@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+---
+
+<BaseLayout
+  title="Terms of Use | Swim BASI"
+  description="Preliminary terms for the Swim BASI website, pending legal review."
+  ><section class="page-hero">
+    <div class="wrap">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Terms' }]} /><p class="eyebrow">
+        Legal
+      </p><h1>Terms of Use</h1>
+    </div>
+  </section><section class="content-page wrap">
+    <div class="notice">
+      <strong>Legal review required:</strong> This is a structural placeholder, not final legal terms.
+      Qualified counsel must review and approve it before launch.
+    </div><article class="prose">
+      <h2>Website use</h2><p>
+        Final acceptable-use, intellectual-property, accessibility, and content-accuracy terms must
+        be established.
+      </p><h2>Products and purchases</h2><p>
+        Products shown on swimbasi.com are a catalog presentation. Purchases are completed through
+        Printful, and its checkout terms may also apply.
+      </p><h2>Disclaimers and governing law</h2><p>
+        Add approved warranty language, limitations of liability, dispute terms, governing law,
+        effective date, and business contact information after legal review.
+      </p>
+    </article>
+  </section></BaseLayout
+>

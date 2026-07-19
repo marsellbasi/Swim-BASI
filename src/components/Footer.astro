@@ -1,0 +1,28 @@
+---
+import Logo from './Logo.astro';
+---
+
+<footer class="site-footer">
+  <div class="footer-main wrap">
+    <div class="footer-brand">
+      <Logo /><p>Swimwear designed for women who embody confidence.</p>
+    </div><nav aria-label="Shop links">
+      <h2>Shop</h2><a href="/shop">All Products</a><a href="/collections/one-piece">One-Piece</a><a
+        href="/collections/string-bikinis">String Bikinis</a
+      ><a href="/collections/high-waisted-bikinis">High-Waisted</a>
+    </nav><nav aria-label="Information links">
+      <h2>Information</h2><a href="/about">About</a><a href="/size-guide">Size Guide</a><a
+        href="/shipping-returns">Shipping & Returns</a
+      ><a href="/contact">Contact</a>
+    </nav><nav aria-label="Legal and social links">
+      <h2>Connect</h2><a
+        href="https://instagram.com/swimbasi"
+        target="_blank"
+        rel="noopener noreferrer">Instagram ↗</a
+      ><a href="/privacy">Privacy</a><a href="/terms">Terms</a>
+    </nav>
+  </div>
+  <div class="footer-bottom wrap">
+    <p>© {new Date().getFullYear()} Swim BASI. All rights reserved.</p><p>Powered by confidence.</p>
+  </div>
+</footer>

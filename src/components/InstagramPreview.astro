@@ -1,0 +1,27 @@
+---
+const tiles = ['#F16A8D', '#111111', '#E8692A', '#247BA0'];
+---
+
+<section class="instagram-section wrap" aria-labelledby="instagram-title">
+  <div class="instagram-heading">
+    <div>
+      <p class="eyebrow">@swimbasi</p><h2 id="instagram-title">Follow the color story.</h2>
+    </div><a href="https://instagram.com/swimbasi" target="_blank" rel="noopener noreferrer"
+      >View Instagram <span aria-hidden="true">↗</span></a
+    >
+  </div>
+  <div class="instagram-grid">
+    {
+      tiles.map((color, i) => (
+        <div
+          class="instagram-tile"
+          style={`--tile:${color}`}
+          role="img"
+          aria-label={`Instagram content placeholder ${i + 1}`}
+        >
+          <span>BASI / 0{i + 1}</span>
+        </div>
+      ))
+    }
+  </div>
+</section>

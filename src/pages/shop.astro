@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ProductGrid from '../components/ProductGrid.astro';
+import { products } from '../data/products';
+import { sortProducts } from '../utils/products';
+---
+
+<BaseLayout
+  title="Shop All Swimwear | Swim BASI"
+  description="Explore the complete Swim BASI catalog of one-piece swimwear, string bikinis, and high-waisted bikinis."
+  ><section class="page-hero">
+    <div class="wrap">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Shop' }]} /><p class="eyebrow">
+        The complete color edit
+      </p><h1>Shop all swimwear</h1><p class="lead">
+        Bold silhouettes organized in a full spectrum of color. Checkout is completed securely
+        through Printful.
+      </p>
+    </div>
+  </section><section class="section wrap">
+    <div class="catalog-note">
+      <span>{products.length} sample catalog styles</span><span
+        >Inventory is verified at Printful</span
+      >
+    </div><nav class="collection-links" aria-label="Filter by collection">
+      <a href="/collections/one-piece">One-Piece</a><a href="/collections/string-bikinis"
+        >String Bikinis</a
+      ><a href="/collections/high-waisted-bikinis">High-Waisted</a>
+    </nav><div style="height:40px"></div><ProductGrid products={sortProducts(products)} />
+  </section></BaseLayout
+>

@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+---
+
+<BaseLayout
+  title="Privacy Policy | Swim BASI"
+  description="Preliminary privacy information for the Swim BASI website, pending legal review."
+  ><section class="page-hero">
+    <div class="wrap">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Privacy' }]} /><p
+        class="eyebrow"
+      >
+        Legal
+      </p><h1>Privacy Policy</h1>
+    </div>
+  </section><section class="content-page wrap">
+    <div class="notice">
+      <strong>Legal review required:</strong> This is a structural placeholder, not a final privacy policy.
+      Qualified counsel must review and approve it before launch.
+    </div><article class="prose">
+      <h2>Information collection</h2><p>
+        The initial static site does not operate user accounts, a local cart, or a functional
+        newsletter form. Future analytics, marketing, or direct ecommerce integrations may change
+        data collection and require this policy to be updated.
+      </p><h2>Third-party checkout</h2><p>
+        Product links direct visitors to Printful, whose privacy practices apply on its storefront
+        and checkout pages.
+      </p><h2>Contact</h2><p>
+        Add the approved privacy contact, jurisdiction-specific disclosures, retention terms, and
+        effective date after legal review.
+      </p>
+    </article>
+  </section></BaseLayout
+>

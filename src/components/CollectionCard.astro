@@ -1,0 +1,20 @@
+---
+interface Props {
+  title: string;
+  href: string;
+  price: string;
+  color: string;
+  index: string;
+}
+const { title, href, price, color, index } = Astro.props;
+---
+
+<article class="collection-card">
+  <a href={href} aria-label={`Shop ${title}`}>
+    <div class="collection-art" style={`--collection-color:${color}`}><span>{index}</span></div>
+    <div class="collection-copy">
+      <div><h3>{title}</h3><p>{price}</p></div><span class="circle-arrow" aria-hidden="true">→</span
+      >
+    </div>
+  </a>
+</article>

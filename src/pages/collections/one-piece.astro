@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ProductGrid from '../../components/ProductGrid.astro';
+import { products } from '../../data/products';
+import { filterByCategory } from '../../utils/products';
+---
+
+<BaseLayout
+  title="One-Piece Swimwear | Swim BASI"
+  description="Shop Swim BASI one-piece swimsuits in bold, expressive colorways, starting at $32.99."
+  ><section class="page-hero">
+    <div class="wrap">
+      <Breadcrumbs
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Collections', href: '/collections' },
+          { label: 'One-Piece' },
+        ]}
+      /><p class="eyebrow">Starting at $32.99</p><h1>One-Piece Swimwear</h1><p class="lead">
+        Clean lines, bold color, and a silhouette built for presence.
+      </p>
+    </div>
+  </section><section class="section wrap">
+    <ProductGrid products={filterByCategory(products, 'one-piece')} />
+  </section></BaseLayout
+>

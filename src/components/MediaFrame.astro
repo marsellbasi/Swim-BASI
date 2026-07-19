@@ -1,0 +1,28 @@
+---
+interface Props {
+  image?: string;
+  video?: string;
+  poster?: string;
+  alt: string;
+  class?: string;
+}
+const { image, video, poster, alt, class: className = '' } = Astro.props;
+---
+
+<figure class:list={['media-frame', className]}>
+  {
+    video ? (
+      <video autoplay muted loop playsinline controls poster={poster} aria-label={alt}>
+        <source src={video} type={video.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
+        <p>{alt} Your browser does not support embedded video.</p>
+      </video>
+    ) : image ? (
+      <img src={image} alt={alt} loading="lazy" decoding="async" />
+    ) : (
+      <div class="media-placeholder" role="img" aria-label={alt}>
+        <span>Campaign media placeholder</span>
+      </div>
+    )
+  }
+  <slot />
+</figure>

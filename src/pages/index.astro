@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import CollectionCard from '../components/CollectionCard.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ProductGrid from '../components/ProductGrid.astro';
+import MediaFrame from '../components/MediaFrame.astro';
+import InstagramPreview from '../components/InstagramPreview.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+import { products } from '../data/products';
+import { featuredProducts } from '../utils/products';
+---
+
+<BaseLayout
+  title="Swim BASI | Confidence Looks Good on You"
+  description="Bold color and flattering silhouettes from Swim BASI. Explore one-piece swimwear, string bikinis, and high-waisted bikinis."
+>
+  <Hero />
+  <section class="section wrap" aria-labelledby="silhouette-title">
+    <SectionHeading
+      eyebrow="Find your shape"
+      title="Shop by silhouette"
+      intro="Three distinct ways to make your presence known."
+    /><div class="collection-grid" id="silhouette-title">
+      <CollectionCard
+        title="One-Piece Swimwear"
+        href="/collections/one-piece"
+        price="Starting at $32.99"
+        color="#F16A8D"
+        index="01"
+      /><CollectionCard
+        title="String Bikinis"
+        href="/collections/string-bikinis"
+        price="Starting at $37.99"
+        color="#247BA0"
+        index="02"
+      /><CollectionCard
+        title="High-Waisted Bikinis"
+        href="/collections/high-waisted-bikinis"
+        price="Starting at $44.99"
+        color="#E8692A"
+        index="03"
+      />
+    </div>
+  </section>
+  <section class="section section--ivory">
+    <div class="wrap">
+      <SectionHeading
+        eyebrow="The BASI edit"
+        title="Color in focus"
+        intro="A first look at signature silhouettes. Product availability and final details are confirmed at Printful."
+      /><ProductGrid products={featuredProducts(products)} />
+    </div>
+  </section>
+  <section class="statement">
+    <p class="eyebrow">Our point of view</p><h2>Take up space.<br />Wear the color.</h2><p>
+      Swim BASI is made for confident entrances, unforgettable color, and the kind of presence that
+      never needs permission.
+    </p>
+  </section>
+  <section class="section wrap">
+    <SectionHeading
+      eyebrow="Campaign space"
+      title="Made for the moment"
+      intro="This flexible frame is ready for future campaign photography or muted, looping video."
+    /><MediaFrame
+      image="/images/hero/swim-basi-campaign-placeholder.png"
+      alt="Abstract Swim BASI campaign placeholder with ivory fabric, gold accents, and reflected light"
+      class="campaign-frame"
+      ><figcaption class="campaign-caption">
+        <h2>Confidence in motion.</h2><p>
+          Replace this original placeholder with an approved seasonal campaign image or video.
+        </p>
+      </figcaption></MediaFrame
+    >
+  </section>
+  <InstagramPreview /><NewsletterSignup />
+</BaseLayout>

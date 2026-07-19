@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+---
+
+<BaseLayout
+  title="Shipping & Returns | Swim BASI"
+  description="Preliminary shipping and returns information for Swim BASI orders completed through Printful."
+  ><section class="page-hero">
+    <div class="wrap">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Shipping & Returns' }]} /><p
+        class="eyebrow"
+      >
+        Customer care
+      </p><h1>Shipping & Returns</h1>
+    </div>
+  </section><section class="content-page wrap">
+    <div class="notice">
+      <strong>Policy draft:</strong> This page is a placeholder and requires final business-policy review,
+      alignment with Printful fulfillment terms, and approval before launch.
+    </div><article class="prose">
+      <h2>Order fulfillment</h2><p>
+        Purchases are currently completed and fulfilled through Printful. Final production
+        timelines, shipping methods, destinations, and costs must be confirmed from the active
+        Printful store.
+      </p><h2>Returns and exchanges</h2><p>
+        Final eligibility, timeframes, condition requirements, and resolution procedures have not
+        yet been approved. Do not rely on this placeholder as a returns policy.
+      </p><h2>Order support</h2><p>
+        Add an approved customer support contact and escalation process before launch.
+      </p>
+    </article>
+  </section></BaseLayout
+>

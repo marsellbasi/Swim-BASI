@@ -1,0 +1,75 @@
+---
+import type { Product } from '../data/products';
+import ExternalCheckoutNotice from './ExternalCheckoutNotice.astro';
+import Price from './Price.astro';
+interface Props {
+  product: Product;
+}
+const { product } = Astro.props;
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: product.name,
+  description: product.description,
+  color: product.colorName,
+  url: product.printfulUrl,
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: product.currency,
+    price: product.price.toFixed(2),
+    url: product.printfulUrl,
+    // Inventory is intentionally omitted until availability is confirmed.
+  },
+};
+---
+
+<article class="product-card">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+  <a
+    class="product-visual"
+    href={product.printfulUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`View ${product.name} on Printful (opens in a new tab)`}
+    style={`--product-color:${product.colorHex}`}
+  >
+    {
+      product.image ? (
+        <img
+          src={product.image}
+          alt={`${product.name} product view`}
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <div
+          class="product-placeholder"
+          role="img"
+          aria-label={`${product.name} image placeholder; approved product photography is pending`}
+        >
+          <span class="placeholder-label">Image coming soon</span>
+        </div>
+      )
+    }
+    <span class="color-chip">{product.colorName}</span>
+  </a>
+  <div class="product-info">
+    <p class="product-category">{product.collection}</p><h3>
+      <a href={product.printfulUrl} target="_blank" rel="noopener noreferrer">{product.name}</a>
+    </h3>
+    <div class="product-meta">
+      <Price amount={product.price} currency={product.currency} /><span class="availability"
+        >Check current availability at Printful</span
+      >
+    </div>
+    <a
+      class="product-cta"
+      href={product.printfulUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`View ${product.name} on Printful (opens in a new tab)`}
+      >View Product <span aria-hidden="true">↗</span></a
+    >
+    <ExternalCheckoutNotice />
+  </div>
+</article>

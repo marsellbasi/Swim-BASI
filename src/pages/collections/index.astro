@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CollectionCard from '../../components/CollectionCard.astro';
+---
+
+<BaseLayout
+  title="Swimwear Collections | Swim BASI"
+  description="Explore Swim BASI one-piece, string bikini, and high-waisted bikini collections."
+  ><section class="page-hero">
+    <div class="wrap">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Collections' }]} /><p
+        class="eyebrow"
+      >
+        Choose your silhouette
+      </p><h1>Collections</h1><p class="lead">
+        A confident shape for every way you want to show up.
+      </p>
+    </div>
+  </section><section class="section wrap">
+    <div class="collection-grid">
+      <CollectionCard
+        title="One-Piece Swimwear"
+        href="/collections/one-piece"
+        price="Starting at $32.99"
+        color="#F16A8D"
+        index="01"
+      /><CollectionCard
+        title="String Bikinis"
+        href="/collections/string-bikinis"
+        price="Starting at $37.99"
+        color="#247BA0"
+        index="02"
+      /><CollectionCard
+        title="High-Waisted Bikinis"
+        href="/collections/high-waisted-bikinis"
+        price="Starting at $44.99"
+        color="#E8692A"
+        index="03"
+      />
+    </div>
+  </section></BaseLayout
+>

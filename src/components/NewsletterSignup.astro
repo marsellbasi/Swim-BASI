@@ -1,0 +1,32 @@
+<section class="newsletter" aria-labelledby="newsletter-title">
+  <div>
+    <p class="eyebrow">The BASI list</p><h2 id="newsletter-title">
+      Color, confidence, and new-season notes.
+    </h2>
+  </div>
+  <form class="newsletter-form" data-presentation-form>
+    <label for="newsletter-email">Email address</label>
+    <div>
+      <input
+        id="newsletter-email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        placeholder="you@example.com"
+        required
+      /><button type="submit">Join the list</button>
+    </div>
+    <p class="form-note" aria-live="polite">
+      Newsletter signup is coming soon. No information is submitted yet.
+    </p>
+    <!-- TODO(newsletter): connect an approved email marketing provider before enabling submission. -->
+  </form>
+</section>
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-presentation-form]').forEach((form) =>
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      form.querySelector<HTMLElement>('.form-note')?.focus();
+    }),
+  );
+</script>

@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+---
+
+<BaseLayout
+  title="About Swim BASI | Our Story"
+  description="Meet Swim BASI, a women's swimwear brand built around confidence, expressive color, and strong silhouettes."
+  ><section class="page-hero">
+    <div class="wrap">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'About' }]} /><p class="eyebrow">
+        Our story
+      </p><h1>For women who embody confidence.</h1>
+    </div>
+  </section><section class="content-page wrap">
+    <article class="prose">
+      <p class="notice">
+        <strong>Brand story placeholder:</strong> Replace this copy with the founder-approved Swim BASI
+        story before launch.
+      </p><p>
+        Swim BASI begins with a simple belief: confidence should be seen. Every color and silhouette
+        is presented to help women feel expressive, present, and entirely themselves.
+      </p><h2>Color with intention</h2><p>
+        Our visual world is bold without becoming loud—an evolving edit of color, form, and seasonal
+        energy.
+      </p><h2>Designed to make an entrance</h2><p>
+        From streamlined one-pieces to expressive bikinis, Swim BASI celebrates silhouettes that
+        hold their own.
+      </p>
+    </article>
+  </section></BaseLayout
+>

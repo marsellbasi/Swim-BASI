@@ -1,0 +1,24 @@
+---
+import Logo from './Logo.astro';
+import MobileNavigation from './MobileNavigation.astro';
+---
+
+<header class="site-header">
+  <div class="header-inner wrap">
+    <Logo />
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="/shop">Shop</a><a href="/collections">Collections</a><a href="/about">About</a><a
+        href="/size-guide">Size Guide</a
+      >
+    </nav>
+    <a
+      class="instagram-link"
+      href="https://instagram.com/swimbasi"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Follow Swim BASI on Instagram (opens in a new tab)"
+      >Instagram <span aria-hidden="true">↗</span></a
+    >
+    <MobileNavigation />
+  </div>
+</header>

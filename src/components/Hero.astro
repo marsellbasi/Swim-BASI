@@ -1,0 +1,22 @@
+---
+import Button from './Button.astro';
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <img
+    src="/images/hero/swim-basi-campaign-placeholder.png"
+    alt="Abstract ivory fabric forms with gold, coral, and blue details reflected on water"
+    fetchpriority="high"
+  />
+  <div class="hero-overlay"></div>
+  <div class="hero-content wrap">
+    <p class="eyebrow">Swim BASI / The color edit</p>
+    <h1 id="hero-title">Confidence<br />Looks Good<br />on You.</h1>
+    <p>Bold color. Flattering silhouettes. Swimwear made to be seen.</p>
+    <div class="button-row">
+      <Button href="/shop">Shop Swim BASI</Button><Button href="/collections" variant="secondary"
+        >Explore Collections</Button
+      >
+    </div>
+  </div>
+</section>
