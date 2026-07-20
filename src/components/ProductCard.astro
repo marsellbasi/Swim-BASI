@@ -1,6 +1,5 @@
 ---
 import type { Product } from '../data/products';
-import ExternalCheckoutNotice from './ExternalCheckoutNotice.astro';
 import Price from './Price.astro';
 interface Props {
   product: Product;
@@ -45,9 +44,9 @@ const productSchema = {
         <div
           class="product-placeholder"
           role="img"
-          aria-label={`${product.name} image placeholder; approved product photography is pending`}
+          aria-label={`${product.name} color preview in ${product.colorName}; product photography is not shown`}
         >
-          <span class="placeholder-label">Image coming soon</span>
+          <span class="placeholder-label">Color preview</span>
         </div>
       )
     }
@@ -58,9 +57,7 @@ const productSchema = {
       <a href={product.printfulUrl} target="_blank" rel="noopener noreferrer">{product.name}</a>
     </h3>
     <div class="product-meta">
-      <Price amount={product.price} currency={product.currency} /><span class="availability"
-        >Check current availability at Printful</span
-      >
+      <Price amount={product.price} currency={product.currency} />
     </div>
     <a
       class="product-cta"
@@ -70,6 +67,5 @@ const productSchema = {
       aria-label={`View ${product.name} on Printful (opens in a new tab)`}
       >View Product <span aria-hidden="true">↗</span></a
     >
-    <ExternalCheckoutNotice />
   </div>
 </article>

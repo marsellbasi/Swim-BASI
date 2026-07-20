@@ -5,7 +5,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 <BaseLayout
   title="Contact Swim BASI"
-  description="Contact Swim BASI with product, collaboration, or general questions."
+  description="Find current ways to connect with Swim BASI for collection news and brand updates."
   ><section class="page-hero">
     <div class="wrap">
       <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Contact' }]} /><p
@@ -17,28 +17,17 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
   </section><section class="content-page wrap contact-layout">
     <div class="prose">
       <p>
-        This presentation form is not connected yet. For now, connect with Swim BASI on <a
+        Swim BASI customer care is getting ready to welcome your questions. In the meantime, follow
+        the color story on <a
           href="https://instagram.com/swimbasi"
           target="_blank"
           rel="noopener noreferrer"><u>Instagram</u> ↗</a
         >.
-      </p><p class="notice">
-        TODO: Add the approved customer service email address or connect a static-form provider
-        before launch.
       </p>
-    </div><form class="contact-form" data-contact-form>
-      <label for="name">Name<input id="name" name="name" autocomplete="name" required /></label
-      ><label for="email"
-        >Email<input id="email" name="email" type="email" autocomplete="email" required /></label
-      ><label for="message"
-        >Message<textarea id="message" name="message" rows="6" required></textarea></label
-      ><button type="submit">Prepare message</button><p class="form-status" aria-live="polite">
-        This form is presentation-only and does not send or store information.
+    </div><aside class="info-card" aria-labelledby="contact-update-title">
+      <h2 id="contact-update-title">Customer care</h2><p>
+        Support contact details will be shared here before the official Swim BASI launch.
       </p>
-    </form>
-  </section><script>
-    document
-      .querySelector<HTMLFormElement>('[data-contact-form]')
-      ?.addEventListener('submit', (event) => event.preventDefault());
-  </script></BaseLayout
+    </aside>
+  </section></BaseLayout
 >

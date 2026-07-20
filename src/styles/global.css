@@ -470,10 +470,13 @@ summary {
   text-transform: uppercase;
 }
 .checkout-notice {
-  margin: 10px 0 0;
-  color: #6a6a6a;
-  font-size: 0.64rem;
-  line-height: 1.4;
+  max-width: 640px;
+  margin: -16px 0 34px;
+  padding-left: 12px;
+  border-left: 2px solid var(--gold);
+  color: #5a5a5a;
+  font-size: 0.76rem;
+  line-height: 1.5;
 }
 .statement {
   padding: clamp(90px, 13vw, 180px) 16px;
@@ -599,37 +602,21 @@ summary {
 .newsletter h2 {
   font-size: clamp(2.2rem, 4vw, 4.5rem);
 }
-.newsletter-form label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.newsletter-preview {
+  max-width: 560px;
 }
-.newsletter-form > div {
-  display: flex;
+.newsletter-preview > p:first-child {
+  margin: 0;
+  font-size: 1rem;
 }
-.newsletter-form input {
-  width: 100%;
-  min-width: 0;
-  padding: 14px;
-  border: 0;
-  border-bottom: 1px solid var(--black);
-  background: transparent;
-}
-.newsletter-form button {
-  border: 1px solid var(--black);
-  padding: 12px 18px;
-  background: var(--black);
-  color: var(--white);
-  font-size: 0.68rem;
+.newsletter-opening {
+  margin: 24px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--black);
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-.form-note {
-  font-size: 0.7rem;
+  letter-spacing: 0.12em;
 }
 .site-footer {
   background: var(--black);
@@ -744,38 +731,6 @@ summary {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8vw;
-}
-.contact-form {
-  display: grid;
-  gap: 18px;
-}
-.contact-form label {
-  display: grid;
-  gap: 7px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 13px;
-  border: 1px solid #aaa;
-  background: var(--white);
-}
-.contact-form button {
-  justify-self: start;
-  padding: 13px 22px;
-  border: 0;
-  background: var(--black);
-  color: var(--white);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-.form-status {
-  font-size: 0.8rem;
 }
 .catalog-note {
   margin-bottom: 32px;
@@ -892,12 +847,6 @@ summary {
 @media (max-width: 390px) {
   .product-grid {
     grid-template-columns: 1fr;
-  }
-  .newsletter-form > div {
-    display: grid;
-  }
-  .newsletter-form button {
-    min-height: 48px;
   }
   .footer-main {
     grid-template-columns: 1fr;

@@ -1,5 +1,10 @@
 ---
-const tiles = ['#F16A8D', '#111111', '#E8692A', '#247BA0'];
+const tiles = [
+  { color: '#F16A8D', name: 'Brink Pink' },
+  { color: '#111111', name: 'Black' },
+  { color: '#E8692A', name: 'Orange' },
+  { color: '#247BA0', name: 'Eastern Blue' },
+];
 ---
 
 <section class="instagram-section wrap" aria-labelledby="instagram-title">
@@ -12,12 +17,12 @@ const tiles = ['#F16A8D', '#111111', '#E8692A', '#247BA0'];
   </div>
   <div class="instagram-grid">
     {
-      tiles.map((color, i) => (
+      tiles.map((tile, i) => (
         <div
           class="instagram-tile"
-          style={`--tile:${color}`}
+          style={`--tile:${tile.color}`}
           role="img"
-          aria-label={`Instagram content placeholder ${i + 1}`}
+          aria-label={`Swim BASI color-story preview ${i + 1} in ${tile.name}`}
         >
           <span>BASI / 0{i + 1}</span>
         </div>

@@ -142,7 +142,7 @@ export const products: Product[] = families.flatMap((family, familyIndex) =>
       video: null,
       featured: familyIndex < 3 && colorIndex < 2,
       available: null,
-      description: `A bold ${family.label.toLowerCase()} presented in ${colorName}. Final product details must be verified in Printful.`,
+      description: `A bold ${family.label.toLowerCase()} in ${colorName}, designed for confident color and standout presence.`,
       sizes: [],
       badges: [],
       sortOrder: familyIndex * 100 + colorIndex,

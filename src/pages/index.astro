@@ -7,6 +7,7 @@ import ProductGrid from '../components/ProductGrid.astro';
 import MediaFrame from '../components/MediaFrame.astro';
 import InstagramPreview from '../components/InstagramPreview.astro';
 import NewsletterSignup from '../components/NewsletterSignup.astro';
+import ExternalCheckoutNotice from '../components/ExternalCheckoutNotice.astro';
 import { products } from '../data/products';
 import { featuredProducts } from '../utils/products';
 ---
@@ -48,8 +49,8 @@ import { featuredProducts } from '../utils/products';
       <SectionHeading
         eyebrow="The BASI edit"
         title="Color in focus"
-        intro="A first look at signature silhouettes. Product availability and final details are confirmed at Printful."
-      /><ProductGrid products={featuredProducts(products)} />
+        intro="A first look at signature Swim BASI silhouettes in colors designed to make an entrance."
+      /><ExternalCheckoutNotice /><ProductGrid products={featuredProducts(products)} />
     </div>
   </section>
   <section class="statement">
@@ -60,16 +61,16 @@ import { featuredProducts } from '../utils/products';
   </section>
   <section class="section wrap">
     <SectionHeading
-      eyebrow="Campaign space"
+      eyebrow="The campaign edit"
       title="Made for the moment"
-      intro="This flexible frame is ready for future campaign photography or muted, looping video."
+      intro="Statement swimwear for poolside confidence, destination color, and every moment made to be remembered."
     /><MediaFrame
       image="/images/hero/swim-basi-campaign-placeholder.png"
-      alt="Abstract Swim BASI campaign placeholder with ivory fabric, gold accents, and reflected light"
+      alt="Abstract Swim BASI campaign artwork with ivory fabric, gold accents, and reflected light"
       class="campaign-frame"
       ><figcaption class="campaign-caption">
         <h2>Confidence in motion.</h2><p>
-          Replace this original placeholder with an approved seasonal campaign image or video.
+          Color moves differently when it is worn with confidence.
         </p>
       </figcaption></MediaFrame
     >
