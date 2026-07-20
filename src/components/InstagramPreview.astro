@@ -1,9 +1,24 @@
 ---
+import ResponsiveBrandImage from './ResponsiveBrandImage.astro';
+import { getBrandImage } from '../data/brand-images';
+
 const tiles = [
-  { color: '#F16A8D', name: 'Brink Pink' },
-  { color: '#111111', name: 'Black' },
-  { color: '#E8692A', name: 'Orange' },
-  { color: '#247BA0', name: 'Eastern Blue' },
+  {
+    image: getBrandImage('red-string-bikini-studio-detail'),
+    label: 'Swim BASI red string-bikini campaign detail',
+  },
+  {
+    image: getBrandImage('forest-green-string-bikini-studio-portrait'),
+    label: 'Swim BASI green string-bikini studio portrait',
+  },
+  {
+    image: getBrandImage('eastern-blue-string-bikini-poolside-back'),
+    label: 'Swim BASI blue string-bikini poolside view',
+  },
+  {
+    image: getBrandImage('lavender-string-bikini-poolside-back'),
+    label: 'Swim BASI lavender string-bikini poolside portrait',
+  },
 ];
 ---
 
@@ -17,15 +32,20 @@ const tiles = [
   </div>
   <div class="instagram-grid">
     {
-      tiles.map((tile, i) => (
-        <div
+      tiles.map((tile) => (
+        <a
           class="instagram-tile"
-          style={`--tile:${tile.color}`}
-          role="img"
-          aria-label={`Swim BASI color-story preview ${i + 1} in ${tile.name}`}
+          href="https://instagram.com/swimbasi"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Explore the Swim BASI Instagram profile — ${tile.label} (opens in a new tab)`}
         >
-          <span>BASI / 0{i + 1}</span>
-        </div>
+          <ResponsiveBrandImage
+            image={tile.image}
+            alt={tile.label}
+            sizes="(max-width: 720px) calc(50vw - 17px), (max-width: 1440px) calc(25vw - 18px), 350px"
+          />
+        </a>
       ))
     }
   </div>

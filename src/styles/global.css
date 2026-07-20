@@ -160,6 +160,82 @@ summary {
   font-family: var(--serif);
   font-size: 1.3rem;
 }
+.responsive-brand-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.responsive-brand-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.film-intro {
+  padding: clamp(52px, 7vw, 104px) 0;
+  background: var(--black);
+  color: var(--white);
+}
+.film-intro-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.75fr);
+  align-items: center;
+  gap: clamp(42px, 8vw, 132px);
+}
+.film-intro-media {
+  width: min(100%, 660px);
+  aspect-ratio: 2/3;
+  justify-self: end;
+  overflow: hidden;
+  background: #111;
+}
+.film-intro-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.film-intro-copy {
+  max-width: 590px;
+}
+.film-intro-copy .eyebrow {
+  color: var(--gold);
+}
+.film-intro-copy h1 {
+  max-width: 620px;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(3.2rem, 6.5vw, 7rem);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+}
+.film-intro-copy > p:not(.eyebrow, .film-status) {
+  max-width: 470px;
+  margin: 26px 0;
+  color: #d4d4d4;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+}
+.film-status {
+  margin: 0 0 30px;
+  padding-top: 18px;
+  border-top: 1px solid #454545;
+  color: #bdbdbd;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.film-intro .button--primary {
+  color: var(--black);
+}
+.film-transcript {
+  margin-top: 24px;
+  color: #d4d4d4;
+}
+.film-transcript summary {
+  cursor: pointer;
+  font-weight: 700;
+}
 .hero {
   min-height: clamp(620px, 78vw, 820px);
   position: relative;
@@ -198,7 +274,7 @@ summary {
   letter-spacing: 0.19em;
   text-transform: uppercase;
 }
-.hero h1 {
+.hero h2 {
   max-width: 760px;
   margin: 0;
   font-family: var(--serif);
@@ -547,13 +623,16 @@ summary {
   overflow: hidden;
 }
 .campaign-frame {
-  min-height: 560px;
+  max-width: 980px;
+  margin-inline: auto;
   background: var(--ivory);
+}
+.campaign-frame .responsive-brand-image {
+  aspect-ratio: 4/5;
 }
 .campaign-frame img {
   width: 100%;
   height: 100%;
-  min-height: 560px;
   object-fit: cover;
 }
 .media-placeholder {
@@ -576,7 +655,8 @@ summary {
   bottom: 24px;
   max-width: 360px;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(10, 10, 10, 0.9);
+  color: var(--white);
 }
 .campaign-caption h2 {
   margin: 0;
@@ -616,27 +696,20 @@ summary {
 .instagram-tile {
   position: relative;
   aspect-ratio: 1;
-  background: linear-gradient(150deg, var(--tile), #161616);
+  display: block;
+  background: var(--ivory);
   overflow: hidden;
 }
-.instagram-tile::before {
-  content: '';
+.instagram-tile .responsive-brand-image {
   position: absolute;
-  width: 80%;
-  height: 80%;
-  left: 10%;
-  top: 10%;
-  border: 1px solid rgba(255, 255, 255, 0.62);
-  border-radius: 50%;
-  transform: translate(25%, 20%);
+  inset: 0;
 }
-.instagram-tile span {
-  position: absolute;
-  left: 12px;
-  bottom: 12px;
-  color: var(--white);
-  font-size: 0.62rem;
-  letter-spacing: 0.15em;
+.instagram-tile img {
+  transition: transform 240ms ease;
+}
+.instagram-tile:hover img,
+.instagram-tile:focus-visible img {
+  transform: scale(1.025);
 }
 .newsletter {
   padding: clamp(60px, 8vw, 100px) max(16px, calc((100vw - var(--max)) / 2));
@@ -738,6 +811,54 @@ summary {
 .content-page {
   padding: clamp(60px, 9vw, 110px) 0;
 }
+.about-story {
+  padding: clamp(64px, 9vw, 128px) 0;
+}
+.about-lead {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.75fr);
+  align-items: center;
+  gap: clamp(42px, 8vw, 128px);
+}
+.about-lead > .responsive-brand-image {
+  aspect-ratio: 2/3;
+}
+.about-lead-copy {
+  padding-block: 32px;
+}
+.about-image-pair {
+  margin-top: clamp(72px, 10vw, 150px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(18px, 4vw, 64px);
+}
+.about-image-pair figure,
+.about-closing-image {
+  margin: 0;
+}
+.about-image-pair figure:nth-child(2) {
+  margin-top: clamp(54px, 9vw, 128px);
+}
+.about-image-pair .responsive-brand-image {
+  aspect-ratio: 4/5;
+}
+.about-image-pair figcaption,
+.about-closing-image figcaption {
+  margin-top: 14px;
+  color: #5a5a5a;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.about-closing-image {
+  max-width: 900px;
+  margin: clamp(80px, 12vw, 170px) auto 0;
+}
+.about-closing-image .responsive-brand-image {
+  aspect-ratio: 4/5;
+}
 .prose {
   max-width: 760px;
 }
@@ -825,6 +946,13 @@ summary {
     grid-template-columns: 1fr;
     gap: 40px;
   }
+  .film-intro-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.75fr);
+    gap: 42px;
+  }
+  .about-lead {
+    gap: 42px;
+  }
   .hero > img {
     object-position: 64% center;
   }
@@ -838,6 +966,21 @@ summary {
   }
   .collection-grid {
     grid-template-columns: 1fr;
+  }
+  .film-intro-inner,
+  .about-lead,
+  .about-image-pair {
+    grid-template-columns: 1fr;
+  }
+  .film-intro-media {
+    width: min(100%, 520px);
+    justify-self: center;
+  }
+  .film-intro-copy {
+    padding: 10px 0 8px;
+  }
+  .about-image-pair figure:nth-child(2) {
+    margin-top: 18px;
   }
   .collection-art {
     aspect-ratio: 16/10;
@@ -877,6 +1020,7 @@ summary {
     position: relative;
     right: auto;
     bottom: auto;
+    background: var(--black);
   }
   .catalog-note {
     flex-direction: column;

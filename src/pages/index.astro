@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import PortraitVideoIntro from '../components/PortraitVideoIntro.astro';
 import CollectionCard from '../components/CollectionCard.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import ProductGrid from '../components/ProductGrid.astro';
@@ -10,18 +11,21 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
 import ExternalCheckoutNotice from '../components/ExternalCheckoutNotice.astro';
 import { products } from '../data/products';
 import { featuredProducts } from '../utils/products';
+import { getBrandImage } from '../data/brand-images';
 
 const collectionProducts = {
   onePiece: products.find((product) => product.slug === 'basi-brink-pink-one-piece-swimsuit'),
   stringBikini: products.find((product) => product.slug === 'basi-eastern-blue-string-bikini'),
   highWaisted: products.find((product) => product.slug === 'basi-orange-high-waisted-bikini'),
 };
+const campaignImage = getBrandImage('yellow-and-black-string-bikinis-night-walk');
 ---
 
 <BaseLayout
   title="Swim BASI | Confidence Looks Good on You"
   description="Bold color and flattering silhouettes from Swim BASI. Explore one-piece swimwear, string bikinis, and high-waisted bikinis."
 >
+  <PortraitVideoIntro />
   <Hero />
   <section class="section wrap" aria-labelledby="silhouette-title">
     <SectionHeading
@@ -74,9 +78,10 @@ const collectionProducts = {
       title="Made for the moment"
       intro="Statement swimwear for poolside confidence, destination color, and every moment made to be remembered."
     /><MediaFrame
-      image="/images/hero/swim-basi-campaign-placeholder.png"
-      alt="Abstract Swim BASI campaign artwork with ivory fabric, gold accents, and reflected light"
+      imageData={campaignImage}
+      alt={campaignImage.alt}
       class="campaign-frame"
+      sizes="(max-width: 1040px) calc(100vw - 24px), 980px"
       ><figcaption class="campaign-caption">
         <h2>Confidence in motion.</h2><p>
           Color moves differently when it is worn with confidence.

@@ -1,6 +1,7 @@
 /* global URL, console, process */
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { extname, join, relative } from 'node:path';
+import sharp from 'sharp';
 
 const root = new URL('../', import.meta.url).pathname.replace(/^\/(\w:)/, '$1');
 const dist = join(root, 'dist');
@@ -39,6 +40,15 @@ for (const file of htmlFiles) {
     }
   }
 
+  const srcsetMediaPaths = [...html.matchAll(/srcset="([^"]+)"/g)].flatMap((match) =>
+    match[1].split(',').map((candidate) => candidate.trim().split(/\s+/)[0]),
+  );
+  for (const mediaPath of srcsetMediaPaths.filter((path) => path?.startsWith('/'))) {
+    if (!existsSync(join(dist, mediaPath))) {
+      errors.push(`${relative(root, file)} has broken responsive media: ${mediaPath}`);
+    }
+  }
+
   for (const match of html.matchAll(/<img\b([^>]*\/images\/products\/[^>]*)>/g)) {
     const attrs = match[1];
     if (!/width="\d+"/.test(attrs) || !/height="\d+"/.test(attrs)) {
@@ -52,6 +62,15 @@ for (const file of htmlFiles) {
     const attrs = match[1];
     if (!/target="_blank"/.test(attrs) || !/rel="noopener noreferrer"/.test(attrs)) {
       errors.push(`${relative(root, file)} has an unsafe Printful link`);
+    }
+  }
+
+  for (const match of html.matchAll(
+    /<a\b([^>]*href="https:\/\/instagram\.com\/swimbasi[^>]*?)>/g,
+  )) {
+    const attrs = match[1];
+    if (!/target="_blank"/.test(attrs) || !/rel="noopener noreferrer"/.test(attrs)) {
+      errors.push(`${relative(root, file)} has an unsafe Instagram link`);
     }
   }
 
@@ -180,11 +199,81 @@ for (const [slug, entry] of imageEntries) {
   }
 }
 
+const brandManifest = JSON.parse(
+  readFileSync(join(root, 'src', 'data', 'brand-image-manifest.json'), 'utf8'),
+);
+const brandEntries = Object.values(brandManifest.images);
+const brandVariants = brandEntries.flatMap((entry) => entry.variants);
+if (
+  brandEntries.length !== 8 ||
+  brandVariants.length !== 24 ||
+  brandManifest.audit.rawImageCount !== 8 ||
+  brandManifest.audit.optimizedOutputCount !== 24
+) {
+  errors.push('Brand image manifest does not contain eight sources and 24 responsive outputs');
+}
+if (
+  brandManifest.audit.unexpectedSources.length ||
+  brandManifest.audit.missingSources.length ||
+  new Set(brandVariants.map((variant) => variant.src)).size !== brandVariants.length
+) {
+  errors.push('Brand image manifest has missing, unexpected, or duplicate media');
+}
+for (const entry of brandEntries) {
+  if (!entry.alt || !entry.focalPoint?.objectPosition || entry.optimizationStatus !== 'optimized') {
+    errors.push(`${entry.productionFilename} is missing alt, focal, or optimization metadata`);
+  }
+  for (const variant of entry.variants) {
+    const outputPath = join(dist, variant.src);
+    if (!existsSync(outputPath)) {
+      errors.push(`Missing brand image output: ${variant.src}`);
+      continue;
+    }
+    const metadata = await sharp(outputPath).metadata();
+    if (
+      metadata.format !== 'webp' ||
+      metadata.width !== variant.width ||
+      metadata.height !== variant.height
+    ) {
+      errors.push(`Brand image metadata mismatch: ${variant.src}`);
+    }
+  }
+}
+
+const homepageHtml = readFileSync(join(dist, 'index.html'), 'utf8');
+const aboutHtml = readFileSync(join(dist, 'about', 'index.html'), 'utf8');
+if (
+  !homepageHtml.includes('data-film-state="poster"') ||
+  !homepageHtml.includes('Confidence, in motion.')
+) {
+  errors.push('Homepage portrait-film poster mode is missing');
+}
+if ((homepageHtml.match(/data-brand-image=/g) ?? []).length !== 6) {
+  errors.push('Homepage should render six intentional brand-image placements');
+}
+if ((aboutHtml.match(/data-brand-image=/g) ?? []).length !== 4) {
+  errors.push('About page should render four editorial brand images');
+}
+if ((homepageHtml.match(/class="instagram-tile"/g) ?? []).length !== 4) {
+  errors.push('Homepage should render four photographic color-story tiles');
+}
+for (const html of [homepageHtml, aboutHtml]) {
+  for (const match of html.matchAll(/<img\b([^>]*\/images\/brand\/[^>]*)>/g)) {
+    const attrs = match[1];
+    if (!/width="\d+"/.test(attrs) || !/height="\d+"/.test(attrs) || !/srcset=/.test(attrs)) {
+      errors.push('Brand photography is missing dimensions or responsive sources');
+    }
+  }
+}
+if ((homepageHtml.match(/\/images\/brand\//g) ?? []).length === 0) {
+  errors.push('Homepage does not reference optimized brand photography');
+}
+
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
 
 console.log(
-  `Verified ${htmlFiles.length} pages and 42 products: catalog identity, direct Printful URLs, category counts, media mappings, internal links, link safety, robots, and sitemap.`,
+  `Verified ${htmlFiles.length} pages, 42 products, and 24 responsive brand images: catalog identity, direct links, media mappings, homepage/About placements, link safety, robots, and sitemap.`,
 );

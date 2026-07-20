@@ -1,0 +1,300 @@
+{
+  "generatedBy": "scripts/optimize-brand-images.mjs",
+  "sourceDirectory": "brand-images",
+  "outputDirectory": "public/images/brand",
+  "format": "webp",
+  "quality": 80,
+  "audit": {
+    "rawImageCount": 8,
+    "rawTotalBytes": 73535885,
+    "optimizedOutputCount": 24,
+    "optimizedTotalBytes": 2577844,
+    "reductionPercent": 96.49,
+    "largestOptimizedBytes": 316262,
+    "averageOptimizedBytes": 107410,
+    "unexpectedSources": [],
+    "missingSources": []
+  },
+  "images": {
+    "cotton-candy-high-waisted-studio-detail": {
+      "sourceFilename": "591A0504.JPG",
+      "productionFilename": "cotton-candy-high-waisted-studio-detail",
+      "sourceBytes": 11349978,
+      "sourceDimensions": { "width": 4640, "height": 6960 },
+      "sourceExifOrientation": 8,
+      "variants": [
+        {
+          "src": "/images/brand/cotton-candy-high-waisted-studio-detail-640w.webp",
+          "width": 640,
+          "height": 960,
+          "bytes": 30094,
+          "aspectRatio": 0.6667
+        },
+        {
+          "src": "/images/brand/cotton-candy-high-waisted-studio-detail-960w.webp",
+          "width": 960,
+          "height": 1440,
+          "bytes": 65954,
+          "aspectRatio": 0.6667
+        },
+        {
+          "src": "/images/brand/cotton-candy-high-waisted-studio-detail-1400w.webp",
+          "width": 1400,
+          "height": 2100,
+          "bytes": 163364,
+          "aspectRatio": 0.6667
+        }
+      ],
+      "intendedPlacements": ["About editorial detail"],
+      "alt": "Model wearing a cotton-candy high-waisted Swim BASI bikini in a studio",
+      "focalPoint": { "x": 50, "y": 48, "objectPosition": "50% 48%" },
+      "loadingPriority": "lazy",
+      "optimizationStatus": "optimized"
+    },
+    "red-string-bikini-studio-detail": {
+      "sourceFilename": "591A1236.JPG",
+      "productionFilename": "red-string-bikini-studio-detail",
+      "sourceBytes": 13085816,
+      "sourceDimensions": { "width": 4640, "height": 6960 },
+      "sourceExifOrientation": 8,
+      "variants": [
+        {
+          "src": "/images/brand/red-string-bikini-studio-detail-640w.webp",
+          "width": 640,
+          "height": 960,
+          "bytes": 43516,
+          "aspectRatio": 0.6667
+        },
+        {
+          "src": "/images/brand/red-string-bikini-studio-detail-960w.webp",
+          "width": 960,
+          "height": 1440,
+          "bytes": 98566,
+          "aspectRatio": 0.6667
+        },
+        {
+          "src": "/images/brand/red-string-bikini-studio-detail-1400w.webp",
+          "width": 1400,
+          "height": 2100,
+          "bytes": 250020,
+          "aspectRatio": 0.6667
+        }
+      ],
+      "intendedPlacements": ["Homepage color story"],
+      "alt": "Model wearing a red Swim BASI string bikini in a studio",
+      "focalPoint": { "x": 50, "y": 50, "objectPosition": "50% 50%" },
+      "loadingPriority": "lazy",
+      "optimizationStatus": "optimized"
+    },
+    "orange-high-waisted-poolside-full-length": {
+      "sourceFilename": "591A1606.JPG",
+      "productionFilename": "orange-high-waisted-poolside-full-length",
+      "sourceBytes": 10846477,
+      "sourceDimensions": { "width": 4640, "height": 6960 },
+      "sourceExifOrientation": 8,
+      "variants": [
+        {
+          "src": "/images/brand/orange-high-waisted-poolside-full-length-640w.webp",
+          "width": 640,
+          "height": 960,
+          "bytes": 73440,
+          "aspectRatio": 0.6667
+        },
+        {
+          "src": "/images/brand/orange-high-waisted-poolside-full-length-960w.webp",
+          "width": 960,
+          "height": 1440,
+          "bytes": 142414,
+          "aspectRatio": 0.6667
+        },
+        {
+          "src": "/images/brand/orange-high-waisted-poolside-full-length-1400w.webp",
+          "width": 1400,
+          "height": 2100,
+          "bytes": 256346,
+          "aspectRatio": 0.6667
+        }
+      ],
+      "intendedPlacements": ["About lead image"],
+      "alt": "Model wearing an orange high-waisted Swim BASI bikini poolside",
+      "focalPoint": { "x": 48, "y": 60, "objectPosition": "48% 60%" },
+      "loadingPriority": "lazy",
+      "optimizationStatus": "optimized"
+    },
+    "forest-green-string-bikini-studio-portrait": {
+      "sourceFilename": "591A1943.JPG",
+      "productionFilename": "forest-green-string-bikini-studio-portrait",
+      "sourceBytes": 4030019,
+      "sourceDimensions": { "width": 4640, "height": 6960 },
+      "sourceExifOrientation": 8,
+      "variants": [
+        {
+          "src": "/images/brand/forest-green-string-bikini-studio-portrait-640w.webp",
+          "width": 640,
+          "height": 960,
+          "bytes": 17248,
+          "aspectRatio": 0.6667
+        },
+        {
+          "src": "/images/brand/forest-green-string-bikini-studio-portrait-960w.webp",
+          "width": 960,
+          "height": 1440,
+          "bytes": 31078,
+          "aspectRatio": 0.6667
+        },
+        {
+          "src": "/images/brand/forest-green-string-bikini-studio-portrait-1400w.webp",
+          "width": 1400,
+          "height": 2100,
+          "bytes": 54672,
+          "aspectRatio": 0.6667
+        }
+      ],
+      "intendedPlacements": ["Homepage color story"],
+      "alt": "Model wearing a green Swim BASI string bikini in a studio",
+      "focalPoint": { "x": 52, "y": 64, "objectPosition": "52% 64%" },
+      "loadingPriority": "lazy",
+      "optimizationStatus": "optimized"
+    },
+    "eastern-blue-string-bikini-poolside-back": {
+      "sourceFilename": "591A6906.JPG",
+      "productionFilename": "eastern-blue-string-bikini-poolside-back",
+      "sourceBytes": 10522555,
+      "sourceDimensions": { "width": 4640, "height": 6960 },
+      "sourceExifOrientation": 8,
+      "variants": [
+        {
+          "src": "/images/brand/eastern-blue-string-bikini-poolside-back-640w.webp",
+          "width": 640,
+          "height": 960,
+          "bytes": 101756,
+          "aspectRatio": 0.6667
+        },
+        {
+          "src": "/images/brand/eastern-blue-string-bikini-poolside-back-960w.webp",
+          "width": 960,
+          "height": 1440,
+          "bytes": 191764,
+          "aspectRatio": 0.6667
+        },
+        {
+          "src": "/images/brand/eastern-blue-string-bikini-poolside-back-1400w.webp",
+          "width": 1400,
+          "height": 2100,
+          "bytes": 316262,
+          "aspectRatio": 0.6667
+        }
+      ],
+      "intendedPlacements": ["Homepage color story"],
+      "alt": "Rear view of a model wearing a blue Swim BASI string bikini poolside",
+      "focalPoint": { "x": 53, "y": 66, "objectPosition": "53% 66%" },
+      "loadingPriority": "lazy",
+      "optimizationStatus": "optimized"
+    },
+    "yellow-and-black-string-bikinis-night-walk": {
+      "sourceFilename": "591A7123.JPG",
+      "productionFilename": "yellow-and-black-string-bikinis-night-walk",
+      "sourceBytes": 8062709,
+      "sourceDimensions": { "width": 4640, "height": 6960 },
+      "sourceExifOrientation": 8,
+      "variants": [
+        {
+          "src": "/images/brand/yellow-and-black-string-bikinis-night-walk-640w.webp",
+          "width": 640,
+          "height": 960,
+          "bytes": 36996,
+          "aspectRatio": 0.6667
+        },
+        {
+          "src": "/images/brand/yellow-and-black-string-bikinis-night-walk-960w.webp",
+          "width": 960,
+          "height": 1440,
+          "bytes": 72598,
+          "aspectRatio": 0.6667
+        },
+        {
+          "src": "/images/brand/yellow-and-black-string-bikinis-night-walk-1400w.webp",
+          "width": 1400,
+          "height": 2100,
+          "bytes": 130018,
+          "aspectRatio": 0.6667
+        }
+      ],
+      "intendedPlacements": ["Homepage campaign", "About closing image"],
+      "alt": "Two models wearing yellow and black Swim BASI string bikinis at night",
+      "focalPoint": { "x": 70, "y": 64, "objectPosition": "70% 64%" },
+      "loadingPriority": "lazy",
+      "optimizationStatus": "optimized"
+    },
+    "black-string-bikini-night-portrait": {
+      "sourceFilename": "591A7198.JPG",
+      "productionFilename": "black-string-bikini-night-portrait",
+      "sourceBytes": 6666077,
+      "sourceDimensions": { "width": 4640, "height": 6960 },
+      "sourceExifOrientation": 8,
+      "variants": [
+        {
+          "src": "/images/brand/black-string-bikini-night-portrait-640w.webp",
+          "width": 640,
+          "height": 960,
+          "bytes": 26570,
+          "aspectRatio": 0.6667
+        },
+        {
+          "src": "/images/brand/black-string-bikini-night-portrait-960w.webp",
+          "width": 960,
+          "height": 1440,
+          "bytes": 50586,
+          "aspectRatio": 0.6667
+        },
+        {
+          "src": "/images/brand/black-string-bikini-night-portrait-1400w.webp",
+          "width": 1400,
+          "height": 2100,
+          "bytes": 93930,
+          "aspectRatio": 0.6667
+        }
+      ],
+      "intendedPlacements": ["Homepage portrait-film poster"],
+      "alt": "Model wearing a black Swim BASI string bikini at night",
+      "focalPoint": { "x": 55, "y": 60, "objectPosition": "55% 60%" },
+      "loadingPriority": "high",
+      "optimizationStatus": "optimized"
+    },
+    "lavender-string-bikini-poolside-back": {
+      "sourceFilename": "591A7944.JPG",
+      "productionFilename": "lavender-string-bikini-poolside-back",
+      "sourceBytes": 8972254,
+      "sourceDimensions": { "width": 4640, "height": 6960 },
+      "sourceExifOrientation": 8,
+      "variants": [
+        {
+          "src": "/images/brand/lavender-string-bikini-poolside-back-640w.webp",
+          "width": 640,
+          "height": 960,
+          "bytes": 54630,
+          "aspectRatio": 0.6667
+        },
+        {
+          "src": "/images/brand/lavender-string-bikini-poolside-back-960w.webp",
+          "width": 960,
+          "height": 1440,
+          "bytes": 97590,
+          "aspectRatio": 0.6667
+        },
+        {
+          "src": "/images/brand/lavender-string-bikini-poolside-back-1400w.webp",
+          "width": 1400,
+          "height": 2100,
+          "bytes": 178432,
+          "aspectRatio": 0.6667
+        }
+      ],
+      "intendedPlacements": ["Homepage color story", "About editorial image"],
+      "alt": "Model wearing a lavender Swim BASI string bikini beside a pool",
+      "focalPoint": { "x": 55, "y": 55, "objectPosition": "55% 55%" },
+      "loadingPriority": "lazy",
+      "optimizationStatus": "optimized"
+    }
+  }
+}

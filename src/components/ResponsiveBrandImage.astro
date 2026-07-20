@@ -1,0 +1,42 @@
+---
+import type { BrandImage } from '../data/brand-images';
+
+interface Props {
+  image: BrandImage;
+  alt?: string;
+  class?: string;
+  sizes: string;
+  loading?: 'eager' | 'lazy';
+  priority?: boolean;
+}
+
+const {
+  image,
+  alt = image.alt,
+  class: className = '',
+  sizes,
+  loading = 'lazy',
+  priority = false,
+} = Astro.props;
+const fallback = image.variants.at(-1);
+if (!fallback) throw new Error(`${image.productionFilename} has no responsive variants`);
+const srcset = image.variants.map((variant) => `${variant.src} ${variant.width}w`).join(', ');
+---
+
+<picture
+  class:list={['responsive-brand-image', className]}
+  data-brand-image={image.productionFilename}
+>
+  <img
+    src={fallback.src}
+    srcset={srcset}
+    sizes={sizes}
+    width={fallback.width}
+    height={fallback.height}
+    alt={alt}
+    loading={loading}
+    decoding="async"
+    fetchpriority={priority ? 'high' : undefined}
+    style={`object-position: ${image.focalPoint.objectPosition}`}
+  />
+</picture>

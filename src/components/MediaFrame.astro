@@ -1,12 +1,25 @@
 ---
+import ResponsiveBrandImage from './ResponsiveBrandImage.astro';
+import type { BrandImage } from '../data/brand-images';
+
 interface Props {
   image?: string;
+  imageData?: BrandImage;
   video?: string;
   poster?: string;
   alt: string;
   class?: string;
+  sizes?: string;
 }
-const { image, video, poster, alt, class: className = '' } = Astro.props;
+const {
+  image,
+  imageData,
+  video,
+  poster,
+  alt,
+  class: className = '',
+  sizes = '100vw',
+} = Astro.props;
 ---
 
 <figure class:list={['media-frame', className]}>
@@ -16,6 +29,8 @@ const { image, video, poster, alt, class: className = '' } = Astro.props;
         <source src={video} type={video.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
         <p>{alt} Your browser does not support embedded video.</p>
       </video>
+    ) : imageData ? (
+      <ResponsiveBrandImage image={imageData} alt={alt} sizes={sizes} />
     ) : image ? (
       <img src={image} alt={alt} loading="lazy" decoding="async" />
     ) : (

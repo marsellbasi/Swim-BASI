@@ -1,0 +1,16 @@
+export const homepageFilm = {
+  enabled: false,
+  videoSrc: '',
+  webmSrc: '',
+  poster: 'black-string-bikini-night-portrait',
+  title: 'Confidence, in motion.',
+  eyebrow: 'THE SWIM BASI FILM',
+  description: 'An introduction to the color, presence, and energy behind Swim BASI.',
+  transcript: '',
+  captionsSrc: '',
+  autoplay: false,
+  muted: false,
+  loop: false,
+  controls: true,
+  playsInline: true,
+} as const;

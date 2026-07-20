@@ -1,0 +1,76 @@
+---
+import Button from './Button.astro';
+import ResponsiveBrandImage from './ResponsiveBrandImage.astro';
+import { getBrandImage } from '../data/brand-images';
+import { homepageFilm } from '../data/homepage-media';
+
+const poster = getBrandImage(homepageFilm.poster);
+const posterFallback = poster.variants.at(-1);
+if (!posterFallback) throw new Error('The homepage film poster has no responsive variants');
+const hasVideo = homepageFilm.enabled && Boolean(homepageFilm.videoSrc || homepageFilm.webmSrc);
+---
+
+<section class="film-intro" aria-labelledby="film-intro-title">
+  <div class="film-intro-inner wrap">
+    <div class="film-intro-media" data-film-state={hasVideo ? 'video' : 'poster'}>
+      {
+        hasVideo ? (
+          <video
+            data-homepage-film
+            poster={posterFallback.src}
+            controls={homepageFilm.controls}
+            autoplay={homepageFilm.autoplay}
+            muted={homepageFilm.muted}
+            loop={homepageFilm.loop}
+            playsinline={homepageFilm.playsInline}
+            preload="metadata"
+            aria-label={homepageFilm.title}
+          >
+            {homepageFilm.webmSrc && <source src={homepageFilm.webmSrc} type="video/webm" />}
+            {homepageFilm.videoSrc && <source src={homepageFilm.videoSrc} type="video/mp4" />}
+            {homepageFilm.captionsSrc && (
+              <track
+                kind="captions"
+                src={homepageFilm.captionsSrc}
+                srclang="en"
+                label="English"
+                default
+              />
+            )}
+            <p>The Swim BASI brand film. Your browser does not support embedded video.</p>
+          </video>
+        ) : (
+          <ResponsiveBrandImage
+            image={poster}
+            sizes="(max-width: 760px) calc(100vw - 24px), (max-width: 1440px) 50vw, 700px"
+            loading="eager"
+            priority
+          />
+        )
+      }
+    </div>
+    <div class="film-intro-copy">
+      <p class="eyebrow">{homepageFilm.eyebrow}</p>
+      <h1 id="film-intro-title">{homepageFilm.title}</h1>
+      <p>{homepageFilm.description}</p>
+      <p class="film-status">Film premiere coming soon.</p>
+      <Button href="/shop">Shop the collection</Button>
+      {
+        hasVideo && homepageFilm.transcript && (
+          <details class="film-transcript">
+            <summary>Read film transcript</summary>
+            <p>{homepageFilm.transcript}</p>
+          </details>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const film = document.querySelector<HTMLVideoElement>('[data-homepage-film]');
+  if (film && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    film.autoplay = false;
+    film.pause();
+  }
+</script>

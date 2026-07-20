@@ -11,6 +11,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "images:brand": "node scripts/optimize-brand-images.mjs",
     "images:products": "node scripts/optimize-product-images.mjs",
     "verify": "node scripts/verify-build.mjs"
   },

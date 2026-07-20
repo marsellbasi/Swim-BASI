@@ -6,6 +6,14 @@ All notable changes to Swim BASI are documented here.
 
 ### Changed
 
+- Integrated eight owned Swim BASI brand photographs as optimized responsive lifestyle media across
+  the homepage, campaign color story, and About page.
+- Prepared the homepage for the upcoming Swim BASI portrait brand film with an accessible poster
+  experience and centralized video, captions, transcript, and playback configuration.
+- Replaced abstract campaign and color-story treatments with real brand photography while preserving
+  responsive loading, stable dimensions, and focal framing.
+- Documented the repeatable brand-photo optimizer and future portrait-film publishing workflow.
+
 - Expanded the catalog from 41 to 42 products and the one-piece collection from 13 to 14 with the
   Red Violet One-Piece Swimsuit.
 - Populated unique direct Printful product URLs for all 42 catalog entries, leaving zero general-store
