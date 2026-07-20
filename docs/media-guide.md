@@ -123,15 +123,16 @@ About, campaign, and color-story images remain lazy-loaded.
 
 ## Portrait brand film
 
-The future film belongs in `public/videos/campaigns/` as an H.264 MP4 and, when it meaningfully
-reduces size, a WebM version. Recommended delivery is 1080 × 1920 portrait, with a compressed WebP
-poster, a WebVTT captions file, and a reviewed text transcript. Keep the primary MP4 ideally below
-8–12 MB, use a restrained bitrate appropriate to motion and voice, and test on mobile networks.
+The live homepage film is stored in `public/videos/campaigns/` as a 720 × 1280 H.264/AAC MP4 with a
+compressed 9:16 WebP poster. Playback is user-initiated through native controls, and the voiceover is
+audible only after the customer presses play. A tested WebM encode was intentionally omitted because
+it was larger than the MP4. The raw `brand-video.MOV` remains local and ignored by Git.
 
 Never autoplay voiceover. User-initiated playback should begin with native controls and sound;
-optional muted autoplay must remain pausable and respect reduced-motion preferences. Captions must
-include the voiceover and meaningful audio, and the transcript must match the final edit. Cloudflare
-Pages serves these as committed static assets, so optimize them before Git and do not add build-time
+optional muted autoplay must remain pausable and respect reduced-motion preferences. Captions and a
+transcript are not published in the current release. The component retains optional fields for a
+future reviewed WebVTT track and matching transcript; do not publish draft or fabricated text.
+Cloudflare Pages serves the optimized media as committed static assets without build-time
 transcoding.
 
 See `docs/homepage-media.md` for exact configuration and replacement steps.

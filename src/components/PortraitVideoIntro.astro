@@ -4,9 +4,7 @@ import ResponsiveBrandImage from './ResponsiveBrandImage.astro';
 import { getBrandImage } from '../data/brand-images';
 import { homepageFilm } from '../data/homepage-media';
 
-const poster = getBrandImage(homepageFilm.poster);
-const posterFallback = poster.variants.at(-1);
-if (!posterFallback) throw new Error('The homepage film poster has no responsive variants');
+const fallbackPoster = getBrandImage(homepageFilm.fallbackPoster);
 const hasVideo = homepageFilm.enabled && Boolean(homepageFilm.videoSrc || homepageFilm.webmSrc);
 ---
 
@@ -17,13 +15,13 @@ const hasVideo = homepageFilm.enabled && Boolean(homepageFilm.videoSrc || homepa
         hasVideo ? (
           <video
             data-homepage-film
-            poster={posterFallback.src}
+            poster={homepageFilm.poster}
             controls={homepageFilm.controls}
             autoplay={homepageFilm.autoplay}
             muted={homepageFilm.muted}
             loop={homepageFilm.loop}
             playsinline={homepageFilm.playsInline}
-            preload="metadata"
+            preload={homepageFilm.preload}
             aria-label={homepageFilm.title}
           >
             {homepageFilm.webmSrc && <source src={homepageFilm.webmSrc} type="video/webm" />}
@@ -41,7 +39,7 @@ const hasVideo = homepageFilm.enabled && Boolean(homepageFilm.videoSrc || homepa
           </video>
         ) : (
           <ResponsiveBrandImage
-            image={poster}
+            image={fallbackPoster}
             sizes="(max-width: 760px) calc(100vw - 24px), (max-width: 1440px) 50vw, 700px"
             loading="eager"
             priority
@@ -53,7 +51,7 @@ const hasVideo = homepageFilm.enabled && Boolean(homepageFilm.videoSrc || homepa
       <p class="eyebrow">{homepageFilm.eyebrow}</p>
       <h1 id="film-intro-title">{homepageFilm.title}</h1>
       <p>{homepageFilm.description}</p>
-      <p class="film-status">Film premiere coming soon.</p>
+      <p class="film-status">{homepageFilm.status}</p>
       <Button href="/shop">Shop the collection</Button>
       {
         hasVideo && homepageFilm.transcript && (

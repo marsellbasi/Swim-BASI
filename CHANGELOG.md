@@ -6,10 +6,14 @@ All notable changes to Swim BASI are documented here.
 
 ### Changed
 
+- Published the portrait Swim BASI brand film on the homepage with user-initiated native playback,
+  audible voiceover after play, metadata-only preload, and a compressed WebP poster.
+- Intentionally omitted the larger WebM comparison encode and kept the raw MOV local and ignored.
+  Reviewed captions and a transcript remain a future accessibility enhancement supported by the
+  existing component architecture.
 - Integrated eight owned Swim BASI brand photographs as optimized responsive lifestyle media across
   the homepage, campaign color story, and About page.
-- Prepared the homepage for the upcoming Swim BASI portrait brand film with an accessible poster
-  experience and centralized video, captions, transcript, and playback configuration.
+- Centralized the film media, playback, and optional future captions/transcript configuration.
 - Replaced abstract campaign and color-story treatments with real brand photography while preserving
   responsive loading, stable dimensions, and focal framing.
 - Documented the repeatable brand-photo optimizer and future portrait-film publishing workflow.

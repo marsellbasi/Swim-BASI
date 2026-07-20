@@ -243,13 +243,20 @@ for (const entry of brandEntries) {
 const homepageHtml = readFileSync(join(dist, 'index.html'), 'utf8');
 const aboutHtml = readFileSync(join(dist, 'about', 'index.html'), 'utf8');
 if (
-  !homepageHtml.includes('data-film-state="poster"') ||
-  !homepageHtml.includes('Confidence, in motion.')
+  !homepageHtml.includes('data-film-state="video"') ||
+  !homepageHtml.includes('data-homepage-film') ||
+  !homepageHtml.includes('poster="/videos/campaigns/swim-basi-brand-film-poster.webp"') ||
+  !homepageHtml.includes('src="/videos/campaigns/swim-basi-brand-film.mp4" type="video/mp4"') ||
+  !homepageHtml.includes('controls playsinline preload="metadata"') ||
+  !homepageHtml.includes('WATCH THE SWIM BASI FILM.') ||
+  homepageHtml.includes('FILM PREMIERE COMING SOON.') ||
+  homepageHtml.includes('<track') ||
+  homepageHtml.includes('type="video/webm"')
 ) {
-  errors.push('Homepage portrait-film poster mode is missing');
+  errors.push('Homepage active portrait-film configuration is invalid');
 }
-if ((homepageHtml.match(/data-brand-image=/g) ?? []).length !== 6) {
-  errors.push('Homepage should render six intentional brand-image placements');
+if ((homepageHtml.match(/data-brand-image=/g) ?? []).length !== 5) {
+  errors.push('Homepage should render five intentional responsive brand-image placements');
 }
 if ((aboutHtml.match(/data-brand-image=/g) ?? []).length !== 4) {
   errors.push('About page should render four editorial brand images');
