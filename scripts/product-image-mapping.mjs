@@ -1,5 +1,11 @@
 export const productImageMappings = [
   {
+    productSlug: 'basi-red-violet-one-piece-swimsuit',
+    productName: 'BASI Red Violet One-Piece Swimsuit',
+    category: 'one-piece',
+    sourceFolder: 'red-violet-one-piece',
+  },
+  {
     productSlug: 'basi-brink-pink-one-piece-swimsuit',
     productName: 'BASI Brink Pink One-Piece Swimsuit',
     category: 'one-piece',

@@ -14,13 +14,13 @@
     "rawFolderCount": 42,
     "rawImageCount": 112,
     "rawTotalBytes": 130113848,
-    "productMappingCount": 41,
-    "optimizedImageCount": 108,
-    "optimizedTotalBytes": 10047312,
-    "reductionPercent": 92.28,
+    "productMappingCount": 42,
+    "optimizedImageCount": 112,
+    "optimizedTotalBytes": 10398738,
+    "reductionPercent": 92.01,
     "largestOptimizedBytes": 153692,
-    "averageOptimizedBytes": 93031,
-    "unmatchedSourceFolders": ["red-violet-one-piece"],
+    "averageOptimizedBytes": 92846,
+    "unmatchedSourceFolders": [],
     "unmatchedProductSlugs": [],
     "normalizedSourceFiles": ["grey-one-piece/leeft.png"],
     "duplicateMappings": [],
@@ -29,6 +29,62 @@
     "sourcesWithoutTransparency": []
   },
   "products": {
+    "basi-red-violet-one-piece-swimsuit": {
+      "productSlug": "basi-red-violet-one-piece-swimsuit",
+      "sourceFolder": "red-violet-one-piece",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/one-piece/basi-red-violet-one-piece-swimsuit/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 80990,
+        "view": "front",
+        "alt": "Front view of the BASI Red Violet One-Piece Swimsuit"
+      },
+      "hover": {
+        "src": "/images/products/one-piece/basi-red-violet-one-piece-swimsuit/left.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 99346,
+        "view": "left",
+        "alt": "Left-side view of the BASI Red Violet One-Piece Swimsuit"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/one-piece/basi-red-violet-one-piece-swimsuit/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 80990,
+          "view": "front",
+          "alt": "Front view of the BASI Red Violet One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-red-violet-one-piece-swimsuit/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 72904,
+          "view": "back",
+          "alt": "Back view of the BASI Red Violet One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-red-violet-one-piece-swimsuit/left.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 99346,
+          "view": "left",
+          "alt": "Left-side view of the BASI Red Violet One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-red-violet-one-piece-swimsuit/right.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 98186,
+          "view": "right",
+          "alt": "Right-side view of the BASI Red Violet One-Piece Swimsuit"
+        }
+      ],
+      "availableViews": ["front", "back", "left", "right"]
+    },
     "basi-brink-pink-one-piece-swimsuit": {
       "productSlug": "basi-brink-pink-one-piece-swimsuit",
       "sourceFolder": "brink-pink-one-piece",

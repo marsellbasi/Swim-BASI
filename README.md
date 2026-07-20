@@ -54,7 +54,9 @@ Place owned and approved media in the matching folder under `public/images/` or 
 
 ## Updating Printful URLs
 
-Replace fallback `https://basiswim.printful.me` values with exact product URLs and set `needsPrintfulUrl` to `false`. Never guess URLs. The Brink Pink one-piece sample already uses its confirmed direct link.
+All catalog entries use exact direct Printful product URLs. Never guess a URL or replace a direct
+product link with the general storefront. Keep each URL slug aligned with the catalog product slug
+and leave `needsPrintfulUrl` set to `false` after verification.
 
 ## Cloudflare Pages
 

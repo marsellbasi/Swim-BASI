@@ -6,6 +6,13 @@ All notable changes to Swim BASI are documented here.
 
 ### Changed
 
+- Expanded the catalog from 41 to 42 products and the one-piece collection from 13 to 14 with the
+  Red Violet One-Piece Swimsuit.
+- Populated unique direct Printful product URLs for all 42 catalog entries, leaving zero general-store
+  fallback links.
+- Optimized and mapped all four Red Violet one-piece views, resolving the final unmatched mockup
+  source folder.
+
 - Imported 41 verified Printful mockup sets as transparent, optimized WebP product media.
 - Mapped front, hover, and ordered gallery views through the central product data and generated image
   manifest.

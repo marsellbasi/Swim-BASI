@@ -34,7 +34,11 @@ Use one of the typed categories: `one-piece`, `string-bikinis`, or `high-waisted
 
 ## Printful links
 
-Never invent a product URL. Use the storefront fallback temporarily, keep `needsPrintfulUrl: true`, and leave the TODO intact. When an exact URL is confirmed, enter it and set `needsPrintfulUrl: false`.
+Every current product uses a unique direct URL under `https://basiswim.printful.me/product/`. Never
+invent a product URL or replace a direct link with the general storefront. The URL slug must exactly
+match the catalog product slug, and `needsPrintfulUrl` must remain `false` for verified entries. Run
+`npm run build` and `npm run verify` after any link update; verification rejects blank, duplicate,
+non-Printful, fallback, or slug-conflicting product links.
 
 ## Launch checklist
 
