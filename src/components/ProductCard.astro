@@ -11,6 +11,7 @@ const productSchema = {
   name: product.name,
   description: product.description,
   color: product.colorName,
+  image: product.image?.src,
   url: product.printfulUrl,
   offers: {
     '@type': 'Offer',
@@ -34,12 +35,29 @@ const productSchema = {
   >
     {
       product.image ? (
-        <img
-          src={product.image}
-          alt={`${product.name} product view`}
-          loading="lazy"
-          decoding="async"
-        />
+        <>
+          <img
+            class="product-image product-image--primary"
+            src={product.image.src}
+            width={product.image.width}
+            height={product.image.height}
+            alt={product.image.alt}
+            loading="lazy"
+            decoding="async"
+          />
+          {product.hoverImage && (
+            <img
+              class="product-image product-image--hover"
+              width={product.hoverImage.width}
+              height={product.hoverImage.height}
+              alt=""
+              aria-hidden="true"
+              data-hover-src={product.hoverImage.src}
+              loading="lazy"
+              decoding="async"
+            />
+          )}
+        </>
       ) : (
         <div
           class="product-placeholder"
@@ -69,3 +87,27 @@ const productSchema = {
     >
   </div>
 </article>
+
+<script>
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+  document.querySelectorAll<HTMLElement>('.product-visual').forEach((visual) => {
+    const hoverImage = visual.querySelector<HTMLImageElement>('[data-hover-src]');
+    if (!hoverImage) return;
+
+    const loadHoverImage = () => {
+      if (hoverImage.src) return;
+      const source = hoverImage.dataset.hoverSrc;
+      if (!source) return;
+      hoverImage.addEventListener('load', () => hoverImage.classList.add('is-loaded'), {
+        once: true,
+      });
+      hoverImage.src = source;
+    };
+
+    if (finePointer.matches) {
+      visual.addEventListener('pointerenter', loadHoverImage, { once: true });
+      visual.addEventListener('focus', loadHoverImage, { once: true });
+    }
+  });
+</script>

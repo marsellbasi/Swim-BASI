@@ -307,6 +307,27 @@ summary {
   overflow: hidden;
   background: linear-gradient(145deg, var(--collection-color), #101010);
 }
+.collection-art--product {
+  background: var(--ivory);
+}
+.collection-art--product::before,
+.collection-art--product::after {
+  display: none;
+}
+.collection-art--product img {
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+  object-fit: contain;
+  transition: transform 240ms ease;
+}
+.collection-card a:hover .collection-art--product img,
+.collection-card a:focus-visible .collection-art--product img {
+  transform: scale(1.025);
+}
+.collection-art--product > span {
+  color: var(--black);
+}
 .collection-art::before,
 .collection-art::after {
   content: '';
@@ -366,7 +387,33 @@ summary {
   aspect-ratio: 4/5;
   display: block;
   overflow: hidden;
-  background: var(--gray);
+  background: var(--ivory);
+}
+.product-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+  object-fit: contain;
+}
+.product-image--primary {
+  opacity: 1;
+  transition: opacity 180ms ease;
+}
+.product-image--hover {
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .product-visual:hover .product-image--primary,
+  .product-visual:focus-visible .product-image--primary {
+    opacity: 0;
+  }
+  .product-visual:hover .product-image--hover.is-loaded,
+  .product-visual:focus-visible .product-image--hover.is-loaded {
+    opacity: 1;
+  }
 }
 .product-placeholder {
   position: absolute;

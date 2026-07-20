@@ -4,7 +4,21 @@ The catalog has one source of truth: `src/data/products.ts`. Do not duplicate pr
 
 ## Add a product
 
-Add a color to the correct family or add a fully typed `Product` entry. Use a stable lowercase slug, exact visible price, owned local media paths, and the exact Printful URL. Leave `available` as `null` unless inventory status is reliably synchronized.
+Add a color to the correct family or add a fully typed `Product` entry. Use a stable lowercase slug,
+exact visible price, and the exact Printful URL. Leave `available` as `null` unless inventory status
+is reliably synchronized. Product mockup paths are populated from the generated image manifest; do
+not hardcode them into page components.
+
+## Product mockups and galleries
+
+Raw mockups belong in the ignored `Swim Mockups/` import directory. Add an explicit product/folder
+entry to `scripts/product-image-mapping.mjs`, then run `npm run images:products`. The generated
+manifest supplies each product's `image`, `hoverImage`, and ordered `gallery` fields through the
+central catalog.
+
+The front view is primary. One-pieces prefer the left, then right, then back view for hover. Bikinis
+use the back view for hover. Gallery order is front, back, left, right, and only existing views are
+included. Never duplicate or invent an angle. See `docs/media-guide.md` for the full import process.
 
 ## Edit or remove
 

@@ -1,17 +1,36 @@
 ---
+import type { Product } from '../data/products';
+
 interface Props {
   title: string;
   href: string;
   price: string;
   color: string;
   index: string;
+  product?: Product;
 }
-const { title, href, price, color, index } = Astro.props;
+const { title, href, price, color, index, product } = Astro.props;
 ---
 
 <article class="collection-card">
   <a href={href} aria-label={`Shop ${title}`}>
-    <div class="collection-art" style={`--collection-color:${color}`}><span>{index}</span></div>
+    <div
+      class:list={['collection-art', { 'collection-art--product': product?.image }]}
+      style={`--collection-color:${color}`}
+    >
+      {
+        product?.image && (
+          <img
+            src={product.image.src}
+            width={product.image.width}
+            height={product.image.height}
+            alt={product.image.alt}
+            loading="lazy"
+            decoding="async"
+          />
+        )
+      }<span>{index}</span>
+    </div>
     <div class="collection-copy">
       <div><h3>{title}</h3><p>{price}</p></div><span class="circle-arrow" aria-hidden="true">→</span
       >

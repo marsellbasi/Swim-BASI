@@ -23,6 +23,23 @@ for (const file of htmlFiles) {
     }
   }
 
+  const localMediaPaths = [...html.matchAll(/(?:src|data-hover-src)="(\/[^"?#]+)"/g)].map(
+    (match) => match[1],
+  );
+  for (const mediaPath of localMediaPaths) {
+    const target = join(dist, mediaPath);
+    if (!existsSync(target)) {
+      errors.push(`${relative(root, file)} has broken local media: ${mediaPath}`);
+    }
+  }
+
+  for (const match of html.matchAll(/<img\b([^>]*\/images\/products\/[^>]*)>/g)) {
+    const attrs = match[1];
+    if (!/width="\d+"/.test(attrs) || !/height="\d+"/.test(attrs)) {
+      errors.push(`${relative(root, file)} has product media without dimensions`);
+    }
+  }
+
   for (const match of html.matchAll(
     /<a\b([^>]*href="https:\/\/basiswim\.printful\.me[^"]*"[^>]*)>/g,
   )) {
@@ -47,5 +64,5 @@ if (errors.length) {
 }
 
 console.log(
-  `Verified ${htmlFiles.length} pages: internal links, Printful link safety, local media, robots, and sitemap.`,
+  `Verified ${htmlFiles.length} pages: internal links, Printful link safety, local media paths and dimensions, robots, and sitemap.`,
 );

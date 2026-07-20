@@ -2,6 +2,13 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import CollectionCard from '../../components/CollectionCard.astro';
+import { products } from '../../data/products';
+
+const collectionProducts = {
+  onePiece: products.find((product) => product.slug === 'basi-brink-pink-one-piece-swimsuit'),
+  stringBikini: products.find((product) => product.slug === 'basi-eastern-blue-string-bikini'),
+  highWaisted: products.find((product) => product.slug === 'basi-orange-high-waisted-bikini'),
+};
 ---
 
 <BaseLayout
@@ -25,18 +32,21 @@ import CollectionCard from '../../components/CollectionCard.astro';
         price="Starting at $32.99"
         color="#F16A8D"
         index="01"
+        product={collectionProducts.onePiece}
       /><CollectionCard
         title="String Bikinis"
         href="/collections/string-bikinis"
         price="Starting at $37.99"
         color="#247BA0"
         index="02"
+        product={collectionProducts.stringBikini}
       /><CollectionCard
         title="High-Waisted Bikinis"
         href="/collections/high-waisted-bikinis"
         price="Starting at $44.99"
         color="#E8692A"
         index="03"
+        product={collectionProducts.highWaisted}
       />
     </div>
   </section></BaseLayout

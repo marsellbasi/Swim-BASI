@@ -1,4 +1,23 @@
+import productImageData from './product-image-manifest.json';
+
 export type ProductCategory = 'one-piece' | 'string-bikinis' | 'high-waisted-bikinis';
+export type ProductImageView = 'front' | 'back' | 'left' | 'right';
+
+export interface ProductImageAsset {
+  src: string;
+  width: number;
+  height: number;
+  bytes: number;
+  view: ProductImageView;
+  alt: string;
+}
+
+interface ProductImageSet {
+  primary: ProductImageAsset;
+  hover: ProductImageAsset | null;
+  gallery: ProductImageAsset[];
+  availableViews: ProductImageView[];
+}
 
 export interface Product {
   id: string;
@@ -12,10 +31,9 @@ export interface Product {
   price: number;
   currency: 'USD';
   printfulUrl: string;
-  /** TODO: Replace empty paths with approved, owned product photography. */
-  image: string;
-  hoverImage: string;
-  gallery: string[];
+  image: ProductImageAsset | null;
+  hoverImage: ProductImageAsset | null;
+  gallery: ProductImageAsset[];
   video: string | null;
   featured: boolean;
   /** Sample catalog entries are not confirmed inventory. */
@@ -29,6 +47,7 @@ export interface Product {
 }
 
 const STOREFRONT_URL = 'https://basiswim.printful.me';
+const productImageManifest = productImageData.products as Record<string, ProductImageSet>;
 const colors = {
   'Brink Pink': '#F16A8D',
   Classic: '#1E3A5F',
@@ -120,10 +139,12 @@ const slugify = (value: string) =>
 export const products: Product[] = families.flatMap((family, familyIndex) =>
   family.colorNames.map((colorName, colorIndex) => {
     const name = `BASI ${colorName} ${family.label}`;
+    const slug = slugify(name);
+    const imageSet = productImageManifest[slug];
     const confirmed = family.category === 'one-piece' && colorName === 'Brink Pink';
     return {
       id: `${family.category}-${slugify(colorName)}`,
-      slug: slugify(name),
+      slug,
       name,
       shortName: `${colorName} ${family.label}`,
       category: family.category,
@@ -136,9 +157,9 @@ export const products: Product[] = families.flatMap((family, familyIndex) =>
       printfulUrl: confirmed
         ? 'https://basiswim.printful.me/product/basi-brink-pink-one-piece-swimsuit'
         : STOREFRONT_URL,
-      image: '',
-      hoverImage: '',
-      gallery: [],
+      image: imageSet?.primary ?? null,
+      hoverImage: imageSet?.hover ?? null,
+      gallery: imageSet?.gallery ?? [],
       video: null,
       featured: familyIndex < 3 && colorIndex < 2,
       available: null,

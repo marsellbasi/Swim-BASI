@@ -1,0 +1,1881 @@
+{
+  "version": 1,
+  "sourceDirectory": "Swim Mockups",
+  "outputDirectory": "public/images/products",
+  "optimization": {
+    "format": "webp",
+    "width": 1200,
+    "height": 1200,
+    "fit": "inside",
+    "quality": 94,
+    "alphaQuality": 100
+  },
+  "audit": {
+    "rawFolderCount": 42,
+    "rawImageCount": 112,
+    "rawTotalBytes": 130113848,
+    "productMappingCount": 41,
+    "optimizedImageCount": 108,
+    "optimizedTotalBytes": 10047312,
+    "reductionPercent": 92.28,
+    "largestOptimizedBytes": 153692,
+    "averageOptimizedBytes": 93031,
+    "unmatchedSourceFolders": ["red-violet-one-piece"],
+    "unmatchedProductSlugs": [],
+    "normalizedSourceFiles": ["grey-one-piece/leeft.png"],
+    "duplicateMappings": [],
+    "unexpectedFiles": [],
+    "corruptFiles": [],
+    "sourcesWithoutTransparency": []
+  },
+  "products": {
+    "basi-brink-pink-one-piece-swimsuit": {
+      "productSlug": "basi-brink-pink-one-piece-swimsuit",
+      "sourceFolder": "brink-pink-one-piece",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/one-piece/basi-brink-pink-one-piece-swimsuit/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 80644,
+        "view": "front",
+        "alt": "Front view of the BASI Brink Pink One-Piece Swimsuit"
+      },
+      "hover": {
+        "src": "/images/products/one-piece/basi-brink-pink-one-piece-swimsuit/left.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 96932,
+        "view": "left",
+        "alt": "Left-side view of the BASI Brink Pink One-Piece Swimsuit"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/one-piece/basi-brink-pink-one-piece-swimsuit/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 80644,
+          "view": "front",
+          "alt": "Front view of the BASI Brink Pink One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-brink-pink-one-piece-swimsuit/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 70106,
+          "view": "back",
+          "alt": "Back view of the BASI Brink Pink One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-brink-pink-one-piece-swimsuit/left.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 96932,
+          "view": "left",
+          "alt": "Left-side view of the BASI Brink Pink One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-brink-pink-one-piece-swimsuit/right.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 96002,
+          "view": "right",
+          "alt": "Right-side view of the BASI Brink Pink One-Piece Swimsuit"
+        }
+      ],
+      "availableViews": ["front", "back", "left", "right"]
+    },
+    "basi-classic-one-piece-swimsuit": {
+      "productSlug": "basi-classic-one-piece-swimsuit",
+      "sourceFolder": "classic-one-piece",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/one-piece/basi-classic-one-piece-swimsuit/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 50542,
+        "view": "front",
+        "alt": "Front view of the BASI Classic One-Piece Swimsuit"
+      },
+      "hover": {
+        "src": "/images/products/one-piece/basi-classic-one-piece-swimsuit/left.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 67736,
+        "view": "left",
+        "alt": "Left-side view of the BASI Classic One-Piece Swimsuit"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/one-piece/basi-classic-one-piece-swimsuit/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 50542,
+          "view": "front",
+          "alt": "Front view of the BASI Classic One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-classic-one-piece-swimsuit/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 40396,
+          "view": "back",
+          "alt": "Back view of the BASI Classic One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-classic-one-piece-swimsuit/left.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 67736,
+          "view": "left",
+          "alt": "Left-side view of the BASI Classic One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-classic-one-piece-swimsuit/right.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 65922,
+          "view": "right",
+          "alt": "Right-side view of the BASI Classic One-Piece Swimsuit"
+        }
+      ],
+      "availableViews": ["front", "back", "left", "right"]
+    },
+    "basi-burgundy-one-piece-swimsuit": {
+      "productSlug": "basi-burgundy-one-piece-swimsuit",
+      "sourceFolder": "burgundy-one-piece",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/one-piece/basi-burgundy-one-piece-swimsuit/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 77932,
+        "view": "front",
+        "alt": "Front view of the BASI Burgundy One-Piece Swimsuit"
+      },
+      "hover": {
+        "src": "/images/products/one-piece/basi-burgundy-one-piece-swimsuit/left.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 98318,
+        "view": "left",
+        "alt": "Left-side view of the BASI Burgundy One-Piece Swimsuit"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/one-piece/basi-burgundy-one-piece-swimsuit/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 77932,
+          "view": "front",
+          "alt": "Front view of the BASI Burgundy One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-burgundy-one-piece-swimsuit/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 70218,
+          "view": "back",
+          "alt": "Back view of the BASI Burgundy One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-burgundy-one-piece-swimsuit/left.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 98318,
+          "view": "left",
+          "alt": "Left-side view of the BASI Burgundy One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-burgundy-one-piece-swimsuit/right.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 96846,
+          "view": "right",
+          "alt": "Right-side view of the BASI Burgundy One-Piece Swimsuit"
+        }
+      ],
+      "availableViews": ["front", "back", "left", "right"]
+    },
+    "basi-mona-lisa-one-piece-swimsuit": {
+      "productSlug": "basi-mona-lisa-one-piece-swimsuit",
+      "sourceFolder": "mona-lisa-one-piece",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/one-piece/basi-mona-lisa-one-piece-swimsuit/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 77108,
+        "view": "front",
+        "alt": "Front view of the BASI Mona Lisa One-Piece Swimsuit"
+      },
+      "hover": {
+        "src": "/images/products/one-piece/basi-mona-lisa-one-piece-swimsuit/left.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 96346,
+        "view": "left",
+        "alt": "Left-side view of the BASI Mona Lisa One-Piece Swimsuit"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/one-piece/basi-mona-lisa-one-piece-swimsuit/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 77108,
+          "view": "front",
+          "alt": "Front view of the BASI Mona Lisa One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-mona-lisa-one-piece-swimsuit/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 69678,
+          "view": "back",
+          "alt": "Back view of the BASI Mona Lisa One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-mona-lisa-one-piece-swimsuit/left.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 96346,
+          "view": "left",
+          "alt": "Left-side view of the BASI Mona Lisa One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-mona-lisa-one-piece-swimsuit/right.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 95228,
+          "view": "right",
+          "alt": "Right-side view of the BASI Mona Lisa One-Piece Swimsuit"
+        }
+      ],
+      "availableViews": ["front", "back", "left", "right"]
+    },
+    "basi-red-one-piece-swimsuit": {
+      "productSlug": "basi-red-one-piece-swimsuit",
+      "sourceFolder": "red-one-piece",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/one-piece/basi-red-one-piece-swimsuit/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 81122,
+        "view": "front",
+        "alt": "Front view of the BASI Red One-Piece Swimsuit"
+      },
+      "hover": {
+        "src": "/images/products/one-piece/basi-red-one-piece-swimsuit/left.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 100288,
+        "view": "left",
+        "alt": "Left-side view of the BASI Red One-Piece Swimsuit"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/one-piece/basi-red-one-piece-swimsuit/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 81122,
+          "view": "front",
+          "alt": "Front view of the BASI Red One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-red-one-piece-swimsuit/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 72516,
+          "view": "back",
+          "alt": "Back view of the BASI Red One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-red-one-piece-swimsuit/left.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 100288,
+          "view": "left",
+          "alt": "Left-side view of the BASI Red One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-red-one-piece-swimsuit/right.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 99012,
+          "view": "right",
+          "alt": "Right-side view of the BASI Red One-Piece Swimsuit"
+        }
+      ],
+      "availableViews": ["front", "back", "left", "right"]
+    },
+    "basi-cotton-candy-one-piece-swimsuit": {
+      "productSlug": "basi-cotton-candy-one-piece-swimsuit",
+      "sourceFolder": "cotton-candy-one-piece",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/one-piece/basi-cotton-candy-one-piece-swimsuit/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 75038,
+        "view": "front",
+        "alt": "Front view of the BASI Cotton Candy One-Piece Swimsuit"
+      },
+      "hover": {
+        "src": "/images/products/one-piece/basi-cotton-candy-one-piece-swimsuit/left.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 93500,
+        "view": "left",
+        "alt": "Left-side view of the BASI Cotton Candy One-Piece Swimsuit"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/one-piece/basi-cotton-candy-one-piece-swimsuit/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 75038,
+          "view": "front",
+          "alt": "Front view of the BASI Cotton Candy One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-cotton-candy-one-piece-swimsuit/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 63560,
+          "view": "back",
+          "alt": "Back view of the BASI Cotton Candy One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-cotton-candy-one-piece-swimsuit/left.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 93500,
+          "view": "left",
+          "alt": "Left-side view of the BASI Cotton Candy One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-cotton-candy-one-piece-swimsuit/right.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 93108,
+          "view": "right",
+          "alt": "Right-side view of the BASI Cotton Candy One-Piece Swimsuit"
+        }
+      ],
+      "availableViews": ["front", "back", "left", "right"]
+    },
+    "basi-orange-one-piece-swimsuit": {
+      "productSlug": "basi-orange-one-piece-swimsuit",
+      "sourceFolder": "orange-one-piece",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/one-piece/basi-orange-one-piece-swimsuit/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 82864,
+        "view": "front",
+        "alt": "Front view of the BASI Orange One-Piece Swimsuit"
+      },
+      "hover": {
+        "src": "/images/products/one-piece/basi-orange-one-piece-swimsuit/left.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 101788,
+        "view": "left",
+        "alt": "Left-side view of the BASI Orange One-Piece Swimsuit"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/one-piece/basi-orange-one-piece-swimsuit/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 82864,
+          "view": "front",
+          "alt": "Front view of the BASI Orange One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-orange-one-piece-swimsuit/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 73846,
+          "view": "back",
+          "alt": "Back view of the BASI Orange One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-orange-one-piece-swimsuit/left.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 101788,
+          "view": "left",
+          "alt": "Left-side view of the BASI Orange One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-orange-one-piece-swimsuit/right.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 100612,
+          "view": "right",
+          "alt": "Right-side view of the BASI Orange One-Piece Swimsuit"
+        }
+      ],
+      "availableViews": ["front", "back", "left", "right"]
+    },
+    "basi-eastern-blue-one-piece-swimsuit": {
+      "productSlug": "basi-eastern-blue-one-piece-swimsuit",
+      "sourceFolder": "eastern-blue-one-piece",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/one-piece/basi-eastern-blue-one-piece-swimsuit/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 85982,
+        "view": "front",
+        "alt": "Front view of the BASI Eastern Blue One-Piece Swimsuit"
+      },
+      "hover": {
+        "src": "/images/products/one-piece/basi-eastern-blue-one-piece-swimsuit/left.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 100724,
+        "view": "left",
+        "alt": "Left-side view of the BASI Eastern Blue One-Piece Swimsuit"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/one-piece/basi-eastern-blue-one-piece-swimsuit/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 85982,
+          "view": "front",
+          "alt": "Front view of the BASI Eastern Blue One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-eastern-blue-one-piece-swimsuit/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 74052,
+          "view": "back",
+          "alt": "Back view of the BASI Eastern Blue One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-eastern-blue-one-piece-swimsuit/left.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 100724,
+          "view": "left",
+          "alt": "Left-side view of the BASI Eastern Blue One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-eastern-blue-one-piece-swimsuit/right.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 99782,
+          "view": "right",
+          "alt": "Right-side view of the BASI Eastern Blue One-Piece Swimsuit"
+        }
+      ],
+      "availableViews": ["front", "back", "left", "right"]
+    },
+    "basi-forest-green-one-piece-swimsuit": {
+      "productSlug": "basi-forest-green-one-piece-swimsuit",
+      "sourceFolder": "forest-green-one-piece",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/one-piece/basi-forest-green-one-piece-swimsuit/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 76202,
+        "view": "front",
+        "alt": "Front view of the BASI Forest Green One-Piece Swimsuit"
+      },
+      "hover": {
+        "src": "/images/products/one-piece/basi-forest-green-one-piece-swimsuit/left.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 96038,
+        "view": "left",
+        "alt": "Left-side view of the BASI Forest Green One-Piece Swimsuit"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/one-piece/basi-forest-green-one-piece-swimsuit/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 76202,
+          "view": "front",
+          "alt": "Front view of the BASI Forest Green One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-forest-green-one-piece-swimsuit/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 69252,
+          "view": "back",
+          "alt": "Back view of the BASI Forest Green One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-forest-green-one-piece-swimsuit/left.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 96038,
+          "view": "left",
+          "alt": "Left-side view of the BASI Forest Green One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-forest-green-one-piece-swimsuit/right.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 94448,
+          "view": "right",
+          "alt": "Right-side view of the BASI Forest Green One-Piece Swimsuit"
+        }
+      ],
+      "availableViews": ["front", "back", "left", "right"]
+    },
+    "basi-brown-one-piece-swimsuit": {
+      "productSlug": "basi-brown-one-piece-swimsuit",
+      "sourceFolder": "brown-one-piece",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/one-piece/basi-brown-one-piece-swimsuit/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 77770,
+        "view": "front",
+        "alt": "Front view of the BASI Brown One-Piece Swimsuit"
+      },
+      "hover": {
+        "src": "/images/products/one-piece/basi-brown-one-piece-swimsuit/left.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 97236,
+        "view": "left",
+        "alt": "Left-side view of the BASI Brown One-Piece Swimsuit"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/one-piece/basi-brown-one-piece-swimsuit/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 77770,
+          "view": "front",
+          "alt": "Front view of the BASI Brown One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-brown-one-piece-swimsuit/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 69984,
+          "view": "back",
+          "alt": "Back view of the BASI Brown One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-brown-one-piece-swimsuit/left.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 97236,
+          "view": "left",
+          "alt": "Left-side view of the BASI Brown One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-brown-one-piece-swimsuit/right.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 95698,
+          "view": "right",
+          "alt": "Right-side view of the BASI Brown One-Piece Swimsuit"
+        }
+      ],
+      "availableViews": ["front", "back", "left", "right"]
+    },
+    "basi-grey-one-piece-swimsuit": {
+      "productSlug": "basi-grey-one-piece-swimsuit",
+      "sourceFolder": "grey-one-piece",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/one-piece/basi-grey-one-piece-swimsuit/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 60446,
+        "view": "front",
+        "alt": "Front view of the BASI Grey One-Piece Swimsuit"
+      },
+      "hover": {
+        "src": "/images/products/one-piece/basi-grey-one-piece-swimsuit/left.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 75538,
+        "view": "left",
+        "alt": "Left-side view of the BASI Grey One-Piece Swimsuit"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/one-piece/basi-grey-one-piece-swimsuit/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 60446,
+          "view": "front",
+          "alt": "Front view of the BASI Grey One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-grey-one-piece-swimsuit/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 53800,
+          "view": "back",
+          "alt": "Back view of the BASI Grey One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-grey-one-piece-swimsuit/left.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 75538,
+          "view": "left",
+          "alt": "Left-side view of the BASI Grey One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-grey-one-piece-swimsuit/right.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 74116,
+          "view": "right",
+          "alt": "Right-side view of the BASI Grey One-Piece Swimsuit"
+        }
+      ],
+      "availableViews": ["front", "back", "left", "right"]
+    },
+    "basi-black-one-piece-swimsuit": {
+      "productSlug": "basi-black-one-piece-swimsuit",
+      "sourceFolder": "black-one-piece",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/one-piece/basi-black-one-piece-swimsuit/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 44352,
+        "view": "front",
+        "alt": "Front view of the BASI Black One-Piece Swimsuit"
+      },
+      "hover": {
+        "src": "/images/products/one-piece/basi-black-one-piece-swimsuit/left.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 62418,
+        "view": "left",
+        "alt": "Left-side view of the BASI Black One-Piece Swimsuit"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/one-piece/basi-black-one-piece-swimsuit/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 44352,
+          "view": "front",
+          "alt": "Front view of the BASI Black One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-black-one-piece-swimsuit/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 39592,
+          "view": "back",
+          "alt": "Back view of the BASI Black One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-black-one-piece-swimsuit/left.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 62418,
+          "view": "left",
+          "alt": "Left-side view of the BASI Black One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-black-one-piece-swimsuit/right.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 60746,
+          "view": "right",
+          "alt": "Right-side view of the BASI Black One-Piece Swimsuit"
+        }
+      ],
+      "availableViews": ["front", "back", "left", "right"]
+    },
+    "basi-yellow-one-piece-swimsuit": {
+      "productSlug": "basi-yellow-one-piece-swimsuit",
+      "sourceFolder": "yellow-one-piece",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/one-piece/basi-yellow-one-piece-swimsuit/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 84220,
+        "view": "front",
+        "alt": "Front view of the BASI Yellow One-Piece Swimsuit"
+      },
+      "hover": {
+        "src": "/images/products/one-piece/basi-yellow-one-piece-swimsuit/left.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 101012,
+        "view": "left",
+        "alt": "Left-side view of the BASI Yellow One-Piece Swimsuit"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/one-piece/basi-yellow-one-piece-swimsuit/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 84220,
+          "view": "front",
+          "alt": "Front view of the BASI Yellow One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-yellow-one-piece-swimsuit/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 69574,
+          "view": "back",
+          "alt": "Back view of the BASI Yellow One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-yellow-one-piece-swimsuit/left.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 101012,
+          "view": "left",
+          "alt": "Left-side view of the BASI Yellow One-Piece Swimsuit"
+        },
+        {
+          "src": "/images/products/one-piece/basi-yellow-one-piece-swimsuit/right.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 100556,
+          "view": "right",
+          "alt": "Right-side view of the BASI Yellow One-Piece Swimsuit"
+        }
+      ],
+      "availableViews": ["front", "back", "left", "right"]
+    },
+    "basi-red-violet-string-bikini": {
+      "productSlug": "basi-red-violet-string-bikini",
+      "sourceFolder": "red-violet-string-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/string-bikinis/basi-red-violet-string-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 145484,
+        "view": "front",
+        "alt": "Front view of the BASI Red Violet String Bikini"
+      },
+      "hover": {
+        "src": "/images/products/string-bikinis/basi-red-violet-string-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 144746,
+        "view": "back",
+        "alt": "Back view of the BASI Red Violet String Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/string-bikinis/basi-red-violet-string-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 145484,
+          "view": "front",
+          "alt": "Front view of the BASI Red Violet String Bikini"
+        },
+        {
+          "src": "/images/products/string-bikinis/basi-red-violet-string-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 144746,
+          "view": "back",
+          "alt": "Back view of the BASI Red Violet String Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-classic-string-bikini": {
+      "productSlug": "basi-classic-string-bikini",
+      "sourceFolder": "classic-string-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/string-bikinis/basi-classic-string-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 78980,
+        "view": "front",
+        "alt": "Front view of the BASI Classic String Bikini"
+      },
+      "hover": {
+        "src": "/images/products/string-bikinis/basi-classic-string-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 79904,
+        "view": "back",
+        "alt": "Back view of the BASI Classic String Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/string-bikinis/basi-classic-string-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 78980,
+          "view": "front",
+          "alt": "Front view of the BASI Classic String Bikini"
+        },
+        {
+          "src": "/images/products/string-bikinis/basi-classic-string-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 79904,
+          "view": "back",
+          "alt": "Back view of the BASI Classic String Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-burgundy-string-bikini": {
+      "productSlug": "basi-burgundy-string-bikini",
+      "sourceFolder": "burgundy-string-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/string-bikinis/basi-burgundy-string-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 135518,
+        "view": "front",
+        "alt": "Front view of the BASI Burgundy String Bikini"
+      },
+      "hover": {
+        "src": "/images/products/string-bikinis/basi-burgundy-string-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 135380,
+        "view": "back",
+        "alt": "Back view of the BASI Burgundy String Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/string-bikinis/basi-burgundy-string-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 135518,
+          "view": "front",
+          "alt": "Front view of the BASI Burgundy String Bikini"
+        },
+        {
+          "src": "/images/products/string-bikinis/basi-burgundy-string-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 135380,
+          "view": "back",
+          "alt": "Back view of the BASI Burgundy String Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-mona-lisa-string-bikini": {
+      "productSlug": "basi-mona-lisa-string-bikini",
+      "sourceFolder": "mona-lisa-string-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/string-bikinis/basi-mona-lisa-string-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 149592,
+        "view": "front",
+        "alt": "Front view of the BASI Mona Lisa String Bikini"
+      },
+      "hover": {
+        "src": "/images/products/string-bikinis/basi-mona-lisa-string-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 148688,
+        "view": "back",
+        "alt": "Back view of the BASI Mona Lisa String Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/string-bikinis/basi-mona-lisa-string-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 149592,
+          "view": "front",
+          "alt": "Front view of the BASI Mona Lisa String Bikini"
+        },
+        {
+          "src": "/images/products/string-bikinis/basi-mona-lisa-string-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 148688,
+          "view": "back",
+          "alt": "Back view of the BASI Mona Lisa String Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-red-string-bikini": {
+      "productSlug": "basi-red-string-bikini",
+      "sourceFolder": "red-string-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/string-bikinis/basi-red-string-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 142638,
+        "view": "front",
+        "alt": "Front view of the BASI Red String Bikini"
+      },
+      "hover": {
+        "src": "/images/products/string-bikinis/basi-red-string-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 142182,
+        "view": "back",
+        "alt": "Back view of the BASI Red String Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/string-bikinis/basi-red-string-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 142638,
+          "view": "front",
+          "alt": "Front view of the BASI Red String Bikini"
+        },
+        {
+          "src": "/images/products/string-bikinis/basi-red-string-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 142182,
+          "view": "back",
+          "alt": "Back view of the BASI Red String Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-cotton-candy-string-bikini": {
+      "productSlug": "basi-cotton-candy-string-bikini",
+      "sourceFolder": "cotton-candy-string-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/string-bikinis/basi-cotton-candy-string-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 142954,
+        "view": "front",
+        "alt": "Front view of the BASI Cotton Candy String Bikini"
+      },
+      "hover": {
+        "src": "/images/products/string-bikinis/basi-cotton-candy-string-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 141492,
+        "view": "back",
+        "alt": "Back view of the BASI Cotton Candy String Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/string-bikinis/basi-cotton-candy-string-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 142954,
+          "view": "front",
+          "alt": "Front view of the BASI Cotton Candy String Bikini"
+        },
+        {
+          "src": "/images/products/string-bikinis/basi-cotton-candy-string-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 141492,
+          "view": "back",
+          "alt": "Back view of the BASI Cotton Candy String Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-eastern-blue-string-bikini": {
+      "productSlug": "basi-eastern-blue-string-bikini",
+      "sourceFolder": "eastern-blue-string-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/string-bikinis/basi-eastern-blue-string-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 147942,
+        "view": "front",
+        "alt": "Front view of the BASI Eastern Blue String Bikini"
+      },
+      "hover": {
+        "src": "/images/products/string-bikinis/basi-eastern-blue-string-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 147820,
+        "view": "back",
+        "alt": "Back view of the BASI Eastern Blue String Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/string-bikinis/basi-eastern-blue-string-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 147942,
+          "view": "front",
+          "alt": "Front view of the BASI Eastern Blue String Bikini"
+        },
+        {
+          "src": "/images/products/string-bikinis/basi-eastern-blue-string-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 147820,
+          "view": "back",
+          "alt": "Back view of the BASI Eastern Blue String Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-orange-string-bikini": {
+      "productSlug": "basi-orange-string-bikini",
+      "sourceFolder": "orange-string-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/string-bikinis/basi-orange-string-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 150772,
+        "view": "front",
+        "alt": "Front view of the BASI Orange String Bikini"
+      },
+      "hover": {
+        "src": "/images/products/string-bikinis/basi-orange-string-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 150632,
+        "view": "back",
+        "alt": "Back view of the BASI Orange String Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/string-bikinis/basi-orange-string-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 150772,
+          "view": "front",
+          "alt": "Front view of the BASI Orange String Bikini"
+        },
+        {
+          "src": "/images/products/string-bikinis/basi-orange-string-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 150632,
+          "view": "back",
+          "alt": "Back view of the BASI Orange String Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-forest-green-string-bikini": {
+      "productSlug": "basi-forest-green-string-bikini",
+      "sourceFolder": "forest-green-string-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/string-bikinis/basi-forest-green-string-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 132024,
+        "view": "front",
+        "alt": "Front view of the BASI Forest Green String Bikini"
+      },
+      "hover": {
+        "src": "/images/products/string-bikinis/basi-forest-green-string-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 132336,
+        "view": "back",
+        "alt": "Back view of the BASI Forest Green String Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/string-bikinis/basi-forest-green-string-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 132024,
+          "view": "front",
+          "alt": "Front view of the BASI Forest Green String Bikini"
+        },
+        {
+          "src": "/images/products/string-bikinis/basi-forest-green-string-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 132336,
+          "view": "back",
+          "alt": "Back view of the BASI Forest Green String Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-brink-pink-string-bikini": {
+      "productSlug": "basi-brink-pink-string-bikini",
+      "sourceFolder": "brink-pink-string-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/string-bikinis/basi-brink-pink-string-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 147624,
+        "view": "front",
+        "alt": "Front view of the BASI Brink Pink String Bikini"
+      },
+      "hover": {
+        "src": "/images/products/string-bikinis/basi-brink-pink-string-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 147238,
+        "view": "back",
+        "alt": "Back view of the BASI Brink Pink String Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/string-bikinis/basi-brink-pink-string-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 147624,
+          "view": "front",
+          "alt": "Front view of the BASI Brink Pink String Bikini"
+        },
+        {
+          "src": "/images/products/string-bikinis/basi-brink-pink-string-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 147238,
+          "view": "back",
+          "alt": "Back view of the BASI Brink Pink String Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-brown-string-bikini": {
+      "productSlug": "basi-brown-string-bikini",
+      "sourceFolder": "brown-string-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/string-bikinis/basi-brown-string-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 136504,
+        "view": "front",
+        "alt": "Front view of the BASI Brown String Bikini"
+      },
+      "hover": {
+        "src": "/images/products/string-bikinis/basi-brown-string-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 136454,
+        "view": "back",
+        "alt": "Back view of the BASI Brown String Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/string-bikinis/basi-brown-string-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 136504,
+          "view": "front",
+          "alt": "Front view of the BASI Brown String Bikini"
+        },
+        {
+          "src": "/images/products/string-bikinis/basi-brown-string-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 136454,
+          "view": "back",
+          "alt": "Back view of the BASI Brown String Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-grey-string-bikini": {
+      "productSlug": "basi-grey-string-bikini",
+      "sourceFolder": "grey-string-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/string-bikinis/basi-grey-string-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 110030,
+        "view": "front",
+        "alt": "Front view of the BASI Grey String Bikini"
+      },
+      "hover": {
+        "src": "/images/products/string-bikinis/basi-grey-string-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 110434,
+        "view": "back",
+        "alt": "Back view of the BASI Grey String Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/string-bikinis/basi-grey-string-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 110030,
+          "view": "front",
+          "alt": "Front view of the BASI Grey String Bikini"
+        },
+        {
+          "src": "/images/products/string-bikinis/basi-grey-string-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 110434,
+          "view": "back",
+          "alt": "Back view of the BASI Grey String Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-black-string-bikini": {
+      "productSlug": "basi-black-string-bikini",
+      "sourceFolder": "black-string-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/string-bikinis/basi-black-string-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 74086,
+        "view": "front",
+        "alt": "Front view of the BASI Black String Bikini"
+      },
+      "hover": {
+        "src": "/images/products/string-bikinis/basi-black-string-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 76868,
+        "view": "back",
+        "alt": "Back view of the BASI Black String Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/string-bikinis/basi-black-string-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 74086,
+          "view": "front",
+          "alt": "Front view of the BASI Black String Bikini"
+        },
+        {
+          "src": "/images/products/string-bikinis/basi-black-string-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 76868,
+          "view": "back",
+          "alt": "Back view of the BASI Black String Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-yellow-string-bikini": {
+      "productSlug": "basi-yellow-string-bikini",
+      "sourceFolder": "yellow-string-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/string-bikinis/basi-yellow-string-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 153692,
+        "view": "front",
+        "alt": "Front view of the BASI Yellow String Bikini"
+      },
+      "hover": {
+        "src": "/images/products/string-bikinis/basi-yellow-string-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 152354,
+        "view": "back",
+        "alt": "Back view of the BASI Yellow String Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/string-bikinis/basi-yellow-string-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 153692,
+          "view": "front",
+          "alt": "Front view of the BASI Yellow String Bikini"
+        },
+        {
+          "src": "/images/products/string-bikinis/basi-yellow-string-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 152354,
+          "view": "back",
+          "alt": "Back view of the BASI Yellow String Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-red-violet-high-waisted-bikini": {
+      "productSlug": "basi-red-violet-high-waisted-bikini",
+      "sourceFolder": "red-violet-high-waisted-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/high-waisted-bikinis/basi-red-violet-high-waisted-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 86064,
+        "view": "front",
+        "alt": "Front view of the BASI Red Violet High-Waisted Bikini"
+      },
+      "hover": {
+        "src": "/images/products/high-waisted-bikinis/basi-red-violet-high-waisted-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 91934,
+        "view": "back",
+        "alt": "Back view of the BASI Red Violet High-Waisted Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-red-violet-high-waisted-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 86064,
+          "view": "front",
+          "alt": "Front view of the BASI Red Violet High-Waisted Bikini"
+        },
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-red-violet-high-waisted-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 91934,
+          "view": "back",
+          "alt": "Back view of the BASI Red Violet High-Waisted Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-classic-high-waisted-bikini": {
+      "productSlug": "basi-classic-high-waisted-bikini",
+      "sourceFolder": "classic-high-waisted-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/high-waisted-bikinis/basi-classic-high-waisted-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 41108,
+        "view": "front",
+        "alt": "Front view of the BASI Classic High-Waisted Bikini"
+      },
+      "hover": {
+        "src": "/images/products/high-waisted-bikinis/basi-classic-high-waisted-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 48574,
+        "view": "back",
+        "alt": "Back view of the BASI Classic High-Waisted Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-classic-high-waisted-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 41108,
+          "view": "front",
+          "alt": "Front view of the BASI Classic High-Waisted Bikini"
+        },
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-classic-high-waisted-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 48574,
+          "view": "back",
+          "alt": "Back view of the BASI Classic High-Waisted Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-burgundy-high-waisted-bikini": {
+      "productSlug": "basi-burgundy-high-waisted-bikini",
+      "sourceFolder": "burgundy-high-waisted-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/high-waisted-bikinis/basi-burgundy-high-waisted-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 81828,
+        "view": "front",
+        "alt": "Front view of the BASI Burgundy High-Waisted Bikini"
+      },
+      "hover": {
+        "src": "/images/products/high-waisted-bikinis/basi-burgundy-high-waisted-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 90030,
+        "view": "back",
+        "alt": "Back view of the BASI Burgundy High-Waisted Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-burgundy-high-waisted-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 81828,
+          "view": "front",
+          "alt": "Front view of the BASI Burgundy High-Waisted Bikini"
+        },
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-burgundy-high-waisted-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 90030,
+          "view": "back",
+          "alt": "Back view of the BASI Burgundy High-Waisted Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-mona-lisa-high-waisted-bikini": {
+      "productSlug": "basi-mona-lisa-high-waisted-bikini",
+      "sourceFolder": "mona-lisa-high-waisted-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/high-waisted-bikinis/basi-mona-lisa-high-waisted-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 83268,
+        "view": "front",
+        "alt": "Front view of the BASI Mona Lisa High-Waisted Bikini"
+      },
+      "hover": {
+        "src": "/images/products/high-waisted-bikinis/basi-mona-lisa-high-waisted-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 89438,
+        "view": "back",
+        "alt": "Back view of the BASI Mona Lisa High-Waisted Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-mona-lisa-high-waisted-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 83268,
+          "view": "front",
+          "alt": "Front view of the BASI Mona Lisa High-Waisted Bikini"
+        },
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-mona-lisa-high-waisted-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 89438,
+          "view": "back",
+          "alt": "Back view of the BASI Mona Lisa High-Waisted Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-red-high-waisted-bikini": {
+      "productSlug": "basi-red-high-waisted-bikini",
+      "sourceFolder": "red-high-waisted-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/high-waisted-bikinis/basi-red-high-waisted-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 84526,
+        "view": "front",
+        "alt": "Front view of the BASI Red High-Waisted Bikini"
+      },
+      "hover": {
+        "src": "/images/products/high-waisted-bikinis/basi-red-high-waisted-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 93332,
+        "view": "back",
+        "alt": "Back view of the BASI Red High-Waisted Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-red-high-waisted-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 84526,
+          "view": "front",
+          "alt": "Front view of the BASI Red High-Waisted Bikini"
+        },
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-red-high-waisted-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 93332,
+          "view": "back",
+          "alt": "Back view of the BASI Red High-Waisted Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-cotton-candy-high-waisted-bikini": {
+      "productSlug": "basi-cotton-candy-high-waisted-bikini",
+      "sourceFolder": "cotton-candy-high-waisted-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/high-waisted-bikinis/basi-cotton-candy-high-waisted-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 76750,
+        "view": "front",
+        "alt": "Front view of the BASI Cotton Candy High-Waisted Bikini"
+      },
+      "hover": {
+        "src": "/images/products/high-waisted-bikinis/basi-cotton-candy-high-waisted-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 78880,
+        "view": "back",
+        "alt": "Back view of the BASI Cotton Candy High-Waisted Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-cotton-candy-high-waisted-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 76750,
+          "view": "front",
+          "alt": "Front view of the BASI Cotton Candy High-Waisted Bikini"
+        },
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-cotton-candy-high-waisted-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 78880,
+          "view": "back",
+          "alt": "Back view of the BASI Cotton Candy High-Waisted Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-eastern-blue-high-waisted-bikini": {
+      "productSlug": "basi-eastern-blue-high-waisted-bikini",
+      "sourceFolder": "eastern-blue-high-waisted-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/high-waisted-bikinis/basi-eastern-blue-high-waisted-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 87814,
+        "view": "front",
+        "alt": "Front view of the BASI Eastern Blue High-Waisted Bikini"
+      },
+      "hover": {
+        "src": "/images/products/high-waisted-bikinis/basi-eastern-blue-high-waisted-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 93506,
+        "view": "back",
+        "alt": "Back view of the BASI Eastern Blue High-Waisted Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-eastern-blue-high-waisted-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 87814,
+          "view": "front",
+          "alt": "Front view of the BASI Eastern Blue High-Waisted Bikini"
+        },
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-eastern-blue-high-waisted-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 93506,
+          "view": "back",
+          "alt": "Back view of the BASI Eastern Blue High-Waisted Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-orange-high-waisted-bikini": {
+      "productSlug": "basi-orange-high-waisted-bikini",
+      "sourceFolder": "orange-high-waisted-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/high-waisted-bikinis/basi-orange-high-waisted-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 88236,
+        "view": "front",
+        "alt": "Front view of the BASI Orange High-Waisted Bikini"
+      },
+      "hover": {
+        "src": "/images/products/high-waisted-bikinis/basi-orange-high-waisted-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 94992,
+        "view": "back",
+        "alt": "Back view of the BASI Orange High-Waisted Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-orange-high-waisted-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 88236,
+          "view": "front",
+          "alt": "Front view of the BASI Orange High-Waisted Bikini"
+        },
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-orange-high-waisted-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 94992,
+          "view": "back",
+          "alt": "Back view of the BASI Orange High-Waisted Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-forest-green-high-waisted-bikini": {
+      "productSlug": "basi-forest-green-high-waisted-bikini",
+      "sourceFolder": "forest-green-high-waisted-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/high-waisted-bikinis/basi-forest-green-high-waisted-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 78390,
+        "view": "front",
+        "alt": "Front view of the BASI Forest Green High-Waisted Bikini"
+      },
+      "hover": {
+        "src": "/images/products/high-waisted-bikinis/basi-forest-green-high-waisted-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 86060,
+        "view": "back",
+        "alt": "Back view of the BASI Forest Green High-Waisted Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-forest-green-high-waisted-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 78390,
+          "view": "front",
+          "alt": "Front view of the BASI Forest Green High-Waisted Bikini"
+        },
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-forest-green-high-waisted-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 86060,
+          "view": "back",
+          "alt": "Back view of the BASI Forest Green High-Waisted Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-brink-pink-high-waisted-bikini": {
+      "productSlug": "basi-brink-pink-high-waisted-bikini",
+      "sourceFolder": "brink-pink-high-waisted-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/high-waisted-bikinis/basi-brink-pink-high-waisted-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 82902,
+        "view": "front",
+        "alt": "Front view of the BASI Brink Pink High-Waisted Bikini"
+      },
+      "hover": {
+        "src": "/images/products/high-waisted-bikinis/basi-brink-pink-high-waisted-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 87128,
+        "view": "back",
+        "alt": "Back view of the BASI Brink Pink High-Waisted Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-brink-pink-high-waisted-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 82902,
+          "view": "front",
+          "alt": "Front view of the BASI Brink Pink High-Waisted Bikini"
+        },
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-brink-pink-high-waisted-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 87128,
+          "view": "back",
+          "alt": "Back view of the BASI Brink Pink High-Waisted Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-brown-high-waisted-bikini": {
+      "productSlug": "basi-brown-high-waisted-bikini",
+      "sourceFolder": "brown-high-waisted-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/high-waisted-bikinis/basi-brown-high-waisted-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 81698,
+        "view": "front",
+        "alt": "Front view of the BASI Brown High-Waisted Bikini"
+      },
+      "hover": {
+        "src": "/images/products/high-waisted-bikinis/basi-brown-high-waisted-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 90774,
+        "view": "back",
+        "alt": "Back view of the BASI Brown High-Waisted Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-brown-high-waisted-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 81698,
+          "view": "front",
+          "alt": "Front view of the BASI Brown High-Waisted Bikini"
+        },
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-brown-high-waisted-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 90774,
+          "view": "back",
+          "alt": "Back view of the BASI Brown High-Waisted Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-grey-high-waisted-bikini": {
+      "productSlug": "basi-grey-high-waisted-bikini",
+      "sourceFolder": "grey-high-waisted-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/high-waisted-bikinis/basi-grey-high-waisted-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 61954,
+        "view": "front",
+        "alt": "Front view of the BASI Grey High-Waisted Bikini"
+      },
+      "hover": {
+        "src": "/images/products/high-waisted-bikinis/basi-grey-high-waisted-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 65516,
+        "view": "back",
+        "alt": "Back view of the BASI Grey High-Waisted Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-grey-high-waisted-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 61954,
+          "view": "front",
+          "alt": "Front view of the BASI Grey High-Waisted Bikini"
+        },
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-grey-high-waisted-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 65516,
+          "view": "back",
+          "alt": "Back view of the BASI Grey High-Waisted Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-black-high-waisted-bikini": {
+      "productSlug": "basi-black-high-waisted-bikini",
+      "sourceFolder": "black-high-waisted-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/high-waisted-bikinis/basi-black-high-waisted-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 39956,
+        "view": "front",
+        "alt": "Front view of the BASI Black High-Waisted Bikini"
+      },
+      "hover": {
+        "src": "/images/products/high-waisted-bikinis/basi-black-high-waisted-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 42900,
+        "view": "back",
+        "alt": "Back view of the BASI Black High-Waisted Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-black-high-waisted-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 39956,
+          "view": "front",
+          "alt": "Front view of the BASI Black High-Waisted Bikini"
+        },
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-black-high-waisted-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 42900,
+          "view": "back",
+          "alt": "Back view of the BASI Black High-Waisted Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    },
+    "basi-yellow-high-waisted-bikini": {
+      "productSlug": "basi-yellow-high-waisted-bikini",
+      "sourceFolder": "yellow-high-waisted-bikini",
+      "mappingStatus": "exact",
+      "primary": {
+        "src": "/images/products/high-waisted-bikinis/basi-yellow-high-waisted-bikini/front.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 85166,
+        "view": "front",
+        "alt": "Front view of the BASI Yellow High-Waisted Bikini"
+      },
+      "hover": {
+        "src": "/images/products/high-waisted-bikinis/basi-yellow-high-waisted-bikini/back.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 89474,
+        "view": "back",
+        "alt": "Back view of the BASI Yellow High-Waisted Bikini"
+      },
+      "gallery": [
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-yellow-high-waisted-bikini/front.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 85166,
+          "view": "front",
+          "alt": "Front view of the BASI Yellow High-Waisted Bikini"
+        },
+        {
+          "src": "/images/products/high-waisted-bikinis/basi-yellow-high-waisted-bikini/back.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 89474,
+          "view": "back",
+          "alt": "Back view of the BASI Yellow High-Waisted Bikini"
+        }
+      ],
+      "availableViews": ["front", "back"]
+    }
+  }
+}
