@@ -36,6 +36,13 @@ controls, and retest reduced motion.
 The published film is 720 × 1280 portrait and approximately 10.11 MB. Its matching poster is
 approximately 45 KB. Keep future posters at the same 9:16 framing, protect faces and swimwear logos
 within mobile-safe bounds, and avoid baked-in text. Add WebM only when it improves transfer size.
+The current 45-second poster remains intentional after comparison with frames at 3, 6, 9, 12, and
+15 seconds; the alternatives had weaker facial presence, tighter crops, or transitional overlap.
+
+The film remains the dominant opening chapter. The abstract color hero directly below it is a
+shorter secondary chapter, separated by a restrained gold rule. Desktop uses a balanced two-column
+film layout and a 70–80vh hero; mobile stacks film before copy and lets the hero size from its
+content rather than forcing a tall viewport-based minimum.
 
 The raw `brand-video.MOV` source remains local and is ignored by Git. To revert, set `enabled: false`;
 the responsive campaign poster returns without removing the production video files.

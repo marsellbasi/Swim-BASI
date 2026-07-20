@@ -172,18 +172,18 @@ summary {
   object-fit: cover;
 }
 .film-intro {
-  padding: clamp(52px, 7vw, 104px) 0;
+  padding: clamp(48px, 5.5vw, 80px) 0 clamp(56px, 6vw, 88px);
   background: var(--black);
   color: var(--white);
 }
 .film-intro-inner {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.75fr);
+  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.8fr);
   align-items: center;
-  gap: clamp(42px, 8vw, 132px);
+  gap: clamp(40px, 6vw, 96px);
 }
 .film-intro-media {
-  width: min(100%, 660px);
+  width: min(100%, 620px);
   aspect-ratio: 2/3;
   justify-self: end;
   overflow: hidden;
@@ -196,6 +196,7 @@ summary {
 }
 .film-intro-copy {
   max-width: 590px;
+  align-self: center;
 }
 .film-intro-copy .eyebrow {
   color: var(--gold);
@@ -216,16 +217,18 @@ summary {
   font-size: clamp(1rem, 1.4vw, 1.2rem);
 }
 .film-status {
-  margin: 0 0 30px;
-  padding-top: 18px;
+  margin: 0 0 28px;
+  padding-top: 16px;
   border-top: 1px solid #454545;
-  color: #bdbdbd;
+  color: #d6cfae;
   font-size: 0.7rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 .film-intro .button--primary {
+  min-height: 44px;
+  padding: 11px 18px;
   color: var(--black);
 }
 .film-transcript {
@@ -237,11 +240,12 @@ summary {
   font-weight: 700;
 }
 .hero {
-  min-height: clamp(620px, 78vw, 820px);
+  min-height: clamp(580px, 74vh, 760px);
   position: relative;
   display: flex;
   align-items: center;
   overflow: hidden;
+  border-top: 1px solid rgba(212, 175, 55, 0.32);
   background: var(--black);
   color: var(--white);
 }
@@ -265,7 +269,7 @@ summary {
 }
 .hero-content {
   position: relative;
-  padding-block: 84px;
+  padding-block: clamp(68px, 8vh, 84px);
 }
 .eyebrow {
   margin: 0 0 18px;
@@ -278,7 +282,7 @@ summary {
   max-width: 760px;
   margin: 0;
   font-family: var(--serif);
-  font-size: clamp(3.15rem, 7.2vw, 7.3rem);
+  font-size: clamp(3.15rem, 6.6vw, 6.7rem);
   font-weight: 400;
   line-height: 0.88;
   letter-spacing: -0.045em;
@@ -331,6 +335,9 @@ summary {
 }
 .section {
   padding: clamp(72px, 9vw, 132px) 0;
+}
+.hero + .section {
+  padding-top: clamp(72px, 8vw, 112px);
 }
 .section--ivory {
   background: var(--ivory);
@@ -947,8 +954,11 @@ summary {
     gap: 40px;
   }
   .film-intro-inner {
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.75fr);
-    gap: 42px;
+    grid-template-columns: minmax(0, 0.95fr) minmax(270px, 0.75fr);
+    gap: clamp(28px, 4vw, 44px);
+  }
+  .hero {
+    min-height: clamp(560px, 66vh, 640px);
   }
   .about-lead {
     gap: 42px;
@@ -972,12 +982,18 @@ summary {
   .about-image-pair {
     grid-template-columns: 1fr;
   }
+  .film-intro {
+    padding: 40px 0 56px;
+  }
   .film-intro-media {
     width: min(100%, 520px);
     justify-self: center;
   }
+  .film-intro-inner {
+    gap: clamp(28px, 8vw, 38px);
+  }
   .film-intro-copy {
-    padding: 10px 0 8px;
+    padding: 0 0 4px;
   }
   .about-image-pair figure:nth-child(2) {
     margin-top: 18px;
@@ -1026,10 +1042,12 @@ summary {
     flex-direction: column;
   }
   .hero {
-    min-height: 680px;
+    min-height: 0;
+    padding-block: clamp(88px, 26vw, 124px);
   }
   .hero-content {
-    align-self: end;
+    align-self: auto;
+    padding-block: 0;
   }
   .hero-overlay {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.1) 80%);

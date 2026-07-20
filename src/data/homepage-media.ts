@@ -26,7 +26,7 @@ export const homepageFilm: HomepageFilmConfig = {
   title: 'Confidence, in motion.',
   eyebrow: 'THE SWIM BASI FILM',
   description: 'An introduction to the color, presence, and energy behind Swim BASI.',
-  status: 'WATCH THE SWIM BASI FILM.',
+  status: 'PRESS PLAY. STEP INTO SWIM BASI.',
   // Add captionsSrc and transcript only after the narration receives a reviewed accessibility pass.
   autoplay: false,
   muted: false,

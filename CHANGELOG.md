@@ -6,6 +6,11 @@ All notable changes to Swim BASI are documented here.
 
 ### Changed
 
+- Refined the live homepage film hierarchy with tighter editorial spacing, vertically balanced copy,
+  a quieter CTA, and the new prompt “Press play. Step into Swim BASI.”
+- Repositioned the abstract color hero as a shorter secondary chapter with a restrained gold section
+  boundary and content-driven mobile height. Retained the existing poster after reviewing five
+  earlier film frames.
 - Published the portrait Swim BASI brand film on the homepage with user-initiated native playback,
   audible voiceover after play, metadata-only preload, and a compressed WebP poster.
 - Intentionally omitted the larger WebM comparison encode and kept the raw MOV local and ignored.

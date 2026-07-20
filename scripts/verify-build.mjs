@@ -248,7 +248,7 @@ if (
   !homepageHtml.includes('poster="/videos/campaigns/swim-basi-brand-film-poster.webp"') ||
   !homepageHtml.includes('src="/videos/campaigns/swim-basi-brand-film.mp4" type="video/mp4"') ||
   !homepageHtml.includes('controls playsinline preload="metadata"') ||
-  !homepageHtml.includes('WATCH THE SWIM BASI FILM.') ||
+  !homepageHtml.includes('PRESS PLAY. STEP INTO SWIM BASI.') ||
   homepageHtml.includes('FILM PREMIERE COMING SOON.') ||
   homepageHtml.includes('<track') ||
   homepageHtml.includes('type="video/webm"')
