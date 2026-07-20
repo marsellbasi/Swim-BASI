@@ -12,7 +12,8 @@ Production-ready initial scaffold for [Swim BASI](https://swimbasi.com), a stati
 
 ## Prerequisites
 
-Node.js 20.19.0+ and npm 10+.
+Node.js 22.23.1 (Node 22.12.0 minimum) and npm 10+. Run `nvm use` in environments
+with nvm to select the repository's pinned Node release.
 
 ## Install and run
 
@@ -62,6 +63,7 @@ Replace fallback `https://basiswim.printful.me` values with exact product URLs a
 - Output directory: `dist`
 - Root directory: repository root
 - Custom domain: `swimbasi.com`
+- Environment variable: `NODE_VERSION=22.23.1`
 
 See [docs/deployment.md](docs/deployment.md).
 

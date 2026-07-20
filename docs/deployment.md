@@ -7,7 +7,11 @@ Connect `https://github.com/marsellbasi/Swim-BASI` to Cloudflare Pages with:
 - Build command: `npm run build`
 - Build output directory: `dist`
 - Root directory: `/`
-- Recommended Node version: 20.19.0 or newer
+- Node version: `22.23.1`
+
+Set the Cloudflare Pages environment variable `NODE_VERSION` to `22.23.1` for both
+production and preview builds. Astro requires Node 22.12.0 or newer; the repository's
+`.nvmrc` and `package.json` keep local and hosted builds on the supported Node 22 line.
 
 No runtime variables are currently required. Review preview deployment links before promoting changes.
 
