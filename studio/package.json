@@ -7,6 +7,7 @@
     "dev": "sanity dev --port 3333",
     "start": "sanity start --port 3333",
     "typecheck": "tsc --noEmit",
+    "validate": "sanity schemas validate --level warning",
     "build": "sanity build && node scripts/copy-cloudflare-routing.mjs"
   },
   "dependencies": {
@@ -17,6 +18,7 @@
     "styled-components": "6.4.4"
   },
   "devDependencies": {
+    "@types/node": "22.20.0",
     "@types/react": "19.2.14",
     "typescript": "5.9.3"
   },
