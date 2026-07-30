@@ -4,24 +4,54 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ProductGrid from '../../components/ProductGrid.astro';
 import { products } from '../../data/products';
 import { filterByCategory } from '../../utils/products';
+import PageSections from '../../components/PageSections.astro';
+import { getSanityCollections, getSiteSettings } from '../../lib/sanity/content';
+import { resolveSeo } from '../../lib/sanity/seo';
+
+const sanityCollection = (await getSanityCollections())?.find(
+  (item) => item.slug === 'string-bikinis',
+);
+const settings = await getSiteSettings();
+const pageSeo = resolveSeo({
+  page: sanityCollection?.seo,
+  settings,
+  derivedTitle: 'String Bikinis | Swim BASI',
+  derivedDescription: 'Shop Swim BASI string bikinis in confident colorways, starting at $37.99.',
+  canonicalPath: '/collections/string-bikinis',
+});
 ---
 
 <BaseLayout
   title="String Bikinis | Swim BASI"
   description="Shop Swim BASI string bikinis in confident colorways, starting at $37.99."
-  ><section class="page-hero">
-    <div class="wrap">
-      <Breadcrumbs
-        items={[
-          { label: 'Home', href: '/' },
-          { label: 'Collections', href: '/collections' },
-          { label: 'String Bikinis' },
-        ]}
-      /><p class="eyebrow">Starting at $37.99</p><h1>String Bikinis</h1><p class="lead">
-        A minimal silhouette with maximum confidence.
-      </p>
-    </div>
-  </section><section class="section wrap">
-    <ProductGrid products={filterByCategory(products, 'string-bikinis')} />
-  </section></BaseLayout
+  seo={pageSeo}
+  >{
+    sanityCollection?.sections?.length ? (
+      <PageSections sections={sanityCollection.sections} />
+    ) : (
+      <>
+        <>
+          <section class="page-hero">
+            <div class="wrap">
+              <>
+                <Breadcrumbs
+                  items={[
+                    { label: 'Home', href: '/' },
+                    { label: 'Collections', href: '/collections' },
+                    { label: 'String Bikinis' },
+                  ]}
+                />
+                <p class="eyebrow">Starting at $37.99</p>
+                <h1>String Bikinis</h1>
+                <p class="lead">A minimal silhouette with maximum confidence.</p>
+              </>
+            </div>
+          </section>
+          <section class="section wrap">
+            <ProductGrid products={filterByCategory(products, 'string-bikinis')} />
+          </section>
+        </>
+      </>
+    )
+  }</BaseLayout
 >

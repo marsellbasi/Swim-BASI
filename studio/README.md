@@ -40,6 +40,16 @@ SANITY_STUDIO_DATASET=production
 These values identify public Sanity resources and are safe to expose in the compiled Studio.
 Authentication is handled by Sanity; no API token belongs in this application.
 
+## Page builder and managed media
+
+Editable pages use ordered arrays of controlled sections. Editors reorder them with Sanity’s native
+drag handles; stable `_key` identities and exact array order are preserved by the storefront.
+Disabled sections remain stored and are omitted from rendering.
+
+Managed images require alternative text unless marked decorative and support hotspot/crop, an
+optional mobile override, credits, captions, links, and loading priority. Managed videos keep file
+assets distinct from image assets and enforce muted autoplay.
+
 ## Cloudflare Pages settings
 
 - Root directory: `studio`

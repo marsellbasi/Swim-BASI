@@ -4,24 +4,55 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ProductGrid from '../../components/ProductGrid.astro';
 import { products } from '../../data/products';
 import { filterByCategory } from '../../utils/products';
+import PageSections from '../../components/PageSections.astro';
+import { getSanityCollections, getSiteSettings } from '../../lib/sanity/content';
+import { resolveSeo } from '../../lib/sanity/seo';
+
+const sanityCollection = (await getSanityCollections())?.find(
+  (item) => item.slug === 'high-waisted-bikinis',
+);
+const settings = await getSiteSettings();
+const pageSeo = resolveSeo({
+  page: sanityCollection?.seo,
+  settings,
+  derivedTitle: 'High-Waisted Bikinis | Swim BASI',
+  derivedDescription:
+    'Shop Swim BASI high-waisted bikinis in expressive colorways, starting at $44.99.',
+  canonicalPath: '/collections/high-waisted-bikinis',
+});
 ---
 
 <BaseLayout
   title="High-Waisted Bikinis | Swim BASI"
   description="Shop Swim BASI high-waisted bikinis in expressive colorways, starting at $44.99."
-  ><section class="page-hero">
-    <div class="wrap">
-      <Breadcrumbs
-        items={[
-          { label: 'Home', href: '/' },
-          { label: 'Collections', href: '/collections' },
-          { label: 'High-Waisted Bikinis' },
-        ]}
-      /><p class="eyebrow">Starting at $44.99</p><h1>High-Waisted Bikinis</h1><p class="lead">
-        A flattering, confident silhouette with a little more coverage.
-      </p>
-    </div>
-  </section><section class="section wrap">
-    <ProductGrid products={filterByCategory(products, 'high-waisted-bikinis')} />
-  </section></BaseLayout
+  seo={pageSeo}
+  >{
+    sanityCollection?.sections?.length ? (
+      <PageSections sections={sanityCollection.sections} />
+    ) : (
+      <>
+        <>
+          <section class="page-hero">
+            <div class="wrap">
+              <>
+                <Breadcrumbs
+                  items={[
+                    { label: 'Home', href: '/' },
+                    { label: 'Collections', href: '/collections' },
+                    { label: 'High-Waisted Bikinis' },
+                  ]}
+                />
+                <p class="eyebrow">Starting at $44.99</p>
+                <h1>High-Waisted Bikinis</h1>
+                <p class="lead">A flattering, confident silhouette with a little more coverage.</p>
+              </>
+            </div>
+          </section>
+          <section class="section wrap">
+            <ProductGrid products={filterByCategory(products, 'high-waisted-bikinis')} />
+          </section>
+        </>
+      </>
+    )
+  }</BaseLayout
 >

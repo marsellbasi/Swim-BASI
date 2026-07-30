@@ -11,6 +11,87 @@
   --sans:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
+
+/* Controlled Sanity page-builder primitives. Existing local pages retain their original rules. */
+.cms-section {
+  position: relative;
+}
+.cms-spacing--none {
+  padding-block: 0;
+}
+.cms-spacing--compact {
+  padding-block: 32px;
+}
+.cms-spacing--standard {
+  padding-block: 64px;
+}
+.cms-spacing--spacious {
+  padding-block: 96px;
+}
+.cms-spacing--editorial {
+  padding-block: clamp(96px, 12vw, 180px);
+}
+.cms-theme--ivory {
+  background: var(--ivory, #f8f4ec);
+}
+.cms-theme--ink {
+  background: #111;
+  color: #fff;
+}
+.cms-theme--brand {
+  background: var(--coral, #e8695b);
+  color: #111;
+}
+.cms-media-copy {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 96px);
+}
+.cms-layout--mediaRight .cms-media {
+  order: 2;
+}
+.cms-media-copy img,
+.cms-media-copy video,
+.cms-split-media img,
+.cms-split-media video,
+.cms-gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.cms-split-media,
+.cms-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 28px);
+}
+.cms-gallery--grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.cms-gallery figure {
+  margin: 0;
+}
+.cms-overlay {
+  position: relative;
+  margin-top: -25%;
+  padding-bottom: 6%;
+  color: #fff;
+}
+.cms-section--dividerSection {
+  border-top: 1px solid currentColor;
+}
+@media (max-width: 760px) {
+  .cms-media-copy,
+  .cms-split-media,
+  .cms-gallery,
+  .cms-gallery--grid {
+    grid-template-columns: 1fr;
+  }
+  .cms-layout--mediaRight .cms-media {
+    order: initial;
+  }
+}
 *,
 *::before,
 *::after {

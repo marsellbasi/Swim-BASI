@@ -1,4 +1,5 @@
-import { defineArrayMember, defineField, defineType } from 'sanity';
+import { defineField, defineType } from 'sanity';
+import { pageSectionMembers } from '../objects/pageSections';
 
 export const aboutPage = defineType({
   name: 'aboutPage',
@@ -6,40 +7,34 @@ export const aboutPage = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'eyebrow',
-      title: 'Eyebrow',
+      name: 'internalTitle',
+      title: 'Internal title',
       type: 'string',
-      validation: (rule) => rule.max(60),
+      initialValue: 'About Page',
+      validation: (rule) => rule.required().max(80),
     }),
+    defineField({ name: 'enabled', title: 'Enabled', type: 'boolean', initialValue: true }),
     defineField({
-      name: 'heading',
-      title: 'Heading',
-      type: 'string',
-      validation: (rule) => rule.required().max(120),
-    }),
-    defineField({
-      name: 'intro',
-      title: 'Introduction',
-      type: 'text',
-      rows: 4,
-      validation: (rule) => rule.required().max(500),
-    }),
-    defineField({
-      name: 'heroImage',
-      title: 'Hero image',
-      type: 'imageWithAlt',
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      initialValue: { current: 'about' },
+      readOnly: true,
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'contentSections',
-      title: 'Content sections',
+      name: 'sections',
+      title: 'Ordered page sections',
       type: 'array',
-      of: [defineArrayMember({ type: 'contentSection' })],
-      validation: (rule) => rule.max(20),
+      of: pageSectionMembers,
+      validation: (rule) => rule.required().min(1).max(30),
     }),
-    defineField({ name: 'seo', title: 'SEO', type: 'seo', validation: (rule) => rule.required() }),
+    defineField({
+      name: 'seo',
+      title: 'Search and social',
+      type: 'seo',
+      validation: (rule) => rule.required(),
+    }),
   ],
-  preview: {
-    prepare: () => ({ title: 'About Page', subtitle: 'Brand story and editorial content' }),
-  },
+  preview: { prepare: () => ({ title: 'About Page', subtitle: 'Brand story page builder' }) },
 });

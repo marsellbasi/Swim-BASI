@@ -13,7 +13,20 @@ Set the Cloudflare Pages environment variable `NODE_VERSION` to `22.23.1` for bo
 production and preview builds. Astro requires Node 22.12.0 or newer; the repository's
 `.nvmrc` and `package.json` keep local and hosted builds on the supported Node 22 line.
 
-No runtime variables are currently required. Review preview deployment links before promoting changes.
+Configure these public build-time values when the Sanity integration is approved:
+
+- `PUBLIC_SANITY_PROJECT_ID=xcfqfknc`
+- `PUBLIC_SANITY_DATASET=production`
+- `PUBLIC_SANITY_CONTENT_ENABLED=false`
+
+Keep the content flag false until published Sanity content passes owner review and parity validation.
+The public dataset needs no frontend read token. Never configure `SANITY_API_WRITE_TOKEN` on the
+storefront project.
+
+The storefront remains static, so a Sanity publish requires a new Cloudflare build before visitors
+see it. After owner approval, create a Cloudflare deploy hook and a Sanity webhook for relevant
+published document changes. Treat the hook URL as an operational secret. This repository does not
+create or expose a hook.
 
 ## Custom domain
 

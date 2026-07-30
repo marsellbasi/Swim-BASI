@@ -5,34 +5,47 @@ import Header from '../components/Header.astro';
 import SEO from '../components/SEO.astro';
 import SkipLink from '../components/SkipLink.astro';
 import '../styles/global.css';
+import { getAnnouncement, getNavigation, getSiteSettings } from '../lib/sanity/content';
+import { organizationJsonLd, resolveSeo, type ResolvedSeo } from '../lib/sanity/seo';
 interface Props {
   title: string;
   description: string;
   canonicalPath?: string;
+  seo?: ResolvedSeo;
 }
-const { title, description, canonicalPath } = Astro.props;
-const organization = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Swim BASI',
-  url: 'https://swimbasi.com',
-  sameAs: ['https://instagram.com/swimbasi'],
-};
+const { title, description, canonicalPath = Astro.url.pathname, seo: providedSeo } = Astro.props;
+const [settings, navigation, announcement] = await Promise.all([
+  getSiteSettings(),
+  getNavigation(),
+  getAnnouncement(),
+]);
+const seo =
+  providedSeo ??
+  resolveSeo({
+    derivedTitle: title,
+    derivedDescription: description,
+    canonicalPath,
+    settings,
+    fallbackImage: '/images/hero/swim-basi-campaign-placeholder.png',
+  });
+const organization = organizationJsonLd(settings);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={settings?.defaultLocale?.split('-')[0] || 'en'}>
   <head>
     <meta charset="UTF-8" /><meta name="viewport" content="width=device-width" /><meta
       name="theme-color"
       content="#ffffff"
     />
     <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
-    <SEO title={title} description={description} canonicalPath={canonicalPath} />
+    <SEO seo={seo} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(organization)} />
   </head>
   <body
-    ><SkipLink /><AnnouncementBar /><Header /><main id="main-content" tabindex="-1">
+    ><SkipLink /><AnnouncementBar announcement={announcement} /><Header
+      items={navigation.header}
+    /><main id="main-content" tabindex="-1">
       <slot />
-    </main><Footer /></body>
+    </main><Footer groups={navigation.footer} settings={settings} /></body>
 </html>

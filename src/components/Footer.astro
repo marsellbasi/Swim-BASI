@@ -1,26 +1,92 @@
 ---
 import Logo from './Logo.astro';
+import type { NavigationItem, SiteSettings } from '../lib/sanity/types';
+
+interface Props {
+  groups?: Array<{ title?: string; items?: NavigationItem[] }> | null;
+  settings?: SiteSettings | null;
+}
+const { groups, settings } = Astro.props;
+const defaults = [
+  {
+    title: 'Shop',
+    items: [
+      { label: 'All Products', destination: { linkType: 'internal', internalPath: '/shop' } },
+      {
+        label: 'One-Piece',
+        destination: { linkType: 'internal', internalPath: '/collections/one-piece' },
+      },
+      {
+        label: 'String Bikinis',
+        destination: { linkType: 'internal', internalPath: '/collections/string-bikinis' },
+      },
+      {
+        label: 'High-Waisted',
+        destination: { linkType: 'internal', internalPath: '/collections/high-waisted-bikinis' },
+      },
+    ],
+  },
+  {
+    title: 'Information',
+    items: [
+      { label: 'About', destination: { linkType: 'internal', internalPath: '/about' } },
+      { label: 'Size Guide', destination: { linkType: 'internal', internalPath: '/size-guide' } },
+      {
+        label: 'Shipping & Returns',
+        destination: { linkType: 'internal', internalPath: '/shipping-returns' },
+      },
+      { label: 'Contact', destination: { linkType: 'internal', internalPath: '/contact' } },
+    ],
+  },
+  {
+    title: 'Connect',
+    items: [
+      {
+        label: 'Instagram ↗',
+        destination: {
+          linkType: 'external',
+          externalUrl: 'https://instagram.com/swimbasi',
+          openInNewTab: true,
+        },
+      },
+      { label: 'Privacy', destination: { linkType: 'internal', internalPath: '/privacy' } },
+      { label: 'Terms', destination: { linkType: 'internal', internalPath: '/terms' } },
+    ],
+  },
+] satisfies Array<{ title: string; items: NavigationItem[] }>;
+const navigation = groups?.length ? groups : defaults;
+const hrefFor = (item: NavigationItem) =>
+  item.destination?.linkType === 'external'
+    ? item.destination.externalUrl
+    : item.destination?.internalPath;
 ---
 
 <footer class="site-footer">
   <div class="footer-main wrap">
     <div class="footer-brand">
-      <Logo /><p>Swimwear designed for women who embody confidence.</p>
-    </div><nav aria-label="Shop links">
-      <h2>Shop</h2><a href="/shop">All Products</a><a href="/collections/one-piece">One-Piece</a><a
-        href="/collections/string-bikinis">String Bikinis</a
-      ><a href="/collections/high-waisted-bikinis">High-Waisted</a>
-    </nav><nav aria-label="Information links">
-      <h2>Information</h2><a href="/about">About</a><a href="/size-guide">Size Guide</a><a
-        href="/shipping-returns">Shipping & Returns</a
-      ><a href="/contact">Contact</a>
-    </nav><nav aria-label="Legal and social links">
-      <h2>Connect</h2><a
-        href="https://instagram.com/swimbasi"
-        target="_blank"
-        rel="noopener noreferrer">Instagram ↗</a
-      ><a href="/privacy">Privacy</a><a href="/terms">Terms</a>
-    </nav>
+      <Logo /><p>
+        {settings?.defaultSocialDescription || 'Swimwear designed for women who embody confidence.'}
+      </p>
+    </div>
+    {
+      navigation.map((group) => (
+        <nav aria-label={`${group.title || 'Footer'} links`}>
+          <h2>{group.title}</h2>
+          {(group.items || []).map(
+            (item) =>
+              hrefFor(item) && (
+                <a
+                  href={hrefFor(item)}
+                  target={item.destination?.openInNewTab ? '_blank' : undefined}
+                  rel={item.destination?.openInNewTab ? 'noopener noreferrer' : undefined}
+                >
+                  {item.label}
+                </a>
+              ),
+          )}
+        </nav>
+      ))
+    }
   </div>
   <div class="footer-bottom wrap">
     <p>© {new Date().getFullYear()} Swim BASI. All rights reserved.</p><p>Powered by confidence.</p>

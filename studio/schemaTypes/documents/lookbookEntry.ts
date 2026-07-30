@@ -1,5 +1,6 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import { requiredSlug } from '../helpers';
+import { pageSectionMembers } from '../objects/pageSections';
 
 export const lookbookEntry = defineType({
   name: 'lookbookEntry',
@@ -22,7 +23,7 @@ export const lookbookEntry = defineType({
     defineField({
       name: 'image',
       title: 'Image',
-      type: 'imageWithAlt',
+      type: 'managedImage',
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -53,6 +54,13 @@ export const lookbookEntry = defineType({
       validation: (rule) => rule.required().integer().min(0),
     }),
     defineField({ name: 'enabled', title: 'Enabled', type: 'boolean', initialValue: true }),
+    defineField({
+      name: 'sections',
+      title: 'Ordered editorial sections',
+      type: 'array',
+      of: pageSectionMembers,
+      validation: (rule) => rule.max(20),
+    }),
     defineField({ name: 'seo', title: 'SEO', type: 'seo' }),
   ],
   preview: {

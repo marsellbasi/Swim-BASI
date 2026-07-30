@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity';
-import { externalUrl, requiredSlug } from '../helpers';
+import { requiredSlug } from '../helpers';
 
 export const brandFilm = defineType({
   name: 'brandFilm',
@@ -39,64 +39,13 @@ export const brandFilm = defineType({
       validation: (rule) => rule.required().max(500),
     }),
     defineField({
-      name: 'videoSourceType',
-      title: 'Video source',
-      type: 'string',
-      options: {
-        layout: 'radio',
-        list: [
-          { title: 'Uploaded video', value: 'upload' },
-          { title: 'External video URL', value: 'external' },
-        ],
-      },
-      initialValue: 'upload',
+      name: 'video',
+      title: 'Managed video',
+      type: 'managedVideo',
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      name: 'uploadedVideo',
-      title: 'Uploaded video',
-      type: 'file',
-      options: { accept: 'video/*' },
-      hidden: ({ parent }) => parent?.videoSourceType !== 'upload',
-      validation: (rule) =>
-        rule.custom((value, context) =>
-          (context.parent as { videoSourceType?: string })?.videoSourceType === 'upload' && !value
-            ? 'Upload a video or choose an external source.'
-            : true,
-        ),
-    }),
-    defineField({
-      name: 'externalVideoUrl',
-      title: 'External video URL',
-      type: 'url',
-      hidden: ({ parent }) => parent?.videoSourceType !== 'external',
-      validation: (rule) =>
-        externalUrl(rule).custom((value, context) =>
-          (context.parent as { videoSourceType?: string })?.videoSourceType === 'external' && !value
-            ? 'Enter a video URL or choose an uploaded source.'
-            : true,
-        ),
-    }),
-    defineField({
-      name: 'posterImage',
-      title: 'Poster image',
-      type: 'imageWithAlt',
-      description: 'Shown before playback and while the video loads.',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'captionFile',
-      title: 'Caption file',
-      type: 'file',
-      description: 'Optional reviewed WebVTT captions.',
-      options: { accept: '.vtt,text/vtt' },
-    }),
-    defineField({ name: 'autoplay', title: 'Autoplay', type: 'boolean', initialValue: false }),
-    defineField({ name: 'muted', title: 'Muted', type: 'boolean', initialValue: false }),
-    defineField({ name: 'loop', title: 'Loop', type: 'boolean', initialValue: false }),
-    defineField({ name: 'controls', title: 'Show controls', type: 'boolean', initialValue: true }),
     defineField({ name: 'featured', title: 'Featured', type: 'boolean', initialValue: false }),
-    defineField({ name: 'seo', title: 'SEO', type: 'seo' }),
+    defineField({ name: 'seo', title: 'Search and social', type: 'seo' }),
   ],
-  preview: { select: { title: 'title', subtitle: 'heading', media: 'posterImage.image' } },
+  preview: { select: { title: 'title', subtitle: 'heading', media: 'video.poster.image' } },
 });

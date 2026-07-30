@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-07-30T10:08:05.232Z",
+  "target": {
+    "projectId": "xcfqfknc",
+    "dataset": "production"
+  },
+  "firstApply": {
+    "assetsCreated": 123,
+    "imageAssetsCreated": 122,
+    "fileAssetsCreated": 1,
+    "assetsReused": 0,
+    "draftsCreated": 58,
+    "draftsUpdated": 0
+  },
+  "secondApply": {
+    "assetsCreated": 0,
+    "assetsReused": 123,
+    "draftsCreated": 0,
+    "draftsUpdated": 2,
+    "draftsUnchanged": 56,
+    "reason": "Homepage and brand-film drafts received the verified live-grid and fallback-image parity correction."
+  },
+  "convergenceApply": {
+    "assetsCreated": 0,
+    "assetsReused": 123,
+    "draftsCreated": 0,
+    "draftsUpdated": 0,
+    "draftsUnchanged": 58
+  },
+  "duplicateDocumentsCreated": 0,
+  "duplicateExactAssetsCreated": 0,
+  "verified": true
+}

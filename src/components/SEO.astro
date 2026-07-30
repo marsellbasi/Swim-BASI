@@ -1,32 +1,32 @@
 ---
+import type { ResolvedSeo } from '../lib/sanity/seo';
+
 interface Props {
-  title: string;
-  description: string;
-  canonicalPath?: string;
-  image?: string;
+  seo: ResolvedSeo;
   type?: 'website' | 'product';
 }
-const {
-  title,
-  description,
-  canonicalPath = Astro.url.pathname,
-  image = '/images/hero/swim-basi-campaign-placeholder.png',
-  type = 'website',
-} = Astro.props;
-const canonical = new URL(canonicalPath, Astro.site ?? 'https://swimbasi.com');
-const imageUrl = new URL(image, Astro.site ?? 'https://swimbasi.com');
+const { seo, type = 'website' } = Astro.props;
+const canonical = seo.canonicalUrl
+  ? new URL(seo.canonicalUrl)
+  : new URL(seo.canonicalPath, Astro.site ?? 'https://swimbasi.com');
+const imageUrl = seo.image ? new URL(seo.image, Astro.site ?? 'https://swimbasi.com') : undefined;
+const twitterImage = seo.twitterImage
+  ? new URL(seo.twitterImage, Astro.site ?? 'https://swimbasi.com')
+  : imageUrl;
+const robots = [seo.noIndex ? 'noindex' : 'index', seo.noFollow ? 'nofollow' : 'follow'].join(', ');
 ---
 
-<title>{title}</title>
-<meta name="description" content={description} />
+<title>{seo.title}</title>
+<meta name="description" content={seo.description} />
 <link rel="canonical" href={canonical} />
+<meta name="robots" content={robots} />
 <meta property="og:type" content={type} />
 <meta property="og:site_name" content="Swim BASI" />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
+<meta property="og:title" content={seo.openGraphTitle} />
+<meta property="og:description" content={seo.openGraphDescription} />
 <meta property="og:url" content={canonical} />
-<meta property="og:image" content={imageUrl} />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={imageUrl} />
+{imageUrl && <meta property="og:image" content={imageUrl} />}
+<meta name="twitter:card" content={seo.cardType} />
+<meta name="twitter:title" content={seo.twitterTitle} />
+<meta name="twitter:description" content={seo.twitterDescription} />
+{twitterImage && <meta name="twitter:image" content={twitterImage} />}

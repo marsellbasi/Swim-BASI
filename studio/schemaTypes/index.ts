@@ -7,6 +7,10 @@ import { sizeGuideRow } from './objects/sizeGuideRow';
 import { navigationItem } from './objects/navigationItem';
 import { socialLink } from './objects/socialLink';
 import { contentSection } from './objects/contentSection';
+import { managedImage } from './objects/managedImage';
+import { managedVideo } from './objects/managedVideo';
+import { responsiveMedia } from './objects/responsiveMedia';
+import { pageSectionTypes } from './objects/pageSections';
 import { siteSettings } from './documents/siteSettings';
 import { announcementBar } from './documents/announcementBar';
 import { homepage } from './documents/homepage';
@@ -20,6 +24,8 @@ import { productCategory } from './documents/productCategory';
 import { campaign } from './documents/campaign';
 import { brandFilm } from './documents/brandFilm';
 import { lookbookEntry } from './documents/lookbookEntry';
+import { shopPage } from './documents/shopPage';
+import { collectionsPage } from './documents/collectionsPage';
 
 export const schemaTypes = [
   seo,
@@ -31,6 +37,10 @@ export const schemaTypes = [
   navigationItem,
   socialLink,
   contentSection,
+  managedImage,
+  managedVideo,
+  responsiveMedia,
+  ...pageSectionTypes,
   siteSettings,
   announcementBar,
   homepage,
@@ -44,4 +54,6 @@ export const schemaTypes = [
   campaign,
   brandFilm,
   lookbookEntry,
+  shopPage,
+  collectionsPage,
 ];

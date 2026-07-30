@@ -52,6 +52,10 @@ Use Node 22.23.1, copy `studio/.env.example` to an untracked `studio/.env`, then
 from that directory. See [studio/README.md](studio/README.md) and
 [docs/sanity-integration-plan.md](docs/sanity-integration-plan.md).
 
+The storefront integration is guarded by `PUBLIC_SANITY_CONTENT_ENABLED`; local content remains the
+default until migration parity and owner review are complete. Migration safety and commands are
+documented in [scripts/sanity/README.md](scripts/sanity/README.md).
+
 ## Managing products
 
 Edit only `src/data/products.ts`; cards and collection pages read from that central source. Each item supports identity, category, collection, color, pricing, Printful link, media, featured state, availability, sizing, badges, and ordering. See [docs/product-management.md](docs/product-management.md).

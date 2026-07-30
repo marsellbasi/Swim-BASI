@@ -1,0 +1,52 @@
+---
+import type { ManagedVideo } from '../lib/sanity/types';
+import SanityImage from './SanityImage.astro';
+import { urlForSanityImage } from '../lib/sanity/image';
+
+interface Props {
+  value: ManagedVideo;
+  class?: string;
+}
+
+const { value, class: className } = Astro.props;
+const source =
+  value.sourceType === 'external' ? value.externalVideoUrl : value.uploadedVideo?.asset?.url;
+const mobileSource = value.mobileVideo?.asset?.url;
+const poster = value.poster?.image;
+const posterUrl = poster
+  ? urlForSanityImage(poster).width(1200).fit('max').auto('format').quality(82).url()
+  : undefined;
+---
+
+{
+  source ? (
+    <video
+      class={className}
+      controls={value.controls !== false}
+      autoplay={value.autoplay === true}
+      muted={value.autoplay === true ? true : value.muted === true}
+      loop={value.loop === true}
+      playsinline={value.playsInline !== false}
+      preload={value.preload || 'metadata'}
+      aria-label={value.title || value.internalLabel || 'Video'}
+      poster={posterUrl}
+    >
+      {mobileSource && <source src={mobileSource} media="(max-width: 640px)" />}
+      <source src={source} />
+      {value.captionsFile?.asset?.url && (
+        <track
+          kind="captions"
+          src={value.captionsFile.asset.url}
+          srclang="en"
+          label="English"
+          default
+        />
+      )}
+      <p>{value.description || 'Your browser does not support embedded video.'}</p>
+    </video>
+  ) : (
+    (value.fallbackImage || value.poster) && (
+      <SanityImage value={value.fallbackImage || value.poster!} class={className} />
+    )
+  )
+}
