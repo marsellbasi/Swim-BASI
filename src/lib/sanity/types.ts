@@ -33,6 +33,7 @@ export interface ManagedVideo {
   mobileVideo?: { asset?: SanityAsset };
   externalVideoUrl?: string;
   poster?: ManagedImage;
+  fallbackImage?: ManagedImage;
   title?: string;
   description?: string;
   captionsFile?: { asset?: SanityAsset };

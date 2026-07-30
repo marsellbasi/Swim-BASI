@@ -66,6 +66,13 @@ export const managedVideo = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'fallbackImage',
+      title: 'Fallback image',
+      type: 'managedImage',
+      description:
+        'Optional still image shown when the video source is unavailable. This is separate from the video poster frame.',
+    }),
+    defineField({
       name: 'title',
       title: 'Accessible title',
       type: 'string',

@@ -45,6 +45,8 @@ const posterUrl = poster
       <p>{value.description || 'Your browser does not support embedded video.'}</p>
     </video>
   ) : (
-    value.poster && <SanityImage value={value.poster} class={className} />
+    (value.fallbackImage || value.poster) && (
+      <SanityImage value={value.fallbackImage || value.poster!} class={className} />
+    )
   )
 }

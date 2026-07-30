@@ -34,6 +34,23 @@ const stripMigrationFields = (value) => {
   );
 };
 
+const comparableDocument = (value) => {
+  if (Array.isArray(value)) return value.map(comparableDocument);
+  if (!value || typeof value !== 'object') return value;
+  return Object.fromEntries(
+    Object.entries(value)
+      .filter(
+        ([name, child]) =>
+          !['_rev', '_createdAt', '_updatedAt'].includes(name) && child !== undefined,
+      )
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([name, child]) => [name, comparableDocument(child)]),
+  );
+};
+
+const documentsMatch = (left, right) =>
+  JSON.stringify(comparableDocument(left)) === JSON.stringify(comparableDocument(right));
+
 async function uploadAssets(mode, inventory) {
   const groupArgument = process.argv.slice(2).find((argument) => argument.startsWith('--group='));
   const group = groupArgument?.split('=')[1];
@@ -106,7 +123,15 @@ function documentsForPhase(phase, assetMap) {
 }
 
 async function writeDocuments(mode, documents) {
-  if (!mode.apply) return { createdOrReplaced: 0, planned: documents.length, documentMap: {} };
+  if (!mode.apply)
+    return {
+      createdOrReplaced: 0,
+      created: 0,
+      updated: 0,
+      unchanged: 0,
+      planned: documents.length,
+      documentMap: {},
+    };
   assertMutationSafety(mode);
   const client = migrationClient();
   const documentMap = await readJson(documentMapPath, {});
@@ -117,18 +142,41 @@ async function writeDocuments(mode, documents) {
     draftDocumentIds: [],
     assetIds: [],
   });
-  let written = 0;
+  const targets = documents.map((source) =>
+    stripMigrationFields({ ...source, _id: draftId(source._id) }),
+  );
+  const targetIds = targets.map((target) => target._id);
+  const existingDocuments = targetIds.length
+    ? await client.fetch(`*[_id in $targetIds]`, { targetIds })
+    : [];
+  const existingById = new Map(existingDocuments.map((document) => [document._id, document]));
+  let created = 0;
+  let updated = 0;
+  let unchanged = 0;
   for (const source of documents) {
     const targetId = draftId(source._id);
     const target = stripMigrationFields({ ...source, _id: targetId });
-    await client.createOrReplace(target);
+    const existing = existingById.get(targetId);
+    if (existing && documentsMatch(existing, target)) {
+      unchanged += 1;
+    } else {
+      await client.createOrReplace(target);
+      if (existing) updated += 1;
+      else created += 1;
+    }
     documentMap[source._id] = { draftId: targetId, type: source._type, deterministic: true };
     if (!rollback.draftDocumentIds.includes(targetId)) rollback.draftDocumentIds.push(targetId);
-    written += 1;
   }
   await writeJson(documentMapPath, documentMap);
   await writeJson(rollbackPath, rollback);
-  return { createdOrReplaced: written, planned: documents.length, documentMap };
+  return {
+    createdOrReplaced: created + updated,
+    created,
+    updated,
+    unchanged,
+    planned: documents.length,
+    documentMap,
+  };
 }
 
 function markdownReport(report) {
@@ -217,6 +265,9 @@ export async function runMigration({ phase = 'all', argv = process.argv.slice(2)
           .map((type) => [type, documents.filter((document) => document._type === type).length]),
       ),
       written: documentResult.createdOrReplaced,
+      created: documentResult.created,
+      updated: documentResult.updated,
+      unchanged: documentResult.unchanged,
     },
     findings: {
       missingCaptions: 1,
@@ -270,7 +321,9 @@ Do not publish migrated documents until this checklist and visual parity are app
     );
   }
   console.log(
-    `${mode.apply ? 'Applied' : 'Dry-run planned'} phase "${phase}": ${uploadable.length} assets and ${documents.length} documents.`,
+    mode.apply
+      ? `Applied phase "${phase}": assets uploaded=${assetResult.uploaded}, reused=${assetResult.reused}; documents created=${documentResult.created}, updated=${documentResult.updated}, unchanged=${documentResult.unchanged}.`
+      : `Dry-run planned phase "${phase}": ${uploadable.length} assets and ${documents.length} documents.`,
   );
   return report;
 }

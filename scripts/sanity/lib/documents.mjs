@@ -298,6 +298,10 @@ export function pageDocuments(assetMap) {
               }
             : undefined,
           poster: brandFilmPoster,
+          fallbackImage: brand(
+            'black-string-bikini-night-portrait',
+            'Woman wearing a black string bikini at night',
+          ),
           title: 'Confidence, in motion.',
           description:
             'The Swim BASI brand film introduces the color, presence, and energy behind the brand.',
@@ -369,11 +373,20 @@ export function pageDocuments(assetMap) {
         items: [
           {
             _type: 'editorialItem',
-            _key: 'nightportrait',
-            internalName: 'Night portrait',
+            _key: 'reddetail',
+            internalName: 'Red studio detail',
             image: brand(
-              'black-string-bikini-night-portrait',
-              'Woman wearing a black string bikini at night',
+              'red-string-bikini-studio-detail',
+              'Detail of a red string bikini in the studio',
+            ),
+          },
+          {
+            _type: 'editorialItem',
+            _key: 'greenstudio',
+            internalName: 'Forest green studio portrait',
+            image: brand(
+              'forest-green-string-bikini-studio-portrait',
+              'Swim BASI green string-bikini studio portrait',
             ),
           },
           {
@@ -387,11 +400,11 @@ export function pageDocuments(assetMap) {
           },
           {
             _type: 'editorialItem',
-            _key: 'reddetail',
-            internalName: 'Red studio detail',
+            _key: 'lavenderpool',
+            internalName: 'Lavender poolside portrait',
             image: brand(
-              'red-string-bikini-studio-detail',
-              'Detail of a red string bikini in the studio',
+              'lavender-string-bikini-poolside-back',
+              'Swim BASI lavender string-bikini poolside portrait',
             ),
           },
         ],

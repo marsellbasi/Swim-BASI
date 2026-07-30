@@ -26,7 +26,8 @@ const videoProjection = `{
   uploadedVideo{asset->{_id, url, originalFilename}},
   mobileVideo{asset->{_id, url, originalFilename}},
   captionsFile{asset->{_id, url, originalFilename}},
-  poster${imageProjection}
+  poster${imageProjection},
+  fallbackImage${imageProjection}
 }`;
 
 const seoProjection = `{
