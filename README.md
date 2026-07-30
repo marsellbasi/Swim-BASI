@@ -42,7 +42,15 @@ Astro writes the production site to `dist/`.
 - `src/utils/products.ts` — filtering and sorting helpers
 - `src/styles/global.css` — design system and responsive styles
 - `public/` — brand, image, video, and icon assets
+- `studio/` — independently installable and buildable Sanity Studio
 - `docs/` — product, media, and deployment guides
+
+## Sanity Studio
+
+The standalone Studio lives in `studio/` and does not replace the storefront's local content yet.
+Use Node 22.23.1, copy `studio/.env.example` to an untracked `studio/.env`, then run its npm commands
+from that directory. See [studio/README.md](studio/README.md) and
+[docs/sanity-integration-plan.md](docs/sanity-integration-plan.md).
 
 ## Managing products
 
