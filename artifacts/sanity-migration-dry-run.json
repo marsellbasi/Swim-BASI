@@ -1,0 +1,46 @@
+{
+  "generatedAt": "2026-07-30T09:03:35.802Z",
+  "mode": "dry-run",
+  "phase": "all",
+  "target": {
+    "projectId": "xcfqfknc",
+    "dataset": "production"
+  },
+  "tokenAvailable": false,
+  "assets": {
+    "inventoryCount": 140,
+    "imagesPlanned": 122,
+    "videosPlanned": 1,
+    "skippedDerivatives": 16,
+    "codeControlled": 1,
+    "duplicateGroups": 0,
+    "projectedBytes": 23372772,
+    "uploaded": 0,
+    "reused": 0
+  },
+  "documents": {
+    "total": 58,
+    "byType": {
+      "aboutPage": 1,
+      "announcementBar": 1,
+      "brandFilm": 1,
+      "collectionsPage": 1,
+      "footerNavigation": 1,
+      "headerNavigation": 1,
+      "homepage": 1,
+      "product": 42,
+      "productCategory": 3,
+      "productCollection": 3,
+      "shopPage": 1,
+      "siteSettings": 1,
+      "sizeGuide": 1
+    },
+    "written": 0
+  },
+  "findings": {
+    "missingCaptions": 1,
+    "missingTranscripts": 1,
+    "productsWithoutSizes": 42,
+    "sizeGuideRowsMissing": 1
+  }
+}

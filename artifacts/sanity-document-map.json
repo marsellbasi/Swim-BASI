@@ -1,0 +1,292 @@
+{
+  "swim-basi.productCategory.one-piece": {
+    "draftId": "drafts.swim-basi.productCategory.one-piece",
+    "type": "productCategory",
+    "planned": true
+  },
+  "swim-basi.productCategory.string-bikinis": {
+    "draftId": "drafts.swim-basi.productCategory.string-bikinis",
+    "type": "productCategory",
+    "planned": true
+  },
+  "swim-basi.productCategory.high-waisted-bikinis": {
+    "draftId": "drafts.swim-basi.productCategory.high-waisted-bikinis",
+    "type": "productCategory",
+    "planned": true
+  },
+  "swim-basi.productCollection.one-piece": {
+    "draftId": "drafts.swim-basi.productCollection.one-piece",
+    "type": "productCollection",
+    "planned": true
+  },
+  "swim-basi.productCollection.string-bikinis": {
+    "draftId": "drafts.swim-basi.productCollection.string-bikinis",
+    "type": "productCollection",
+    "planned": true
+  },
+  "swim-basi.productCollection.high-waisted-bikinis": {
+    "draftId": "drafts.swim-basi.productCollection.high-waisted-bikinis",
+    "type": "productCollection",
+    "planned": true
+  },
+  "swim-basi.product.basi-red-violet-one-piece-swimsuit": {
+    "draftId": "drafts.swim-basi.product.basi-red-violet-one-piece-swimsuit",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-brink-pink-one-piece-swimsuit": {
+    "draftId": "drafts.swim-basi.product.basi-brink-pink-one-piece-swimsuit",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-classic-one-piece-swimsuit": {
+    "draftId": "drafts.swim-basi.product.basi-classic-one-piece-swimsuit",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-burgundy-one-piece-swimsuit": {
+    "draftId": "drafts.swim-basi.product.basi-burgundy-one-piece-swimsuit",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-mona-lisa-one-piece-swimsuit": {
+    "draftId": "drafts.swim-basi.product.basi-mona-lisa-one-piece-swimsuit",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-red-one-piece-swimsuit": {
+    "draftId": "drafts.swim-basi.product.basi-red-one-piece-swimsuit",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-cotton-candy-one-piece-swimsuit": {
+    "draftId": "drafts.swim-basi.product.basi-cotton-candy-one-piece-swimsuit",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-orange-one-piece-swimsuit": {
+    "draftId": "drafts.swim-basi.product.basi-orange-one-piece-swimsuit",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-eastern-blue-one-piece-swimsuit": {
+    "draftId": "drafts.swim-basi.product.basi-eastern-blue-one-piece-swimsuit",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-forest-green-one-piece-swimsuit": {
+    "draftId": "drafts.swim-basi.product.basi-forest-green-one-piece-swimsuit",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-brown-one-piece-swimsuit": {
+    "draftId": "drafts.swim-basi.product.basi-brown-one-piece-swimsuit",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-grey-one-piece-swimsuit": {
+    "draftId": "drafts.swim-basi.product.basi-grey-one-piece-swimsuit",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-black-one-piece-swimsuit": {
+    "draftId": "drafts.swim-basi.product.basi-black-one-piece-swimsuit",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-yellow-one-piece-swimsuit": {
+    "draftId": "drafts.swim-basi.product.basi-yellow-one-piece-swimsuit",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-red-violet-string-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-red-violet-string-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-classic-string-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-classic-string-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-burgundy-string-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-burgundy-string-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-mona-lisa-string-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-mona-lisa-string-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-red-string-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-red-string-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-cotton-candy-string-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-cotton-candy-string-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-eastern-blue-string-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-eastern-blue-string-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-orange-string-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-orange-string-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-forest-green-string-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-forest-green-string-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-brink-pink-string-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-brink-pink-string-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-brown-string-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-brown-string-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-grey-string-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-grey-string-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-black-string-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-black-string-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-yellow-string-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-yellow-string-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-red-violet-high-waisted-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-red-violet-high-waisted-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-classic-high-waisted-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-classic-high-waisted-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-burgundy-high-waisted-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-burgundy-high-waisted-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-mona-lisa-high-waisted-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-mona-lisa-high-waisted-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-red-high-waisted-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-red-high-waisted-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-cotton-candy-high-waisted-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-cotton-candy-high-waisted-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-eastern-blue-high-waisted-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-eastern-blue-high-waisted-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-orange-high-waisted-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-orange-high-waisted-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-forest-green-high-waisted-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-forest-green-high-waisted-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-brink-pink-high-waisted-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-brink-pink-high-waisted-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-brown-high-waisted-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-brown-high-waisted-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-grey-high-waisted-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-grey-high-waisted-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-black-high-waisted-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-black-high-waisted-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "swim-basi.product.basi-yellow-high-waisted-bikini": {
+    "draftId": "drafts.swim-basi.product.basi-yellow-high-waisted-bikini",
+    "type": "product",
+    "planned": true
+  },
+  "siteSettings": {
+    "draftId": "drafts.siteSettings",
+    "type": "siteSettings",
+    "planned": true
+  },
+  "announcementBar": {
+    "draftId": "drafts.announcementBar",
+    "type": "announcementBar",
+    "planned": true
+  },
+  "headerNavigation": {
+    "draftId": "drafts.headerNavigation",
+    "type": "headerNavigation",
+    "planned": true
+  },
+  "footerNavigation": {
+    "draftId": "drafts.footerNavigation",
+    "type": "footerNavigation",
+    "planned": true
+  },
+  "homepage": {
+    "draftId": "drafts.homepage",
+    "type": "homepage",
+    "planned": true
+  },
+  "aboutPage": {
+    "draftId": "drafts.aboutPage",
+    "type": "aboutPage",
+    "planned": true
+  },
+  "sizeGuide": {
+    "draftId": "drafts.sizeGuide",
+    "type": "sizeGuide",
+    "planned": true
+  },
+  "shopPage": {
+    "draftId": "drafts.shopPage",
+    "type": "shopPage",
+    "planned": true
+  },
+  "collectionsPage": {
+    "draftId": "drafts.collectionsPage",
+    "type": "collectionsPage",
+    "planned": true
+  },
+  "swim-basi.brandFilm.swim-basi-brand-film": {
+    "draftId": "drafts.swim-basi.brandFilm.swim-basi-brand-film",
+    "type": "brandFilm",
+    "planned": true
+  }
+}
