@@ -1,1 +1,26 @@
-<div class="announcement" role="status">Welcome to Swim BASI — Confidence in Every Color.</div>
+---
+import type { SanityLink } from '../lib/sanity/types';
+interface Props {
+  announcement?: {
+    enabled?: boolean;
+    message?: string;
+    link?: SanityLink;
+    linkLabel?: string;
+  } | null;
+}
+const { announcement } = Astro.props;
+const enabled = announcement ? announcement.enabled !== false : true;
+const href =
+  announcement?.link?.linkType === 'external'
+    ? announcement.link.externalUrl
+    : announcement?.link?.internalPath;
+---
+
+{
+  enabled && (
+    <div class="announcement" role="status">
+      {announcement?.message || 'Welcome to Swim BASI — Confidence in Every Color.'}
+      {href && <a href={href}>{announcement?.linkLabel || 'Learn more'}</a>}
+    </div>
+  )
+}

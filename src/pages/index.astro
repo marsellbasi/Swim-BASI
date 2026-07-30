@@ -12,6 +12,9 @@ import ExternalCheckoutNotice from '../components/ExternalCheckoutNotice.astro';
 import { products } from '../data/products';
 import { featuredProducts } from '../utils/products';
 import { getBrandImage } from '../data/brand-images';
+import PageSections from '../components/PageSections.astro';
+import { getSanityPage, getSiteSettings } from '../lib/sanity/content';
+import { resolveSeo } from '../lib/sanity/seo';
 
 const collectionProducts = {
   onePiece: products.find((product) => product.slug === 'basi-brink-pink-one-piece-swimsuit'),
@@ -19,75 +22,122 @@ const collectionProducts = {
   highWaisted: products.find((product) => product.slug === 'basi-orange-high-waisted-bikini'),
 };
 const campaignImage = getBrandImage('yellow-and-black-string-bikinis-night-walk');
+const sanityPage = await getSanityPage('homepage');
+const settings = await getSiteSettings();
+const pageSeo = resolveSeo({
+  page: sanityPage?.seo,
+  settings,
+  derivedTitle: 'Swim BASI | Confidence Looks Good on You',
+  derivedDescription:
+    'Bold color and flattering silhouettes from Swim BASI. Explore one-piece swimwear, string bikinis, and high-waisted bikinis.',
+  canonicalPath: '/',
+  fallbackImage: '/images/hero/swim-basi-campaign-placeholder.png',
+});
 ---
 
 <BaseLayout
   title="Swim BASI | Confidence Looks Good on You"
   description="Bold color and flattering silhouettes from Swim BASI. Explore one-piece swimwear, string bikinis, and high-waisted bikinis."
+  seo={pageSeo}
 >
-  <PortraitVideoIntro />
-  <Hero />
-  <section class="section wrap" aria-labelledby="silhouette-title">
-    <SectionHeading
-      eyebrow="Find your shape"
-      title="Shop by silhouette"
-      intro="Three distinct ways to make your presence known."
-    /><div class="collection-grid" id="silhouette-title">
-      <CollectionCard
-        title="One-Piece Swimwear"
-        href="/collections/one-piece"
-        price="Starting at $32.99"
-        color="#F16A8D"
-        index="01"
-        product={collectionProducts.onePiece}
-      /><CollectionCard
-        title="String Bikinis"
-        href="/collections/string-bikinis"
-        price="Starting at $37.99"
-        color="#247BA0"
-        index="02"
-        product={collectionProducts.stringBikini}
-      /><CollectionCard
-        title="High-Waisted Bikinis"
-        href="/collections/high-waisted-bikinis"
-        price="Starting at $44.99"
-        color="#E8692A"
-        index="03"
-        product={collectionProducts.highWaisted}
-      />
-    </div>
-  </section>
-  <section class="section section--ivory">
-    <div class="wrap">
-      <SectionHeading
-        eyebrow="The BASI edit"
-        title="Color in focus"
-        intro="A first look at signature Swim BASI silhouettes in colors designed to make an entrance."
-      /><ExternalCheckoutNotice /><ProductGrid products={featuredProducts(products)} />
-    </div>
-  </section>
-  <section class="statement">
-    <p class="eyebrow">Our point of view</p><h2>Take up space.<br />Wear the color.</h2><p>
-      Swim BASI is made for confident entrances, unforgettable color, and the kind of presence that
-      never needs permission.
-    </p>
-  </section>
-  <section class="section wrap">
-    <SectionHeading
-      eyebrow="The campaign edit"
-      title="Made for the moment"
-      intro="Statement swimwear for poolside confidence, destination color, and every moment made to be remembered."
-    /><MediaFrame
-      imageData={campaignImage}
-      alt={campaignImage.alt}
-      class="campaign-frame"
-      sizes="(max-width: 1040px) calc(100vw - 24px), 980px"
-      ><figcaption class="campaign-caption">
-        <h2>Confidence in motion.</h2><p>
-          Color moves differently when it is worn with confidence.
-        </p>
-      </figcaption></MediaFrame
-    >
-  </section>
-  <InstagramPreview /><NewsletterSignup />
+  {
+    sanityPage ? (
+      <PageSections sections={sanityPage.sections || []} />
+    ) : (
+      <>
+        <PortraitVideoIntro />
+        <Hero />
+        <section class="section wrap" aria-labelledby="silhouette-title">
+          <>
+            <SectionHeading
+              eyebrow="Find your shape"
+              title="Shop by silhouette"
+              intro="Three distinct ways to make your presence known."
+            />
+            <div class="collection-grid" id="silhouette-title">
+              <>
+                <CollectionCard
+                  title="One-Piece Swimwear"
+                  href="/collections/one-piece"
+                  price="Starting at $32.99"
+                  color="#F16A8D"
+                  index="01"
+                  product={collectionProducts.onePiece}
+                />
+                <CollectionCard
+                  title="String Bikinis"
+                  href="/collections/string-bikinis"
+                  price="Starting at $37.99"
+                  color="#247BA0"
+                  index="02"
+                  product={collectionProducts.stringBikini}
+                />
+                <CollectionCard
+                  title="High-Waisted Bikinis"
+                  href="/collections/high-waisted-bikinis"
+                  price="Starting at $44.99"
+                  color="#E8692A"
+                  index="03"
+                  product={collectionProducts.highWaisted}
+                />
+              </>
+            </div>
+          </>
+        </section>
+        <section class="section section--ivory">
+          <div class="wrap">
+            <>
+              <SectionHeading
+                eyebrow="The BASI edit"
+                title="Color in focus"
+                intro="A first look at signature Swim BASI silhouettes in colors designed to make an entrance."
+              />
+              <ExternalCheckoutNotice />
+              <ProductGrid products={featuredProducts(products)} />
+            </>
+          </div>
+        </section>
+        <section class="statement">
+          <>
+            <p class="eyebrow">Our point of view</p>
+            <h2>
+              Take up space.
+              <br />
+              Wear the color.
+            </h2>
+            <p>
+              Swim BASI is made for confident entrances, unforgettable color, and the kind of
+              presence that never needs permission.
+            </p>
+          </>
+        </section>
+        <section class="section wrap">
+          <>
+            <SectionHeading
+              eyebrow="The campaign edit"
+              title="Made for the moment"
+              intro="Statement swimwear for poolside confidence, destination color, and every moment made to be remembered."
+            />
+            <MediaFrame
+              imageData={campaignImage}
+              alt={campaignImage.alt}
+              class="campaign-frame"
+              sizes="(max-width: 1040px) calc(100vw - 24px), 980px"
+            >
+              <figcaption class="campaign-caption">
+                <>
+                  <h2>Confidence in motion.</h2>
+                  <p>Color moves differently when it is worn with confidence.</p>
+                </>
+              </figcaption>
+            </MediaFrame>
+          </>
+        </section>
+        <>
+          <InstagramPreview />
+          <NewsletterSignup />
+        </>
+      </>
+    )
+  }
 </BaseLayout>

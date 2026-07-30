@@ -1,15 +1,43 @@
 ---
 import Logo from './Logo.astro';
 import MobileNavigation from './MobileNavigation.astro';
+import type { NavigationItem } from '../lib/sanity/types';
+
+interface Props {
+  items?: NavigationItem[] | null;
+}
+const { items } = Astro.props;
+const defaults: NavigationItem[] = [
+  { label: 'Shop', destination: { linkType: 'internal', internalPath: '/shop' } },
+  { label: 'Collections', destination: { linkType: 'internal', internalPath: '/collections' } },
+  { label: 'About', destination: { linkType: 'internal', internalPath: '/about' } },
+  { label: 'Size Guide', destination: { linkType: 'internal', internalPath: '/size-guide' } },
+];
+const navigation = items?.length ? items : defaults;
+const hrefFor = (item: NavigationItem) =>
+  item.destination?.linkType === 'external'
+    ? item.destination.externalUrl
+    : item.destination?.internalPath;
 ---
 
 <header class="site-header">
   <div class="header-inner wrap">
     <Logo />
     <nav class="desktop-nav" aria-label="Primary navigation">
-      <a href="/shop">Shop</a><a href="/collections">Collections</a><a href="/about">About</a><a
-        href="/size-guide">Size Guide</a
-      >
+      {
+        navigation.map(
+          (item) =>
+            hrefFor(item) && (
+              <a
+                href={hrefFor(item)}
+                target={item.destination?.openInNewTab ? '_blank' : undefined}
+                rel={item.destination?.openInNewTab ? 'noopener noreferrer' : undefined}
+              >
+                {item.label}
+              </a>
+            ),
+        )
+      }
     </nav>
     <a
       class="instagram-link"
@@ -19,6 +47,6 @@ import MobileNavigation from './MobileNavigation.astro';
       aria-label="Follow Swim BASI on Instagram (opens in a new tab)"
       >Instagram <span aria-hidden="true">↗</span></a
     >
-    <MobileNavigation />
+    <MobileNavigation items={navigation} />
   </div>
 </header>

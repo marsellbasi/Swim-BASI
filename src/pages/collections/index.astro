@@ -3,51 +3,79 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import CollectionCard from '../../components/CollectionCard.astro';
 import { products } from '../../data/products';
+import PageSections from '../../components/PageSections.astro';
+import { getSanityPage, getSiteSettings } from '../../lib/sanity/content';
+import { resolveSeo } from '../../lib/sanity/seo';
 
 const collectionProducts = {
   onePiece: products.find((product) => product.slug === 'basi-brink-pink-one-piece-swimsuit'),
   stringBikini: products.find((product) => product.slug === 'basi-eastern-blue-string-bikini'),
   highWaisted: products.find((product) => product.slug === 'basi-orange-high-waisted-bikini'),
 };
+const sanityPage = await getSanityPage('collectionsPage');
+const settings = await getSiteSettings();
+const pageSeo = resolveSeo({
+  page: sanityPage?.seo,
+  settings,
+  derivedTitle: 'Swimwear Collections | Swim BASI',
+  derivedDescription:
+    'Explore Swim BASI one-piece, string bikini, and high-waisted bikini collections.',
+  canonicalPath: '/collections',
+});
 ---
 
 <BaseLayout
   title="Swimwear Collections | Swim BASI"
   description="Explore Swim BASI one-piece, string bikini, and high-waisted bikini collections."
-  ><section class="page-hero">
-    <div class="wrap">
-      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Collections' }]} /><p
-        class="eyebrow"
-      >
-        Choose your silhouette
-      </p><h1>Collections</h1><p class="lead">
-        A confident shape for every way you want to show up.
-      </p>
-    </div>
-  </section><section class="section wrap">
-    <div class="collection-grid">
-      <CollectionCard
-        title="One-Piece Swimwear"
-        href="/collections/one-piece"
-        price="Starting at $32.99"
-        color="#F16A8D"
-        index="01"
-        product={collectionProducts.onePiece}
-      /><CollectionCard
-        title="String Bikinis"
-        href="/collections/string-bikinis"
-        price="Starting at $37.99"
-        color="#247BA0"
-        index="02"
-        product={collectionProducts.stringBikini}
-      /><CollectionCard
-        title="High-Waisted Bikinis"
-        href="/collections/high-waisted-bikinis"
-        price="Starting at $44.99"
-        color="#E8692A"
-        index="03"
-        product={collectionProducts.highWaisted}
-      />
-    </div>
-  </section></BaseLayout
+  seo={pageSeo}
+  >{
+    sanityPage ? (
+      <PageSections sections={sanityPage.sections || []} />
+    ) : (
+      <>
+        <>
+          <section class="page-hero">
+            <div class="wrap">
+              <>
+                <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Collections' }]} />
+                <p class="eyebrow">Choose your silhouette</p>
+                <h1>Collections</h1>
+                <p class="lead">A confident shape for every way you want to show up.</p>
+              </>
+            </div>
+          </section>
+          <section class="section wrap">
+            <div class="collection-grid">
+              <>
+                <CollectionCard
+                  title="One-Piece Swimwear"
+                  href="/collections/one-piece"
+                  price="Starting at $32.99"
+                  color="#F16A8D"
+                  index="01"
+                  product={collectionProducts.onePiece}
+                />
+                <CollectionCard
+                  title="String Bikinis"
+                  href="/collections/string-bikinis"
+                  price="Starting at $37.99"
+                  color="#247BA0"
+                  index="02"
+                  product={collectionProducts.stringBikini}
+                />
+                <CollectionCard
+                  title="High-Waisted Bikinis"
+                  href="/collections/high-waisted-bikinis"
+                  price="Starting at $44.99"
+                  color="#E8692A"
+                  index="03"
+                  product={collectionProducts.highWaisted}
+                />
+              </>
+            </div>
+          </section>
+        </>
+      </>
+    )
+  }</BaseLayout
 >

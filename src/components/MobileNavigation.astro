@@ -1,9 +1,32 @@
+---
+import type { NavigationItem } from '../lib/sanity/types';
+interface Props {
+  items: NavigationItem[];
+}
+const { items } = Astro.props;
+const hrefFor = (item: NavigationItem) =>
+  item.destination?.linkType === 'external'
+    ? item.destination.externalUrl
+    : item.destination?.internalPath;
+---
+
 <details class="mobile-nav">
   <summary aria-label="Open site navigation"><span></span><span></span><span></span></summary>
   <nav aria-label="Mobile navigation">
-    <a href="/shop">Shop</a><a href="/collections">Collections</a><a href="/about">About</a><a
-      href="/size-guide">Size Guide</a
-    >
+    {
+      items.map(
+        (item) =>
+          hrefFor(item) && (
+            <a
+              href={hrefFor(item)}
+              target={item.destination?.openInNewTab ? '_blank' : undefined}
+              rel={item.destination?.openInNewTab ? 'noopener noreferrer' : undefined}
+            >
+              {item.label}
+            </a>
+          ),
+      )
+    }
     <a href="https://instagram.com/swimbasi" target="_blank" rel="noopener noreferrer"
       >Instagram <span aria-hidden="true">↗</span></a
     >
