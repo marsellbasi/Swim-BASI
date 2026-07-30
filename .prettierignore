@@ -2,3 +2,7 @@ dist
 .astro
 node_modules
 package-lock.json
+studio/.sanity
+studio/dist
+studio/node_modules
+studio/package-lock.json
