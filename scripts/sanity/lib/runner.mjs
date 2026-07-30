@@ -35,7 +35,24 @@ const stripMigrationFields = (value) => {
 };
 
 async function uploadAssets(mode, inventory) {
-  const planned = inventory.filter((item) => item.recommendation === 'upload');
+  const groupArgument = process.argv.slice(2).find((argument) => argument.startsWith('--group='));
+  const group = groupArgument?.split('=')[1];
+  const inGroup = (item) => {
+    if (!group) return true;
+    if (group === 'sitewide') return item.source.includes('/images/hero/');
+    if (group === 'products') return item.source.includes('/images/products/');
+    if (group === 'campaigns') return item.source.includes('/images/brand/');
+    if (group === 'brand-film') return item.source.includes('/videos/campaigns/');
+    if (group === 'pages')
+      return (
+        !item.source.includes('/images/hero/') &&
+        !item.source.includes('/images/products/') &&
+        !item.source.includes('/images/brand/') &&
+        !item.source.includes('/videos/campaigns/')
+      );
+    throw new Error(`Unknown asset group: ${group}`);
+  };
+  const planned = inventory.filter((item) => item.recommendation === 'upload' && inGroup(item));
   const existingMap = await readJson(assetMapPath, {});
   if (!mode.apply) {
     return {
