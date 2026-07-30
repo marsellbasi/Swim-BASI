@@ -1,0 +1,26 @@
+{
+  "name": "swim-basi-sanity-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev --port 3333",
+    "start": "sanity start --port 3333",
+    "typecheck": "tsc --noEmit",
+    "build": "sanity build && node scripts/copy-cloudflare-routing.mjs"
+  },
+  "dependencies": {
+    "@sanity/vision": "6.7.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "sanity": "6.7.0",
+    "styled-components": "6.4.4"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.14",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=22.12.0 <23"
+  }
+}
