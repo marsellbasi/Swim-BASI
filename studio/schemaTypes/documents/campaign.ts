@@ -1,5 +1,6 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import { requiredSlug } from '../helpers';
+import { pageSectionMembers } from '../objects/pageSections';
 
 export const campaign = defineType({
   name: 'campaign',
@@ -35,15 +36,15 @@ export const campaign = defineType({
     defineField({
       name: 'heroImage',
       title: 'Hero image',
-      type: 'imageWithAlt',
+      type: 'managedImage',
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'contentSections',
-      title: 'Content sections',
+      name: 'sections',
+      title: 'Ordered page sections',
       type: 'array',
-      of: [defineArrayMember({ type: 'contentSection' })],
-      validation: (rule) => rule.max(20),
+      of: pageSectionMembers,
+      validation: (rule) => rule.max(30),
     }),
     defineField({
       name: 'relatedProducts',

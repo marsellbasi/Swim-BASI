@@ -60,14 +60,14 @@ export const product = defineType({
     defineField({
       name: 'primaryImage',
       title: 'Primary image',
-      type: 'imageWithAlt',
+      type: 'managedImage',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'gallery',
       title: 'Gallery',
       type: 'array',
-      of: [defineArrayMember({ type: 'imageWithAlt' })],
+      of: [defineArrayMember({ type: 'managedImage' })],
       validation: (rule) => rule.max(12).unique(),
     }),
     defineField({

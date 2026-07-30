@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
+import { pageSectionMembers } from '../objects/pageSections';
 
 export const sizeGuide = defineType({
   name: 'sizeGuide',
@@ -6,17 +7,20 @@ export const sizeGuide = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'heading',
-      title: 'Heading',
+      name: 'internalTitle',
+      title: 'Internal title',
       type: 'string',
-      validation: (rule) => rule.required().max(100),
+      initialValue: 'Size Guide',
+      validation: (rule) => rule.required().max(80),
     }),
+    defineField({ name: 'enabled', title: 'Enabled', type: 'boolean', initialValue: true }),
     defineField({
-      name: 'introduction',
-      title: 'Introduction',
-      type: 'text',
-      rows: 3,
-      validation: (rule) => rule.max(400),
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      initialValue: { current: 'size-guide' },
+      readOnly: true,
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'measurementUnit',
@@ -34,24 +38,37 @@ export const sizeGuide = defineType({
     }),
     defineField({
       name: 'rows',
-      title: 'Size rows',
+      title: 'Structured size rows',
       type: 'array',
       of: [defineArrayMember({ type: 'sizeGuideRow' })],
-      validation: (rule) => rule.required().min(1).unique(),
+      validation: (rule) => rule.unique(),
     }),
     defineField({
       name: 'measurementInstructions',
       title: 'Measurement instructions',
       type: 'array',
       of: [defineArrayMember({ type: 'block' })],
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'sizeGuideImage',
       title: 'Optional size-guide image',
-      type: 'imageWithAlt',
+      type: 'managedImage',
     }),
-    defineField({ name: 'seo', title: 'SEO', type: 'seo', validation: (rule) => rule.required() }),
+    defineField({
+      name: 'sections',
+      title: 'Ordered page sections',
+      type: 'array',
+      of: pageSectionMembers,
+      validation: (rule) => rule.required().min(1).max(30),
+    }),
+    defineField({
+      name: 'seo',
+      title: 'Search and social',
+      type: 'seo',
+      validation: (rule) => rule.required(),
+    }),
   ],
-  preview: { prepare: () => ({ title: 'Size Guide', subtitle: 'Measurements and fit guidance' }) },
+  preview: {
+    prepare: () => ({ title: 'Size Guide', subtitle: 'Fit content and ordered sections' }),
+  },
 });

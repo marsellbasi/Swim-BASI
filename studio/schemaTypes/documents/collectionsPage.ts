@@ -1,27 +1,33 @@
 import { defineField, defineType } from 'sanity';
 import { pageSectionMembers } from '../objects/pageSections';
 
-export const homepage = defineType({
-  name: 'homepage',
-  title: 'Homepage',
+export const collectionsPage = defineType({
+  name: 'collectionsPage',
+  title: 'Collections landing page',
   type: 'document',
   fields: [
     defineField({
       name: 'internalTitle',
       title: 'Internal title',
       type: 'string',
-      initialValue: 'Homepage',
+      initialValue: 'Collections Landing Page',
       validation: (rule) => rule.required().max(80),
     }),
     defineField({ name: 'enabled', title: 'Enabled', type: 'boolean', initialValue: true }),
     defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      initialValue: { current: 'collections' },
+      readOnly: true,
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'sections',
       title: 'Ordered page sections',
       type: 'array',
-      description:
-        'Drag sections by their handles to set the exact storefront order. Disabled sections remain saved but are not rendered.',
       of: pageSectionMembers,
-      validation: (rule) => rule.required().min(1).max(40),
+      validation: (rule) => rule.required().min(1).max(30),
     }),
     defineField({
       name: 'seo',
@@ -30,5 +36,10 @@ export const homepage = defineType({
       validation: (rule) => rule.required(),
     }),
   ],
-  preview: { prepare: () => ({ title: 'Homepage', subtitle: 'Ordered page-builder content' }) },
+  preview: {
+    prepare: () => ({
+      title: 'Collections Landing Page',
+      subtitle: 'Collection index page builder',
+    }),
+  },
 });

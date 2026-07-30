@@ -4,6 +4,8 @@ export const singletonTypes = new Set([
   'homepage',
   'aboutPage',
   'sizeGuide',
+  'shopPage',
+  'collectionsPage',
   'headerNavigation',
   'footerNavigation',
 ]);

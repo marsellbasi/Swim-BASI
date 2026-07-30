@@ -26,7 +26,7 @@ export const productCategory = defineType({
       rows: 3,
       validation: (rule) => rule.max(300),
     }),
-    defineField({ name: 'image', title: 'Category image', type: 'imageWithAlt' }),
+    defineField({ name: 'image', title: 'Category image', type: 'managedImage' }),
     defineField({
       name: 'displayOrder',
       title: 'Display order',

@@ -1,5 +1,6 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import { requiredSlug } from '../helpers';
+import { pageSectionMembers } from '../objects/pageSections';
 
 export const productCollection = defineType({
   name: 'productCollection',
@@ -26,7 +27,7 @@ export const productCollection = defineType({
       rows: 4,
       validation: (rule) => rule.required().max(500),
     }),
-    defineField({ name: 'heroImage', title: 'Hero image', type: 'imageWithAlt' }),
+    defineField({ name: 'heroImage', title: 'Hero image', type: 'managedImage' }),
     defineField({
       name: 'products',
       title: 'Products',
@@ -44,6 +45,15 @@ export const productCollection = defineType({
       validation: (rule) => rule.required().integer().min(0),
     }),
     defineField({ name: 'enabled', title: 'Enabled', type: 'boolean', initialValue: true }),
+    defineField({
+      name: 'sections',
+      title: 'Ordered editorial sections',
+      type: 'array',
+      description:
+        'Optional sections rendered around the collection product grid in this exact order.',
+      of: pageSectionMembers,
+      validation: (rule) => rule.max(20),
+    }),
     defineField({ name: 'seo', title: 'SEO', type: 'seo' }),
   ],
   preview: {
