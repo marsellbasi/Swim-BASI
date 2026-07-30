@@ -10,4 +10,11 @@ if (!projectId || !dataset) {
 export default defineCliConfig({
   api: { projectId, dataset },
   studioHost: 'swim-basi',
+  vite: {
+    resolve: {
+      // The Studio uses no TypeScript path aliases. Keep Vite from walking into the
+      // parent Astro project when this standalone workspace is built in isolation.
+      tsconfigPaths: false,
+    },
+  },
 });
