@@ -1,0 +1,367 @@
+---
+import type { PageSection, SanityCallToAction, SanityPage } from '../lib/sanity/types';
+import { portableTextToPlainText, sanityProductToLocal } from '../lib/sanity/adapters';
+import ProductGrid from './ProductGrid.astro';
+import ExternalCheckoutNotice from './ExternalCheckoutNotice.astro';
+import NewsletterSignup from './NewsletterSignup.astro';
+import SanityImage from './SanityImage.astro';
+import SanityVideo from './SanityVideo.astro';
+
+interface Props {
+  sections: PageSection[];
+  page?: SanityPage;
+}
+const { sections, page } = Astro.props;
+const enabledSections = sections.filter((section) => section.enabled !== false);
+
+const hrefFor = (cta?: SanityCallToAction) =>
+  cta?.destination?.linkType === 'external'
+    ? cta.destination.externalUrl
+    : cta?.destination?.internalPath;
+const bodyText = (section: PageSection) =>
+  typeof section.body === 'string'
+    ? section.body
+    : portableTextToPlainText(section.body || section.content);
+const spacingClass = (section: PageSection) => `cms-spacing--${section.spacing || 'standard'}`;
+const themeClass = (section: PageSection) => `cms-theme--${section.theme || 'white'}`;
+---
+
+{
+  enabledSections.map((section) => {
+    const classes = [
+      'cms-section',
+      `cms-section--${section._type}`,
+      spacingClass(section),
+      themeClass(section),
+    ];
+    const primaryHref = hrefFor(section.primaryCallToAction || section.callToAction);
+    const secondaryHref = hrefFor(section.secondaryCallToAction);
+
+    if (section._type === 'heroSection') {
+      return (
+        <section class:list={[...classes, 'hero']} aria-labelledby={`section-${section._key}`}>
+          {section.media?.mediaType === 'video' && section.media.video ? (
+            <SanityVideo value={section.media.video} />
+          ) : section.media?.image ? (
+            <SanityImage value={section.media.image} priority />
+          ) : null}
+          <div class="hero-overlay" />
+          <div class="hero-content wrap">
+            {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+            <h1 id={`section-${section._key}`}>{section.heading}</h1>
+            {bodyText(section) && <p>{bodyText(section)}</p>}
+            <div class="button-row">
+              {primaryHref && (
+                <a class="button" href={primaryHref}>
+                  {(section.primaryCallToAction || section.callToAction)?.label}
+                </a>
+              )}
+              {secondaryHref && (
+                <a class="button button--secondary" href={secondaryHref}>
+                  {section.secondaryCallToAction?.label}
+                </a>
+              )}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    if (section._type === 'videoSection' && section.video) {
+      return (
+        <section class:list={classes} aria-labelledby={`section-${section._key}`}>
+          <div class="wrap cms-media-copy">
+            <SanityVideo value={section.video} />
+            <div>
+              {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+              {section.heading && <h2 id={`section-${section._key}`}>{section.heading}</h2>}
+              {bodyText(section) && <p>{bodyText(section)}</p>}
+              {primaryHref && (
+                <a class="button" href={primaryHref}>
+                  {section.callToAction?.label}
+                </a>
+              )}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    if (section._type === 'imageTextSection' && section.media) {
+      return (
+        <section class:list={[...classes, `cms-layout--${section.layout || 'mediaLeft'}`]}>
+          <div class="wrap cms-media-copy">
+            <div class="cms-media">
+              {section.media.mediaType === 'video' && section.media.video ? (
+                <SanityVideo value={section.media.video} />
+              ) : (
+                section.media.image && <SanityImage value={section.media.image} />
+              )}
+            </div>
+            <div class="prose">
+              {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+              <h2>{section.heading}</h2>
+              {bodyText(section)
+                .split('\n\n')
+                .map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
+              {primaryHref && (
+                <a class="button" href={primaryHref}>
+                  {section.callToAction?.label}
+                </a>
+              )}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    if (section._type === 'imageSection' && section.image) {
+      return (
+        <section class:list={classes}>
+          <div class:list={['wrap', `cms-image--${section.width || 'contained'}`]}>
+            {section.heading && <h2>{section.heading}</h2>}
+            <SanityImage value={section.image} />
+          </div>
+        </section>
+      );
+    }
+
+    if (section._type === 'fullWidthMediaSection' && section.media) {
+      return (
+        <section class:list={classes}>
+          {section.media.mediaType === 'video' && section.media.video ? (
+            <SanityVideo value={section.media.video} />
+          ) : (
+            section.media.image && <SanityImage value={section.media.image} sizes="100vw" />
+          )}
+          {section.heading && (
+            <div class="cms-overlay wrap">
+              <h2>{section.heading}</h2>
+              {bodyText(section) && <p>{bodyText(section)}</p>}
+            </div>
+          )}
+        </section>
+      );
+    }
+
+    if (section._type === 'splitMediaSection') {
+      const media = [section.leftMedia, section.rightMedia];
+      return (
+        <section class:list={classes}>
+          <div class="wrap cms-split-media">
+            {media.map((item) =>
+              item?.mediaType === 'video' && item.video ? (
+                <SanityVideo value={item.video} />
+              ) : (
+                item?.image && <SanityImage value={item.image} />
+              ),
+            )}
+          </div>
+        </section>
+      );
+    }
+
+    if (section._type === 'productGridSection') {
+      const products = (section.products || section.collection?.products || [])
+        .slice(0, section.limit || 42)
+        .map(sanityProductToLocal);
+      return (
+        <section class:list={classes}>
+          <div class="wrap">
+            {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+            <h2>{section.heading}</h2>
+            {bodyText(section) && <p>{bodyText(section)}</p>}
+            {section.showCheckoutNotice && <ExternalCheckoutNotice />}
+            {products.length ? (
+              <ProductGrid products={products} />
+            ) : (
+              <p>No published products are configured for this section.</p>
+            )}
+          </div>
+        </section>
+      );
+    }
+
+    if (section._type === 'collectionGridSection') {
+      return (
+        <section class:list={classes}>
+          <div class="wrap">
+            {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+            <h2>{section.heading}</h2>
+            <div class="collection-grid">
+              {(section.collections || []).map((collection) => (
+                <article class="collection-card">
+                  <a href={`/collections/${collection.slug}`}>
+                    <div class="collection-art">
+                      {collection.heroImage && <SanityImage value={collection.heroImage} />}
+                    </div>
+                    <div class="collection-copy">
+                      <h3>{collection.title}</h3>
+                      <span aria-hidden="true">→</span>
+                    </div>
+                  </a>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    if (section._type === 'imageGallerySection') {
+      return (
+        <section class:list={classes}>
+          <div class="wrap">
+            {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+            {section.heading && <h2>{section.heading}</h2>}
+            <div class:list={['cms-gallery', `cms-gallery--${section.variant || 'grid'}`]}>
+              {(section.images || []).map((image) => (
+                <figure>
+                  <SanityImage value={image} />
+                  {image.caption && <figcaption>{image.caption}</figcaption>}
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    if (section._type === 'campaignSection' && section.campaign) {
+      return (
+        <section class:list={classes}>
+          <div class="wrap cms-media-copy">
+            {section.campaign.heroImage && <SanityImage value={section.campaign.heroImage} />}
+            <div>
+              {section.heading && <h2>{section.heading}</h2>}
+              <p>{section.campaign.summary}</p>
+              {primaryHref && (
+                <a class="button" href={primaryHref}>
+                  {section.callToAction?.label}
+                </a>
+              )}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    if (section._type === 'editorialGridSection') {
+      return (
+        <section class:list={classes}>
+          <div class="wrap">
+            {section.heading && <h2>{section.heading}</h2>}
+            <div class="cms-gallery">
+              {(section.items || []).map((item) => (
+                <article>
+                  {item.image && <SanityImage value={item.image} />}
+                  {item.heading && <h3>{item.heading}</h3>}
+                  {item.copy && <p>{item.copy}</p>}
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    if (section._type === 'newsletterSection') {
+      return <NewsletterSignup />;
+    }
+
+    if (section._type === 'spacerSection') {
+      return <div class:list={classes} aria-hidden="true" />;
+    }
+
+    if (section._type === 'dividerSection') {
+      return (
+        <div
+          class:list={classes}
+          role={section.accessibleLabel ? 'separator' : undefined}
+          aria-label={section.accessibleLabel}
+        />
+      );
+    }
+
+    if (section._type === 'brandStatementSection' || section._type === 'callToActionSection') {
+      return (
+        <section class:list={[...classes, 'statement']}>
+          <div class="wrap">
+            {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+            <h2>{section.heading}</h2>
+            {bodyText(section) && <p>{bodyText(section)}</p>}
+            {primaryHref && (
+              <a class="button" href={primaryHref}>
+                {(section.primaryCallToAction || section.callToAction)?.label}
+              </a>
+            )}
+          </div>
+        </section>
+      );
+    }
+
+    if (section._type === 'sizeGuideSection') {
+      return (
+        <section class:list={classes}>
+          <div class="content-page wrap prose">
+            <h2>{section.heading}</h2>
+            {bodyText(section) && <p>{bodyText(section)}</p>}
+            {page?.sizeGuideImage && <SanityImage value={page.sizeGuideImage} />}
+            {page?.rows?.length && (
+              <table>
+                <thead>
+                  <tr>
+                    <th>Size</th>
+                    <th>Bust</th>
+                    <th>Waist</th>
+                    <th>Hips</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {page.rows.map((row) => (
+                    <tr>
+                      <th>{row.sizeName}</th>
+                      <td>{row.bust}</td>
+                      <td>{row.waist}</td>
+                      <td>{row.hips}</td>
+                      <td>{row.notes}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+            {portableTextToPlainText(page?.measurementInstructions)
+              .split('\n\n')
+              .filter(Boolean)
+              .map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+          </div>
+        </section>
+      );
+    }
+
+    if (section._type === 'richTextSection') {
+      return (
+        <section class:list={classes}>
+          <div class="content-page wrap prose">
+            {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+            {section.heading && <h2>{section.heading}</h2>}
+            {bodyText(section)
+              .split('\n\n')
+              .map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+          </div>
+        </section>
+      );
+    }
+
+    if (import.meta.env.DEV)
+      console.warn(`[Sanity] Unsupported page section type: ${section._type}`);
+    return null;
+  })
+}
