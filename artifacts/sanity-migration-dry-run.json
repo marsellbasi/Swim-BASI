@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-07-30T09:11:02.075Z",
+  "generatedAt": "2026-07-30T09:47:57.730Z",
   "mode": "dry-run",
   "phase": "all",
   "target": {
     "projectId": "xcfqfknc",
     "dataset": "production"
   },
-  "tokenAvailable": false,
+  "tokenAvailable": true,
   "assets": {
     "inventoryCount": 140,
     "imagesPlanned": 122,

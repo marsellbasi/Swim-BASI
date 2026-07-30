@@ -1,6 +1,15 @@
 # Sanity editorial review
 
-Generated: 2026-07-30T09:11:02.075Z
+Generated: 2026-07-30T10:08:05.232Z
+
+Remote migration verification: **passed**
+
+- 58 deterministic draft documents verified
+- 122 image assets and one video file asset verified
+- 393 references resolved
+- 0 migrated documents published
+- 0 duplicate exact-content assets
+- 0 orphaned mapped assets
 
 ## Owner review required
 
@@ -10,7 +19,7 @@ Generated: 2026-07-30T09:11:02.075Z
 - Product availability remains unasserted; Printful is the checkout source of truth.
 - Review migrated image alternative text before publication.
 - Image credits and campaign dates are unavailable and remain empty.
-- Confirm MP4 resolution with FFprobe before apply; FFprobe was unavailable locally.
+- The MP4 and poster references are valid; review playback visually before publication.
 - Policy and customer-care pages remain code-controlled because their copy is unfinished.
 - SEO values reproduce current source copy and still require editorial review.
 

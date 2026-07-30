@@ -1,10 +1,10 @@
 # Sanity migration dry run
 
-Generated: 2026-07-30T09:11:02.075Z
+Generated: 2026-07-30T09:47:57.730Z
 
 Target: `xcfqfknc/production`
 
-Write token available: **no**
+Write token available: **yes**
 
 No remote mutations were performed by this dry run.
 
@@ -47,4 +47,4 @@ Total planned draft documents: 58
 
 ## Safety decision
 
-Paused before remote mutation. Set `SANITY_API_WRITE_TOKEN` only in the local process environment, rerun validation, then explicitly run with `--apply`.
+The credential gate is available, but an apply still requires the explicit `--apply` flag.
