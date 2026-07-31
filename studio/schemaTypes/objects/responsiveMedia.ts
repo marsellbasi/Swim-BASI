@@ -1,75 +1,78 @@
-import { defineField, defineType } from 'sanity';
+import { defineField, defineType } from "sanity";
 
 export const responsiveMedia = defineType({
-  name: 'responsiveMedia',
-  title: 'Responsive media',
-  type: 'object',
+  name: "responsiveMedia",
+  title: "Responsive media",
+  type: "object",
   fields: [
     defineField({
-      name: 'mediaType',
-      title: 'Media type',
-      type: 'string',
+      name: "mediaType",
+      title: "Media type",
+      type: "string",
       options: {
-        layout: 'radio',
+        layout: "radio",
         list: [
-          { title: 'Image', value: 'image' },
-          { title: 'Video', value: 'video' },
+          { title: "Image", value: "image" },
+          { title: "Video", value: "video" },
         ],
       },
-      initialValue: 'image',
+      initialValue: "image",
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'image',
-      title: 'Image',
-      type: 'managedImage',
-      hidden: ({ parent }) => parent?.mediaType !== 'image',
+      name: "image",
+      title: "Image",
+      type: "managedImage",
+      hidden: ({ parent }) => parent?.mediaType !== "image",
       validation: (rule) =>
         rule.custom((value, context) =>
-          (context.parent as { mediaType?: string })?.mediaType !== 'image' || value
+          (context.parent as { mediaType?: string })?.mediaType !== "image" ||
+          value
             ? true
-            : 'Choose an image.',
+            : "Choose an image.",
         ),
     }),
     defineField({
-      name: 'video',
-      title: 'Video',
-      type: 'managedVideo',
-      hidden: ({ parent }) => parent?.mediaType !== 'video',
+      name: "video",
+      title: "Video",
+      type: "managedVideo",
+      hidden: ({ parent }) => parent?.mediaType !== "video",
       validation: (rule) =>
         rule.custom((value, context) =>
-          (context.parent as { mediaType?: string })?.mediaType !== 'video' || value
+          (context.parent as { mediaType?: string })?.mediaType !== "video" ||
+          value
             ? true
-            : 'Choose a video.',
+            : "Choose a video.",
         ),
     }),
     defineField({
-      name: 'fit',
-      title: 'Media fit',
-      type: 'string',
+      name: "fit",
+      title: "Media fit",
+      type: "string",
       options: {
         list: [
-          { title: 'Cover', value: 'cover' },
-          { title: 'Contain', value: 'contain' },
-          { title: 'Natural dimensions', value: 'natural' },
+          { title: "Cover", value: "cover" },
+          { title: "Contain", value: "contain" },
+          { title: "Natural dimensions", value: "natural" },
         ],
       },
-      initialValue: 'cover',
+      initialValue: "cover",
       validation: (rule) => rule.required(),
     }),
   ],
   preview: {
     select: {
-      mediaType: 'mediaType',
-      imageTitle: 'image.internalLabel',
-      videoTitle: 'video.internalLabel',
-      image: 'image.image',
-      poster: 'video.poster.image',
+      mediaType: "mediaType",
+      imageTitle: "image.internalLabel",
+      videoTitle: "video.internalLabel",
+      image: "image.image",
+      poster: "video.poster.image",
     },
     prepare: ({ mediaType, imageTitle, videoTitle, image, poster }) => ({
-      title: mediaType === 'video' ? videoTitle || 'Video' : imageTitle || 'Image',
-      subtitle: mediaType === 'video' ? 'Video' : 'Image',
-      media: mediaType === 'video' ? poster : image,
+      title:
+        mediaType === "video" ? videoTitle || "Video" : imageTitle || "Image",
+      subtitle: mediaType === "video" ? "Video" : "Image",
+      media: mediaType === "video" ? poster : image,
     }),
   },
 });

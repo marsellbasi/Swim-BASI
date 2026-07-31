@@ -1,0 +1,185 @@
+{
+  "generatedAt": "2026-07-31T07:17:51.229Z",
+  "mode": "apply",
+  "target": {
+    "projectId": "xcfqfknc",
+    "dataset": "production"
+  },
+  "method": "@sanity/client Actions API (sanity.action.document.publish)",
+  "approvedDocuments": 58,
+  "existingApprovedDocumentsUpdated": 9,
+  "unrelatedDraftsPreserved": 0,
+  "publishedDocuments": 58,
+  "remainingApprovedDrafts": 0,
+  "countsByType": {
+    "aboutPage": 1,
+    "announcementBar": 1,
+    "brandFilm": 1,
+    "collectionsPage": 1,
+    "footerNavigation": 1,
+    "headerNavigation": 1,
+    "homepage": 1,
+    "product": 42,
+    "productCategory": 3,
+    "productCollection": 3,
+    "shopPage": 1,
+    "siteSettings": 1,
+    "sizeGuide": 1
+  },
+  "phases": [
+    {
+      "phase": "site-settings",
+      "documents": 1,
+      "dryRun": false,
+      "transactionId": "X75gSGSSGXPOWtNjik5Hn3",
+      "verified": true,
+      "published": 1,
+      "remainingDrafts": 0
+    },
+    {
+      "phase": "product-categories",
+      "documents": 3,
+      "dryRun": false,
+      "transactionId": "X75gSGSSGXPOWtNjik5IdJ",
+      "verified": true,
+      "published": 3,
+      "remainingDrafts": 0
+    },
+    {
+      "phase": "product-collections",
+      "documents": 3,
+      "dryRun": false,
+      "transactionId": "UmzmbFJD6YRkrHfroicpBn",
+      "verified": true,
+      "published": 3,
+      "remainingDrafts": 0
+    },
+    {
+      "phase": "products-1",
+      "documents": 10,
+      "dryRun": false,
+      "transactionId": "X75gSGSSGXPOWtNjik5KP3",
+      "verified": true,
+      "published": 10,
+      "remainingDrafts": 0
+    },
+    {
+      "phase": "products-2",
+      "documents": 10,
+      "dryRun": false,
+      "transactionId": "UmzmbFJD6YRkrHfroicrCR",
+      "verified": true,
+      "published": 10,
+      "remainingDrafts": 0
+    },
+    {
+      "phase": "products-3",
+      "documents": 10,
+      "dryRun": false,
+      "transactionId": "X75gSGSSGXPOWtNjik5NRB",
+      "verified": true,
+      "published": 10,
+      "remainingDrafts": 0
+    },
+    {
+      "phase": "products-4",
+      "documents": 10,
+      "dryRun": false,
+      "transactionId": "UmzmbFJD6YRkrHfroicv3L",
+      "verified": true,
+      "published": 10,
+      "remainingDrafts": 0
+    },
+    {
+      "phase": "products-5",
+      "documents": 2,
+      "dryRun": false,
+      "transactionId": "UmzmbFJD6YRkrHfroicxZ9",
+      "verified": true,
+      "published": 2,
+      "remainingDrafts": 0
+    },
+    {
+      "phase": "header-navigation",
+      "documents": 1,
+      "dryRun": false,
+      "transactionId": "UmzmbFJD6YRkrHfroicy9V",
+      "verified": true,
+      "published": 1,
+      "remainingDrafts": 0
+    },
+    {
+      "phase": "footer-navigation",
+      "documents": 1,
+      "dryRun": false,
+      "transactionId": "UmzmbFJD6YRkrHfroicyef",
+      "verified": true,
+      "published": 1,
+      "remainingDrafts": 0
+    },
+    {
+      "phase": "announcement-bar",
+      "documents": 1,
+      "dryRun": false,
+      "transactionId": "UmzmbFJD6YRkrHfroicz4d",
+      "verified": true,
+      "published": 1,
+      "remainingDrafts": 0
+    },
+    {
+      "phase": "about-page",
+      "documents": 1,
+      "dryRun": false,
+      "transactionId": "yJ3gMV6IX6dsI5jav5RSRM",
+      "verified": true,
+      "published": 1,
+      "remainingDrafts": 0
+    },
+    {
+      "phase": "shop-page",
+      "documents": 1,
+      "dryRun": false,
+      "transactionId": "yJ3gMV6IX6dsI5jav5RSoB",
+      "verified": true,
+      "published": 1,
+      "remainingDrafts": 0
+    },
+    {
+      "phase": "collections-page",
+      "documents": 1,
+      "dryRun": false,
+      "transactionId": "yJ3gMV6IX6dsI5jav5RT6R",
+      "verified": true,
+      "published": 1,
+      "remainingDrafts": 0
+    },
+    {
+      "phase": "size-guide",
+      "documents": 1,
+      "dryRun": false,
+      "transactionId": "yJ3gMV6IX6dsI5jav5RTOh",
+      "verified": true,
+      "published": 1,
+      "remainingDrafts": 0
+    },
+    {
+      "phase": "brand-film",
+      "documents": 1,
+      "dryRun": false,
+      "transactionId": "UmzmbFJD6YRkrHfroiczuZ",
+      "verified": true,
+      "published": 1,
+      "remainingDrafts": 0
+    },
+    {
+      "phase": "homepage",
+      "documents": 1,
+      "dryRun": false,
+      "transactionId": "X75gSGSSGXPOWtNjik5Qiz",
+      "verified": true,
+      "published": 1,
+      "remainingDrafts": 0
+    }
+  ],
+  "verified": true
+}

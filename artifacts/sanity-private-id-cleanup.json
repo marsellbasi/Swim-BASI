@@ -1,0 +1,112 @@
+{
+  "generatedAt": "2026-07-31T07:21:22.452Z",
+  "mode": "apply",
+  "target": {
+    "projectId": "xcfqfknc",
+    "dataset": "production"
+  },
+  "obsoleteDocumentsIdentified": 49,
+  "obsoleteDocumentsDeleted": 49,
+  "remainingObsoleteDocuments": 0,
+  "retainedCorrectedDocuments": 58,
+  "retainedAssets": 123,
+  "countsByType": {
+    "product": 42,
+    "productCategory": 3,
+    "productCollection": 3,
+    "brandFilm": 1
+  },
+  "obsoleteDocumentIds": [
+    "swim-basi.brandFilm.swim-basi-brand-film",
+    "swim-basi.product.basi-black-high-waisted-bikini",
+    "swim-basi.product.basi-black-one-piece-swimsuit",
+    "swim-basi.product.basi-black-string-bikini",
+    "swim-basi.product.basi-brink-pink-high-waisted-bikini",
+    "swim-basi.product.basi-brink-pink-one-piece-swimsuit",
+    "swim-basi.product.basi-brink-pink-string-bikini",
+    "swim-basi.product.basi-brown-high-waisted-bikini",
+    "swim-basi.product.basi-brown-one-piece-swimsuit",
+    "swim-basi.product.basi-brown-string-bikini",
+    "swim-basi.product.basi-burgundy-high-waisted-bikini",
+    "swim-basi.product.basi-burgundy-one-piece-swimsuit",
+    "swim-basi.product.basi-burgundy-string-bikini",
+    "swim-basi.product.basi-classic-high-waisted-bikini",
+    "swim-basi.product.basi-classic-one-piece-swimsuit",
+    "swim-basi.product.basi-classic-string-bikini",
+    "swim-basi.product.basi-cotton-candy-high-waisted-bikini",
+    "swim-basi.product.basi-cotton-candy-one-piece-swimsuit",
+    "swim-basi.product.basi-cotton-candy-string-bikini",
+    "swim-basi.product.basi-eastern-blue-high-waisted-bikini",
+    "swim-basi.product.basi-eastern-blue-one-piece-swimsuit",
+    "swim-basi.product.basi-eastern-blue-string-bikini",
+    "swim-basi.product.basi-forest-green-high-waisted-bikini",
+    "swim-basi.product.basi-forest-green-one-piece-swimsuit",
+    "swim-basi.product.basi-forest-green-string-bikini",
+    "swim-basi.product.basi-grey-high-waisted-bikini",
+    "swim-basi.product.basi-grey-one-piece-swimsuit",
+    "swim-basi.product.basi-grey-string-bikini",
+    "swim-basi.product.basi-mona-lisa-high-waisted-bikini",
+    "swim-basi.product.basi-mona-lisa-one-piece-swimsuit",
+    "swim-basi.product.basi-mona-lisa-string-bikini",
+    "swim-basi.product.basi-orange-high-waisted-bikini",
+    "swim-basi.product.basi-orange-one-piece-swimsuit",
+    "swim-basi.product.basi-orange-string-bikini",
+    "swim-basi.product.basi-red-high-waisted-bikini",
+    "swim-basi.product.basi-red-one-piece-swimsuit",
+    "swim-basi.product.basi-red-string-bikini",
+    "swim-basi.product.basi-red-violet-high-waisted-bikini",
+    "swim-basi.product.basi-red-violet-one-piece-swimsuit",
+    "swim-basi.product.basi-red-violet-string-bikini",
+    "swim-basi.product.basi-yellow-high-waisted-bikini",
+    "swim-basi.product.basi-yellow-one-piece-swimsuit",
+    "swim-basi.product.basi-yellow-string-bikini",
+    "swim-basi.productCategory.high-waisted-bikinis",
+    "swim-basi.productCategory.one-piece",
+    "swim-basi.productCategory.string-bikinis",
+    "swim-basi.productCollection.high-waisted-bikinis",
+    "swim-basi.productCollection.one-piece",
+    "swim-basi.productCollection.string-bikinis"
+  ],
+  "safetyChecks": {
+    "targetCorrect": true,
+    "exactlyExpectedPrivateDocuments": true,
+    "correctedDocumentsComplete": true,
+    "correctedReferencesClear": true,
+    "draftReferencesClear": true,
+    "assetsComplete": true,
+    "publicSafeIdsContainNoPeriods": true
+  },
+  "batches": [
+    {
+      "batch": 1,
+      "documents": 10,
+      "transactionId": "yJ3gMV6IX6dsI5jav5RhEp",
+      "verified": true
+    },
+    {
+      "batch": 2,
+      "documents": 10,
+      "transactionId": "UmzmbFJD6YRkrHfroidFUZ",
+      "verified": true
+    },
+    {
+      "batch": 3,
+      "documents": 10,
+      "transactionId": "UmzmbFJD6YRkrHfroidGUt",
+      "verified": true
+    },
+    {
+      "batch": 4,
+      "documents": 10,
+      "transactionId": "UmzmbFJD6YRkrHfroidHVD",
+      "verified": true
+    },
+    {
+      "batch": 5,
+      "documents": 9,
+      "transactionId": "yJ3gMV6IX6dsI5jav5RirF",
+      "verified": true
+    }
+  ],
+  "verified": true
+}

@@ -1,143 +1,42 @@
 {
-  "generatedAt": "2026-07-30T10:08:44.669Z",
-  "verified": true,
+  "generatedAt": "2026-07-31T07:02:27.035Z",
+  "mode": "apply",
+  "phase": "pages",
   "target": {
     "projectId": "xcfqfknc",
     "dataset": "production"
   },
-  "counts": {
-    "expectedDocuments": 58,
-    "remoteDraftDocuments": 58,
+  "tokenAvailable": true,
+  "assets": {
+    "inventoryCount": 140,
+    "imagesPlanned": 122,
+    "videosPlanned": 1,
+    "skippedDerivatives": 16,
+    "codeControlled": 1,
+    "duplicateGroups": 0,
+    "projectedBytes": 23372772,
+    "uploaded": 0,
+    "reused": 0
+  },
+  "documents": {
+    "total": 6,
     "byType": {
       "aboutPage": 1,
-      "announcementBar": 1,
       "brandFilm": 1,
       "collectionsPage": 1,
-      "footerNavigation": 1,
-      "headerNavigation": 1,
       "homepage": 1,
-      "product": 42,
-      "productCategory": 3,
-      "productCollection": 3,
       "shopPage": 1,
-      "siteSettings": 1,
       "sizeGuide": 1
     },
-    "expectedByType": {
-      "aboutPage": 1,
-      "announcementBar": 1,
-      "brandFilm": 1,
-      "collectionsPage": 1,
-      "footerNavigation": 1,
-      "headerNavigation": 1,
-      "homepage": 1,
-      "product": 42,
-      "productCategory": 3,
-      "productCollection": 3,
-      "shopPage": 1,
-      "siteSettings": 1,
-      "sizeGuide": 1
-    },
-    "publishedMigratedDocuments": 0,
-    "mappedAssets": 123,
-    "imageAssets": 122,
-    "fileAssets": 1,
-    "skippedDerivatives": 16,
-    "duplicateExactAssets": 0,
-    "resolvedReferences": 393,
-    "totalReferences": 393,
-    "managedImages": 169,
-    "managedVideos": 2,
-    "seoDocuments": 50,
-    "orphanedMappedAssets": 0
-  },
-  "homepageSectionOrder": [
-    {
-      "key": "brandfilm",
-      "type": "videoSection",
-      "enabled": true
-    },
-    {
-      "key": "mainhero",
-      "type": "heroSection",
-      "enabled": true
-    },
-    {
-      "key": "silhouettes",
-      "type": "collectionGridSection",
-      "enabled": true
-    },
-    {
-      "key": "colorfocus",
-      "type": "productGridSection",
-      "enabled": true
-    },
-    {
-      "key": "statement",
-      "type": "brandStatementSection",
-      "enabled": true
-    },
-    {
-      "key": "campaign",
-      "type": "imageTextSection",
-      "enabled": true
-    },
-    {
-      "key": "instagram",
-      "type": "editorialGridSection",
-      "enabled": true
-    },
-    {
-      "key": "newsletter",
-      "type": "newsletterSection",
-      "enabled": true
-    }
-  ],
-  "brandFilm": {
-    "found": true,
-    "videoAssetId": "file-e604cb559cf0f6ec9fa5594be149810f39b29df4-mp4",
-    "posterAssetId": "image-efe1200c89bb8687c8a0436805b95f6f0d576311-720x1280-webp",
-    "videoValid": true,
-    "posterValid": true
+    "written": 6,
+    "created": 6,
+    "updated": 0,
+    "unchanged": 0
   },
   "findings": {
     "missingCaptions": 1,
     "missingTranscripts": 1,
     "productsWithoutSizes": 42,
     "sizeGuideRowsMissing": 1
-  },
-  "checks": {
-    "allDocumentsFound": true,
-    "noUnexpectedDrafts": true,
-    "noMigratedDocumentsPublished": true,
-    "allAssetsFound": true,
-    "documentsMatchPlan": true,
-    "referencesResolve": true,
-    "managedImagesValid": true,
-    "managedVideosValid": true,
-    "productsValid": true,
-    "collectionsValid": true,
-    "sectionOrderValid": true,
-    "brandFilmValid": true,
-    "sourceCoverageValid": true,
-    "noDuplicateExactAssets": true,
-    "noOrphanedMappedAssets": true
-  },
-  "errors": {
-    "missingDocuments": [],
-    "unexpectedDrafts": [],
-    "publishedMigratedDocuments": [],
-    "missingAssets": [],
-    "mismatchedDocuments": [],
-    "unresolvedReferences": [],
-    "invalidManagedImages": [],
-    "invalidManagedVideos": [],
-    "productIntegrityErrors": [],
-    "collectionIntegrityErrors": [],
-    "sectionOrderErrors": [],
-    "unmappedPlannedSources": [],
-    "missingLocalSources": [],
-    "skippedSourcesWithoutReason": [],
-    "orphanedMappedAssets": []
   }
 }

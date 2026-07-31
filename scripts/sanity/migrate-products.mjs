@@ -1,2 +1,2 @@
-import { runMigration } from './lib/runner.mjs';
-await runMigration({ phase: 'products' });
+import { runMigration } from "./lib/runner.mjs";
+await runMigration({ phase: "products" });

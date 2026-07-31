@@ -8,7 +8,7 @@ export interface SanityAsset {
 }
 
 export interface SanityImageValue {
-  _type?: 'image';
+  _type?: "image";
   asset?: SanityAsset | { _ref?: string };
   crop?: { top: number; bottom: number; left: number; right: number };
   hotspot?: { x: number; y: number; width: number; height: number };
@@ -22,13 +22,13 @@ export interface ManagedImage {
   alt?: string;
   caption?: string;
   credit?: string;
-  loading?: 'lazy' | 'eager';
+  loading?: "lazy" | "eager";
   link?: SanityLink;
 }
 
 export interface ManagedVideo {
   internalLabel?: string;
-  sourceType?: 'upload' | 'external';
+  sourceType?: "upload" | "external";
   uploadedVideo?: { asset?: SanityAsset };
   mobileVideo?: { asset?: SanityAsset };
   externalVideoUrl?: string;
@@ -43,11 +43,11 @@ export interface ManagedVideo {
   loop?: boolean;
   controls?: boolean;
   playsInline?: boolean;
-  preload?: 'none' | 'metadata' | 'auto';
+  preload?: "none" | "metadata" | "auto";
 }
 
 export interface SanityLink {
-  linkType?: 'internal' | 'external';
+  linkType?: "internal" | "external";
   internalPath?: string;
   externalUrl?: string;
   openInNewTab?: boolean;
@@ -56,7 +56,7 @@ export interface SanityLink {
 export interface SanityCallToAction {
   label?: string;
   destination?: SanityLink;
-  style?: 'primary' | 'secondary' | 'text';
+  style?: "primary" | "secondary" | "text";
 }
 
 export interface PortableTextBlock {
@@ -77,12 +77,12 @@ export interface SeoValue {
   twitterTitle?: string;
   twitterDescription?: string;
   twitterImage?: ManagedImage;
-  socialCardType?: 'summary' | 'summary_large_image';
+  socialCardType?: "summary" | "summary_large_image";
   breadcrumbLabel?: string;
   includeInSitemap?: boolean;
   sitemapPriority?: string;
   sitemapChangeFrequency?: string;
-  structuredDataType?: 'WebPage' | 'CollectionPage' | 'AboutPage' | 'Product';
+  structuredDataType?: "WebPage" | "CollectionPage" | "AboutPage" | "Product";
 }
 
 export interface SiteSettings {
@@ -115,15 +115,23 @@ export interface PageSection {
   body?: string | PortableTextBlock[];
   content?: PortableTextBlock[];
   media?: {
-    mediaType?: 'image' | 'video';
+    mediaType?: "image" | "video";
     image?: ManagedImage;
     video?: ManagedVideo;
     fit?: string;
   };
   image?: ManagedImage;
   video?: ManagedVideo;
-  leftMedia?: { mediaType?: 'image' | 'video'; image?: ManagedImage; video?: ManagedVideo };
-  rightMedia?: { mediaType?: 'image' | 'video'; image?: ManagedImage; video?: ManagedVideo };
+  leftMedia?: {
+    mediaType?: "image" | "video";
+    image?: ManagedImage;
+    video?: ManagedVideo;
+  };
+  rightMedia?: {
+    mediaType?: "image" | "video";
+    image?: ManagedImage;
+    video?: ManagedVideo;
+  };
   images?: ManagedImage[];
   items?: Array<{
     _key?: string;
@@ -146,7 +154,12 @@ export interface PageSection {
   collections?: SanityCollection[];
   limit?: number;
   showCheckoutNotice?: boolean;
-  campaign?: { title?: string; summary?: string; heroImage?: ManagedImage; slug?: string };
+  campaign?: {
+    title?: string;
+    summary?: string;
+    heroImage?: ManagedImage;
+    slug?: string;
+  };
   emailLabel?: string;
   buttonLabel?: string;
   style?: string;
@@ -161,7 +174,7 @@ export interface SanityPage {
   slug?: string;
   sections?: PageSection[];
   seo?: SeoValue;
-  measurementUnit?: 'inches' | 'centimeters';
+  measurementUnit?: "inches" | "centimeters";
   rows?: Array<{
     _key?: string;
     sizeName?: string;

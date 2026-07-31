@@ -1,40 +1,50 @@
-import { defineField, defineType } from 'sanity';
-import { pageSectionMembers } from '../objects/pageSections';
+import { defineField, defineType } from "sanity";
+import { pageSectionMembers } from "../objects/pageSections";
 
 export const shopPage = defineType({
-  name: 'shopPage',
-  title: 'Shop landing page',
-  type: 'document',
+  name: "shopPage",
+  title: "Shop landing page",
+  type: "document",
   fields: [
     defineField({
-      name: 'internalTitle',
-      title: 'Internal title',
-      type: 'string',
-      initialValue: 'Shop Landing Page',
+      name: "internalTitle",
+      title: "Internal title",
+      type: "string",
+      initialValue: "Shop Landing Page",
       validation: (rule) => rule.required().max(80),
     }),
-    defineField({ name: 'enabled', title: 'Enabled', type: 'boolean', initialValue: true }),
     defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      initialValue: { current: 'shop' },
+      name: "enabled",
+      title: "Enabled",
+      type: "boolean",
+      initialValue: true,
+    }),
+    defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      initialValue: { current: "shop" },
       readOnly: true,
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'sections',
-      title: 'Ordered page sections',
-      type: 'array',
+      name: "sections",
+      title: "Ordered page sections",
+      type: "array",
       of: pageSectionMembers,
       validation: (rule) => rule.required().min(1).max(30),
     }),
     defineField({
-      name: 'seo',
-      title: 'Search and social',
-      type: 'seo',
+      name: "seo",
+      title: "Search and social",
+      type: "seo",
       validation: (rule) => rule.required(),
     }),
   ],
-  preview: { prepare: () => ({ title: 'Shop Landing Page', subtitle: 'Catalog page builder' }) },
+  preview: {
+    prepare: () => ({
+      title: "Shop Landing Page",
+      subtitle: "Catalog page builder",
+    }),
+  },
 });
