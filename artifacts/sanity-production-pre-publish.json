@@ -1,0 +1,67 @@
+{
+  "generatedAt": "2026-07-31T07:15:52.215Z",
+  "mode": "pre-publish",
+  "target": {
+    "projectId": "xcfqfknc",
+    "dataset": "production"
+  },
+  "verified": true,
+  "counts": {
+    "documents": 58,
+    "products": 42,
+    "categories": 3,
+    "collections": 3,
+    "assets": 123,
+    "references": 393,
+    "managedImages": 169,
+    "managedVideos": 2,
+    "seoDocuments": 50
+  },
+  "homepageOrder": [
+    "brandfilm",
+    "mainhero",
+    "silhouettes",
+    "colorfocus",
+    "statement",
+    "campaign",
+    "instagram",
+    "newsletter"
+  ],
+  "checks": {
+    "targetCorrect": true,
+    "expectedDocumentCount": true,
+    "allExpectedIdsFound": true,
+    "noUnexpectedIds": true,
+    "assetsComplete": true,
+    "referencesResolve": true,
+    "productsComplete": true,
+    "productsActive": true,
+    "productSlugsUnique": true,
+    "printfulUrlsComplete": true,
+    "categoriesComplete": true,
+    "collectionsComplete": true,
+    "singletonDocumentsComplete": true,
+    "homepageOrderValid": true,
+    "managedImagesValid": true,
+    "managedVideosValid": true,
+    "seoValid": true,
+    "builtShopUsesSanity": true
+  },
+  "errors": {
+    "missingExpectedIds": [],
+    "unresolvedReferences": [],
+    "inactiveProducts": [],
+    "duplicateProductSlugs": [],
+    "productsMissingPrintfulUrl": [],
+    "collectionErrors": [],
+    "missingSingletonTypes": [],
+    "invalidImages": [],
+    "invalidVideos": [],
+    "invalidSeoDocuments": []
+  },
+  "distChecks": {
+    "checked": false,
+    "shopUsesSanityCdn": null,
+    "shopAvoidsLocalProductImages": null
+  }
+}

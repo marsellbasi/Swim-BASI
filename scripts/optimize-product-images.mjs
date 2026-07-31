@@ -1,33 +1,42 @@
 /* global Buffer, console, process */
-import { promises as fs } from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import sharp from 'sharp';
-import { productImageMappings, sourceViewAliases } from './product-image-mapping.mjs';
+import { promises as fs } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import sharp from "sharp";
+import {
+  productImageMappings,
+  sourceViewAliases,
+} from "./product-image-mapping.mjs";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
-const projectRoot = path.resolve(scriptDirectory, '..');
-const sourceRoot = path.join(projectRoot, 'Swim Mockups');
-const publicRoot = path.join(projectRoot, 'public');
-const outputRoot = path.join(publicRoot, 'images', 'products');
-const manifestPath = path.join(projectRoot, 'src', 'data', 'product-image-manifest.json');
+const projectRoot = path.resolve(scriptDirectory, "..");
+const sourceRoot = path.join(projectRoot, "Swim Mockups");
+const publicRoot = path.join(projectRoot, "public");
+const outputRoot = path.join(publicRoot, "images", "products");
+const manifestPath = path.join(
+  projectRoot,
+  "src",
+  "data",
+  "product-image-manifest.json",
+);
 const outputSize = 1200;
-const supportedViews = ['front', 'back', 'left', 'right'];
+const supportedViews = ["front", "back", "left", "right"];
 
-const toPosixPath = (value) => value.split(path.sep).join('/');
+const toPosixPath = (value) => value.split(path.sep).join("/");
 const viewLabel = (view) => {
-  if (view === 'left') return 'Left-side';
-  if (view === 'right') return 'Right-side';
+  if (view === "left") return "Left-side";
+  if (view === "right") return "Right-side";
   return view[0].toUpperCase() + view.slice(1);
 };
-const assetAlt = (productName, view) => `${viewLabel(view)} view of the ${productName}`;
+const assetAlt = (productName, view) =>
+  `${viewLabel(view)} view of the ${productName}`;
 
 const writeIfChanged = async (filePath, contents) => {
   try {
     const current = await fs.readFile(filePath);
     if (current.equals(contents)) return false;
   } catch (error) {
-    if (error.code !== 'ENOENT') throw error;
+    if (error.code !== "ENOENT") throw error;
   }
   await fs.mkdir(path.dirname(filePath), { recursive: true });
   await fs.writeFile(filePath, contents);
@@ -48,24 +57,30 @@ const validateMappings = (sourceFolders) => {
       throw new Error(`Duplicate product mapping: ${mapping.productSlug}`);
     }
     if (mappedFolders.has(mapping.sourceFolder)) {
-      throw new Error(`Source folder mapped more than once: ${mapping.sourceFolder}`);
+      throw new Error(
+        `Source folder mapped more than once: ${mapping.sourceFolder}`,
+      );
     }
     if (!sourceFolders.includes(mapping.sourceFolder)) {
-      throw new Error(`Mapped source folder does not exist: ${mapping.sourceFolder}`);
+      throw new Error(
+        `Mapped source folder does not exist: ${mapping.sourceFolder}`,
+      );
     }
     productSlugs.add(mapping.productSlug);
     mappedFolders.add(mapping.sourceFolder);
   }
   return {
-    unmatchedSourceFolders: sourceFolders.filter((folder) => !mappedFolders.has(folder)),
+    unmatchedSourceFolders: sourceFolders.filter(
+      (folder) => !mappedFolders.has(folder),
+    ),
   };
 };
 
 const inspectSourceFolder = async (folderName) => {
   const folderPath = path.join(sourceRoot, folderName);
-  const entries = (await fs.readdir(folderPath, { withFileTypes: true })).filter((entry) =>
-    entry.isFile(),
-  );
+  const entries = (
+    await fs.readdir(folderPath, { withFileTypes: true })
+  ).filter((entry) => entry.isFile());
   const views = new Map();
   const unexpectedFiles = [];
   for (const entry of entries) {
@@ -74,21 +89,26 @@ const inspectSourceFolder = async (folderName) => {
     const extension = path.extname(entry.name).toLowerCase();
     const baseName = path.basename(entry.name, extension).toLowerCase();
     const view = alias ?? baseName;
-    if (extension !== '.png' || !supportedViews.includes(view)) {
+    if (extension !== ".png" || !supportedViews.includes(view)) {
       unexpectedFiles.push(relativeSource);
       continue;
     }
-    if (views.has(view)) throw new Error(`Duplicate ${view} view in ${folderName}`);
+    if (views.has(view))
+      throw new Error(`Duplicate ${view} view in ${folderName}`);
     const sourcePath = path.join(folderPath, entry.name);
     const sourceStat = await fs.stat(sourcePath);
-    const metadata = await sharp(sourcePath, { failOn: 'error' }).metadata();
-    const stats = await sharp(sourcePath, { failOn: 'error' }).stats();
+    const metadata = await sharp(sourcePath, { failOn: "error" }).metadata();
+    const stats = await sharp(sourcePath, { failOn: "error" }).stats();
     const alpha = metadata.hasAlpha ? stats.channels.at(-1) : null;
-    if (metadata.format !== 'png' || !metadata.width || !metadata.height) {
-      throw new Error(`Unreadable or unsupported source image: ${relativeSource}`);
+    if (metadata.format !== "png" || !metadata.width || !metadata.height) {
+      throw new Error(
+        `Unreadable or unsupported source image: ${relativeSource}`,
+      );
     }
     if (!metadata.hasAlpha || alpha?.min === 255) {
-      throw new Error(`Source image does not contain transparency: ${relativeSource}`);
+      throw new Error(
+        `Source image does not contain transparency: ${relativeSource}`,
+      );
     }
     views.set(view, {
       sourcePath,
@@ -100,13 +120,17 @@ const inspectSourceFolder = async (folderName) => {
 };
 
 const optimizeView = async (mapping, view, source) => {
-  const outputDirectory = path.join(outputRoot, mapping.category, mapping.productSlug);
+  const outputDirectory = path.join(
+    outputRoot,
+    mapping.category,
+    mapping.productSlug,
+  );
   const outputPath = path.join(outputDirectory, `${view}.webp`);
-  const buffer = await sharp(source.sourcePath, { failOn: 'error' })
+  const buffer = await sharp(source.sourcePath, { failOn: "error" })
     .resize({
       width: outputSize,
       height: outputSize,
-      fit: 'inside',
+      fit: "inside",
       withoutEnlargement: true,
       kernel: sharp.kernel.lanczos3,
     })
@@ -155,7 +179,7 @@ const main = async () => {
     );
   }
   if (unexpectedFiles.length > 0) {
-    throw new Error(`Unexpected source files:\n${unexpectedFiles.join('\n')}`);
+    throw new Error(`Unexpected source files:\n${unexpectedFiles.join("\n")}`);
   }
 
   const products = {};
@@ -165,8 +189,10 @@ const main = async () => {
   const normalizedSourceFiles = [];
   for (const mapping of productImageMappings) {
     const inspection = inspections.get(mapping.sourceFolder);
-    const availableViews = supportedViews.filter((view) => inspection.views.has(view));
-    if (!availableViews.includes('front')) {
+    const availableViews = supportedViews.filter((view) =>
+      inspection.views.has(view),
+    );
+    if (!availableViews.includes("front")) {
       throw new Error(`Front view is required for ${mapping.sourceFolder}`);
     }
     const assets = {};
@@ -181,13 +207,15 @@ const main = async () => {
         normalizedSourceFiles.push(`${mapping.sourceFolder}/leeft.png`);
     }
     const hoverView =
-      mapping.category === 'one-piece'
-        ? ['left', 'right', 'back'].find((view) => availableViews.includes(view))
-        : availableViews.find((view) => view === 'back');
+      mapping.category === "one-piece"
+        ? ["left", "right", "back"].find((view) =>
+            availableViews.includes(view),
+          )
+        : availableViews.find((view) => view === "back");
     products[mapping.productSlug] = {
       productSlug: mapping.productSlug,
       sourceFolder: mapping.sourceFolder,
-      mappingStatus: 'exact',
+      mappingStatus: "exact",
       primary: assets.front,
       hover: hoverView ? assets[hoverView] : null,
       gallery: availableViews.map((view) => assets[view]),
@@ -200,13 +228,13 @@ const main = async () => {
   );
   const manifest = {
     version: 1,
-    sourceDirectory: 'Swim Mockups',
-    outputDirectory: 'public/images/products',
+    sourceDirectory: "Swim Mockups",
+    outputDirectory: "public/images/products",
     optimization: {
-      format: 'webp',
+      format: "webp",
       width: outputSize,
       height: outputSize,
-      fit: 'inside',
+      fit: "inside",
       quality: 94,
       alphaQuality: 100,
     },
@@ -217,9 +245,13 @@ const main = async () => {
       productMappingCount: productImageMappings.length,
       optimizedImageCount,
       optimizedTotalBytes,
-      reductionPercent: Number((100 - (optimizedTotalBytes / rawTotalBytes) * 100).toFixed(2)),
+      reductionPercent: Number(
+        (100 - (optimizedTotalBytes / rawTotalBytes) * 100).toFixed(2),
+      ),
       largestOptimizedBytes: Math.max(...optimizedSizes),
-      averageOptimizedBytes: Math.round(optimizedTotalBytes / optimizedImageCount),
+      averageOptimizedBytes: Math.round(
+        optimizedTotalBytes / optimizedImageCount,
+      ),
       unmatchedSourceFolders,
       unmatchedProductSlugs: [],
       normalizedSourceFiles,
@@ -230,7 +262,9 @@ const main = async () => {
     },
     products,
   };
-  const manifestContents = Buffer.from(`${JSON.stringify(manifest, null, 2)}\n`);
+  const manifestContents = Buffer.from(
+    `${JSON.stringify(manifest, null, 2)}\n`,
+  );
   const manifestChanged = await writeIfChanged(manifestPath, manifestContents);
   console.log(
     `Mapped ${productImageMappings.length} products from ${sourceFolders.length} folders.`,
@@ -239,10 +273,12 @@ const main = async () => {
     `Optimized ${optimizedImageCount} of ${rawImageCount} source images (${manifest.audit.reductionPercent}% smaller).`,
   );
   console.log(
-    `${rewrittenImageCount} image files and ${manifestChanged ? 'the' : 'no'} manifest changed.`,
+    `${rewrittenImageCount} image files and ${manifestChanged ? "the" : "no"} manifest changed.`,
   );
   if (unmatchedSourceFolders.length > 0) {
-    console.log(`Unmatched source folders: ${unmatchedSourceFolders.join(', ')}`);
+    console.log(
+      `Unmatched source folders: ${unmatchedSourceFolders.join(", ")}`,
+    );
   }
 };
 

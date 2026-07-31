@@ -1,4 +1,4 @@
-import type { Product, ProductCategory } from '../data/products';
+import type { Product, ProductCategory } from "../data/products";
 
 export const sortProducts = (items: Product[]) =>
   [...items].sort((a, b) => a.sortOrder - b.sortOrder);

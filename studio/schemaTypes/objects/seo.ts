@@ -1,142 +1,158 @@
-import { defineField, defineType } from 'sanity';
-import { externalUrl } from '../helpers';
+import { defineField, defineType } from "sanity";
+import { externalUrl } from "../helpers";
 
 export const seo = defineType({
-  name: 'seo',
-  title: 'Search and social',
-  type: 'object',
+  name: "seo",
+  title: "Search and social",
+  type: "object",
   options: { collapsible: true, collapsed: false },
   fields: [
     defineField({
-      name: 'metaTitle',
-      title: 'SEO title',
-      type: 'string',
-      description: 'Page-specific search result title. Aim for 50–60 characters.',
+      name: "metaTitle",
+      title: "SEO title",
+      type: "string",
+      description:
+        "Page-specific search result title. Aim for 50–60 characters.",
       validation: (rule) =>
         rule
           .min(30)
-          .warning('SEO titles shorter than 30 characters may be less descriptive.')
+          .warning(
+            "SEO titles shorter than 30 characters may be less descriptive.",
+          )
           .max(65)
-          .warning('SEO titles longer than 65 characters may be truncated.'),
+          .warning("SEO titles longer than 65 characters may be truncated."),
     }),
     defineField({
-      name: 'metaDescription',
-      title: 'Meta description',
-      type: 'text',
+      name: "metaDescription",
+      title: "Meta description",
+      type: "text",
       rows: 3,
-      description: 'Page-specific search summary. Aim for 120–160 characters.',
+      description: "Page-specific search summary. Aim for 120–160 characters.",
       validation: (rule) =>
         rule
           .min(70)
-          .warning('Meta descriptions shorter than 70 characters may be less descriptive.')
+          .warning(
+            "Meta descriptions shorter than 70 characters may be less descriptive.",
+          )
           .max(170)
-          .warning('Meta descriptions longer than 170 characters may be truncated.'),
+          .warning(
+            "Meta descriptions longer than 170 characters may be truncated.",
+          ),
     }),
     defineField({
-      name: 'canonicalUrl',
-      title: 'Canonical URL override',
-      type: 'url',
+      name: "canonicalUrl",
+      title: "Canonical URL override",
+      type: "url",
       description:
-        'Usually leave blank. Use only when the canonical address differs from the generated route.',
+        "Usually leave blank. Use only when the canonical address differs from the generated route.",
       validation: externalUrl,
     }),
     defineField({
-      name: 'noIndex',
-      title: 'Exclude from search indexing',
-      type: 'boolean',
+      name: "noIndex",
+      title: "Exclude from search indexing",
+      type: "boolean",
       initialValue: false,
     }),
     defineField({
-      name: 'noFollow',
-      title: 'Ask crawlers not to follow links',
-      type: 'boolean',
+      name: "noFollow",
+      title: "Ask crawlers not to follow links",
+      type: "boolean",
       initialValue: false,
     }),
     defineField({
-      name: 'openGraphTitle',
-      title: 'Open Graph title',
-      type: 'string',
+      name: "openGraphTitle",
+      title: "Open Graph title",
+      type: "string",
       validation: (rule) => rule.max(95),
     }),
     defineField({
-      name: 'openGraphDescription',
-      title: 'Open Graph description',
-      type: 'text',
+      name: "openGraphDescription",
+      title: "Open Graph description",
+      type: "text",
       rows: 3,
       validation: (rule) => rule.max(200),
     }),
-    defineField({ name: 'openGraphImage', title: 'Open Graph image', type: 'managedImage' }),
     defineField({
-      name: 'twitterTitle',
-      title: 'Twitter/X title',
-      type: 'string',
+      name: "openGraphImage",
+      title: "Open Graph image",
+      type: "managedImage",
+    }),
+    defineField({
+      name: "twitterTitle",
+      title: "Twitter/X title",
+      type: "string",
       validation: (rule) => rule.max(70),
     }),
     defineField({
-      name: 'twitterDescription',
-      title: 'Twitter/X description',
-      type: 'text',
+      name: "twitterDescription",
+      title: "Twitter/X description",
+      type: "text",
       rows: 3,
       validation: (rule) => rule.max(200),
     }),
-    defineField({ name: 'twitterImage', title: 'Twitter/X image', type: 'managedImage' }),
     defineField({
-      name: 'socialCardType',
-      title: 'Social card type',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Large image', value: 'summary_large_image' },
-          { title: 'Compact summary', value: 'summary' },
-        ],
-      },
-      initialValue: 'summary_large_image',
+      name: "twitterImage",
+      title: "Twitter/X image",
+      type: "managedImage",
     }),
     defineField({
-      name: 'focusKeyword',
-      title: 'Focus keyword',
-      type: 'string',
-      description: 'Editorial planning only. This is not rendered as a meta keyword.',
+      name: "socialCardType",
+      title: "Social card type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Large image", value: "summary_large_image" },
+          { title: "Compact summary", value: "summary" },
+        ],
+      },
+      initialValue: "summary_large_image",
+    }),
+    defineField({
+      name: "focusKeyword",
+      title: "Focus keyword",
+      type: "string",
+      description:
+        "Editorial planning only. This is not rendered as a meta keyword.",
       validation: (rule) => rule.max(80),
     }),
     defineField({
-      name: 'breadcrumbLabel',
-      title: 'Breadcrumb label',
-      type: 'string',
+      name: "breadcrumbLabel",
+      title: "Breadcrumb label",
+      type: "string",
       validation: (rule) => rule.max(60),
     }),
     defineField({
-      name: 'includeInSitemap',
-      title: 'Include in sitemap',
-      type: 'boolean',
+      name: "includeInSitemap",
+      title: "Include in sitemap",
+      type: "boolean",
       initialValue: true,
     }),
     defineField({
-      name: 'sitemapPriority',
-      title: 'Sitemap priority',
-      type: 'string',
-      options: { list: ['0.3', '0.5', '0.7', '0.8', '1.0'] },
-      initialValue: '0.7',
+      name: "sitemapPriority",
+      title: "Sitemap priority",
+      type: "string",
+      options: { list: ["0.3", "0.5", "0.7", "0.8", "1.0"] },
+      initialValue: "0.7",
     }),
     defineField({
-      name: 'sitemapChangeFrequency',
-      title: 'Sitemap change frequency',
-      type: 'string',
-      options: { list: ['daily', 'weekly', 'monthly', 'yearly'] },
-      initialValue: 'monthly',
+      name: "sitemapChangeFrequency",
+      title: "Sitemap change frequency",
+      type: "string",
+      options: { list: ["daily", "weekly", "monthly", "yearly"] },
+      initialValue: "monthly",
     }),
     defineField({
-      name: 'structuredDataType',
-      title: 'Structured-data hint',
-      type: 'string',
+      name: "structuredDataType",
+      title: "Structured-data hint",
+      type: "string",
       description:
-        'Select a controlled schema type. Technical fields are generated by the storefront.',
+        "Select a controlled schema type. Technical fields are generated by the storefront.",
       options: {
         list: [
-          { title: 'Web page', value: 'WebPage' },
-          { title: 'Collection page', value: 'CollectionPage' },
-          { title: 'About page', value: 'AboutPage' },
-          { title: 'Product page', value: 'Product' },
+          { title: "Web page", value: "WebPage" },
+          { title: "Collection page", value: "CollectionPage" },
+          { title: "About page", value: "AboutPage" },
+          { title: "Product page", value: "Product" },
         ],
       },
     }),

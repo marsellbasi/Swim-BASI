@@ -15,23 +15,24 @@ interface HomepageFilmConfig {
   loop: boolean;
   controls: boolean;
   playsInline: boolean;
-  preload: 'none' | 'metadata' | 'auto';
+  preload: "none" | "metadata" | "auto";
 }
 
 export const homepageFilm: HomepageFilmConfig = {
   enabled: true,
-  videoSrc: '/videos/campaigns/swim-basi-brand-film.mp4',
-  poster: '/videos/campaigns/swim-basi-brand-film-poster.webp',
-  fallbackPoster: 'black-string-bikini-night-portrait',
-  title: 'Confidence, in motion.',
-  eyebrow: 'THE SWIM BASI FILM',
-  description: 'An introduction to the color, presence, and energy behind Swim BASI.',
-  status: 'PRESS PLAY. STEP INTO SWIM BASI.',
+  videoSrc: "/videos/campaigns/swim-basi-brand-film.mp4",
+  poster: "/videos/campaigns/swim-basi-brand-film-poster.webp",
+  fallbackPoster: "black-string-bikini-night-portrait",
+  title: "Confidence, in motion.",
+  eyebrow: "THE SWIM BASI FILM",
+  description:
+    "An introduction to the color, presence, and energy behind Swim BASI.",
+  status: "PRESS PLAY. STEP INTO SWIM BASI.",
   // Add captionsSrc and transcript only after the narration receives a reviewed accessibility pass.
   autoplay: false,
   muted: false,
   loop: false,
   controls: true,
   playsInline: true,
-  preload: 'metadata',
+  preload: "metadata",
 };

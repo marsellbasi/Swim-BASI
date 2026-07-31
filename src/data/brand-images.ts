@@ -1,4 +1,4 @@
-import manifestData from './brand-image-manifest.json';
+import manifestData from "./brand-image-manifest.json";
 
 export interface BrandImageVariant {
   src: string;
@@ -18,8 +18,8 @@ export interface BrandImage {
   intendedPlacements: string[];
   alt: string;
   focalPoint: { x: number; y: number; objectPosition: string };
-  loadingPriority: 'high' | 'lazy';
-  optimizationStatus: 'optimized';
+  loadingPriority: "high" | "lazy";
+  optimizationStatus: "optimized";
 }
 
 export const brandImages = manifestData.images as Record<string, BrandImage>;

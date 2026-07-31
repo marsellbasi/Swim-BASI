@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-30T09:47:57.730Z",
+  "generatedAt": "2026-07-31T07:01:10.716Z",
   "mode": "dry-run",
   "phase": "all",
   "target": {
@@ -16,7 +16,7 @@
     "duplicateGroups": 0,
     "projectedBytes": 23372772,
     "uploaded": 0,
-    "reused": 0
+    "reused": 123
   },
   "documents": {
     "total": 58,
@@ -35,7 +35,10 @@
       "siteSettings": 1,
       "sizeGuide": 1
     },
-    "written": 0
+    "written": 0,
+    "created": 0,
+    "updated": 0,
+    "unchanged": 0
   },
   "findings": {
     "missingCaptions": 1,

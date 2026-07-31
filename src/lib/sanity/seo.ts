@@ -1,5 +1,5 @@
-import type { ManagedImage, SeoValue, SiteSettings } from './types';
-import { urlForSanityImage } from './image';
+import type { ManagedImage, SeoValue, SiteSettings } from "./types";
+import { urlForSanityImage } from "./image";
 
 export interface ResolvedSeo {
   title: string;
@@ -12,7 +12,7 @@ export interface ResolvedSeo {
   openGraphDescription: string;
   twitterTitle: string;
   twitterDescription: string;
-  cardType: 'summary' | 'summary_large_image';
+  cardType: "summary" | "summary_large_image";
   noIndex: boolean;
   noFollow: boolean;
 }
@@ -22,8 +22,8 @@ const imageUrl = (image?: ManagedImage) =>
     ? urlForSanityImage(image.image)
         .width(1200)
         .height(630)
-        .fit('crop')
-        .auto('format')
+        .fit("crop")
+        .auto("format")
         .quality(85)
         .url()
     : undefined;
@@ -45,13 +45,18 @@ export function resolveSeo(input: {
     fallbackImage,
   } = input;
   const rawTitle = page.metaTitle || derivedTitle;
-  const title = settings?.titleTemplate?.includes('%s')
-    ? settings.titleTemplate.replace('%s', rawTitle)
+  const title = settings?.titleTemplate?.includes("%s")
+    ? settings.titleTemplate.replace("%s", rawTitle)
     : rawTitle;
   const description =
-    page.metaDescription || derivedDescription || settings?.defaultMetaDescription || '';
+    page.metaDescription ||
+    derivedDescription ||
+    settings?.defaultMetaDescription ||
+    "";
   const socialImage =
-    imageUrl(page.openGraphImage) || imageUrl(settings?.defaultOpenGraphImage) || fallbackImage;
+    imageUrl(page.openGraphImage) ||
+    imageUrl(settings?.defaultOpenGraphImage) ||
+    fallbackImage;
   return {
     title,
     description,
@@ -59,37 +64,44 @@ export function resolveSeo(input: {
     canonicalUrl: page.canonicalUrl,
     image: socialImage,
     twitterImage: imageUrl(page.twitterImage) || socialImage,
-    openGraphTitle: page.openGraphTitle || rawTitle || settings?.defaultSocialTitle || title,
+    openGraphTitle:
+      page.openGraphTitle || rawTitle || settings?.defaultSocialTitle || title,
     openGraphDescription:
-      page.openGraphDescription || description || settings?.defaultSocialDescription || '',
+      page.openGraphDescription ||
+      description ||
+      settings?.defaultSocialDescription ||
+      "",
     twitterTitle: page.twitterTitle || page.openGraphTitle || rawTitle,
-    twitterDescription: page.twitterDescription || page.openGraphDescription || description,
-    cardType: page.socialCardType || 'summary_large_image',
+    twitterDescription:
+      page.twitterDescription || page.openGraphDescription || description,
+    cardType: page.socialCardType || "summary_large_image",
     noIndex: page.noIndex ?? settings?.defaultNoIndex ?? false,
     noFollow: page.noFollow ?? settings?.defaultNoFollow ?? false,
   };
 }
 
 export function organizationJsonLd(settings?: SiteSettings | null) {
-  const baseUrl = settings?.canonicalSiteUrl || 'https://swimbasi.com';
+  const baseUrl = settings?.canonicalSiteUrl || "https://swimbasi.com";
   return {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: settings?.organizationName || settings?.siteName || 'Swim BASI',
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: settings?.organizationName || settings?.siteName || "Swim BASI",
     url: baseUrl,
-    sameAs: (settings?.socialLinks || []).map((item) => item.url).filter(Boolean),
+    sameAs: (settings?.socialLinks || [])
+      .map((item) => item.url)
+      .filter(Boolean),
   };
 }
 
 export function breadcrumbJsonLd(
   items: Array<{ label: string; href?: string }>,
-  baseUrl = 'https://swimbasi.com',
+  baseUrl = "https://swimbasi.com",
 ) {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
+      "@type": "ListItem",
       position: index + 1,
       name: item.label,
       ...(item.href ? { item: new URL(item.href, baseUrl).toString() } : {}),

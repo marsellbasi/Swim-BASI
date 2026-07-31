@@ -1,0 +1,74 @@
+{
+  "generatedAt": "2026-07-31T07:21:35.928Z",
+  "target": {
+    "projectId": "xcfqfknc",
+    "dataset": "production"
+  },
+  "authenticatedPublishedByType": {
+    "aboutPage": 1,
+    "announcementBar": 1,
+    "brandFilm": 1,
+    "collectionsPage": 1,
+    "footerNavigation": 1,
+    "headerNavigation": 1,
+    "homepage": 1,
+    "product": 42,
+    "productCategory": 3,
+    "productCollection": 3,
+    "shopPage": 1,
+    "siteSettings": 1,
+    "sizeGuide": 1
+  },
+  "anonymousPublishedByType": {
+    "aboutPage": 1,
+    "announcementBar": 1,
+    "brandFilm": 1,
+    "collectionsPage": 1,
+    "footerNavigation": 1,
+    "headerNavigation": 1,
+    "homepage": 1,
+    "product": 42,
+    "productCategory": 3,
+    "productCollection": 3,
+    "shopPage": 1,
+    "siteSettings": 1,
+    "sizeGuide": 1
+  },
+  "draftsByType": {},
+  "authenticatedPublishedCount": 58,
+  "anonymousPublishedCount": 58,
+  "draftCount": 0,
+  "privatePublishedCount": 0,
+  "privatePublishedIds": [],
+  "replacementDraftCount": 0,
+  "correctedPublishedCount": 58,
+  "replacementIdsPublicSafe": true,
+  "assets": {
+    "images": 122,
+    "files": 1,
+    "total": 123
+  },
+  "references": {
+    "total": 393,
+    "broken": 0,
+    "pointingToPrivateIds": 0,
+    "pointingToReplacementDrafts": 0,
+    "correctedDocumentsPointingToPrivateIds": 0,
+    "draftsPointingToPrivateIds": 0
+  },
+  "products": {
+    "count": 42,
+    "uniqueSlugs": true,
+    "printfulUrlsPresent": true
+  },
+  "homepageSectionKeys": [
+    "brandfilm",
+    "mainhero",
+    "silhouettes",
+    "colorfocus",
+    "statement",
+    "campaign",
+    "instagram",
+    "newsletter"
+  ]
+}
