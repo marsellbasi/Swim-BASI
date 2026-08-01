@@ -66,7 +66,6 @@ const publishedIdSet = new Set(publishedIds);
 const mappedAssetIds = new Set(
   Object.values(assetMap).map((entry) => entry.sanityAssetId),
 );
-
 const client = createClient({
   projectId,
   dataset,
@@ -78,9 +77,9 @@ const client = createClient({
 
 const [documents, assets] = await Promise.all([
   client.fetch(`*[_id in $expectedIds]`, { expectedIds }),
-  client.fetch(`*[_id in $assetIds]{_id,_type}`, {
-    assetIds: [...mappedAssetIds],
-  }),
+  client.fetch(
+    `*[_type in ["sanity.imageAsset", "sanity.fileAsset"]]{_id,_type}`,
+  ),
 ]);
 const documentsById = new Map(
   documents.map((document) => [document._id, document]),
@@ -105,7 +104,7 @@ const refs = documents.flatMap((document) =>
   ).map((reference) => ({ source: document._id, ref: reference._ref })),
 );
 const unresolvedReferences = refs.filter(({ ref }) => {
-  if (mappedAssetIds.has(ref)) return !assetsById.has(ref);
+  if (assetsById.has(ref)) return false;
   if (!publishedIdSet.has(ref)) return true;
   return prePublish
     ? !documentsById.has(`drafts.${ref}`)
@@ -241,7 +240,7 @@ const checks = {
   noUnexpectedIds: documents.every((document) =>
     expectedIdSet.has(document._id),
   ),
-  assetsComplete: assets.length === 123,
+  assetsComplete: [...mappedAssetIds].every((id) => assetsById.has(id)),
   referencesResolve: unresolvedReferences.length === 0,
   productsComplete: products.length === 42,
   productsActive: inactiveProducts.length === 0,
@@ -274,6 +273,10 @@ const report = {
     categories: categories.length,
     collections: collections.length,
     assets: assets.length,
+    imageAssets: assets.filter((asset) => asset._type === "sanity.imageAsset")
+      .length,
+    fileAssets: assets.filter((asset) => asset._type === "sanity.fileAsset")
+      .length,
     references: refs.length,
     managedImages: managedImages.length,
     managedVideos: managedVideos.length,
@@ -336,4 +339,12 @@ ${Object.entries(checks)
 console.log(
   `Sanity ${report.mode} validation: ${report.verified ? "PASS" : "FAIL"} (${documents.length} documents, ${refs.length} references).`,
 );
+if (!report.verified) {
+  console.error(
+    `Failed checks: ${Object.entries(checks)
+      .filter(([, passed]) => !passed)
+      .map(([name]) => name)
+      .join(", ")}`,
+  );
+}
 if (!report.verified) process.exitCode = 1;

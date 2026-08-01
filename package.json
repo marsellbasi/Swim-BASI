@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/sanity/validate-production.mjs --build-gate",
+    "build": "astro build && node scripts/sanity/validate-production.mjs --build-gate && node scripts/verify-homepage-visual-parity.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "lint": "eslint .",
@@ -15,6 +15,8 @@
     "images:products": "node scripts/optimize-product-images.mjs",
     "security:scan": "node scripts/security/scan-release-secrets.mjs",
     "verify": "node scripts/verify-build.mjs",
+    "verify:homepage": "node scripts/verify-homepage-visual-parity.mjs",
+    "verify:homepage-media": "node scripts/validate-homepage-media.mjs",
     "sanity:inventory": "node scripts/sanity/inventory-media.mjs",
     "sanity:migrate:dry-run": "node scripts/sanity/migrate-all.mjs --dry-run",
     "sanity:migrate:verify": "node scripts/sanity/verify-migration.mjs",
