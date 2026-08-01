@@ -1,23 +1,70 @@
 ---
-import Button from './Button.astro';
+import Button from "./Button.astro";
+import SanityImage from "./SanityImage.astro";
+import type { PageSection, SanityCallToAction } from "../lib/sanity/types";
+
+interface Props {
+  section?: PageSection;
+}
+
+const { section } = Astro.props;
+const hrefFor = (cta?: SanityCallToAction) =>
+  cta?.destination?.linkType === "external"
+    ? cta.destination.externalUrl
+    : cta?.destination?.internalPath;
+const eyebrow = section?.eyebrow || "Swim BASI / The color edit";
+const heading = section?.heading || "Confidence Looks Good on You.";
+const body =
+  typeof section?.body === "string"
+    ? section.body
+    : "Bold color. Flattering silhouettes. Swimwear made to be seen.";
+const primary = section?.primaryCallToAction;
+const secondary = section?.secondaryCallToAction;
+const headingLines =
+  heading === "Confidence Looks Good on You."
+    ? ["Confidence", "Looks Good", "on You."]
+    : [heading];
 ---
 
 <section class="hero" aria-labelledby="hero-title">
-  <img
-    src="/images/hero/swim-basi-campaign-placeholder.png"
-    alt="Abstract ivory fabric forms with gold, coral, and blue details reflected on water"
-    width="1774"
-    height="887"
-    fetchpriority="high"
-  />
+  {
+    section?.media?.image ? (
+      <SanityImage
+        value={section.media.image}
+        pictureClass="hero-picture"
+        sizes="100vw"
+        priority
+        diagnosticKey={section._key}
+      />
+    ) : (
+      <img
+        src="/images/hero/swim-basi-campaign-placeholder.png"
+        alt="Abstract ivory fabric forms with gold, coral, and blue details reflected on water"
+        width="1774"
+        height="887"
+        fetchpriority="high"
+      />
+    )
+  }
   <div class="hero-overlay"></div>
   <div class="hero-content wrap">
-    <p class="eyebrow">Swim BASI / The color edit</p>
-    <h2 id="hero-title">Confidence<br />Looks Good<br />on You.</h2>
-    <p>Bold color. Flattering silhouettes. Swimwear made to be seen.</p>
+    <p class="eyebrow">{eyebrow}</p>
+    <h2 id="hero-title">
+      {
+        headingLines.map((line, index) => (
+          <>
+            {index > 0 && <br />}
+            {line}
+          </>
+        ))
+      }
+    </h2>
+    <p>{body}</p>
     <div class="button-row">
-      <Button href="/shop">Shop Swim BASI</Button><Button href="/collections" variant="secondary"
-        >Explore Collections</Button
+      <Button href={hrefFor(primary) || "/shop"}
+        >{primary?.label || "Shop Swim BASI"}</Button
+      ><Button href={hrefFor(secondary) || "/collections"} variant="secondary"
+        >{secondary?.label || "Explore Collections"}</Button
       >
     </div>
   </div>

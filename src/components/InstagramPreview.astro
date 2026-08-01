@@ -1,50 +1,77 @@
 ---
-import ResponsiveBrandImage from './ResponsiveBrandImage.astro';
-import { getBrandImage } from '../data/brand-images';
+import ResponsiveBrandImage from "./ResponsiveBrandImage.astro";
+import SanityImage from "./SanityImage.astro";
+import { getBrandImage } from "../data/brand-images";
+import type { PageSection } from "../lib/sanity/types";
+
+interface Props {
+  section?: PageSection;
+}
+
+const { section } = Astro.props;
 
 const tiles = [
   {
-    image: getBrandImage('red-string-bikini-studio-detail'),
-    label: 'Swim BASI red string-bikini campaign detail',
+    image: getBrandImage("red-string-bikini-studio-detail"),
+    label: "Swim BASI red string-bikini campaign detail",
   },
   {
-    image: getBrandImage('forest-green-string-bikini-studio-portrait'),
-    label: 'Swim BASI green string-bikini studio portrait',
+    image: getBrandImage("forest-green-string-bikini-studio-portrait"),
+    label: "Swim BASI green string-bikini studio portrait",
   },
   {
-    image: getBrandImage('eastern-blue-string-bikini-poolside-back'),
-    label: 'Swim BASI blue string-bikini poolside view',
+    image: getBrandImage("eastern-blue-string-bikini-poolside-back"),
+    label: "Swim BASI blue string-bikini poolside view",
   },
   {
-    image: getBrandImage('lavender-string-bikini-poolside-back'),
-    label: 'Swim BASI lavender string-bikini poolside portrait',
+    image: getBrandImage("lavender-string-bikini-poolside-back"),
+    label: "Swim BASI lavender string-bikini poolside portrait",
   },
 ];
+const cmsItems = section?.items || [];
+const heading = section?.heading || "Follow the color story.";
 ---
 
 <section class="instagram-section wrap" aria-labelledby="instagram-title">
   <div class="instagram-heading">
     <div>
-      <p class="eyebrow">@swimbasi</p><h2 id="instagram-title">Follow the color story.</h2>
-    </div><a href="https://instagram.com/swimbasi" target="_blank" rel="noopener noreferrer"
+      <p class="eyebrow">{section?.eyebrow || "@swimbasi"}</p><h2
+        id="instagram-title"
+      >
+        {heading}
+      </h2>
+    </div><a
+      href="https://instagram.com/swimbasi"
+      target="_blank"
+      rel="noopener noreferrer"
       >View Instagram <span aria-hidden="true">↗</span></a
     >
   </div>
   <div class="instagram-grid">
     {
-      tiles.map((tile) => (
+      (cmsItems.length ? cmsItems : tiles).map((tile, index) => (
         <a
           class="instagram-tile"
           href="https://instagram.com/swimbasi"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`Explore the Swim BASI Instagram profile — ${tile.label} (opens in a new tab)`}
+          aria-label={`Explore the Swim BASI Instagram profile — ${"label" in tile ? tile.label : tile.internalName || tile.image?.alt || `gallery image ${index + 1}`} (opens in a new tab)`}
         >
-          <ResponsiveBrandImage
-            image={tile.image}
-            alt={tile.label}
-            sizes="(max-width: 720px) calc(50vw - 17px), (max-width: 1440px) calc(25vw - 18px), 350px"
-          />
+          {"label" in tile ? (
+            <ResponsiveBrandImage
+              image={tile.image}
+              alt={tile.label}
+              sizes="(max-width: 720px) calc(50vw - 17px), (max-width: 1440px) calc(25vw - 18px), 350px"
+            />
+          ) : tile.image?.image ? (
+            <SanityImage
+              value={tile.image}
+              pictureClass="instagram-picture"
+              aspectRatio={1}
+              sizes="(max-width: 720px) calc(50vw - 17px), (max-width: 1440px) calc(25vw - 18px), 350px"
+              diagnosticKey={`${section?._key || "instagram"}:${tile._key || index}`}
+            />
+          ) : null}
         </a>
       ))
     }

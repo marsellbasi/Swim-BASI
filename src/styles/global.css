@@ -82,6 +82,21 @@
 .cms-section--dividerSection {
   border-top: 1px solid currentColor;
 }
+.homepage-spacing--none {
+  --homepage-section-space: 0;
+}
+.homepage-spacing--compact {
+  --homepage-section-space: clamp(44px, 5vw, 68px);
+}
+.homepage-spacing--standard {
+  --homepage-section-space: clamp(64px, 7vw, 104px);
+}
+.homepage-spacing--spacious {
+  --homepage-section-space: clamp(80px, 9vw, 128px);
+}
+.homepage-spacing--editorial {
+  --homepage-section-space: clamp(96px, 11vw, 160px);
+}
 @media (max-width: 760px) {
   .cms-media-copy,
   .cms-split-media,
@@ -339,6 +354,19 @@ summary {
   object-fit: cover;
   object-position: center;
 }
+.hero > .hero-picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.hero > .hero-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -485,6 +513,11 @@ summary {
   padding: 5%;
   object-fit: contain;
   transition: transform 240ms ease;
+}
+.collection-art--product .collection-picture {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 .collection-card a:hover .collection-art--product img,
 .collection-card a:focus-visible .collection-art--product img {
@@ -1011,6 +1044,96 @@ summary {
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
+
+/* Homepage page-builder sections inherit the original storefront composition. */
+.homepage-section {
+  --homepage-section-space: clamp(64px, 7vw, 104px);
+}
+.homepage-section .homepage-padded,
+.homepage-section .film-intro,
+.homepage-section .instagram-section,
+.homepage-section .newsletter {
+  padding-block: var(--homepage-section-space);
+}
+.homepage-section .film-intro-media {
+  width: min(100%, 560px);
+  max-height: 780px;
+}
+.homepage-section .film-intro-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.homepage-section .collection-picture img {
+  padding: 5%;
+  object-fit: contain;
+}
+.homepage-product-section .product-grid {
+  gap: 36px 18px;
+}
+.homepage-product-section .product-visual {
+  aspect-ratio: 1;
+}
+.homepage-product-section .product-card h3,
+.homepage-product-section .product-meta {
+  min-height: 0;
+}
+.homepage-product-section .product-meta {
+  margin-top: 8px;
+}
+.homepage-product-section .product-cta {
+  margin-top: 10px;
+}
+.homepage-campaign {
+  background: var(--white);
+}
+.homepage-campaign-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.7fr);
+  align-items: center;
+  gap: clamp(40px, 7vw, 108px);
+}
+.homepage-campaign-frame {
+  width: min(100%, 760px);
+  aspect-ratio: 4/5;
+  background: var(--ivory);
+}
+.homepage-campaign-frame .media-frame-picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.homepage-campaign-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.homepage-campaign-copy {
+  max-width: 520px;
+}
+.homepage-campaign-copy .section-heading {
+  margin-bottom: 30px;
+}
+.campaign-signoff {
+  margin: 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-family: var(--serif);
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+}
+.homepage-section .instagram-picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.homepage-section .instagram-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 @media (max-width: 980px) {
   .product-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1039,6 +1162,10 @@ summary {
     grid-template-columns: minmax(0, 0.95fr) minmax(270px, 0.75fr);
     gap: clamp(28px, 4vw, 44px);
   }
+  .homepage-campaign-inner {
+    grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.75fr);
+    gap: clamp(30px, 5vw, 54px);
+  }
   .hero {
     min-height: clamp(560px, 66vh, 640px);
   }
@@ -1065,7 +1192,8 @@ summary {
   }
   .film-intro-inner,
   .about-lead,
-  .about-image-pair {
+  .about-image-pair,
+  .homepage-campaign-inner {
     grid-template-columns: 1fr;
   }
   .film-intro {
@@ -1080,6 +1208,12 @@ summary {
   }
   .film-intro-copy {
     padding: 0 0 4px;
+  }
+  .homepage-section .film-intro-media {
+    max-height: none;
+  }
+  .homepage-campaign-copy {
+    max-width: none;
   }
   .about-image-pair figure:nth-child(2) {
     margin-top: 18px;

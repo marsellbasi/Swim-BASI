@@ -1,37 +1,45 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import PortraitVideoIntro from '../components/PortraitVideoIntro.astro';
-import CollectionCard from '../components/CollectionCard.astro';
-import SectionHeading from '../components/SectionHeading.astro';
-import ProductGrid from '../components/ProductGrid.astro';
-import MediaFrame from '../components/MediaFrame.astro';
-import InstagramPreview from '../components/InstagramPreview.astro';
-import NewsletterSignup from '../components/NewsletterSignup.astro';
-import ExternalCheckoutNotice from '../components/ExternalCheckoutNotice.astro';
-import { products } from '../data/products';
-import { featuredProducts } from '../utils/products';
-import { getBrandImage } from '../data/brand-images';
-import PageSections from '../components/PageSections.astro';
-import { getSanityPage, getSiteSettings } from '../lib/sanity/content';
-import { resolveSeo } from '../lib/sanity/seo';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import PortraitVideoIntro from "../components/PortraitVideoIntro.astro";
+import CollectionCard from "../components/CollectionCard.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import ProductGrid from "../components/ProductGrid.astro";
+import MediaFrame from "../components/MediaFrame.astro";
+import InstagramPreview from "../components/InstagramPreview.astro";
+import NewsletterSignup from "../components/NewsletterSignup.astro";
+import ExternalCheckoutNotice from "../components/ExternalCheckoutNotice.astro";
+import { products } from "../data/products";
+import { featuredProducts } from "../utils/products";
+import { getBrandImage } from "../data/brand-images";
+import HomepageSections from "../components/HomepageSections.astro";
+import { getSanityPage, getSiteSettings } from "../lib/sanity/content";
+import { resolveSeo } from "../lib/sanity/seo";
 
 const collectionProducts = {
-  onePiece: products.find((product) => product.slug === 'basi-brink-pink-one-piece-swimsuit'),
-  stringBikini: products.find((product) => product.slug === 'basi-eastern-blue-string-bikini'),
-  highWaisted: products.find((product) => product.slug === 'basi-orange-high-waisted-bikini'),
+  onePiece: products.find(
+    (product) => product.slug === "basi-brink-pink-one-piece-swimsuit",
+  ),
+  stringBikini: products.find(
+    (product) => product.slug === "basi-eastern-blue-string-bikini",
+  ),
+  highWaisted: products.find(
+    (product) => product.slug === "basi-orange-high-waisted-bikini",
+  ),
 };
-const campaignImage = getBrandImage('yellow-and-black-string-bikinis-night-walk');
-const sanityPage = await getSanityPage('homepage');
+const campaignImage = getBrandImage(
+  "yellow-and-black-string-bikinis-night-walk",
+);
+const sanityPage = await getSanityPage("homepage");
 const settings = await getSiteSettings();
 const pageSeo = resolveSeo({
   page: sanityPage?.seo,
   settings,
-  derivedTitle: 'Swim BASI | Confidence Looks Good on You',
+  derivedTitle: "Swim BASI | Confidence Looks Good on You",
   derivedDescription:
-    'Bold color and flattering silhouettes from Swim BASI. Explore one-piece swimwear, string bikinis, and high-waisted bikinis.',
-  canonicalPath: '/',
-  fallbackImage: '/images/hero/swim-basi-campaign-placeholder.png',
+    "Bold color and flattering silhouettes from Swim BASI. Explore one-piece swimwear, string bikinis, and high-waisted bikinis.",
+  canonicalPath: "/",
+  fallbackImage: "/images/hero/swim-basi-campaign-placeholder.png",
 });
 ---
 
@@ -42,7 +50,7 @@ const pageSeo = resolveSeo({
 >
   {
     sanityPage ? (
-      <PageSections sections={sanityPage.sections || []} />
+      <HomepageSections sections={sanityPage.sections || []} />
     ) : (
       <>
         <PortraitVideoIntro />
@@ -106,8 +114,8 @@ const pageSeo = resolveSeo({
               Wear the color.
             </h2>
             <p>
-              Swim BASI is made for confident entrances, unforgettable color, and the kind of
-              presence that never needs permission.
+              Swim BASI is made for confident entrances, unforgettable color,
+              and the kind of presence that never needs permission.
             </p>
           </>
         </section>
@@ -127,7 +135,9 @@ const pageSeo = resolveSeo({
               <figcaption class="campaign-caption">
                 <>
                   <h2>Confidence in motion.</h2>
-                  <p>Color moves differently when it is worn with confidence.</p>
+                  <p>
+                    Color moves differently when it is worn with confidence.
+                  </p>
                 </>
               </figcaption>
             </MediaFrame>
