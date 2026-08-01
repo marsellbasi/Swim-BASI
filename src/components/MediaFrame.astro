@@ -1,6 +1,8 @@
 ---
-import ResponsiveBrandImage from './ResponsiveBrandImage.astro';
-import type { BrandImage } from '../data/brand-images';
+import ResponsiveBrandImage from "./ResponsiveBrandImage.astro";
+import type { BrandImage } from "../data/brand-images";
+import type { ManagedImage } from "../lib/sanity/types";
+import SanityImage from "./SanityImage.astro";
 
 interface Props {
   image?: string;
@@ -10,6 +12,9 @@ interface Props {
   alt: string;
   class?: string;
   sizes?: string;
+  managedImage?: ManagedImage;
+  aspectRatio?: number;
+  diagnosticKey?: string;
 }
 const {
   image,
@@ -17,18 +22,40 @@ const {
   video,
   poster,
   alt,
-  class: className = '',
-  sizes = '100vw',
+  class: className = "",
+  sizes = "100vw",
+  managedImage,
+  aspectRatio,
+  diagnosticKey,
 } = Astro.props;
 ---
 
-<figure class:list={['media-frame', className]}>
+<figure class:list={["media-frame", className]}>
   {
     video ? (
-      <video autoplay muted loop playsinline controls poster={poster} aria-label={alt}>
-        <source src={video} type={video.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        controls
+        poster={poster}
+        aria-label={alt}
+      >
+        <source
+          src={video}
+          type={video.endsWith(".webm") ? "video/webm" : "video/mp4"}
+        />
         <p>{alt} Your browser does not support embedded video.</p>
       </video>
+    ) : managedImage?.image ? (
+      <SanityImage
+        value={managedImage}
+        pictureClass="media-frame-picture"
+        sizes={sizes}
+        aspectRatio={aspectRatio}
+        diagnosticKey={diagnosticKey}
+      />
     ) : imageData ? (
       <ResponsiveBrandImage image={imageData} alt={alt} sizes={sizes} />
     ) : image ? (

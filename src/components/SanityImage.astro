@@ -1,57 +1,88 @@
 ---
-import type { ManagedImage } from '../lib/sanity/types';
-import { getImageDimensions, urlForSanityImage } from '../lib/sanity/image';
+import type { ManagedImage } from "../lib/sanity/types";
+import { getImageDimensions, urlForSanityImage } from "../lib/sanity/image";
 
 interface Props {
   value: ManagedImage;
   sizes?: string;
   class?: string;
+  pictureClass?: string;
   priority?: boolean;
+  aspectRatio?: number;
+  diagnosticKey?: string;
 }
 
 const {
   value,
-  sizes = '(max-width: 760px) 100vw, 1200px',
+  sizes = "(max-width: 760px) 100vw, 1200px",
   class: className,
-  priority = value.loading === 'eager',
+  pictureClass,
+  priority = value.loading === "eager",
+  aspectRatio,
+  diagnosticKey,
 } = Astro.props;
 
-if (!value.image) throw new Error('SanityImage requires an image asset.');
+if (!value.image) throw new Error("SanityImage requires an image asset.");
 const source = value.image;
 const mobile = value.mobileImage;
 const dimensions = getImageDimensions(source);
 const widths = [480, 640, 800, 960, 1200, 1600];
-const src = urlForSanityImage(source).width(1200).fit('max').auto('format').quality(85).url();
+const buildUrl = (imageSource: typeof source, width: number, quality = 85) => {
+  let image = urlForSanityImage(imageSource).width(width);
+  if (aspectRatio)
+    image = image.height(Math.round(width / aspectRatio)).fit("crop");
+  else image = image.fit("max");
+  return image.auto("format").quality(quality).url();
+};
+const src = buildUrl(source, 1200);
 const srcset = widths
-  .map(
-    (width) =>
-      `${urlForSanityImage(source).width(width).fit('max').auto('format').quality(85).url()} ${width}w`,
-  )
-  .join(', ');
+  .map((width) => `${buildUrl(source, width)} ${width}w`)
+  .join(", ");
 const mobileSrcset = mobile
   ? widths
       .slice(0, 4)
-      .map(
-        (width) =>
-          `${urlForSanityImage(mobile).width(width).fit('max').auto('format').quality(82).url()} ${width}w`,
-      )
-      .join(', ')
+      .map((width) => `${buildUrl(mobile, width, 82)} ${width}w`)
+      .join(", ")
   : undefined;
+const intrinsicWidth = aspectRatio ? 1200 : dimensions.width;
+const intrinsicHeight = aspectRatio
+  ? Math.round(1200 / aspectRatio)
+  : dimensions.height;
+
+if (import.meta.env.DEV && diagnosticKey) {
+  const asset = source.asset;
+  const assetId =
+    asset && "_id" in asset
+      ? asset._id
+      : asset && "_ref" in asset
+        ? asset._ref
+        : undefined;
+  console.info("[Sanity image]", {
+    sectionKey: diagnosticKey,
+    assetId: assetId || "missing",
+    url: src,
+    dimensions: `${intrinsicWidth}x${intrinsicHeight}`,
+  });
+}
 ---
 
-<picture>
-  {mobileSrcset && <source media="(max-width: 640px)" srcset={mobileSrcset} sizes="100vw" />}
+<picture class={pictureClass}>
+  {
+    mobileSrcset && (
+      <source media="(max-width: 640px)" srcset={mobileSrcset} sizes="100vw" />
+    )
+  }
   <img
     class={className}
     src={src}
     srcset={srcset}
     sizes={sizes}
-    width={dimensions.width}
-    height={dimensions.height}
-    alt={value.decorative ? '' : value.alt || ''}
-    aria-hidden={value.decorative ? 'true' : undefined}
-    loading={priority ? 'eager' : 'lazy'}
-    fetchpriority={priority ? 'high' : 'auto'}
+    width={intrinsicWidth}
+    height={intrinsicHeight}
+    alt={value.decorative ? "" : value.alt || ""}
+    aria-hidden={value.decorative ? "true" : undefined}
+    loading={priority ? "eager" : "lazy"}
+    fetchpriority={priority ? "high" : "auto"}
     decoding="async"
   />
 </picture>
