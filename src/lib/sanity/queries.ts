@@ -78,7 +78,14 @@ const sectionProjection = `{
     []
   ),
   collection->{_id, title, "slug": slug.current, description, heroImage${imageProjection}},
-  collections[]->{_id, title, "slug": slug.current, description, heroImage${imageProjection}},
+  collections[]->{
+    _id,
+    title,
+    "slug": slug.current,
+    description,
+    heroImage${imageProjection},
+    products[]->${productProjection}
+  },
   campaign->{title, summary, "slug": slug.current, heroImage${imageProjection}}
 }`;
 

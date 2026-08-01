@@ -10,6 +10,9 @@ const files = readdirSync(dist, { recursive: true, withFileTypes: true })
   .map((entry) => join(entry.parentPath, entry.name));
 const htmlFiles = files.filter((file) => extname(file) === ".html");
 const errors = [];
+const sanityEnabled = process.env.PUBLIC_SANITY_CONTENT_ENABLED === "true";
+const sanityImageHost = "https://cdn.sanity.io/images/xcfqfknc/production/";
+const sanityFileHost = "https://cdn.sanity.io/files/xcfqfknc/production/";
 const productBaseUrl = "https://basiswim.printful.me/product/";
 const slugify = (value) =>
   value
@@ -61,7 +64,7 @@ for (const file of htmlFiles) {
   }
 
   for (const match of html.matchAll(
-    /<img\b([^>]*\/images\/products\/[^>]*)>/g,
+    /<img\b([^>]*class="[^"]*product-image--primary[^>]*)>/g,
   )) {
     const attrs = match[1];
     if (!/width="\d+"/.test(attrs) || !/height="\d+"/.test(attrs)) {
@@ -95,8 +98,19 @@ for (const file of htmlFiles) {
     }
   }
 
-  if (/<(?:img|source)\b[^>]*src="https?:\/\//.test(html)) {
-    errors.push(`${relative(root, file)} has a remote media dependency`);
+  const remoteMedia = [
+    ...html.matchAll(/<(?:img|source)\b[^>]*src="(https?:\/\/[^"]+)"/g),
+  ].map((match) => match[1].replaceAll("&amp;", "&"));
+  for (const mediaUrl of remoteMedia) {
+    const approvedSanityMedia =
+      sanityEnabled &&
+      (mediaUrl.startsWith(sanityImageHost) ||
+        mediaUrl.startsWith(sanityFileHost));
+    if (!approvedSanityMedia) {
+      errors.push(
+        `${relative(root, file)} has an unapproved remote media dependency`,
+      );
+    }
   }
 }
 
@@ -305,30 +319,61 @@ for (const entry of brandEntries) {
 
 const homepageHtml = readFileSync(join(dist, "index.html"), "utf8");
 const aboutHtml = readFileSync(join(dist, "about", "index.html"), "utf8");
-if (
-  !homepageHtml.includes('data-film-state="video"') ||
-  !homepageHtml.includes("data-homepage-film") ||
-  !homepageHtml.includes(
-    'poster="/videos/campaigns/swim-basi-brand-film-poster.webp"',
-  ) ||
-  !homepageHtml.includes(
-    'src="/videos/campaigns/swim-basi-brand-film.mp4" type="video/mp4"',
-  ) ||
-  !homepageHtml.includes('controls playsinline preload="metadata"') ||
-  !homepageHtml.includes("PRESS PLAY. STEP INTO SWIM BASI.") ||
-  homepageHtml.includes("FILM PREMIERE COMING SOON.") ||
-  homepageHtml.includes("<track") ||
-  homepageHtml.includes('type="video/webm"')
-) {
-  errors.push("Homepage active portrait-film configuration is invalid");
-}
-if ((homepageHtml.match(/data-brand-image=/g) ?? []).length !== 5) {
-  errors.push(
-    "Homepage should render five intentional responsive brand-image placements",
-  );
-}
-if ((aboutHtml.match(/data-brand-image=/g) ?? []).length !== 4) {
-  errors.push("About page should render four editorial brand images");
+if (sanityEnabled) {
+  const homepageOrder = [
+    ...homepageHtml.matchAll(/data-homepage-section="([^"]+)"/g),
+  ].map((match) => match[1]);
+  if (
+    JSON.stringify(homepageOrder) !==
+      JSON.stringify([
+        "brandfilm",
+        "mainhero",
+        "silhouettes",
+        "colorfocus",
+        "statement",
+        "campaign",
+        "instagram",
+        "newsletter",
+      ]) ||
+    (homepageHtml.match(/<video/g) ?? []).length !== 1 ||
+    !homepageHtml.includes(sanityFileHost) ||
+    !homepageHtml.includes(`poster="${sanityImageHost}`) ||
+    !homepageHtml.includes('controls playsinline preload="metadata"') ||
+    homepageHtml.includes('src="/images/')
+  ) {
+    errors.push(
+      "Sanity homepage media, order, or film configuration is invalid",
+    );
+  }
+} else {
+  if (
+    !homepageHtml.includes('data-film-state="video"') ||
+    !homepageHtml.includes("data-homepage-film") ||
+    !homepageHtml.includes(
+      'poster="/videos/campaigns/swim-basi-brand-film-poster.webp"',
+    ) ||
+    !homepageHtml.includes(
+      'src="/videos/campaigns/swim-basi-brand-film.mp4" type="video/mp4"',
+    ) ||
+    !homepageHtml.includes('controls playsinline preload="metadata"') ||
+    !homepageHtml.includes("PRESS PLAY. STEP INTO SWIM BASI.") ||
+    homepageHtml.includes("FILM PREMIERE COMING SOON.") ||
+    homepageHtml.includes("<track") ||
+    homepageHtml.includes('type="video/webm"')
+  ) {
+    errors.push("Homepage active portrait-film configuration is invalid");
+  }
+  if ((homepageHtml.match(/data-brand-image=/g) ?? []).length !== 5) {
+    errors.push(
+      "Homepage should render five intentional responsive brand-image placements",
+    );
+  }
+  if ((aboutHtml.match(/data-brand-image=/g) ?? []).length !== 4) {
+    errors.push("About page should render four editorial brand images");
+  }
+  if ((homepageHtml.match(/\/images\/brand\//g) ?? []).length === 0) {
+    errors.push("Homepage does not reference optimized brand photography");
+  }
 }
 if ((homepageHtml.match(/class="instagram-tile"/g) ?? []).length !== 4) {
   errors.push("Homepage should render four photographic color-story tiles");
@@ -347,15 +392,11 @@ for (const html of [homepageHtml, aboutHtml]) {
     }
   }
 }
-if ((homepageHtml.match(/\/images\/brand\//g) ?? []).length === 0) {
-  errors.push("Homepage does not reference optimized brand photography");
-}
-
 if (errors.length) {
   console.error(errors.join("\n"));
   process.exit(1);
 }
 
 console.log(
-  `Verified ${htmlFiles.length} pages, 42 products, and 24 responsive brand images: catalog identity, direct links, media mappings, homepage/About placements, link safety, robots, and sitemap.`,
+  `Verified ${htmlFiles.length} pages, 42 products, and 24 retained responsive brand images (${sanityEnabled ? "Sanity" : "local fallback"} mode): catalog identity, direct links, media mappings, homepage/About placements, link safety, robots, and sitemap.`,
 );

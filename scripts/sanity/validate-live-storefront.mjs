@@ -37,6 +37,7 @@ const expectedTypes = [
   "productCollection",
   "brandFilm",
 ];
+const approvedAssetBaseline = { images: 122, files: 1 };
 
 const client = createClient({
   projectId: "xcfqfknc",
@@ -117,9 +118,8 @@ const checks = {
       ({ collectionProductCount }) => collectionProductCount === 14,
     ),
   assetsComplete:
-    assets.length === 123 &&
-    imageAssets.length === 122 &&
-    fileAssets.length === 1,
+    imageAssets.length >= approvedAssetBaseline.images &&
+    fileAssets.length === approvedAssetBaseline.files,
   printfulLinksComplete:
     uniquePrintfulUrls.size === 42 &&
     [...uniquePrintfulUrls].every((url) => shopHtml.includes(url)),

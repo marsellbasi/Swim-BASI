@@ -1,18 +1,47 @@
 ---
-import Button from './Button.astro';
-import ResponsiveBrandImage from './ResponsiveBrandImage.astro';
-import { getBrandImage } from '../data/brand-images';
-import { homepageFilm } from '../data/homepage-media';
+import Button from "./Button.astro";
+import ResponsiveBrandImage from "./ResponsiveBrandImage.astro";
+import SanityVideo from "./SanityVideo.astro";
+import { getBrandImage } from "../data/brand-images";
+import { homepageFilm } from "../data/homepage-media";
+import type { PageSection, SanityCallToAction } from "../lib/sanity/types";
+
+interface Props {
+  section?: PageSection;
+}
+
+const { section } = Astro.props;
+const hrefFor = (cta?: SanityCallToAction) =>
+  cta?.destination?.linkType === "external"
+    ? cta.destination.externalUrl
+    : cta?.destination?.internalPath;
 
 const fallbackPoster = getBrandImage(homepageFilm.fallbackPoster);
-const hasVideo = homepageFilm.enabled && Boolean(homepageFilm.videoSrc || homepageFilm.webmSrc);
+const managedVideo = section?.video;
+const hasVideo = managedVideo
+  ? Boolean(
+      managedVideo.uploadedVideo?.asset?.url || managedVideo.externalVideoUrl,
+    )
+  : homepageFilm.enabled &&
+    Boolean(homepageFilm.videoSrc || homepageFilm.webmSrc);
+const eyebrow = section?.eyebrow || homepageFilm.eyebrow;
+const title = section?.heading || homepageFilm.title;
+const description =
+  (typeof section?.body === "string" && section.body) ||
+  homepageFilm.description;
+const cta = section?.callToAction;
 ---
 
 <section class="film-intro" aria-labelledby="film-intro-title">
   <div class="film-intro-inner wrap">
-    <div class="film-intro-media" data-film-state={hasVideo ? 'video' : 'poster'}>
+    <div
+      class="film-intro-media"
+      data-film-state={hasVideo ? "video" : "poster"}
+    >
       {
-        hasVideo ? (
+        managedVideo && hasVideo ? (
+          <SanityVideo value={managedVideo} class="homepage-film-video" />
+        ) : hasVideo ? (
           <video
             data-homepage-film
             poster={homepageFilm.poster}
@@ -24,8 +53,12 @@ const hasVideo = homepageFilm.enabled && Boolean(homepageFilm.videoSrc || homepa
             preload={homepageFilm.preload}
             aria-label={homepageFilm.title}
           >
-            {homepageFilm.webmSrc && <source src={homepageFilm.webmSrc} type="video/webm" />}
-            {homepageFilm.videoSrc && <source src={homepageFilm.videoSrc} type="video/mp4" />}
+            {homepageFilm.webmSrc && (
+              <source src={homepageFilm.webmSrc} type="video/webm" />
+            )}
+            {homepageFilm.videoSrc && (
+              <source src={homepageFilm.videoSrc} type="video/mp4" />
+            )}
             {homepageFilm.captionsSrc && (
               <track
                 kind="captions"
@@ -35,7 +68,10 @@ const hasVideo = homepageFilm.enabled && Boolean(homepageFilm.videoSrc || homepa
                 default
               />
             )}
-            <p>The Swim BASI brand film. Your browser does not support embedded video.</p>
+            <p>
+              The Swim BASI brand film. Your browser does not support embedded
+              video.
+            </p>
           </video>
         ) : (
           <ResponsiveBrandImage
@@ -48,13 +84,15 @@ const hasVideo = homepageFilm.enabled && Boolean(homepageFilm.videoSrc || homepa
       }
     </div>
     <div class="film-intro-copy">
-      <p class="eyebrow">{homepageFilm.eyebrow}</p>
-      <h1 id="film-intro-title">{homepageFilm.title}</h1>
-      <p>{homepageFilm.description}</p>
-      <p class="film-status">{homepageFilm.status}</p>
-      <Button href="/shop">Shop the collection</Button>
+      <p class="eyebrow">{eyebrow}</p>
+      <h1 id="film-intro-title">{title}</h1>
+      <p>{description}</p>
+      {!section && <p class="film-status">{homepageFilm.status}</p>}
+      <Button href={hrefFor(cta) || "/shop"}
+        >{cta?.label || "Shop the collection"}</Button
+      >
       {
-        hasVideo && homepageFilm.transcript && (
+        !section && hasVideo && homepageFilm.transcript && (
           <details class="film-transcript">
             <summary>Read film transcript</summary>
             <p>{homepageFilm.transcript}</p>
@@ -66,8 +104,8 @@ const hasVideo = homepageFilm.enabled && Boolean(homepageFilm.videoSrc || homepa
 </section>
 
 <script>
-  const film = document.querySelector<HTMLVideoElement>('[data-homepage-film]');
-  if (film && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const film = document.querySelector<HTMLVideoElement>("[data-homepage-film]");
+  if (film && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     film.autoplay = false;
     film.pause();
   }

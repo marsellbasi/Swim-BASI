@@ -1,5 +1,7 @@
 ---
-import type { Product } from '../data/products';
+import type { Product } from "../data/products";
+import type { ManagedImage } from "../lib/sanity/types";
+import SanityImage from "./SanityImage.astro";
 
 interface Props {
   title: string;
@@ -8,18 +10,38 @@ interface Props {
   color: string;
   index: string;
   product?: Product;
+  managedImage?: ManagedImage;
+  diagnosticKey?: string;
 }
-const { title, href, price, color, index, product } = Astro.props;
+const {
+  title,
+  href,
+  price,
+  color,
+  index,
+  product,
+  managedImage,
+  diagnosticKey,
+} = Astro.props;
+const hasImage = Boolean(product?.image || managedImage?.image);
 ---
 
 <article class="collection-card">
   <a href={href} aria-label={`Shop ${title}`}>
     <div
-      class:list={['collection-art', { 'collection-art--product': product?.image }]}
+      class:list={["collection-art", { "collection-art--product": hasImage }]}
       style={`--collection-color:${color}`}
     >
       {
-        product?.image && (
+        managedImage?.image ? (
+          <SanityImage
+            value={managedImage}
+            pictureClass="collection-picture"
+            aspectRatio={1}
+            sizes="(max-width: 720px) calc(100vw - 24px), (max-width: 1440px) 33vw, 470px"
+            diagnosticKey={diagnosticKey}
+          />
+        ) : product?.image ? (
           <img
             src={product.image.src}
             width={product.image.width}
@@ -28,11 +50,13 @@ const { title, href, price, color, index, product } = Astro.props;
             loading="lazy"
             decoding="async"
           />
-        )
+        ) : null
       }<span>{index}</span>
     </div>
     <div class="collection-copy">
-      <div><h3>{title}</h3><p>{price}</p></div><span class="circle-arrow" aria-hidden="true">→</span
+      <div><h3>{title}</h3><p>{price}</p></div><span
+        class="circle-arrow"
+        aria-hidden="true">→</span
       >
     </div>
   </a>

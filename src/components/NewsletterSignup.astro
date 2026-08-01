@@ -1,13 +1,26 @@
+---
+import type { PageSection } from "../lib/sanity/types";
+
+interface Props {
+  section?: PageSection;
+}
+
+const { section } = Astro.props;
+const body =
+  (typeof section?.body === "string" && section.body) ||
+  "Be first to hear about new colors, seasonal drops, campaign releases, and Swim BASI updates.";
+---
+
 <section class="newsletter" aria-labelledby="newsletter-title">
   <div>
-    <p class="eyebrow">The BASI list</p><h2 id="newsletter-title">
-      Color, confidence, and first access.
+    <p class="eyebrow">{section?.eyebrow || "The BASI list"}</p><h2
+      id="newsletter-title"
+    >
+      {section?.heading || "Color, confidence, and first access."}
     </h2>
   </div>
   <div class="newsletter-preview">
-    <p>
-      Be first to hear about new colors, seasonal drops, campaign releases, and Swim BASI updates.
-    </p>
+    <p>{body}</p>
     <p class="newsletter-opening">The BASI List opens soon.</p>
   </div>
 </section>

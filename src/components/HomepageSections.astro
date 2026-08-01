@@ -1,0 +1,207 @@
+---
+import type { PageSection, SanityCollection } from "../lib/sanity/types";
+import {
+  portableTextToPlainText,
+  sanityProductToLocal,
+} from "../lib/sanity/adapters";
+import PortraitVideoIntro from "./PortraitVideoIntro.astro";
+import Hero from "./Hero.astro";
+import CollectionCard from "./CollectionCard.astro";
+import SectionHeading from "./SectionHeading.astro";
+import ProductGrid from "./ProductGrid.astro";
+import ExternalCheckoutNotice from "./ExternalCheckoutNotice.astro";
+import MediaFrame from "./MediaFrame.astro";
+import InstagramPreview from "./InstagramPreview.astro";
+import NewsletterSignup from "./NewsletterSignup.astro";
+import PageSections from "./PageSections.astro";
+
+interface Props {
+  sections: PageSection[];
+}
+
+const { sections } = Astro.props;
+const enabledSections = sections.filter((section) => section.enabled !== false);
+const bodyText = (section: PageSection) =>
+  typeof section.body === "string"
+    ? section.body
+    : portableTextToPlainText(section.body || section.content);
+const spacingClass = (section: PageSection) =>
+  `homepage-spacing--${section.spacing || "standard"}`;
+const collectionColors = ["#F16A8D", "#247BA0", "#E8692A"];
+const startingPrice = (collection: SanityCollection) => {
+  const prices = (collection.products || [])
+    .map((product) => product.displayPrice)
+    .filter((price): price is number => typeof price === "number" && price > 0);
+  return prices.length
+    ? `Starting at $${Math.min(...prices).toFixed(2)}`
+    : "Explore collection";
+};
+
+if (import.meta.env.DEV) {
+  for (const section of enabledSections) {
+    if (section._type === "collectionGridSection") {
+      for (const collection of section.collections || []) {
+        if (!collection.heroImage?.image) {
+          console.warn(
+            `[Sanity homepage] ${section._key}: ${collection._id || collection.title || "collection"} has no projected hero image.`,
+          );
+        }
+      }
+    }
+  }
+}
+---
+
+{
+  enabledSections.map((section) => {
+    const wrapperClasses = [
+      "homepage-section",
+      `homepage-section--${section._key}`,
+      spacingClass(section),
+    ];
+
+    if (section._type === "videoSection" && section.video) {
+      return (
+        <div class:list={wrapperClasses} data-homepage-section={section._key}>
+          <PortraitVideoIntro section={section} />
+        </div>
+      );
+    }
+
+    if (section._type === "heroSection") {
+      return (
+        <div class:list={wrapperClasses} data-homepage-section={section._key}>
+          <Hero section={section} />
+        </div>
+      );
+    }
+
+    if (section._type === "collectionGridSection") {
+      return (
+        <div class:list={wrapperClasses} data-homepage-section={section._key}>
+          <section
+            class="section homepage-padded wrap"
+            aria-labelledby={`section-${section._key}`}
+          >
+            <SectionHeading
+              eyebrow={section.eyebrow}
+              title={section.heading || section.internalName || "Collections"}
+              intro={bodyText(section)}
+            />
+            <div class="collection-grid" id={`section-${section._key}`}>
+              {(section.collections || []).map((collection, index) => (
+                <CollectionCard
+                  title={collection.title || "Collection"}
+                  href={`/collections/${collection.slug || ""}`}
+                  price={startingPrice(collection)}
+                  color={
+                    collectionColors[index % collectionColors.length] ||
+                    "#77777B"
+                  }
+                  index={String(index + 1).padStart(2, "0")}
+                  managedImage={collection.heroImage}
+                  diagnosticKey={`${section._key}:${collection._id || index}`}
+                />
+              ))}
+            </div>
+          </section>
+        </div>
+      );
+    }
+
+    if (section._type === "productGridSection") {
+      const products = (section.products || [])
+        .slice(0, section.limit || 42)
+        .map(sanityProductToLocal);
+      return (
+        <div class:list={wrapperClasses} data-homepage-section={section._key}>
+          <section class="section section--ivory homepage-padded homepage-product-section">
+            <div class="wrap">
+              <SectionHeading
+                eyebrow={section.eyebrow}
+                title={section.heading || section.internalName || "Products"}
+                intro={bodyText(section)}
+              />
+              {section.showCheckoutNotice && <ExternalCheckoutNotice />}
+              {products.length ? (
+                <ProductGrid products={products} />
+              ) : (
+                <p>No products are configured.</p>
+              )}
+            </div>
+          </section>
+        </div>
+      );
+    }
+
+    if (section._type === "brandStatementSection") {
+      return (
+        <div class:list={wrapperClasses} data-homepage-section={section._key}>
+          <section class="statement homepage-padded">
+            {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+            <h2>{section.heading}</h2>
+            {bodyText(section) && <p>{bodyText(section)}</p>}
+          </section>
+        </div>
+      );
+    }
+
+    if (section._type === "imageTextSection" && section.media?.image) {
+      return (
+        <div class:list={wrapperClasses} data-homepage-section={section._key}>
+          <section class="homepage-campaign homepage-padded">
+            <div class="homepage-campaign-inner wrap">
+              <MediaFrame
+                managedImage={section.media.image}
+                alt={
+                  section.media.image.alt ||
+                  section.heading ||
+                  "Swim BASI campaign image"
+                }
+                class="homepage-campaign-frame"
+                sizes="(max-width: 760px) calc(100vw - 24px), (max-width: 1440px) 55vw, 760px"
+                aspectRatio={4 / 5}
+                diagnosticKey={section._key}
+              />
+              <div class="homepage-campaign-copy">
+                <SectionHeading
+                  eyebrow={section.eyebrow}
+                  title={section.heading || section.internalName || "Campaign"}
+                  intro={bodyText(section)}
+                />
+                <p class="campaign-signoff">Confidence in motion.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      );
+    }
+
+    if (section._type === "editorialGridSection") {
+      return (
+        <div class:list={wrapperClasses} data-homepage-section={section._key}>
+          <InstagramPreview section={section} />
+        </div>
+      );
+    }
+
+    if (section._type === "newsletterSection") {
+      return (
+        <div class:list={wrapperClasses} data-homepage-section={section._key}>
+          <NewsletterSignup section={section} />
+        </div>
+      );
+    }
+
+    if (import.meta.env.DEV) {
+      console.warn(
+        `[Sanity homepage] Falling back for section type ${section._type}.`,
+      );
+    }
+    return (
+      <div class:list={wrapperClasses} data-homepage-section={section._key}>
+        <PageSections sections={[section]} />
+      </div>
+    );
+  })
+}
