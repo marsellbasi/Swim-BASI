@@ -1,0 +1,456 @@
+---
+import type {
+  PageSection,
+  SanityCallToAction,
+  SanityCollection,
+  SanityPage,
+} from "../lib/sanity/types";
+import { portableTextToPlainText } from "../lib/sanity/adapters";
+import Breadcrumbs from "./Breadcrumbs.astro";
+import Button from "./Button.astro";
+import SanityImage from "./SanityImage.astro";
+
+interface Props {
+  page: SanityPage;
+}
+
+const { page } = Astro.props;
+const sections = (page.sections || []).filter(
+  (section) => section.enabled !== false,
+);
+const byKey = (key: string, type: string) =>
+  sections.find((section) => section._key === key) ||
+  sections.find((section) => section._type === type);
+const textFor = (section?: PageSection) => {
+  if (!section) return "";
+  return typeof section.body === "string"
+    ? section.body
+    : portableTextToPlainText(section.body || section.content);
+};
+const hrefFor = (cta?: SanityCallToAction) =>
+  cta?.destination?.linkType === "external"
+    ? cta.destination.externalUrl
+    : cta?.destination?.internalPath;
+const identifierFor = (collection: SanityCollection, index: number) => {
+  const label = (collection.title || "Collection")
+    .replace(/ Swimwear$/i, "")
+    .replace(/ Bikinis$/i, "");
+  return `${String(index + 1).padStart(2, "0")} — ${label}`;
+};
+
+const intro = byKey("collectionsintro", "richTextSection");
+const grid = byKey("collectioncards", "collectionGridSection");
+const closing = byKey("collectionscta", "callToActionSection");
+const collections = grid?.collections || [];
+const primaryCta = closing?.primaryCallToAction || closing?.callToAction;
+const primaryHref = hrefFor(primaryCta);
+const secondaryHref = hrefFor(closing?.secondaryCallToAction);
+
+if (
+  !intro?.heading ||
+  !grid?.heading ||
+  collections.length !== 3 ||
+  collections.some(
+    (collection) =>
+      !collection.slug ||
+      !collection.title ||
+      !collection.description ||
+      !collection.heroImage?.image,
+  ) ||
+  !closing?.heading
+) {
+  throw new Error(
+    "The published Sanity Collections page requires an intro, three collections, and a closing call to action.",
+  );
+}
+---
+
+<div class="collections-page">
+  <section class="collections-intro" aria-labelledby="collections-title">
+    <div class="collections-intro__inner wrap">
+      <Breadcrumbs
+        items={[{ label: "Home", href: "/" }, { label: "Collections" }]}
+      />
+      {intro.eyebrow && <p class="collections-eyebrow">{intro.eyebrow}</p>}
+      <h1 id="collections-title">{intro.heading}</h1>
+      {textFor(intro) && <p class="collections-intro__copy">{textFor(intro)}</p>}
+    </div>
+  </section>
+
+  <section class="collections-index" aria-labelledby="collections-index-title">
+    <div class="collections-index__inner wrap">
+      <header class="collections-index__heading">
+        <h2 id="collections-index-title">{grid.heading}</h2>
+        {textFor(grid) && <p>{textFor(grid)}</p>}
+      </header>
+
+      <ol class="collections-grid">
+        {
+          collections.map((collection, index) => (
+            <li>
+              <article
+                class:list={[
+                  "silhouette-card",
+                  collection.slug && `silhouette-card--${collection.slug}`,
+                ]}
+              >
+                <a
+                  href={`/collections/${collection.slug}`}
+                  aria-label={`Explore ${collection.title}`}
+                >
+                  <p class="silhouette-card__id">
+                    {identifierFor(collection, index)}
+                  </p>
+                  <div class="silhouette-card__media">
+                    {collection.heroImage?.image && (
+                      <div class="silhouette-card__art">
+                        <SanityImage
+                          value={collection.heroImage}
+                          sizes="(max-width: 719px) calc(100vw - 24px), (max-width: 1023px) 46vw, (max-width: 1510px) 31vw, 448px"
+                          pictureClass="silhouette-picture"
+                          diagnosticKey={`collections-${collection.slug}`}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <div class="silhouette-card__copy">
+                    <h3>{collection.title}</h3>
+                    {collection.description && <p>{collection.description}</p>}
+                    <span class="silhouette-card__cta">
+                      Explore <span aria-hidden="true">→</span>
+                    </span>
+                  </div>
+                </a>
+              </article>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="collections-closing" aria-labelledby="collections-closing-title">
+    <div class="collections-closing__inner wrap">
+      {closing.eyebrow && <p class="collections-eyebrow">{closing.eyebrow}</p>}
+      <h2 id="collections-closing-title">{closing.heading}</h2>
+      {textFor(closing) && <p>{textFor(closing)}</p>}
+      {(primaryHref || secondaryHref) && (
+        <div class="collections-closing__actions">
+          {primaryHref && <Button href={primaryHref}>{primaryCta?.label}</Button>}
+          {secondaryHref && (
+            <Button href={secondaryHref} variant="text">
+              {closing.secondaryCallToAction?.label}
+            </Button>
+          )}
+        </div>
+      )}
+    </div>
+  </section>
+</div>
+
+<style>
+  .collections-page {
+    --collections-copy: #4c4c4c;
+    background: var(--white);
+  }
+
+  .collections-eyebrow {
+    margin: 0 0 16px;
+    color: #806a1f;
+    font-size: 0.69rem;
+    font-weight: 700;
+    letter-spacing: 0.19em;
+    text-transform: uppercase;
+  }
+
+  .collections-intro {
+    padding-top: clamp(88px, 7.5vw, 112px);
+  }
+
+  .collections-intro__inner,
+  .collections-index__inner {
+    max-width: 1440px;
+  }
+
+  .collections-intro :global(.breadcrumbs) {
+    padding-top: 0;
+    margin-bottom: clamp(38px, 4vw, 54px);
+  }
+
+  .collections-intro h1,
+  .silhouette-card h3,
+  .collections-closing h2 {
+    margin: 0;
+    font-family: var(--serif);
+    font-weight: 400;
+    letter-spacing: -0.035em;
+  }
+
+  .collections-intro h1 {
+    font-size: clamp(3.25rem, 5vw, 5.75rem);
+    line-height: 0.96;
+  }
+
+  .collections-intro__copy {
+    max-width: 720px;
+    margin: clamp(22px, 2.5vw, 32px) 0 0;
+    color: var(--collections-copy);
+    font-size: clamp(1.02rem, 1.3vw, 1.18rem);
+    line-height: 1.7;
+  }
+
+  .collections-index {
+    padding-top: clamp(64px, 6vw, 92px);
+  }
+
+  .collections-index__heading {
+    margin-bottom: clamp(32px, 3.2vw, 46px);
+  }
+
+  .collections-index__heading h2 {
+    margin: 0;
+    color: #806a1f;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.19em;
+    text-transform: uppercase;
+  }
+
+  .collections-index__heading p {
+    margin: 12px 0 0;
+    color: var(--collections-copy);
+    font-size: 0.92rem;
+  }
+
+  .collections-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(24px, 2.4vw, 34px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .collections-grid > li,
+  .silhouette-card,
+  .silhouette-card > a {
+    min-width: 0;
+    height: 100%;
+  }
+
+  .silhouette-card > a {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .silhouette-card__id {
+    margin: 0 0 14px;
+    color: #806a1f;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+  }
+
+  .silhouette-card__media {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--ivory);
+    transition: background-color 220ms ease;
+  }
+
+  .silhouette-card__art {
+    position: absolute;
+    inset: 2%;
+    transform: scale(var(--art-scale, 1.06));
+    transition: transform 260ms ease;
+  }
+
+  .silhouette-card--one-piece {
+    --art-scale: 1.16;
+  }
+
+  .silhouette-card--string-bikinis {
+    --art-scale: 1.04;
+  }
+
+  .silhouette-card--high-waisted-bikinis {
+    --art-scale: 1.11;
+  }
+
+  .silhouette-card__art :global(.silhouette-picture),
+  .silhouette-card__art :global(.silhouette-picture img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .silhouette-card__art :global(.silhouette-picture img) {
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .silhouette-card__copy {
+    padding-top: 20px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .silhouette-card h3 {
+    font-size: clamp(1.55rem, 2.1vw, 2rem);
+    line-height: 1.05;
+  }
+
+  .silhouette-card__copy p {
+    margin: 12px 0 0;
+    color: var(--collections-copy);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .silhouette-card__cta {
+    width: fit-content;
+    margin-top: 22px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid currentColor;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .silhouette-card__cta span {
+    display: inline-block;
+    margin-left: 5px;
+    transition: transform 220ms ease;
+  }
+
+  .silhouette-card > a:hover .silhouette-card__media {
+    background: var(--gray);
+  }
+
+  .silhouette-card > a:hover .silhouette-card__art,
+  .silhouette-card > a:focus-visible .silhouette-card__art {
+    transform: scale(calc(var(--art-scale, 1.06) * 1.02));
+  }
+
+  .silhouette-card > a:hover .silhouette-card__cta span,
+  .silhouette-card > a:focus-visible .silhouette-card__cta span {
+    transform: translateX(4px);
+  }
+
+  .collections-closing {
+    margin-top: clamp(88px, 8vw, 120px);
+    padding-block: clamp(72px, 7vw, 104px);
+    background: var(--ivory);
+  }
+
+  .collections-closing__inner {
+    max-width: 720px;
+    text-align: center;
+  }
+
+  .collections-closing h2 {
+    font-size: clamp(2.5rem, 4.25vw, 4.5rem);
+    line-height: 1;
+  }
+
+  .collections-closing__inner > p:not(.collections-eyebrow) {
+    margin: 22px 0 0;
+    color: var(--collections-copy);
+    font-size: 1.02rem;
+    line-height: 1.65;
+  }
+
+  .collections-closing__actions {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 18px 28px;
+  }
+
+  @media (min-width: 720px) and (max-width: 1023px) {
+    .collections-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .collections-grid > li:last-child {
+      width: calc((100% - clamp(24px, 2.4vw, 34px)) / 2);
+      grid-column: 1 / -1;
+      justify-self: center;
+    }
+  }
+
+  @media (max-width: 719px) {
+    .collections-intro {
+      padding-top: clamp(56px, 16vw, 76px);
+    }
+
+    .collections-intro :global(.breadcrumbs) {
+      margin-bottom: 34px;
+    }
+
+    .collections-index {
+      padding-top: clamp(48px, 14vw, 64px);
+    }
+
+    .collections-index__heading {
+      margin-bottom: clamp(26px, 8vw, 34px);
+    }
+
+    .collections-grid {
+      grid-template-columns: 1fr;
+      gap: clamp(38px, 11vw, 48px);
+    }
+
+    .silhouette-card__media {
+      aspect-ratio: 4 / 5;
+    }
+
+    .silhouette-card h3 {
+      font-size: clamp(1.65rem, 7.5vw, 2rem);
+    }
+
+    .collections-closing {
+      margin-top: clamp(64px, 19vw, 84px);
+      padding-block: clamp(60px, 17vw, 76px);
+    }
+
+    .collections-closing__inner {
+      text-align: left;
+    }
+
+    .collections-closing__actions {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .collections-closing__actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .collections-closing__actions :global(.button) {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .collections-closing__actions :global(.button--text) {
+      width: fit-content;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .silhouette-card__media,
+    .silhouette-card__art,
+    .silhouette-card__cta span {
+      transition: none;
+    }
+  }
+</style>

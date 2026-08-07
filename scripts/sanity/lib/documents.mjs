@@ -64,6 +64,12 @@ const commonSection = (type, sectionKey, internalName, overrides = {}) => ({
   ...overrides,
 });
 
+const collectionPositioning = {
+  "one-piece": "Clean lines. Confident coverage.",
+  "string-bikinis": "Minimal shape. Maximum attitude.",
+  "high-waisted-bikinis": "Defined waist. Effortless confidence.",
+};
+
 export function taxonomyDocuments() {
   const categories = taxonomy.map((item) => ({
     _id: ids.category(item.slug),
@@ -79,7 +85,7 @@ export function taxonomyDocuments() {
     _type: "productCollection",
     title: item.title,
     slug: { _type: "slug", current: item.slug },
-    description: item.description,
+    description: collectionPositioning[item.slug],
     products: products
       .filter((product) => product.collection === item.slug)
       .map((product) => ({
@@ -705,7 +711,7 @@ export function pageDocuments(assetMap) {
           eyebrow: "Choose your silhouette",
           heading: "Collections",
           content: block(
-            "A confident shape for every way you want to show up.",
+            "Find the shape that feels like you—confident, expressive, and made for wherever the day takes you.",
             "collectionsintro",
           ),
         },
@@ -716,8 +722,22 @@ export function pageDocuments(assetMap) {
         "Collection cards",
         {
           heading: "Shop by silhouette",
+          body: "Three ways to make the water yours.",
           collections: collectionRefs,
           variant: "cards",
+        },
+      ),
+      commonSection(
+        "callToActionSection",
+        "collectionscta",
+        "Closing shop call to action",
+        {
+          eyebrow: "Swim BASI",
+          heading: "Not sure where to start?",
+          body: "Explore every style, color, and silhouette in one place.",
+          primaryCallToAction: cta("SHOP ALL SWIMWEAR", "/shop"),
+          secondaryCallToAction: cta("SIZE GUIDE", "/size-guide", "text"),
+          alignment: "center",
         },
       ),
     ],
