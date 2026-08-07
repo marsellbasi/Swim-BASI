@@ -1,16 +1,16 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import ProductGrid from '../../components/ProductGrid.astro';
-import { products } from '../../data/products';
-import { filterByCategory } from '../../utils/products';
-import PageSections from '../../components/PageSections.astro';
+import CollectionEditorial from '../../components/CollectionEditorial.astro';
 import { getSanityCollections, getSiteSettings } from '../../lib/sanity/content';
+import { SANITY_CONTENT_ENABLED } from '../../lib/sanity/config';
 import { resolveSeo } from '../../lib/sanity/seo';
 
 const sanityCollection = (await getSanityCollections())?.find(
   (item) => item.slug === 'string-bikinis',
 );
+if (SANITY_CONTENT_ENABLED && !sanityCollection) {
+  throw new Error('The published Sanity String Bikini collection is required for production.');
+}
 const settings = await getSiteSettings();
 const pageSeo = resolveSeo({
   page: sanityCollection?.seo,
@@ -25,33 +25,7 @@ const pageSeo = resolveSeo({
   title="String Bikinis | Swim BASI"
   description="Shop Swim BASI string bikinis in confident colorways for $37.99."
   seo={pageSeo}
-  >{
-    sanityCollection?.sections?.length ? (
-      <PageSections sections={sanityCollection.sections} />
-    ) : (
-      <>
-        <>
-          <section class="page-hero">
-            <div class="wrap">
-              <>
-                <Breadcrumbs
-                  items={[
-                    { label: 'Home', href: '/' },
-                    { label: 'Collections', href: '/collections' },
-                    { label: 'String Bikinis' },
-                  ]}
-                />
-                <p class="eyebrow">$37.99</p>
-                <h1>String Bikinis</h1>
-                <p class="lead">A minimal silhouette with maximum confidence.</p>
-              </>
-            </div>
-          </section>
-          <section class="section wrap">
-            <ProductGrid products={filterByCategory(products, 'string-bikinis')} />
-          </section>
-        </>
-      </>
-    )
-  }</BaseLayout
+>
+  {sanityCollection && <CollectionEditorial collection={sanityCollection} />}
+</BaseLayout
 >

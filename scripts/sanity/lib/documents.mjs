@@ -70,6 +70,24 @@ const collectionPositioning = {
   "high-waisted-bikinis": "Defined waist. Effortless confidence.",
 };
 
+const collectionEditorial = {
+  "one-piece": {
+    eyebrow: "ONE-PIECE COLLECTION",
+    description:
+      "Clean lines, bold color, and a confident silhouette designed to move with you.",
+  },
+  "string-bikinis": {
+    eyebrow: "STRING BIKINI COLLECTION",
+    description:
+      "Minimal coverage, adjustable ties, and bold color made for maximum confidence.",
+  },
+  "high-waisted-bikinis": {
+    eyebrow: "HIGH-WAISTED COLLECTION",
+    description:
+      "A flattering high-rise silhouette with confident coverage and effortless shape.",
+  },
+};
+
 export function taxonomyDocuments() {
   const categories = taxonomy.map((item) => ({
     _id: ids.category(item.slug),
@@ -103,19 +121,10 @@ export function taxonomyDocuments() {
         `${key(item.slug)}intro`,
         `${item.title} heading`,
         {
-          eyebrow:
-            item.slug === "one-piece"
-              ? "$32.99"
-              : item.slug === "string-bikinis"
-                ? "$37.99"
-                : "$44.99",
+          eyebrow: collectionEditorial[item.slug].eyebrow,
           heading: item.title,
           content: block(
-            item.slug === "one-piece"
-              ? "Clean lines, bold color, and a silhouette built for presence."
-              : item.slug === "string-bikinis"
-                ? "A minimal silhouette with maximum confidence."
-                : "A flattering, confident silhouette with a little more coverage.",
+            collectionEditorial[item.slug].description,
             `${item.slug}intro`,
           ),
         },

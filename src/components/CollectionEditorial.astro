@@ -1,0 +1,149 @@
+---
+import type { PageSection, SanityCollection } from "../lib/sanity/types";
+import {
+  portableTextToPlainText,
+  sanityProductToLocal,
+} from "../lib/sanity/adapters";
+import Breadcrumbs from "./Breadcrumbs.astro";
+import ProductGrid from "./ProductGrid.astro";
+
+interface Props {
+  collection: SanityCollection;
+}
+
+const { collection } = Astro.props;
+const sections = (collection.sections || []).filter(
+  (section) => section.enabled !== false,
+);
+const intro = sections.find(
+  (section) => section._type === "richTextSection",
+);
+const catalog = sections.find(
+  (section) => section._type === "productGridSection",
+);
+const bodyText = (section?: PageSection) =>
+  section
+    ? typeof section.body === "string"
+      ? section.body
+      : portableTextToPlainText(section.body || section.content)
+    : "";
+const sanityProducts = catalog?.products || collection.products || [];
+const products = sanityProducts.map(sanityProductToLocal);
+const prices = [
+  ...new Set(
+    sanityProducts
+      .map((product) => product.displayPrice)
+      .filter((price): price is number => typeof price === "number" && price > 0),
+  ),
+];
+const title = intro?.heading || collection.title;
+const description = bodyText(intro);
+const fixedPrice = prices.length === 1 ? prices[0] : undefined;
+const formattedPrice =
+  fixedPrice !== undefined
+    ? new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }).format(fixedPrice)
+    : "";
+
+if (
+  !collection.slug ||
+  !title ||
+  !intro?.eyebrow ||
+  !description ||
+  !formattedPrice ||
+  products.length === 0
+) {
+  throw new Error(
+    `The published Sanity collection ${collection.slug || collection._id || "document"} requires an eyebrow, title, description, one fixed product price, and products.`,
+  );
+}
+---
+
+<main class="collection-page">
+  <section class="collection-catalog" aria-labelledby="collection-title">
+    <div class="wrap">
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Collections", href: "/collections" },
+          { label: title },
+        ]}
+      />
+
+      <header class="collection-intro">
+        <p class="eyebrow">{intro.eyebrow}</p>
+        <h1 id="collection-title">{title}</h1>
+        <p class="collection-intro__description">{description}</p>
+        <p class="collection-intro__price">{formattedPrice}</p>
+      </header>
+
+      <ProductGrid products={products} />
+    </div>
+  </section>
+</main>
+
+<style>
+  .collection-catalog {
+    padding: clamp(72px, 6.5vw, 96px) 0 clamp(64px, 6vw, 88px);
+  }
+
+  .collection-catalog :global(.breadcrumbs) {
+    padding-top: 0;
+  }
+
+  .collection-intro {
+    max-width: 760px;
+    margin-top: clamp(32px, 3vw, 44px);
+  }
+
+  .collection-intro .eyebrow {
+    margin: 0;
+  }
+
+  .collection-intro h1 {
+    margin: clamp(16px, 1.5vw, 22px) 0 0;
+    font-family: var(--serif);
+    font-size: clamp(3rem, 4.5vw, 5rem);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+  }
+
+  .collection-intro__description {
+    max-width: 680px;
+    margin: clamp(16px, 1.5vw, 22px) 0 0;
+    color: #4c4c4c;
+    font-size: clamp(1rem, 1.2vw, 1.1rem);
+    line-height: 1.65;
+  }
+
+  .collection-intro__price {
+    margin: clamp(18px, 1.6vw, 24px) 0 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .collection-catalog :global(.product-grid) {
+    margin-top: clamp(48px, 5vw, 72px);
+  }
+
+  @media (max-width: 760px) {
+    .collection-catalog {
+      padding: clamp(48px, 13vw, 64px) 0 clamp(48px, 14vw, 64px);
+    }
+
+    .collection-intro {
+      margin-top: clamp(24px, 7vw, 32px);
+    }
+
+    .collection-intro h1 {
+      font-size: clamp(3rem, 13vw, 4.5rem);
+    }
+
+    .collection-catalog :global(.product-grid) {
+      margin-top: clamp(36px, 11vw, 52px);
+    }
+  }
+</style>
