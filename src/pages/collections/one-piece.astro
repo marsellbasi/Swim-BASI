@@ -15,14 +15,14 @@ const pageSeo = resolveSeo({
   settings,
   derivedTitle: 'One-Piece Swimwear | Swim BASI',
   derivedDescription:
-    'Shop Swim BASI one-piece swimsuits in bold, expressive colorways, starting at $32.99.',
+    'Shop Swim BASI one-piece swimsuits in bold, expressive colorways for $32.99.',
   canonicalPath: '/collections/one-piece',
 });
 ---
 
 <BaseLayout
   title="One-Piece Swimwear | Swim BASI"
-  description="Shop Swim BASI one-piece swimsuits in bold, expressive colorways, starting at $32.99."
+  description="Shop Swim BASI one-piece swimsuits in bold, expressive colorways for $32.99."
   seo={pageSeo}
   >{
     sanityCollection?.sections?.length ? (
@@ -40,7 +40,7 @@ const pageSeo = resolveSeo({
                     { label: 'One-Piece' },
                   ]}
                 />
-                <p class="eyebrow">Starting at $32.99</p>
+                <p class="eyebrow">$32.99</p>
                 <h1>One-Piece Swimwear</h1>
                 <p class="lead">Clean lines, bold color, and a silhouette built for presence.</p>
               </>

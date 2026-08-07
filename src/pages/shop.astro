@@ -1,16 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumbs from '../components/Breadcrumbs.astro';
-import ProductGrid from '../components/ProductGrid.astro';
-import { products } from '../data/products';
-import { sortProducts } from '../utils/products';
-import PageSections from '../components/PageSections.astro';
-import { getSanityPage, getSanityProducts, getSiteSettings } from '../lib/sanity/content';
+import ShopEditorial from '../components/ShopEditorial.astro';
+import { getSanityPage, getSiteSettings } from '../lib/sanity/content';
+import { SANITY_CONTENT_ENABLED } from '../lib/sanity/config';
 import { resolveSeo } from '../lib/sanity/seo';
 
 const sanityPage = await getSanityPage('shopPage');
-const sanityProducts = await getSanityProducts();
-const useSanityPage = sanityPage && sanityProducts;
+if (SANITY_CONTENT_ENABLED && !sanityPage) {
+  throw new Error('The published Sanity Shop page is required for the production build.');
+}
 const settings = await getSiteSettings();
 const pageSeo = resolveSeo({
   page: sanityPage?.seo,
@@ -26,46 +24,7 @@ const pageSeo = resolveSeo({
   title="Shop All Swimwear | Swim BASI"
   description="Explore the complete Swim BASI catalog of one-piece swimwear, string bikinis, and high-waisted bikinis."
   seo={pageSeo}
-  >{
-    useSanityPage ? (
-      <PageSections sections={sanityPage.sections || []} />
-    ) : (
-      <>
-        <>
-          <section class="page-hero">
-            <div class="wrap">
-              <>
-                <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Shop' }]} />
-                <p class="eyebrow">The complete color edit</p>
-                <h1>Shop all swimwear</h1>
-                <p class="lead">
-                  Bold silhouettes organized in a full spectrum of color. Checkout is completed
-                  securely through Printful.
-                </p>
-              </>
-            </div>
-          </section>
-          <section class="section wrap">
-            <>
-              <div class="catalog-note">
-                <>
-                  <span>{products.length} colorways across three silhouettes</span>
-                  <span>Availability and sizing are provided through Printful</span>
-                </>
-              </div>
-              <nav class="collection-links" aria-label="Filter by collection">
-                <>
-                  <a href="/collections/one-piece">One-Piece</a>
-                  <a href="/collections/string-bikinis">String Bikinis</a>
-                  <a href="/collections/high-waisted-bikinis">High-Waisted</a>
-                </>
-              </nav>
-              <div style="height:40px" />
-              <ProductGrid products={sortProducts(products)} />
-            </>
-          </section>
-        </>
-      </>
-    )
-  }</BaseLayout
+>
+  {sanityPage && <ShopEditorial page={sanityPage} />}
+</BaseLayout
 >

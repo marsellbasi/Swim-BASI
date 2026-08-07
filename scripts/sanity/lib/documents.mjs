@@ -105,10 +105,10 @@ export function taxonomyDocuments() {
         {
           eyebrow:
             item.slug === "one-piece"
-              ? "Starting at $32.99"
+              ? "$32.99"
               : item.slug === "string-bikinis"
-                ? "Starting at $37.99"
-                : "Starting at $44.99",
+                ? "$37.99"
+                : "$44.99",
           heading: item.title,
           content: block(
             item.slug === "one-piece"

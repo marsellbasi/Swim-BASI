@@ -23,7 +23,12 @@ const productSchema = {
 };
 ---
 
-<article class="product-card" data-product-id={product.id} data-product-slug={product.slug}>
+<article
+  class="product-card"
+  role="listitem"
+  data-product-id={product.id}
+  data-product-slug={product.slug}
+>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(productSchema)} />
   <a
     class="product-visual"

@@ -28,13 +28,11 @@ const bodyText = (section: PageSection) =>
 const spacingClass = (section: PageSection) =>
   `homepage-spacing--${section.spacing || "standard"}`;
 const collectionColors = ["#F16A8D", "#247BA0", "#E8692A"];
-const startingPrice = (collection: SanityCollection) => {
+const collectionPrice = (collection: SanityCollection) => {
   const prices = (collection.products || [])
     .map((product) => product.displayPrice)
     .filter((price): price is number => typeof price === "number" && price > 0);
-  return prices.length
-    ? `Starting at $${Math.min(...prices).toFixed(2)}`
-    : "Explore collection";
+  return prices.length ? `$${Math.min(...prices).toFixed(2)}` : "Explore collection";
 };
 
 if (import.meta.env.DEV) {
@@ -93,7 +91,7 @@ if (import.meta.env.DEV) {
                 <CollectionCard
                   title={collection.title || "Collection"}
                   href={`/collections/${collection.slug || ""}`}
-                  price={startingPrice(collection)}
+                  price={collectionPrice(collection)}
                   color={
                     collectionColors[index % collectionColors.length] ||
                     "#77777B"

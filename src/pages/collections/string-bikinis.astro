@@ -16,14 +16,14 @@ const pageSeo = resolveSeo({
   page: sanityCollection?.seo,
   settings,
   derivedTitle: 'String Bikinis | Swim BASI',
-  derivedDescription: 'Shop Swim BASI string bikinis in confident colorways, starting at $37.99.',
+  derivedDescription: 'Shop Swim BASI string bikinis in confident colorways for $37.99.',
   canonicalPath: '/collections/string-bikinis',
 });
 ---
 
 <BaseLayout
   title="String Bikinis | Swim BASI"
-  description="Shop Swim BASI string bikinis in confident colorways, starting at $37.99."
+  description="Shop Swim BASI string bikinis in confident colorways for $37.99."
   seo={pageSeo}
   >{
     sanityCollection?.sections?.length ? (
@@ -41,7 +41,7 @@ const pageSeo = resolveSeo({
                     { label: 'String Bikinis' },
                   ]}
                 />
-                <p class="eyebrow">Starting at $37.99</p>
+                <p class="eyebrow">$37.99</p>
                 <h1>String Bikinis</h1>
                 <p class="lead">A minimal silhouette with maximum confidence.</p>
               </>

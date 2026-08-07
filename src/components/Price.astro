@@ -2,10 +2,9 @@
 interface Props {
   amount: number;
   currency?: string;
-  prefix?: string;
 }
-const { amount, currency = 'USD', prefix = 'Starting at' } = Astro.props;
+const { amount, currency = 'USD' } = Astro.props;
 const formatted = new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(amount);
 ---
 
-<p class="price"><span>{prefix}</span> {formatted}</p>
+<p class="price">{formatted}</p>

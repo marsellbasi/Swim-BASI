@@ -7,4 +7,6 @@ interface Props {
 const { products } = Astro.props;
 ---
 
-<div class="product-grid">{products.map((product) => <ProductCard product={product} />)}</div>
+<div class="product-grid" role="list">
+  {products.map((product) => <ProductCard product={product} />)}
+</div>

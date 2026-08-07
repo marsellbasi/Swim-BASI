@@ -1,0 +1,151 @@
+---
+import type { PageSection, SanityPage } from "../lib/sanity/types";
+import {
+  portableTextToPlainText,
+  sanityProductToLocal,
+} from "../lib/sanity/adapters";
+import Breadcrumbs from "./Breadcrumbs.astro";
+import ExternalCheckoutNotice from "./ExternalCheckoutNotice.astro";
+import ProductGrid from "./ProductGrid.astro";
+
+interface Props {
+  page: SanityPage;
+}
+
+const { page } = Astro.props;
+const sections = (page.sections || []).filter(
+  (section) => section.enabled !== false,
+);
+const intro = sections.find(
+  (section) => section._type === "richTextSection",
+);
+const catalog = sections.find(
+  (section) => section._type === "productGridSection",
+);
+const bodyText = (section?: PageSection) =>
+  section
+    ? typeof section.body === "string"
+      ? section.body
+      : portableTextToPlainText(section.body || section.content)
+    : "";
+const products = (catalog?.products || catalog?.collection?.products || [])
+  .slice(0, catalog?.limit || 42)
+  .map(sanityProductToLocal);
+
+if (!intro?.heading || !catalog?.heading || products.length === 0) {
+  throw new Error(
+    "The published Sanity Shop page requires an introduction and a populated product grid.",
+  );
+}
+---
+
+<main class="shop-page">
+  <section class="shop-intro" aria-labelledby="shop-title">
+    <div class="wrap shop-intro__inner">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Shop" }]} />
+      <div class="shop-intro__copy">
+        {intro.eyebrow && <p class="eyebrow">{intro.eyebrow}</p>}
+        <h1 id="shop-title">{intro.heading}</h1>
+        {bodyText(intro) && <p class="shop-intro__lead">{bodyText(intro)}</p>}
+      </div>
+    </div>
+  </section>
+
+  <section class="shop-catalog" aria-labelledby="shop-catalog-title">
+    <div class="wrap">
+      <header class="shop-catalog__header">
+        <h2 id="shop-catalog-title">{catalog.heading}</h2>
+        {bodyText(catalog) && <p>{bodyText(catalog)}</p>}
+        {catalog.showCheckoutNotice && <ExternalCheckoutNotice />}
+      </header>
+      <ProductGrid products={products} />
+    </div>
+  </section>
+</main>
+
+<style>
+  .shop-intro {
+    padding-top: clamp(72px, 6.5vw, 96px);
+  }
+
+  .shop-intro :global(.breadcrumbs) {
+    padding-top: 0;
+  }
+
+  .shop-intro__copy {
+    max-width: 760px;
+    margin-top: clamp(36px, 3.4vw, 48px);
+  }
+
+  .shop-intro__copy .eyebrow {
+    margin: 0;
+  }
+
+  .shop-intro h1 {
+    margin: clamp(20px, 1.8vw, 26px) 0 0;
+    font-family: var(--serif);
+    font-size: clamp(3.25rem, 5vw, 5.75rem);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+  }
+
+  .shop-intro__lead {
+    max-width: 680px;
+    margin: clamp(18px, 1.6vw, 24px) 0 0;
+    color: #4c4c4c;
+    font-size: clamp(1rem, 1.2vw, 1.1rem);
+    line-height: 1.65;
+  }
+
+  .shop-catalog {
+    margin-top: clamp(56px, 5.5vw, 80px);
+    padding-bottom: clamp(64px, 6vw, 88px);
+  }
+
+  .shop-catalog__header {
+    margin-bottom: clamp(28px, 2.8vw, 40px);
+  }
+
+  .shop-catalog__header h2 {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+
+  .shop-catalog__header > p {
+    max-width: 640px;
+    margin: 10px 0 0;
+    color: #5a5a5a;
+  }
+
+  .shop-catalog__header :global(.checkout-notice) {
+    margin: 10px 0 0;
+  }
+
+  @media (max-width: 760px) {
+    .shop-intro {
+      padding-top: clamp(48px, 13vw, 64px);
+    }
+
+    .shop-intro__copy {
+      margin-top: clamp(30px, 8vw, 40px);
+    }
+
+    .shop-intro h1 {
+      font-size: clamp(3rem, 14vw, 4.75rem);
+    }
+
+    .shop-catalog {
+      margin-top: clamp(40px, 12vw, 56px);
+      padding-bottom: clamp(48px, 14vw, 64px);
+    }
+
+    .shop-catalog__header {
+      margin-bottom: clamp(28px, 8vw, 36px);
+    }
+  }
+</style>
