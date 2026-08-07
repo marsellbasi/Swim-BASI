@@ -1,0 +1,503 @@
+---
+import type {
+  PageSection,
+  SanityCallToAction,
+  SanityPage,
+} from "../lib/sanity/types";
+import { portableTextToPlainText } from "../lib/sanity/adapters";
+import Breadcrumbs from "./Breadcrumbs.astro";
+import Button from "./Button.astro";
+import SanityImage from "./SanityImage.astro";
+
+interface Props {
+  page: SanityPage;
+}
+
+const { page } = Astro.props;
+const sections = (page.sections || []).filter(
+  (section) => section.enabled !== false,
+);
+const byKey = (key: string, type: string) =>
+  sections.find((section) => section._key === key) ||
+  sections.find((section) => section._type === type);
+const textFor = (section?: PageSection) => {
+  if (!section) return "";
+  return typeof section.body === "string"
+    ? section.body
+    : portableTextToPlainText(section.body || section.content);
+};
+const paragraphsFor = (section?: PageSection) =>
+  textFor(section)
+    .split("\n\n")
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+const hrefFor = (cta?: SanityCallToAction) =>
+  cta?.destination?.linkType === "external"
+    ? cta.destination.externalUrl
+    : cta?.destination?.internalPath;
+
+const intro = byKey("aboutintro", "richTextSection");
+const feature = byKey("aboutlead", "imageTextSection");
+const imagePair = byKey("aboutpair", "splitMediaSection");
+const promise = byKey("aboutpromise", "brandStatementSection");
+const campaign = byKey("aboutclosing", "imageSection");
+const closingCta = byKey("aboutcta", "callToActionSection");
+const primaryCta = closingCta?.primaryCallToAction || closingCta?.callToAction;
+const primaryHref = hrefFor(primaryCta);
+const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
+---
+
+<div class="about-page">
+  {
+    intro?.heading && (
+      <section class="about-intro" aria-labelledby="about-title">
+        <div class="about-intro__inner wrap">
+          <Breadcrumbs
+            items={[{ label: "Home", href: "/" }, { label: "About" }]}
+          />
+          {intro.eyebrow && <p class="about-eyebrow">{intro.eyebrow}</p>}
+          <h1 id="about-title">{intro.heading}</h1>
+          <div class="about-intro__copy">
+            {paragraphsFor(intro).map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    feature?.media?.image && (
+      <section class="about-feature" aria-labelledby="about-feature-title">
+        <div class="about-feature__inner wrap">
+          <div class="about-media about-media--feature">
+            <SanityImage
+              value={feature.media.image}
+              sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1400px) 54vw, 700px"
+              pictureClass="about-picture"
+              diagnosticKey="about-feature"
+            />
+          </div>
+          <div class="about-feature__copy">
+            <h2 id="about-feature-title">{feature.heading}</h2>
+            {paragraphsFor(feature).map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    (imagePair?.leftMedia?.image || imagePair?.rightMedia?.image) && (
+      <section
+        class="about-pair"
+        aria-label={imagePair.heading || "Swim BASI editorial"}
+      >
+        <div class="about-pair__grid wrap">
+          {imagePair.leftMedia?.image && (
+            <figure>
+              <div class="about-media about-media--pink">
+                <SanityImage
+                  value={imagePair.leftMedia.image}
+                  sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1440px) 48vw, 684px"
+                  pictureClass="about-picture"
+                  diagnosticKey="about-pair-pink"
+                />
+              </div>
+              {imagePair.leftMedia.image.caption && (
+                <figcaption>{imagePair.leftMedia.image.caption}</figcaption>
+              )}
+            </figure>
+          )}
+          {imagePair.rightMedia?.image && (
+            <figure>
+              <div class="about-media about-media--blue">
+                <SanityImage
+                  value={imagePair.rightMedia.image}
+                  sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1440px) 48vw, 684px"
+                  pictureClass="about-picture"
+                  diagnosticKey="about-pair-blue"
+                />
+              </div>
+              {imagePair.rightMedia.image.caption && (
+                <figcaption>{imagePair.rightMedia.image.caption}</figcaption>
+              )}
+            </figure>
+          )}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    promise?.heading && (
+      <section class="about-promise" aria-labelledby="about-promise-title">
+        <div class="about-promise__inner wrap">
+          {promise.eyebrow && <p class="about-eyebrow">{promise.eyebrow}</p>}
+          <h2 id="about-promise-title">{promise.heading}</h2>
+          {paragraphsFor(promise).map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    campaign?.image && (
+      <section
+        class="about-campaign"
+        aria-label={campaign.heading || "Swim BASI campaign"}
+      >
+        <figure class="wrap">
+          <div class="about-media about-media--campaign">
+            <SanityImage
+              value={campaign.image}
+              sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1440px) calc(100vw - 32px), 1408px"
+              pictureClass="about-picture"
+              diagnosticKey="about-campaign"
+            />
+          </div>
+          {campaign.image.caption && (
+            <figcaption>{campaign.image.caption}</figcaption>
+          )}
+        </figure>
+      </section>
+    )
+  }
+
+  {
+    closingCta?.heading && (
+      <section class="about-closing" aria-labelledby="about-closing-title">
+        <div class="about-closing__inner wrap">
+          {closingCta.eyebrow && (
+            <p class="about-eyebrow">{closingCta.eyebrow}</p>
+          )}
+          <h2 id="about-closing-title">{closingCta.heading}</h2>
+          {paragraphsFor(closingCta).map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+          {(primaryHref || secondaryHref) && (
+            <div class="about-closing__actions">
+              {primaryHref && (
+                <Button href={primaryHref}>{primaryCta?.label}</Button>
+              )}
+              {secondaryHref && (
+                <Button href={secondaryHref} variant="text">
+                  {closingCta.secondaryCallToAction?.label}
+                </Button>
+              )}
+            </div>
+          )}
+        </div>
+      </section>
+    )
+  }
+</div>
+
+<style>
+  .about-page {
+    --about-major-space: clamp(72px, 8vw, 112px);
+    --about-copy: #454545;
+    background: var(--white);
+  }
+
+  .about-eyebrow {
+    margin: 0 0 18px;
+    color: #806a1f;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.19em;
+    text-transform: uppercase;
+  }
+
+  .about-intro {
+    padding-block: clamp(72px, 7.5vw, 112px);
+  }
+
+  .about-intro__inner {
+    max-width: 1440px;
+  }
+
+  .about-intro :global(.breadcrumbs) {
+    padding-top: 0;
+    margin-bottom: clamp(42px, 5vw, 68px);
+  }
+
+  .about-intro h1,
+  .about-feature h2,
+  .about-promise h2,
+  .about-closing h2 {
+    margin: 0;
+    font-family: var(--serif);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+  }
+
+  .about-intro h1 {
+    max-width: 980px;
+    font-size: clamp(3.25rem, 6.7vw, 6.7rem);
+    line-height: 0.94;
+  }
+
+  .about-intro__copy {
+    max-width: 780px;
+    margin-top: clamp(28px, 3.2vw, 42px);
+    color: var(--about-copy);
+    font-size: clamp(1.05rem, 1.35vw, 1.22rem);
+    line-height: 1.7;
+  }
+
+  .about-intro__copy p,
+  .about-feature__copy p,
+  .about-promise__inner > p:not(.about-eyebrow),
+  .about-closing__inner > p:not(.about-eyebrow) {
+    margin: 0;
+  }
+
+  .about-intro__copy p + p,
+  .about-feature__copy p + p {
+    margin-top: 18px;
+  }
+
+  .about-feature {
+    padding-bottom: var(--about-major-space);
+  }
+
+  .about-feature__inner {
+    width: min(calc(100% - 32px), 1280px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+    align-items: center;
+    gap: clamp(44px, 6vw, 92px);
+  }
+
+  .about-media {
+    position: relative;
+    overflow: hidden;
+    background: var(--ivory);
+  }
+
+  .about-media--feature,
+  .about-media--pink,
+  .about-media--blue {
+    aspect-ratio: 4 / 5;
+  }
+
+  .about-media :global(.about-picture),
+  .about-media :global(.about-picture img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .about-media :global(.about-picture img) {
+    object-fit: cover;
+  }
+
+  .about-media--feature :global(img) {
+    object-position: center 57%;
+  }
+
+  .about-media--pink :global(img) {
+    object-position: center top;
+  }
+
+  .about-media--blue :global(img) {
+    object-position: center 29%;
+  }
+
+  .about-feature__copy {
+    max-width: 480px;
+  }
+
+  .about-feature__copy h2 {
+    margin-bottom: 24px;
+    font-size: clamp(2.6rem, 4vw, 4.75rem);
+    line-height: 0.98;
+  }
+
+  .about-feature__copy p {
+    color: var(--about-copy);
+    line-height: 1.75;
+  }
+
+  .about-pair figure,
+  .about-campaign figure {
+    margin: 0;
+  }
+
+  .about-pair__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(24px, 2.8vw, 40px);
+  }
+
+  .about-pair figcaption,
+  .about-campaign figcaption {
+    margin-top: 14px;
+    color: #666;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .about-promise {
+    padding-block: clamp(88px, 8.5vw, 120px);
+  }
+
+  .about-promise__inner {
+    max-width: 792px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .about-promise h2,
+  .about-closing h2 {
+    font-size: clamp(2.8rem, 5vw, 5.6rem);
+    line-height: 0.98;
+  }
+
+  .about-promise__inner > p:not(.about-eyebrow) {
+    max-width: 720px;
+    margin: 28px auto 0;
+    color: var(--about-copy);
+    font-size: clamp(1rem, 1.25vw, 1.15rem);
+    line-height: 1.75;
+  }
+
+  .about-media--campaign {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: 760px;
+  }
+
+  .about-media--campaign :global(img) {
+    object-position: center 76%;
+  }
+
+  .about-closing {
+    padding-block: clamp(80px, 8.5vw, 120px);
+  }
+
+  .about-closing__inner {
+    max-width: 820px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .about-closing__inner > p:not(.about-eyebrow) {
+    margin-top: 24px;
+    color: var(--about-copy);
+    font-size: 1.05rem;
+  }
+
+  .about-closing__actions {
+    margin-top: 34px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 18px 28px;
+  }
+
+  @media (max-width: 767px) {
+    .about-page {
+      --about-major-space: clamp(56px, 15vw, 72px);
+    }
+
+    .about-intro {
+      padding-block: clamp(56px, 16vw, 72px);
+    }
+
+    .about-intro :global(.breadcrumbs) {
+      margin-bottom: 38px;
+    }
+
+    .about-intro h1 {
+      font-size: clamp(3rem, 14vw, 4.7rem);
+      line-height: 0.96;
+    }
+
+    .about-intro__copy {
+      margin-top: 26px;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    .about-feature__inner {
+      width: min(calc(100% - 24px), 1280px);
+      grid-template-columns: 1fr;
+      gap: 34px;
+    }
+
+    .about-feature__copy {
+      max-width: 620px;
+    }
+
+    .about-feature__copy h2 {
+      margin-bottom: 18px;
+    }
+
+    .about-pair__grid {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .about-pair figcaption,
+    .about-campaign figcaption {
+      margin-top: 10px;
+    }
+
+    .about-promise {
+      padding-block: clamp(64px, 17vw, 76px);
+    }
+
+    .about-promise__inner,
+    .about-closing__inner {
+      text-align: left;
+    }
+
+    .about-promise__inner > p:not(.about-eyebrow) {
+      margin-top: 22px;
+    }
+
+    .about-media--campaign {
+      aspect-ratio: 4 / 5;
+      max-height: none;
+    }
+
+    .about-media--campaign :global(img) {
+      object-position: center 64%;
+    }
+
+    .about-closing {
+      padding-block: clamp(64px, 17vw, 80px);
+    }
+
+    .about-closing__actions {
+      margin-top: 30px;
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .about-closing__actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .about-closing__actions :global(.button) {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .about-closing__actions :global(.button--text) {
+      width: fit-content;
+    }
+  }
+</style>

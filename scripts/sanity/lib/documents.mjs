@@ -502,18 +502,30 @@ export function pageDocuments(assetMap) {
     sections: [
       commonSection("richTextSection", "aboutintro", "About page heading", {
         eyebrow: "Our story",
-        heading: "For women who embody confidence.",
-        content: block(
-          "Swim BASI begins with a simple belief: confidence should be seen. Every color and silhouette is presented to help women feel expressive, present, and entirely themselves.",
-          "aboutintro",
-        ),
+        heading: "Designed to be seen. Made to be lived in.",
+        content: [
+          ...block(
+            "Swim BASI is swimwear for women who lead with confidence. We pair expressive color, flattering silhouettes, and a clean point of view so every piece feels bold without trying too hard.",
+            "aboutintro",
+          ),
+          ...block(
+            "Whether poolside, on vacation, or somewhere in between, Swim BASI is made for the moments when you want to feel completely present in your own skin.",
+            "aboutintrosecondary",
+          ),
+        ],
       }),
       commonSection("imageTextSection", "aboutlead", "Color with intention", {
-        heading: "Color with intention",
-        body: block(
-          "Our visual world is bold without becoming loud—an evolving edit of color, form, and seasonal energy.",
-          "colorintent",
-        ),
+        heading: "Color with intention.",
+        body: [
+          ...block(
+            "Color is part of the attitude. Every shade is chosen to feel expressive, elevated, and easy to own—from soft tones to saturated statements.",
+            "colorintent",
+          ),
+          ...block(
+            "The goal isn't simply to stand out. It's to wear color in a way that feels unmistakably like you.",
+            "colorintentsecondary",
+          ),
+        ],
         media: {
           _type: "responsiveMedia",
           mediaType: "image",
@@ -547,6 +559,17 @@ export function pageDocuments(assetMap) {
           fit: "cover",
         },
       }),
+      commonSection(
+        "brandStatementSection",
+        "aboutpromise",
+        "Our point of view",
+        {
+          eyebrow: "Our point of view",
+          heading: "Confidence looks different on everyone.",
+          body: "Swim BASI isn't about dressing for permission. It's about choosing the color, silhouette, and energy that make you feel most like yourself. Our collections are built to give women room to be playful, polished, bold, soft—or all of it at once.",
+          alignment: "center",
+        },
+      ),
       commonSection("imageSection", "aboutclosing", "Swim BASI after dark", {
         image: brand(
           "yellow-and-black-string-bikinis-night-walk",
@@ -555,6 +578,23 @@ export function pageDocuments(assetMap) {
         ),
         width: "wide",
       }),
+      commonSection(
+        "callToActionSection",
+        "aboutcta",
+        "Closing shop call to action",
+        {
+          eyebrow: "Swim BASI",
+          heading: "Your confidence is the statement.",
+          body: "Find the color and silhouette that feel like you.",
+          primaryCallToAction: cta("SHOP THE COLLECTION", "/shop"),
+          secondaryCallToAction: cta(
+            "EXPLORE COLLECTIONS",
+            "/collections",
+            "text",
+          ),
+          alignment: "center",
+        },
+      ),
     ],
     seo: {
       _type: "seo",

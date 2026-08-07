@@ -1,25 +1,24 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumbs from '../components/Breadcrumbs.astro';
-import ResponsiveBrandImage from '../components/ResponsiveBrandImage.astro';
-import { getBrandImage } from '../data/brand-images';
-import PageSections from '../components/PageSections.astro';
-import { getSanityPage, getSiteSettings } from '../lib/sanity/content';
-import { resolveSeo } from '../lib/sanity/seo';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AboutEditorial from "../components/AboutEditorial.astro";
+import { getSanityPage, getSiteSettings } from "../lib/sanity/content";
+import { SANITY_CONTENT_ENABLED } from "../lib/sanity/config";
+import { resolveSeo } from "../lib/sanity/seo";
 
-const orangePoolside = getBrandImage('orange-high-waisted-poolside-full-length');
-const cottonCandyDetail = getBrandImage('cotton-candy-high-waisted-studio-detail');
-const lavenderPoolside = getBrandImage('lavender-string-bikini-poolside-back');
-const nightWalk = getBrandImage('yellow-and-black-string-bikinis-night-walk');
-const sanityPage = await getSanityPage('aboutPage');
+const sanityPage = await getSanityPage("aboutPage");
+if (SANITY_CONTENT_ENABLED && !sanityPage) {
+  throw new Error(
+    "The published Sanity About page is required for the production build.",
+  );
+}
 const settings = await getSiteSettings();
 const pageSeo = resolveSeo({
   page: sanityPage?.seo,
   settings,
-  derivedTitle: 'About Swim BASI | Our Story',
+  derivedTitle: "About Swim BASI | Our Story",
   derivedDescription:
     "Meet Swim BASI, a women's swimwear brand built around confidence, expressive color, and strong silhouettes.",
-  canonicalPath: '/about',
+  canonicalPath: "/about",
 });
 ---
 
@@ -27,73 +26,6 @@ const pageSeo = resolveSeo({
   title="About Swim BASI | Our Story"
   description="Meet Swim BASI, a women's swimwear brand built around confidence, expressive color, and strong silhouettes."
   seo={pageSeo}
-  >{
-    sanityPage ? (
-      <PageSections sections={sanityPage.sections || []} />
-    ) : (
-      <>
-        <>
-          <section class="page-hero">
-            <div class="wrap">
-              <>
-                <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'About' }]} />
-                <p class="eyebrow">Our story</p>
-                <h1>For women who embody confidence.</h1>
-              </>
-            </div>
-          </section>
-          <section class="about-story wrap" aria-label="The Swim BASI story">
-            <div class="about-lead">
-              <ResponsiveBrandImage
-                image={orangePoolside}
-                sizes="(max-width: 800px) calc(100vw - 24px), 52vw"
-              />
-              <article class="prose about-lead-copy">
-                <>
-                  <p>
-                    Swim BASI begins with a simple belief: confidence should be seen. Every color
-                    and silhouette is presented to help women feel expressive, present, and entirely
-                    themselves.
-                  </p>
-                  <h2>Color with intention</h2>
-                  <p>
-                    Our visual world is bold without becoming loud—an evolving edit of color, form,
-                    and seasonal energy.
-                  </p>
-                  <h2>Designed to make an entrance</h2>
-                  <p>
-                    From streamlined one-pieces to expressive bikinis, Swim BASI celebrates
-                    silhouettes that hold their own.
-                  </p>
-                </>
-              </article>
-            </div>
-            <div class="about-image-pair">
-              <figure>
-                <ResponsiveBrandImage
-                  image={cottonCandyDetail}
-                  sizes="(max-width: 720px) calc(100vw - 24px), 50vw"
-                />
-                <figcaption>Color, considered from every angle.</figcaption>
-              </figure>
-              <figure>
-                <ResponsiveBrandImage
-                  image={lavenderPoolside}
-                  sizes="(max-width: 720px) calc(100vw - 24px), 50vw"
-                />
-                <figcaption>Presence belongs wherever you bring it.</figcaption>
-              </figure>
-            </div>
-            <figure class="about-closing-image">
-              <ResponsiveBrandImage
-                image={nightWalk}
-                sizes="(max-width: 960px) calc(100vw - 24px), 900px"
-              />
-              <figcaption>Swim BASI after dark.</figcaption>
-            </figure>
-          </section>
-        </>
-      </>
-    )
-  }</BaseLayout
 >
+  {sanityPage && <AboutEditorial page={sanityPage} />}
+</BaseLayout>
