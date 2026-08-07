@@ -1,0 +1,445 @@
+---
+import type { SanityCallToAction, SanityPage } from "../lib/sanity/types";
+import Breadcrumbs from "./Breadcrumbs.astro";
+import Button from "./Button.astro";
+
+interface Props {
+  page: SanityPage;
+}
+
+const { page } = Astro.props;
+const { intro, measurementGuide, silhouetteGuide, beforeOrder, closingCallToAction } = page;
+const measurementCards = measurementGuide?.cards || [];
+const silhouetteItems = silhouetteGuide?.items || [];
+
+const ctaHref = (cta?: SanityCallToAction) =>
+  cta?.destination?.linkType === "external"
+    ? cta.destination.externalUrl
+    : cta?.destination?.internalPath;
+
+const primaryHref = ctaHref(closingCallToAction?.primaryCallToAction);
+const secondaryHref = ctaHref(closingCallToAction?.secondaryCallToAction);
+
+if (
+  !intro?.eyebrow ||
+  !intro.heading ||
+  !intro.body ||
+  !measurementGuide?.eyebrow ||
+  !measurementGuide.heading ||
+  !measurementGuide.intro ||
+  measurementCards.length !== 3 ||
+  measurementCards.some((card) => !card.heading || !card.body) ||
+  !silhouetteGuide?.eyebrow ||
+  !silhouetteGuide.heading ||
+  silhouetteItems.length !== 3 ||
+  silhouetteItems.some(
+    (item) =>
+      !item.collection?.title ||
+      !item.collection.slug ||
+      !item.body ||
+      !item.fitNote ||
+      !item.callToActionLabel,
+  ) ||
+  !beforeOrder?.eyebrow ||
+  !beforeOrder.heading ||
+  !beforeOrder.body ||
+  !beforeOrder.secondaryBody ||
+  !closingCallToAction?.heading ||
+  !closingCallToAction.primaryCallToAction?.label ||
+  !closingCallToAction.secondaryCallToAction?.label ||
+  !primaryHref ||
+  !secondaryHref
+) {
+  throw new Error(
+    "The published Sanity Size Guide requires complete intro, measurement, silhouette, ordering, and closing CTA content.",
+  );
+}
+---
+
+<div class="fit-guide">
+  <section class="fit-guide__intro" aria-labelledby="fit-guide-title">
+    <div class="wrap">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Size Guide" }]} />
+      <header class="fit-guide__intro-copy">
+        <p class="fit-eyebrow">{intro.eyebrow}</p>
+        <h1 id="fit-guide-title">{intro.heading}</h1>
+        <p>{intro.body}</p>
+        {intro.secondaryBody && <p>{intro.secondaryBody}</p>}
+      </header>
+    </div>
+  </section>
+
+  <section class="measure-section" aria-labelledby="measure-title">
+    <div class="wrap">
+      <header class="fit-section-heading">
+        <p class="fit-eyebrow">{measurementGuide.eyebrow}</p>
+        <h2 id="measure-title">{measurementGuide.heading}</h2>
+        <p>{measurementGuide.intro}</p>
+      </header>
+
+      <ol class="measure-grid">
+        {measurementCards.map((card, index) => (
+          <li class="measure-card">
+            <p class="measure-card__identifier">
+              {String(index + 1).padStart(2, "0")} — {card.heading}
+            </p>
+            <p>{card.body}</p>
+          </li>
+        ))}
+      </ol>
+
+      {measurementGuide.note && <p class="measure-note">{measurementGuide.note}</p>}
+    </div>
+  </section>
+
+  <section class="silhouette-section" aria-labelledby="silhouette-title">
+    <div class="wrap">
+      <header class="fit-section-heading">
+        <p class="fit-eyebrow">{silhouetteGuide.eyebrow}</p>
+        <h2 id="silhouette-title">{silhouetteGuide.heading}</h2>
+      </header>
+
+      <div class="silhouette-grid">
+        {silhouetteItems.map((item, index) => (
+          <article class="silhouette-card">
+            <p class="silhouette-card__number">{String(index + 1).padStart(2, "0")}</p>
+            <h3>{item.collection?.title}</h3>
+            <p>{item.body}</p>
+            <p class="silhouette-card__note">{item.fitNote}</p>
+            <a class="silhouette-card__link" href={`/collections/${item.collection?.slug}/`}>
+              {item.callToActionLabel}<span aria-hidden="true"> →</span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="before-order" aria-labelledby="before-order-title">
+    <div class="wrap before-order__inner">
+      <p class="fit-eyebrow">{beforeOrder.eyebrow}</p>
+      <h2 id="before-order-title">{beforeOrder.heading}</h2>
+      <p>{beforeOrder.body}</p>
+      <p>{beforeOrder.secondaryBody}</p>
+    </div>
+  </section>
+
+  <section class="fit-closing" aria-labelledby="fit-closing-title">
+    <div class="wrap fit-closing__inner">
+      <h2 id="fit-closing-title">{closingCallToAction.heading}</h2>
+      <div class="fit-closing__actions">
+        <Button href={primaryHref}>{closingCallToAction.primaryCallToAction.label}</Button>
+        <Button href={secondaryHref} variant="secondary">
+          {closingCallToAction.secondaryCallToAction.label}
+        </Button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .fit-guide {
+    color: var(--black);
+  }
+
+  .fit-guide__intro {
+    padding: clamp(72px, 6.5vw, 96px) 0 0;
+  }
+
+  .fit-guide__intro :global(.breadcrumbs) {
+    padding-top: 0;
+  }
+
+  .fit-guide__intro-copy {
+    max-width: 760px;
+    margin-top: clamp(32px, 3vw, 44px);
+  }
+
+  .fit-eyebrow,
+  .measure-card__identifier,
+  .silhouette-card__number {
+    margin: 0;
+    color: var(--gold);
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .fit-guide__intro h1 {
+    margin: clamp(18px, 1.6vw, 24px) 0 0;
+    font-family: var(--serif);
+    font-size: clamp(3.2rem, 5vw, 5.75rem);
+    font-weight: 400;
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+  }
+
+  .fit-guide__intro-copy > p:not(.fit-eyebrow) {
+    max-width: 720px;
+    margin: clamp(18px, 1.5vw, 24px) 0 0;
+    color: #4c4c4c;
+    font-size: clamp(1rem, 1.15vw, 1.1rem);
+    line-height: 1.7;
+  }
+
+  .fit-guide__intro-copy > p + p {
+    margin-top: 12px;
+  }
+
+  .measure-section {
+    padding-top: clamp(64px, 6vw, 88px);
+  }
+
+  .fit-section-heading {
+    max-width: 720px;
+  }
+
+  .fit-section-heading h2,
+  .before-order h2,
+  .fit-closing h2 {
+    margin: clamp(14px, 1.3vw, 20px) 0 0;
+    font-family: var(--serif);
+    font-size: clamp(2.45rem, 3.7vw, 4.4rem);
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    line-height: 1.03;
+  }
+
+  .fit-section-heading > p:not(.fit-eyebrow) {
+    max-width: 660px;
+    margin: clamp(16px, 1.4vw, 22px) 0 0;
+    color: #4c4c4c;
+    line-height: 1.7;
+  }
+
+  .measure-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(24px, 2.3vw, 36px);
+    margin: clamp(28px, 3vw, 40px) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .measure-card {
+    min-height: 190px;
+    padding: clamp(24px, 2.2vw, 34px);
+    border-top: 1px solid #dedbd3;
+    background: #f8f7f4;
+  }
+
+  .measure-card > p:last-child {
+    margin: 28px 0 0;
+    color: #3f3f3f;
+    line-height: 1.65;
+  }
+
+  .measure-note {
+    margin: clamp(20px, 2vw, 28px) 0 0;
+    color: #666;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  .silhouette-section {
+    padding-top: clamp(80px, 7vw, 104px);
+  }
+
+  .silhouette-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(24px, 2.3vw, 36px);
+    margin-top: clamp(32px, 3.3vw, 48px);
+  }
+
+  .silhouette-card {
+    display: flex;
+    min-height: 390px;
+    flex-direction: column;
+    padding: clamp(28px, 2.6vw, 40px);
+    border: 1px solid #e4e1da;
+  }
+
+  .silhouette-card h3 {
+    margin: clamp(24px, 2.3vw, 34px) 0 0;
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 2.3vw, 2.75rem);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+  }
+
+  .silhouette-card > p:not(.silhouette-card__number) {
+    margin: 20px 0 0;
+    color: #4c4c4c;
+    line-height: 1.65;
+  }
+
+  .silhouette-card .silhouette-card__note {
+    padding-top: 20px;
+    border-top: 1px solid #e8e5df;
+    color: #656565;
+    font-size: 0.9rem;
+  }
+
+  .silhouette-card__link {
+    width: fit-content;
+    margin-top: auto;
+    padding-top: 32px;
+    color: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .silhouette-card__link span {
+    display: inline-block;
+    transition: transform 180ms ease;
+  }
+
+  .silhouette-card__link:hover span,
+  .silhouette-card__link:focus-visible span {
+    transform: translateX(4px);
+  }
+
+  .before-order {
+    padding-top: clamp(72px, 6.5vw, 96px);
+  }
+
+  .before-order__inner {
+    max-width: 900px;
+    padding: clamp(48px, 5vw, 72px);
+    background: #f8f7f4;
+  }
+
+  .before-order h2 {
+    max-width: 760px;
+    font-size: clamp(2.35rem, 3.4vw, 4rem);
+  }
+
+  .before-order__inner > p:not(.fit-eyebrow) {
+    max-width: 720px;
+    margin: clamp(16px, 1.5vw, 22px) 0 0;
+    color: #4c4c4c;
+    line-height: 1.7;
+  }
+
+  .before-order__inner > p + p {
+    margin-top: 12px;
+  }
+
+  .fit-closing {
+    padding: clamp(72px, 7vw, 96px) 0 clamp(64px, 6vw, 88px);
+  }
+
+  .fit-closing__inner {
+    text-align: center;
+  }
+
+  .fit-closing h2 {
+    margin-top: 0;
+    font-size: clamp(2.4rem, 3.6vw, 4.2rem);
+  }
+
+  .fit-closing__actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: clamp(28px, 2.7vw, 38px);
+  }
+
+  @media (max-width: 900px) {
+    .measure-grid,
+    .silhouette-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .measure-card:last-child,
+    .silhouette-card:last-child {
+      grid-column: 1 / -1;
+      width: calc(50% - 12px);
+      justify-self: center;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .fit-guide__intro {
+      padding-top: clamp(48px, 13vw, 64px);
+    }
+
+    .fit-guide__intro-copy {
+      margin-top: clamp(24px, 7vw, 32px);
+    }
+
+    .fit-guide__intro h1 {
+      font-size: clamp(3rem, 14.5vw, 4.5rem);
+    }
+
+    .measure-section {
+      padding-top: clamp(48px, 14vw, 64px);
+    }
+
+    .measure-grid,
+    .silhouette-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .measure-card:last-child,
+    .silhouette-card:last-child {
+      grid-column: auto;
+      width: auto;
+    }
+
+    .measure-card {
+      min-height: auto;
+    }
+
+    .silhouette-section {
+      padding-top: clamp(56px, 16vw, 72px);
+    }
+
+    .silhouette-card {
+      min-height: 0;
+      padding: 28px 24px;
+    }
+
+    .silhouette-card__link {
+      margin-top: 32px;
+      padding-top: 0;
+    }
+
+    .before-order {
+      padding-top: clamp(48px, 14vw, 72px);
+    }
+
+    .before-order__inner {
+      padding: 40px 24px;
+    }
+
+    .fit-closing {
+      padding: clamp(56px, 17vw, 80px) 0 clamp(48px, 14vw, 64px);
+    }
+
+    .fit-closing__actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .fit-closing__actions :global(.button) {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .silhouette-card__link span {
+      transition: none;
+    }
+  }
+</style>

@@ -1,75 +1,29 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumbs from '../components/Breadcrumbs.astro';
-import PageSections from '../components/PageSections.astro';
+import SizeGuideEditorial from '../components/SizeGuideEditorial.astro';
 import { getSanityPage, getSiteSettings } from '../lib/sanity/content';
+import { SANITY_CONTENT_ENABLED } from '../lib/sanity/config';
 import { resolveSeo } from '../lib/sanity/seo';
 
 const sanityPage = await getSanityPage('sizeGuide');
+if (SANITY_CONTENT_ENABLED && !sanityPage) {
+  throw new Error('Published Sanity Size Guide content is required in production.');
+}
 const settings = await getSiteSettings();
 const pageSeo = resolveSeo({
   page: sanityPage?.seo,
   settings,
-  derivedTitle: 'Swimwear Size Guide | Swim BASI',
+  derivedTitle: 'Size Guide | Swimwear Fit & Measurements',
   derivedDescription:
-    'Find Swim BASI fit notes and product-specific sizing guidance before ordering through Printful.',
+    'Find your Swim BASI fit with measuring guidance, silhouette-specific fit notes, and product sizing information for one-piece, string bikini, and high-waisted swimwear.',
   canonicalPath: '/size-guide',
 });
 ---
 
 <BaseLayout
-  title="Swimwear Size Guide | Swim BASI"
-  description="Find Swim BASI fit notes and product-specific sizing guidance before ordering through Printful."
+  title="Size Guide | Swimwear Fit & Measurements"
+  description="Find your Swim BASI fit with measuring guidance, silhouette-specific fit notes, and product sizing information for one-piece, string bikini, and high-waisted swimwear."
   seo={pageSeo}
-  >{
-    sanityPage ? (
-      <PageSections sections={sanityPage.sections || []} page={sanityPage} />
-    ) : (
-      <>
-        <>
-          <section class="page-hero">
-            <div class="wrap">
-              <>
-                <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Size Guide' }]} />
-                <p class="eyebrow">Fit notes</p>
-                <h1>Size guide</h1>
-                <p class="lead">The right fit starts with product-specific measurements.</p>
-              </>
-            </div>
-          </section>
-          <section class="content-page wrap">
-            <>
-              <div class="notice">
-                <strong>Sizing update:</strong> Detailed Swim BASI sizing guidance is being
-                finalized. Until then, review the sizing information on each Printful product page
-                before ordering.
-              </div>
-              <div class="info-grid">
-                <>
-                  <article class="info-card">
-                    <>
-                      <h2>Measure with care</h2>
-                      <p>
-                        Use a flexible measuring tape and keep it level. Measure bust, natural
-                        waist, and the fullest part of your hips.
-                      </p>
-                    </>
-                  </article>
-                  <article class="info-card">
-                    <>
-                      <h2>Check the product page</h2>
-                      <p>
-                        Fabric, stretch, and cut can affect fit. Always review the latest
-                        product-specific sizing information at Printful before ordering.
-                      </p>
-                    </>
-                  </article>
-                </>
-              </div>
-            </>
-          </section>
-        </>
-      </>
-    )
-  }</BaseLayout
 >
+  {sanityPage && <SizeGuideEditorial page={sanityPage} />}
+</BaseLayout>

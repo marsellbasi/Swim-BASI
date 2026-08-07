@@ -185,6 +185,41 @@ export interface SanityPage {
   }>;
   measurementInstructions?: PortableTextBlock[];
   sizeGuideImage?: ManagedImage;
+  intro?: {
+    eyebrow?: string;
+    heading?: string;
+    body?: string;
+    secondaryBody?: string;
+  };
+  measurementGuide?: {
+    eyebrow?: string;
+    heading?: string;
+    intro?: string;
+    cards?: Array<{ _key?: string; heading?: string; body?: string }>;
+    note?: string;
+  };
+  silhouetteGuide?: {
+    eyebrow?: string;
+    heading?: string;
+    items?: Array<{
+      _key?: string;
+      collection?: SanityCollection;
+      body?: string;
+      fitNote?: string;
+      callToActionLabel?: string;
+    }>;
+  };
+  beforeOrder?: {
+    eyebrow?: string;
+    heading?: string;
+    body?: string;
+    secondaryBody?: string;
+  };
+  closingCallToAction?: {
+    heading?: string;
+    primaryCallToAction?: SanityCallToAction;
+    secondaryCallToAction?: SanityCallToAction;
+  };
 }
 
 export interface SanityProduct {

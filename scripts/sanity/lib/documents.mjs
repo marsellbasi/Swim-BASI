@@ -631,30 +631,122 @@ export function pageDocuments(assetMap) {
     measurementUnit: "inches",
     rows: [],
     measurementInstructions: block(
-      "Use a flexible measuring tape and keep it level. Measure bust, natural waist, and the fullest part of your hips.",
+      "Use a flexible measuring tape, keep it level, and measure close to the body without pulling too tightly.",
       "measure",
     ),
+    intro: {
+      eyebrow: "FIT GUIDE",
+      heading: "Find your best fit.",
+      body: "Swimwear should feel secure, comfortable, and made to move with you. Start with your body measurements, then compare them with the product-specific sizing details for the silhouette you're shopping.",
+      secondaryBody:
+        "Because fabric, stretch, and construction vary by style, always review the final measurements on the product page before ordering.",
+    },
+    measurementGuide: {
+      eyebrow: "HOW TO MEASURE",
+      heading: "Measure with care.",
+      intro:
+        "Use a flexible measuring tape, keep it level, and measure close to the body without pulling too tightly.",
+      cards: [
+        {
+          _type: "measurementCard",
+          _key: "chest",
+          heading: "CHEST",
+          body: "Measure around the fullest part of your chest, keeping the tape level across your back and under your arms.",
+        },
+        {
+          _type: "measurementCard",
+          _key: "waist",
+          heading: "WAIST",
+          body: "Measure around the narrowest part of your natural waist.",
+        },
+        {
+          _type: "measurementCard",
+          _key: "hips",
+          heading: "HIPS",
+          body: "Stand with your feet together and measure around the fullest part of your hips and seat.",
+        },
+      ],
+      note: "For the most accurate result, measure over lightweight clothing or undergarments.",
+    },
+    silhouetteGuide: {
+      eyebrow: "FIT BY SILHOUETTE",
+      heading: "Choose your shape.",
+      items: [
+        {
+          _type: "silhouetteFit",
+          _key: "onepiecefit",
+          collection: {
+            _type: "reference",
+            _ref: ids.collection("one-piece"),
+          },
+          body: "Designed for a close, secure fit through the torso. Chest, waist, hips, and torso length can all affect how a one-piece sits.",
+          fitNote:
+            "If you're between sizes, compare the product measurements closely before choosing.",
+          callToActionLabel: "SHOP ONE-PIECE",
+        },
+        {
+          _type: "silhouetteFit",
+          _key: "stringfit",
+          collection: {
+            _type: "reference",
+            _ref: ids.collection("string-bikinis"),
+          },
+          body: "Adjustable ties provide more flexibility through the top and hips, making this silhouette easier to personalize to your preferred fit.",
+          fitNote:
+            "Use your chest and hip measurements as your starting point, then adjust the ties for comfort and coverage.",
+          callToActionLabel: "SHOP STRING BIKINIS",
+        },
+        {
+          _type: "silhouetteFit",
+          _key: "highwaistedfit",
+          collection: {
+            _type: "reference",
+            _ref: ids.collection("high-waisted-bikinis"),
+          },
+          body: "Designed to sit higher through the waist with more coverage through the bottom. Waist and hip measurements are especially important for this silhouette.",
+          fitNote:
+            "Choose the size that gives you a secure waistband without excessive compression.",
+          callToActionLabel: "SHOP HIGH-WAISTED",
+        },
+      ],
+    },
+    beforeOrder: {
+      eyebrow: "BEFORE YOU ORDER",
+      heading: "Check the final product measurements.",
+      body: "Fit can vary slightly by fabric, stretch, and silhouette. Before completing your order, review the size guide on the product page for the most current product-specific measurements.",
+      secondaryBody:
+        "Swim BASI checkout is completed securely through Printful, where final sizing and availability are confirmed.",
+    },
+    closingCallToAction: {
+      heading: "Ready to find your fit?",
+      primaryCallToAction: cta("SHOP SWIMWEAR", "/shop"),
+      secondaryCallToAction: cta(
+        "EXPLORE COLLECTIONS",
+        "/collections",
+        "secondary",
+      ),
+    },
     sections: [
       commonSection("richTextSection", "sizeintro", "Size guide heading", {
-        eyebrow: "Fit notes",
-        heading: "Size guide",
+        eyebrow: "FIT GUIDE",
+        heading: "Find your best fit.",
         content: block(
-          "The right fit starts with product-specific measurements. Detailed Swim BASI sizing guidance is being finalized. Until then, review the sizing information on each Printful product page before ordering.",
+          "Swimwear should feel secure, comfortable, and made to move with you. Start with your body measurements, then compare them with the product-specific sizing details for the silhouette you're shopping.",
           "sizeintro",
         ),
       }),
       commonSection("sizeGuideSection", "sizetable", "Measurement guidance", {
         heading: "Measure with care",
-        body: "Use a flexible measuring tape and keep it level. Fabric, stretch, and cut can affect fit. Always review the latest product-specific sizing information at Printful before ordering.",
-        showMeasurements: true,
+        body: "Use a flexible measuring tape, keep it level, and measure close to the body without pulling too tightly.",
+        showMeasurements: false,
         showInstructions: true,
       }),
     ],
     seo: {
       _type: "seo",
-      metaTitle: "Swimwear Size Guide | Swim BASI",
+      metaTitle: "Size Guide | Swimwear Fit & Measurements",
       metaDescription:
-        "Find Swim BASI fit notes and product-specific sizing guidance before ordering through Printful.",
+        "Find your Swim BASI fit with measuring guidance, silhouette-specific fit notes, and product sizing information for one-piece, string bikini, and high-waisted swimwear.",
       includeInSitemap: true,
       sitemapPriority: "0.7",
       sitemapChangeFrequency: "monthly",

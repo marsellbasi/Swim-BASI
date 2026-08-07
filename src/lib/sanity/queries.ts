@@ -95,6 +95,27 @@ export const PAGE_QUERY = `*[_id == $documentId && !(_id in path("drafts.**"))][
   internalTitle,
   enabled,
   "slug": slug.current,
+  measurementUnit,
+  rows,
+  measurementInstructions,
+  sizeGuideImage${imageProjection},
+  intro,
+  measurementGuide,
+  silhouetteGuide{
+    ...,
+    items[]{
+      ...,
+      collection->{
+        _id,
+        title,
+        "slug": slug.current,
+        description,
+        products[]->${productProjection}
+      }
+    }
+  },
+  beforeOrder,
+  closingCallToAction,
   sections[]${sectionProjection},
   seo${seoProjection}
 }`;
