@@ -108,7 +108,12 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
                 />
               </div>
               {imagePair.leftMedia.image.caption && (
-                <figcaption>{imagePair.leftMedia.image.caption}</figcaption>
+                <figcaption>
+                  <span class="about-caption__id">01 — Expression</span>
+                  <span class="about-caption__text">
+                    {imagePair.leftMedia.image.caption}
+                  </span>
+                </figcaption>
               )}
             </figure>
           )}
@@ -123,7 +128,12 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
                 />
               </div>
               {imagePair.rightMedia.image.caption && (
-                <figcaption>{imagePair.rightMedia.image.caption}</figcaption>
+                <figcaption>
+                  <span class="about-caption__id">02 — Presence</span>
+                  <span class="about-caption__text">
+                    {imagePair.rightMedia.image.caption}
+                  </span>
+                </figcaption>
               )}
             </figure>
           )}
@@ -156,13 +166,16 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
           <div class="about-media about-media--campaign">
             <SanityImage
               value={campaign.image}
-              sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1440px) calc(100vw - 32px), 1408px"
+              sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1312px) calc(100vw - 32px), 1280px"
               pictureClass="about-picture"
               diagnosticKey="about-campaign"
             />
           </div>
           {campaign.image.caption && (
-            <figcaption>{campaign.image.caption}</figcaption>
+            <figcaption>
+              <span class="about-caption__id">03 — After dark</span>
+              <span class="about-caption__text">{campaign.image.caption}</span>
+            </figcaption>
           )}
         </figure>
       </section>
@@ -215,7 +228,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
   }
 
   .about-intro {
-    padding-block: clamp(72px, 7.5vw, 112px);
+    padding: clamp(72px, 7.5vw, 112px) 0 clamp(54px, 5.4vw, 80px);
   }
 
   .about-intro__inner {
@@ -239,7 +252,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
 
   .about-intro h1 {
     max-width: 980px;
-    font-size: clamp(3.25rem, 6.7vw, 6.7rem);
+    font-size: clamp(3.25rem, 5.3vw, 6.25rem);
     line-height: 0.94;
   }
 
@@ -312,11 +325,12 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
 
   .about-feature__copy {
     max-width: 480px;
+    margin-top: clamp(8px, 1.2vw, 18px);
   }
 
   .about-feature__copy h2 {
     margin-bottom: 24px;
-    font-size: clamp(2.6rem, 4vw, 4.75rem);
+    font-size: clamp(2.6rem, 3.8vw, 4.25rem);
     line-height: 0.98;
   }
 
@@ -339,15 +353,28 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
   .about-pair figcaption,
   .about-campaign figcaption {
     margin-top: 14px;
-    color: #666;
-    font-size: 0.68rem;
+    display: grid;
+    gap: 6px;
+  }
+
+  .about-caption__id {
+    color: #806a1f;
+    font-size: 0.66rem;
     font-weight: 700;
-    letter-spacing: 0.11em;
+    letter-spacing: 0.17em;
     text-transform: uppercase;
   }
 
+  .about-caption__text {
+    color: #666;
+    font-size: 0.76rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    line-height: 1.45;
+  }
+
   .about-promise {
-    padding-block: clamp(88px, 8.5vw, 120px);
+    padding-block: clamp(80px, 7vw, 104px);
   }
 
   .about-promise__inner {
@@ -358,7 +385,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
 
   .about-promise h2,
   .about-closing h2 {
-    font-size: clamp(2.8rem, 5vw, 5.6rem);
+    font-size: clamp(2.8rem, 4.5vw, 5rem);
     line-height: 0.98;
   }
 
@@ -376,12 +403,17 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
     max-height: 760px;
   }
 
+  .about-campaign figure {
+    width: min(calc(100% - 32px), 1280px);
+    margin-inline: auto;
+  }
+
   .about-media--campaign :global(img) {
     object-position: center 76%;
   }
 
   .about-closing {
-    padding-block: clamp(80px, 8.5vw, 120px);
+    padding: clamp(60px, 6vw, 88px) 0 clamp(68px, 6.5vw, 96px);
   }
 
   .about-closing__inner {
@@ -411,7 +443,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
     }
 
     .about-intro {
-      padding-block: clamp(56px, 16vw, 72px);
+      padding: clamp(56px, 16vw, 72px) 0 clamp(44px, 13vw, 56px);
     }
 
     .about-intro :global(.breadcrumbs) {
@@ -437,6 +469,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
 
     .about-feature__copy {
       max-width: 620px;
+      margin-top: 0;
     }
 
     .about-feature__copy h2 {
@@ -454,7 +487,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
     }
 
     .about-promise {
-      padding-block: clamp(64px, 17vw, 76px);
+      padding-block: clamp(56px, 15vw, 72px);
     }
 
     .about-promise__inner,
@@ -471,12 +504,16 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
       max-height: none;
     }
 
+    .about-campaign figure {
+      width: min(calc(100% - 24px), 1280px);
+    }
+
     .about-media--campaign :global(img) {
       object-position: center 64%;
     }
 
     .about-closing {
-      padding-block: clamp(64px, 17vw, 80px);
+      padding: clamp(48px, 13vw, 60px) 0 clamp(56px, 14vw, 68px);
     }
 
     .about-closing__actions {
