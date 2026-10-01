@@ -22,8 +22,8 @@ if (!fs.existsSync(htmlPath)) {
 const html = fs.readFileSync(htmlPath, "utf8");
 const css = fs.readFileSync(cssPath, "utf8");
 const expectedOrder = [
-  "brandfilm",
   "mainhero",
+  "brandfilm",
   "silhouettes",
   "colorfocus",
   "statement",
@@ -54,6 +54,8 @@ const homepageBody = html.slice(html.indexOf("<main"), html.indexOf("</main>"));
 const checks = {
   orderedSections:
     JSON.stringify(actualOrder) === JSON.stringify(expectedOrder),
+  campaignHeading: /<h1[^>]*id="hero-title"/.test(homepageBody),
+  filmHeading: /<h2[^>]*id="film-intro-title"/.test(brandFilm),
   originalHomepageRenderer: !homepageBody.includes("cms-section--"),
   silhouetteCards: count(silhouettes, /class="collection-card"/g) === 3,
   silhouetteImages:

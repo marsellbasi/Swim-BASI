@@ -326,8 +326,8 @@ if (sanityEnabled) {
   if (
     JSON.stringify(homepageOrder) !==
       JSON.stringify([
-        "brandfilm",
         "mainhero",
+        "brandfilm",
         "silhouettes",
         "colorfocus",
         "statement",

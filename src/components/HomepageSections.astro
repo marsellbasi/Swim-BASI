@@ -21,6 +21,14 @@ interface Props {
 
 const { sections } = Astro.props;
 const enabledSections = sections.filter((section) => section.enabled !== false);
+// Keep the campaign introduction first without changing the published CMS array.
+// All other sections retain their relative editorial order.
+const heroIndex = enabledSections.findIndex(
+  (section) => section._type === "heroSection",
+);
+if (heroIndex > 0) {
+  enabledSections.unshift(...enabledSections.splice(heroIndex, 1));
+}
 const bodyText = (section: PageSection) =>
   typeof section.body === "string"
     ? section.body
@@ -32,7 +40,9 @@ const collectionPrice = (collection: SanityCollection) => {
   const prices = (collection.products || [])
     .map((product) => product.displayPrice)
     .filter((price): price is number => typeof price === "number" && price > 0);
-  return prices.length ? `$${Math.min(...prices).toFixed(2)}` : "Explore collection";
+  return prices.length
+    ? `$${Math.min(...prices).toFixed(2)}`
+    : "Explore collection";
 };
 
 if (import.meta.env.DEV) {
@@ -61,7 +71,7 @@ if (import.meta.env.DEV) {
     if (section._type === "videoSection" && section.video) {
       return (
         <div class:list={wrapperClasses} data-homepage-section={section._key}>
-          <PortraitVideoIntro section={section} />
+          <PortraitVideoIntro section={section} headingTag="h2" />
         </div>
       );
     }
@@ -69,7 +79,7 @@ if (import.meta.env.DEV) {
     if (section._type === "heroSection") {
       return (
         <div class:list={wrapperClasses} data-homepage-section={section._key}>
-          <Hero section={section} />
+          <Hero section={section} headingTag="h1" />
         </div>
       );
     }

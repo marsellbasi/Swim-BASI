@@ -5,9 +5,10 @@ import type { PageSection, SanityCallToAction } from "../lib/sanity/types";
 
 interface Props {
   section?: PageSection;
+  headingTag?: "h1" | "h2";
 }
 
-const { section } = Astro.props;
+const { section, headingTag: Heading = "h2" } = Astro.props;
 const hrefFor = (cta?: SanityCallToAction) =>
   cta?.destination?.linkType === "external"
     ? cta.destination.externalUrl
@@ -49,7 +50,7 @@ const headingLines =
   <div class="hero-overlay"></div>
   <div class="hero-content wrap">
     <p class="eyebrow">{eyebrow}</p>
-    <h2 id="hero-title">
+    <Heading id="hero-title">
       {
         headingLines.map((line, index) => (
           <>
@@ -58,7 +59,7 @@ const headingLines =
           </>
         ))
       }
-    </h2>
+    </Heading>
     <p>{body}</p>
     <div class="button-row">
       <Button href={hrefFor(primary) || "/shop"}

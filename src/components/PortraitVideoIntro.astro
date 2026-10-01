@@ -8,9 +8,10 @@ import type { PageSection, SanityCallToAction } from "../lib/sanity/types";
 
 interface Props {
   section?: PageSection;
+  headingTag?: "h1" | "h2";
 }
 
-const { section } = Astro.props;
+const { section, headingTag: Heading = "h1" } = Astro.props;
 const hrefFor = (cta?: SanityCallToAction) =>
   cta?.destination?.linkType === "external"
     ? cta.destination.externalUrl
@@ -85,7 +86,7 @@ const cta = section?.callToAction;
     </div>
     <div class="film-intro-copy">
       <p class="eyebrow">{eyebrow}</p>
-      <h1 id="film-intro-title">{title}</h1>
+      <Heading id="film-intro-title">{title}</Heading>
       <p>{description}</p>
       {!section && <p class="film-status">{homepageFilm.status}</p>}
       <Button href={hrefFor(cta) || "/shop"}

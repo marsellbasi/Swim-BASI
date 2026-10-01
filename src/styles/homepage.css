@@ -1,0 +1,320 @@
+/* Homepage presentation only; shared storefront components retain their defaults. */
+.homepage-section {
+  --homepage-space-sm: clamp(28px, 2.25vw, 36px);
+  --homepage-space-md: clamp(36px, 2.75vw, 44px);
+  --homepage-space-lg: clamp(44px, 4vw, 64px);
+  --homepage-gap-sm: 12px;
+  --homepage-gap-md: clamp(20px, 2vw, 28px);
+  --homepage-gap-lg: clamp(28px, 4vw, 56px);
+}
+.homepage-section.homepage-spacing--none {
+  --homepage-section-space: 0px;
+}
+.homepage-section.homepage-spacing--compact {
+  --homepage-section-space: var(--homepage-space-sm);
+}
+.homepage-section.homepage-spacing--standard {
+  --homepage-section-space: var(--homepage-space-md);
+}
+.homepage-section.homepage-spacing--spacious,
+.homepage-section.homepage-spacing--editorial {
+  --homepage-section-space: var(--homepage-space-lg);
+}
+
+.homepage-section .eyebrow {
+  margin-bottom: var(--homepage-gap-sm);
+}
+.homepage-section .section-heading {
+  margin-bottom: var(--homepage-gap-md);
+}
+.homepage-section .section-intro {
+  margin-top: var(--homepage-gap-sm);
+}
+.homepage-section :is(h1, h2) {
+  text-wrap: balance;
+}
+
+/* A feature-sized film at the uploaded video's native 9:16 ratio. */
+.homepage-section .film-intro-inner {
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  gap: var(--homepage-gap-lg);
+}
+.homepage-section .film-intro-media {
+  width: min(100%, clamp(240px, 18vw, 252px));
+  max-height: none;
+  aspect-ratio: 9 / 16;
+  justify-self: center;
+}
+.homepage-section .film-intro-media video {
+  object-fit: contain;
+}
+.homepage-section .film-intro-copy > p:not(.eyebrow, .film-status) {
+  margin-block: var(--homepage-gap-md);
+}
+.homepage-section .film-intro-copy :is(h1, h2) {
+  max-width: 620px;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(3.2rem, 6.5vw, 7rem);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+}
+
+/* Preserve the campaign hero's scale and positioning. */
+.homepage-section .hero {
+  min-height: clamp(560px, 70vh, 720px);
+}
+.homepage-section .hero-content {
+  padding-block: var(--homepage-space-lg);
+}
+.homepage-section .hero-content > p:not(.eyebrow) {
+  margin-block: var(--homepage-gap-md);
+}
+.homepage-section .button-row {
+  gap: 10px;
+}
+.homepage-section .hero :is(h1, h2) {
+  max-width: 760px;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(3.15rem, 6.6vw, 6.7rem);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+}
+
+.homepage-section .collection-grid {
+  gap: 18px;
+}
+.homepage-section .collection-art {
+  height: clamp(240px, 21vw, 310px);
+  aspect-ratio: auto;
+}
+.homepage-section .collection-copy {
+  gap: var(--homepage-gap-sm);
+  padding-block: var(--homepage-gap-sm);
+}
+.homepage-section .circle-arrow {
+  flex-shrink: 0;
+}
+.homepage-section .collection-art--product > span {
+  color: var(--black);
+}
+
+/* Six curated products: balanced rows, complete contain-fit product art. */
+.homepage-section .homepage-product-section .product-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--homepage-gap-md) 18px;
+}
+.homepage-section .homepage-product-section .product-visual {
+  height: clamp(210px, 16vw, 240px);
+  aspect-ratio: auto;
+}
+.homepage-section .product-info {
+  padding-top: var(--homepage-gap-sm);
+}
+.homepage-section .product-image {
+  padding: 3%;
+}
+.homepage-section
+  .product-visual:not(:has(.product-image--hover.is-loaded))
+  .product-image--primary {
+  opacity: 1;
+}
+.homepage-section .product-meta {
+  margin-top: 8px;
+}
+.homepage-section .product-cta {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  padding-block: 8px;
+}
+.homepage-section .checkout-notice {
+  margin: 0 0 var(--homepage-gap-md);
+}
+
+/* A dramatic interruption with enough room for the oversized statement. */
+.homepage-section .statement {
+  padding-block: clamp(24px, 1.8vw, 28px);
+}
+.homepage-section .statement .eyebrow {
+  margin-top: 0;
+  margin-bottom: var(--homepage-gap-sm);
+}
+.homepage-section .statement h2 {
+  font-size: clamp(3rem, 6.5vw, 6.5rem);
+}
+.homepage-section .statement > p:not(.eyebrow) {
+  margin-top: var(--homepage-gap-md);
+}
+
+.homepage-section .homepage-campaign-inner {
+  width: min(calc(100% - 32px), 1180px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--homepage-gap-lg);
+}
+.homepage-section .homepage-campaign-frame {
+  width: min(100%, 352px);
+  aspect-ratio: 4 / 5;
+  justify-self: center;
+}
+.homepage-section .homepage-campaign-copy {
+  max-width: 520px;
+}
+.homepage-section .campaign-signoff {
+  padding-top: var(--homepage-gap-sm);
+}
+
+.homepage-section .instagram-heading {
+  margin-bottom: var(--homepage-gap-md);
+}
+.homepage-section .instagram-heading > a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.homepage-section .instagram-tile {
+  aspect-ratio: 3 / 2;
+}
+.homepage-section .newsletter {
+  padding-block: var(--homepage-space-sm);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--homepage-gap-lg);
+}
+.homepage-section .newsletter-opening {
+  margin-top: var(--homepage-gap-md);
+  padding-top: var(--homepage-gap-sm);
+}
+
+/* The footer is shared; qualify its modest reduction with homepage presence. */
+body:has(#main-content .homepage-section) .footer-main {
+  padding-block: 52px 44px;
+  gap: 40px;
+}
+body:has(#main-content .homepage-section) .footer-main nav h2 {
+  margin-bottom: 8px;
+}
+body:has(#main-content .homepage-section) .footer-bottom {
+  padding-block: 16px;
+}
+
+@media (min-width: 981px) {
+  .homepage-section .homepage-product-section .section-heading {
+    max-width: none;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--homepage-gap-lg);
+    align-items: end;
+  }
+  .homepage-section .homepage-product-section .section-heading .eyebrow {
+    grid-column: 1 / -1;
+  }
+  .homepage-section .homepage-product-section .section-intro {
+    margin: 0;
+  }
+}
+
+@media (max-width: 980px) {
+  .homepage-section .hero {
+    min-height: clamp(540px, 66vh, 640px);
+  }
+  .homepage-section .homepage-campaign-copy .section-heading h2 {
+    font-size: clamp(2.5rem, 4.5vw, 3rem);
+  }
+}
+
+@media (max-width: 720px) {
+  .homepage-section {
+    --homepage-space-sm: 32px;
+    --homepage-space-md: 40px;
+    --homepage-space-lg: 48px;
+    --homepage-gap-md: 24px;
+    --homepage-gap-lg: 28px;
+  }
+  .homepage-section .film-intro-inner,
+  .homepage-section .homepage-campaign-inner,
+  .homepage-section .newsletter {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .homepage-section .film-intro-media {
+    width: min(100%, 260px);
+  }
+  .homepage-section .hero {
+    min-height: 0;
+    padding-block: clamp(88px, 24vw, 112px);
+  }
+  .homepage-section .hero-content {
+    padding-block: 0;
+  }
+  .homepage-section .collection-art {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+  .homepage-section .homepage-product-section .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 12px;
+  }
+  .homepage-section .homepage-product-section .product-visual {
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+  .homepage-section .product-image {
+    padding: 4%;
+  }
+  .homepage-section .color-chip {
+    top: 8px;
+    left: 8px;
+    max-width: calc(100% - 16px);
+  }
+  .homepage-section .statement h2 {
+    max-width: 620px;
+  }
+  .homepage-section .statement {
+    padding-block: var(--homepage-space-sm);
+  }
+  .homepage-section .homepage-campaign-inner {
+    width: min(calc(100% - 24px), 520px);
+  }
+  .homepage-section .homepage-campaign-frame {
+    width: min(100%, 360px);
+  }
+  .homepage-section .homepage-campaign-copy {
+    max-width: none;
+  }
+  .homepage-section .instagram-heading {
+    gap: var(--homepage-gap-sm);
+  }
+  .homepage-section .instagram-tile {
+    aspect-ratio: 1;
+  }
+  .homepage-section .newsletter {
+    gap: var(--homepage-gap-md);
+  }
+  body:has(#main-content .homepage-section) .footer-main {
+    gap: 32px;
+  }
+  body:has(#main-content .homepage-section) .footer-main nav {
+    gap: 0;
+  }
+  body:has(#main-content .homepage-section) .footer-main nav a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 359px) {
+  .homepage-section .homepage-product-section .product-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .homepage-section .homepage-product-section .product-visual {
+    aspect-ratio: 1;
+  }
+}
