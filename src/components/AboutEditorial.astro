@@ -74,7 +74,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
           <div class="about-media about-media--feature">
             <SanityImage
               value={feature.media.image}
-              sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1400px) 54vw, 700px"
+              sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1152px) 45vw, 480px"
               pictureClass="about-picture"
               diagnosticKey="about-feature"
             />
@@ -102,7 +102,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
               <div class="about-media about-media--pink">
                 <SanityImage
                   value={imagePair.leftMedia.image}
-                  sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1440px) 48vw, 684px"
+                  sizes="(max-width: 767px) calc((100vw - 36px) / 2), (max-width: 1152px) calc((100vw - 64px) / 2), 540px"
                   pictureClass="about-picture"
                   diagnosticKey="about-pair-pink"
                 />
@@ -122,7 +122,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
               <div class="about-media about-media--blue">
                 <SanityImage
                   value={imagePair.rightMedia.image}
-                  sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1440px) 48vw, 684px"
+                  sizes="(max-width: 767px) calc((100vw - 36px) / 2), (max-width: 1152px) calc((100vw - 64px) / 2), 540px"
                   pictureClass="about-picture"
                   diagnosticKey="about-pair-blue"
                 />
@@ -166,7 +166,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
           <div class="about-media about-media--campaign">
             <SanityImage
               value={campaign.image}
-              sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1312px) calc(100vw - 32px), 1280px"
+              sizes="(max-width: 767px) calc(100vw - 24px), (max-width: 1152px) calc(100vw - 32px), 1120px"
               pictureClass="about-picture"
               diagnosticKey="about-campaign"
             />
@@ -213,13 +213,15 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
 
 <style>
   .about-page {
-    --about-major-space: clamp(72px, 8vw, 112px);
+    --about-major-space: clamp(40px, 4vw, 64px);
+    --about-copy-gap: clamp(20px, 2vw, 28px);
+    --about-frame-width: 1120px;
     --about-copy: #454545;
     background: var(--white);
   }
 
   .about-eyebrow {
-    margin: 0 0 18px;
+    margin: 0 0 12px;
     color: #806a1f;
     font-size: 0.7rem;
     font-weight: 700;
@@ -228,7 +230,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
   }
 
   .about-intro {
-    padding: clamp(72px, 7.5vw, 112px) 0 clamp(54px, 5.4vw, 80px);
+    padding: var(--about-major-space) 0 var(--about-copy-gap);
   }
 
   .about-intro__inner {
@@ -237,7 +239,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
 
   .about-intro :global(.breadcrumbs) {
     padding-top: 0;
-    margin-bottom: clamp(42px, 5vw, 68px);
+    margin-bottom: var(--about-copy-gap);
   }
 
   .about-intro h1,
@@ -248,6 +250,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
     font-family: var(--serif);
     font-weight: 400;
     letter-spacing: -0.04em;
+    text-wrap: balance;
   }
 
   .about-intro h1 {
@@ -258,7 +261,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
 
   .about-intro__copy {
     max-width: 780px;
-    margin-top: clamp(28px, 3.2vw, 42px);
+    margin-top: var(--about-copy-gap);
     color: var(--about-copy);
     font-size: clamp(1.05rem, 1.35vw, 1.22rem);
     line-height: 1.7;
@@ -273,7 +276,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
 
   .about-intro__copy p + p,
   .about-feature__copy p + p {
-    margin-top: 18px;
+    margin-top: 14px;
   }
 
   .about-feature {
@@ -281,11 +284,11 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
   }
 
   .about-feature__inner {
-    width: min(calc(100% - 32px), 1280px);
+    width: min(calc(100% - 32px), var(--about-frame-width));
     display: grid;
-    grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+    grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
     align-items: center;
-    gap: clamp(44px, 6vw, 92px);
+    gap: clamp(28px, 4vw, 56px);
   }
 
   .about-media {
@@ -325,11 +328,11 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
 
   .about-feature__copy {
     max-width: 480px;
-    margin-top: clamp(8px, 1.2vw, 18px);
+    margin-top: 0;
   }
 
   .about-feature__copy h2 {
-    margin-bottom: 24px;
+    margin-bottom: var(--about-copy-gap);
     font-size: clamp(2.6rem, 3.8vw, 4.25rem);
     line-height: 0.98;
   }
@@ -345,9 +348,10 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
   }
 
   .about-pair__grid {
+    max-width: var(--about-frame-width);
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(24px, 2.8vw, 40px);
+    gap: var(--about-copy-gap);
   }
 
   .about-pair figcaption,
@@ -374,7 +378,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
   }
 
   .about-promise {
-    padding-block: clamp(80px, 7vw, 104px);
+    padding-block: var(--about-major-space);
   }
 
   .about-promise__inner {
@@ -391,7 +395,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
 
   .about-promise__inner > p:not(.about-eyebrow) {
     max-width: 720px;
-    margin: 28px auto 0;
+    margin: var(--about-copy-gap) auto 0;
     color: var(--about-copy);
     font-size: clamp(1rem, 1.25vw, 1.15rem);
     line-height: 1.75;
@@ -404,7 +408,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
   }
 
   .about-campaign figure {
-    width: min(calc(100% - 32px), 1280px);
+    width: min(calc(100% - 32px), var(--about-frame-width));
     margin-inline: auto;
   }
 
@@ -413,7 +417,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
   }
 
   .about-closing {
-    padding: clamp(60px, 6vw, 88px) 0 clamp(68px, 6.5vw, 96px);
+    padding-block: var(--about-major-space);
   }
 
   .about-closing__inner {
@@ -423,31 +427,32 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
   }
 
   .about-closing__inner > p:not(.about-eyebrow) {
-    margin-top: 24px;
+    margin-top: var(--about-copy-gap);
     color: var(--about-copy);
     font-size: 1.05rem;
   }
 
   .about-closing__actions {
-    margin-top: 34px;
+    margin-top: var(--about-copy-gap);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 18px 28px;
+    gap: 12px 24px;
   }
 
   @media (max-width: 767px) {
     .about-page {
-      --about-major-space: clamp(56px, 15vw, 72px);
+      --about-major-space: clamp(32px, 9vw, 40px);
+      --about-copy-gap: 20px;
     }
 
     .about-intro {
-      padding: clamp(56px, 16vw, 72px) 0 clamp(44px, 13vw, 56px);
+      padding: var(--about-major-space) 0 var(--about-major-space);
     }
 
     .about-intro :global(.breadcrumbs) {
-      margin-bottom: 38px;
+      margin-bottom: var(--about-copy-gap);
     }
 
     .about-intro h1 {
@@ -456,7 +461,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
     }
 
     .about-intro__copy {
-      margin-top: 26px;
+      margin-top: var(--about-copy-gap);
       font-size: 1rem;
       line-height: 1.65;
     }
@@ -464,7 +469,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
     .about-feature__inner {
       width: min(calc(100% - 24px), 1280px);
       grid-template-columns: 1fr;
-      gap: 34px;
+      gap: 22px;
     }
 
     .about-feature__copy {
@@ -477,8 +482,8 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
     }
 
     .about-pair__grid {
-      grid-template-columns: 1fr;
-      gap: 22px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
     }
 
     .about-pair figcaption,
@@ -487,7 +492,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
     }
 
     .about-promise {
-      padding-block: clamp(56px, 15vw, 72px);
+      padding-block: var(--about-major-space);
     }
 
     .about-promise__inner,
@@ -496,7 +501,7 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
     }
 
     .about-promise__inner > p:not(.about-eyebrow) {
-      margin-top: 22px;
+      margin-top: var(--about-copy-gap);
     }
 
     .about-media--campaign {
@@ -513,11 +518,11 @@ const secondaryHref = hrefFor(closingCta?.secondaryCallToAction);
     }
 
     .about-closing {
-      padding: clamp(48px, 13vw, 60px) 0 clamp(56px, 14vw, 68px);
+      padding-block: var(--about-major-space);
     }
 
     .about-closing__actions {
-      margin-top: 30px;
+      margin-top: var(--about-copy-gap);
       justify-content: flex-start;
     }
   }

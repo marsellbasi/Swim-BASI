@@ -417,6 +417,56 @@ for (const entry of brandEntries) {
 const homepageHtml = readFileSync(join(dist, "index.html"), "utf8");
 const aboutHtml = readFileSync(join(dist, "about", "index.html"), "utf8");
 if (sanityEnabled) {
+  const aboutSections = [
+    ...aboutHtml.matchAll(/<section\b[^>]*class="(about-[^"]+)"/g),
+  ].map((match) => match[1]);
+  if (
+    JSON.stringify(aboutSections) !==
+      JSON.stringify([
+        "about-intro",
+        "about-feature",
+        "about-pair",
+        "about-promise",
+        "about-campaign",
+        "about-closing",
+      ]) ||
+    (aboutHtml.match(/<h1\b/g) || []).length !== 1 ||
+    (aboutHtml.match(/<h2\b[^>]*id="about-/g) || []).length !== 3 ||
+    (aboutHtml.match(/<main\b/g) || []).length !== 1 ||
+    !aboutHtml.includes('href="https://swimbasi.com/about"')
+  ) {
+    errors.push(
+      "About editorial section order, headings, or canonical is invalid",
+    );
+  }
+  const aboutImages = [...aboutHtml.matchAll(/<img\b([^>]*?)>/g)];
+  if (
+    aboutImages.length !== 4 ||
+    aboutImages.some(
+      ([, attrs]) =>
+        !attrs.includes(sanityImageHost) ||
+        !/alt="[^"]+"/.test(attrs) ||
+        !/width="\d+"/.test(attrs) ||
+        !/height="\d+"/.test(attrs) ||
+        !/srcset="[^"]+"/.test(attrs) ||
+        !/sizes="[^"]+"/.test(attrs),
+    ) ||
+    aboutHtml.includes('src="/images/')
+  ) {
+    errors.push(
+      "About requires four published, accessible responsive Sanity images",
+    );
+  }
+  const aboutActions =
+    aboutHtml.match(
+      /class="about-closing__actions"[^>]*>([\s\S]*?)<\/div>/,
+    )?.[1] || "";
+  if (
+    !aboutActions.includes('href="/shop"') ||
+    !aboutActions.includes('href="/collections"')
+  ) {
+    errors.push("About shopping CTA destinations are missing");
+  }
   const homepageOrder = [
     ...homepageHtml.matchAll(/data-homepage-section="([^"]+)"/g),
   ].map((match) => match[1]);

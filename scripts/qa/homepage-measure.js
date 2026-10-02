@@ -40,6 +40,7 @@
   const video = document.querySelector("video");
   const shop = document.querySelector(".shop-page");
   const collection = document.querySelector(".collection-page");
+  const about = document.querySelector(".about-page");
   const cards = [...document.querySelectorAll(".product-card")];
   const productBoxes = cards.map((card) => ({
     slug: card.dataset.productSlug,
@@ -123,6 +124,58 @@
           ".collection-category-nav",
           ".collection-intro__price",
         )
+      : null,
+    about: about
+      ? {
+          sections: [...about.querySelectorAll(":scope > section")].map(
+            (section) => {
+              const style = getComputedStyle(section);
+              return {
+                key: section.className,
+                ...rect(section),
+                paddingTop: style.paddingTop,
+                paddingBottom: style.paddingBottom,
+                content: rect(section.firstElementChild),
+                media: [...section.querySelectorAll(".about-media")].map(rect),
+              };
+            },
+          ),
+          panels: [
+            ...about.querySelectorAll(
+              ".about-intro__copy, .about-feature__copy, .about-promise__inner, .about-closing__inner, figcaption, .about-closing__actions",
+            ),
+          ].map((panel) => ({
+            key: panel.className || panel.tagName,
+            ...rect(panel),
+          })),
+          typography: [...about.querySelectorAll("h1, h2, p")].map(
+            (element) => ({
+              text: element.textContent.trim(),
+              fontSize: getComputedStyle(element).fontSize,
+              lineHeight: getComputedStyle(element).lineHeight,
+            }),
+          ),
+          firstStoryTop: rect(about.querySelector(".about-intro__copy")).y,
+          firstFeatureTop: rect(about.querySelector(".about-feature")).y,
+          footerTop: rect(document.querySelector(".site-footer")).y,
+          footerHeight: rect(document.querySelector(".site-footer")).height,
+          content: about.textContent.replace(/\s+/g, " ").trim(),
+          assets: [...about.querySelectorAll("img")].map((img) => ({
+            src: img.getAttribute("src"),
+            srcset: img.getAttribute("srcset"),
+            sizes: img.getAttribute("sizes"),
+            alt: img.alt,
+            width: img.getAttribute("width"),
+            height: img.getAttribute("height"),
+            loading: img.loading,
+          })),
+          seo: {
+            title: document.title,
+            description: document.querySelector('meta[name="description"]')
+              ?.content,
+            canonical: document.querySelector('link[rel="canonical"]')?.href,
+          },
+        }
       : null,
     headingOrder: [...document.querySelectorAll("main h1, main h2")].map(
       (e) => ({ tag: e.tagName, text: e.textContent.trim() }),
