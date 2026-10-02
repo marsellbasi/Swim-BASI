@@ -417,6 +417,43 @@ for (const entry of brandEntries) {
 const homepageHtml = readFileSync(join(dist, "index.html"), "utf8");
 const aboutHtml = readFileSync(join(dist, "about", "index.html"), "utf8");
 if (sanityEnabled) {
+  const sizeGuideHtml = readFileSync(
+    join(dist, "size-guide", "index.html"),
+    "utf8",
+  );
+  const sizeGuideSections = [
+    ...sizeGuideHtml.matchAll(
+      /<section\b[^>]*class="(fit-guide__intro|measure-section|silhouette-section|before-order|fit-closing)"/g,
+    ),
+  ].map((match) => match[1]);
+  if (
+    JSON.stringify(sizeGuideSections) !==
+      JSON.stringify([
+        "fit-guide__intro",
+        "measure-section",
+        "silhouette-section",
+        "before-order",
+        "fit-closing",
+      ]) ||
+    (sizeGuideHtml.match(/<h1\b/g) || []).length !== 1 ||
+    (sizeGuideHtml.match(/<h3\b[^>]*class="measure-card__identifier"/g) || [])
+      .length !== 3 ||
+    (sizeGuideHtml.match(/<li\b[^>]*class="measure-card"/g) || []).length !==
+      3 ||
+    (sizeGuideHtml.match(/<article\b[^>]*class="silhouette-card"/g) || [])
+      .length !== 3 ||
+    !sizeGuideHtml.includes('href="https://swimbasi.com/size-guide"') ||
+    sizeGuideHtml.includes('content="noindex')
+  ) {
+    errors.push(
+      "Size Guide dedicated section structure, headings, or SEO is invalid",
+    );
+  }
+  for (const slug of ["one-piece", "string-bikinis", "high-waisted-bikinis"]) {
+    if (!sizeGuideHtml.includes(`href="/collections/${slug}/"`)) {
+      errors.push(`Size Guide is missing silhouette destination ${slug}`);
+    }
+  }
   const aboutSections = [
     ...aboutHtml.matchAll(/<section\b[^>]*class="(about-[^"]+)"/g),
   ].map((match) => match[1]);

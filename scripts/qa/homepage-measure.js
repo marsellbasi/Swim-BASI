@@ -41,6 +41,7 @@
   const shop = document.querySelector(".shop-page");
   const collection = document.querySelector(".collection-page");
   const about = document.querySelector(".about-page");
+  const sizeGuide = document.querySelector(".fit-guide");
   const cards = [...document.querySelectorAll(".product-card")];
   const productBoxes = cards.map((card) => ({
     slug: card.dataset.productSlug,
@@ -174,6 +175,68 @@
             description: document.querySelector('meta[name="description"]')
               ?.content,
             canonical: document.querySelector('link[rel="canonical"]')?.href,
+          },
+        }
+      : null,
+    sizeGuide: sizeGuide
+      ? {
+          sections: [...sizeGuide.querySelectorAll(":scope > section")].map(
+            (section) => ({
+              key: section.className,
+              ...rect(section),
+              paddingTop: getComputedStyle(section).paddingTop,
+              paddingBottom: getComputedStyle(section).paddingBottom,
+            }),
+          ),
+          firstGuidanceTop: rect(
+            sizeGuide.querySelector(".fit-section-heading > p:last-child"),
+          ).y,
+          firstMeasurementTop: rect(sizeGuide.querySelector(".measure-card")).y,
+          footerTop: rect(document.querySelector(".site-footer")).y,
+          footerHeight: rect(document.querySelector(".site-footer")).height,
+          table: sizeGuide.querySelector("table")
+            ? rect(sizeGuide.querySelector("table"))
+            : null,
+          firstSizeRow: sizeGuide.querySelector("tbody tr")
+            ? rect(sizeGuide.querySelector("tbody tr"))
+            : null,
+          measurements: [...sizeGuide.querySelectorAll(".measure-card")].map(
+            (card) => ({
+              label: card.firstElementChild.textContent
+                .trim()
+                .replace(/^\d+\s*—\s*/, ""),
+              body: card.lastElementChild.textContent.trim(),
+            }),
+          ),
+          silhouettes: [...sizeGuide.querySelectorAll(".silhouette-card")].map(
+            (card) => ({
+              title: card.querySelector("h3").textContent.trim(),
+              body: card.querySelector("h3 + p").textContent.trim(),
+              fitNote: card
+                .querySelector(".silhouette-card__note")
+                .textContent.trim(),
+              href: card.querySelector("a").getAttribute("href"),
+            }),
+          ),
+          panels: [
+            ...sizeGuide.querySelectorAll(
+              ".measure-card, .silhouette-card, .before-order__inner, .fit-closing__actions",
+            ),
+          ].map((panel) => ({ key: panel.className, ...rect(panel) })),
+          typography: [...sizeGuide.querySelectorAll("h1, h2, h3, p")].map(
+            (element) => ({
+              text: element.textContent.trim(),
+              fontSize: getComputedStyle(element).fontSize,
+              lineHeight: getComputedStyle(element).lineHeight,
+            }),
+          ),
+          content: sizeGuide.textContent.replace(/\s+/g, " ").trim(),
+          seo: {
+            title: document.title,
+            description: document.querySelector('meta[name="description"]')
+              ?.content,
+            canonical: document.querySelector('link[rel="canonical"]')?.href,
+            robots: document.querySelector('meta[name="robots"]')?.content,
           },
         }
       : null,

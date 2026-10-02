@@ -8,7 +8,13 @@ interface Props {
 }
 
 const { page } = Astro.props;
-const { intro, measurementGuide, silhouetteGuide, beforeOrder, closingCallToAction } = page;
+const {
+  intro,
+  measurementGuide,
+  silhouetteGuide,
+  beforeOrder,
+  closingCallToAction,
+} = page;
 const measurementCards = measurementGuide?.cards || [];
 const silhouetteItems = silhouetteGuide?.items || [];
 
@@ -59,7 +65,9 @@ if (
 <div class="fit-guide">
   <section class="fit-guide__intro" aria-labelledby="fit-guide-title">
     <div class="wrap">
-      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Size Guide" }]} />
+      <Breadcrumbs
+        items={[{ label: "Home", href: "/" }, { label: "Size Guide" }]}
+      />
       <header class="fit-guide__intro-copy">
         <p class="fit-eyebrow">{intro.eyebrow}</p>
         <h1 id="fit-guide-title">{intro.heading}</h1>
@@ -78,17 +86,23 @@ if (
       </header>
 
       <ol class="measure-grid">
-        {measurementCards.map((card, index) => (
-          <li class="measure-card">
-            <p class="measure-card__identifier">
-              {String(index + 1).padStart(2, "0")} — {card.heading}
-            </p>
-            <p>{card.body}</p>
-          </li>
-        ))}
+        {
+          measurementCards.map((card, index) => (
+            <li class="measure-card">
+              <h3 class="measure-card__identifier">
+                {String(index + 1).padStart(2, "0")} — {card.heading}
+              </h3>
+              <p>{card.body}</p>
+            </li>
+          ))
+        }
       </ol>
 
-      {measurementGuide.note && <p class="measure-note">{measurementGuide.note}</p>}
+      {
+        measurementGuide.note && (
+          <p class="measure-note">{measurementGuide.note}</p>
+        )
+      }
     </div>
   </section>
 
@@ -100,17 +114,25 @@ if (
       </header>
 
       <div class="silhouette-grid">
-        {silhouetteItems.map((item, index) => (
-          <article class="silhouette-card">
-            <p class="silhouette-card__number">{String(index + 1).padStart(2, "0")}</p>
-            <h3>{item.collection?.title}</h3>
-            <p>{item.body}</p>
-            <p class="silhouette-card__note">{item.fitNote}</p>
-            <a class="silhouette-card__link" href={`/collections/${item.collection?.slug}/`}>
-              {item.callToActionLabel}<span aria-hidden="true"> →</span>
-            </a>
-          </article>
-        ))}
+        {
+          silhouetteItems.map((item, index) => (
+            <article class="silhouette-card">
+              <p class="silhouette-card__number">
+                {String(index + 1).padStart(2, "0")}
+              </p>
+              <h3>{item.collection?.title}</h3>
+              <p>{item.body}</p>
+              <p class="silhouette-card__note">{item.fitNote}</p>
+              <a
+                class="silhouette-card__link"
+                href={`/collections/${item.collection?.slug}/`}
+              >
+                {item.callToActionLabel}
+                <span aria-hidden="true"> →</span>
+              </a>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -128,7 +150,9 @@ if (
     <div class="wrap fit-closing__inner">
       <h2 id="fit-closing-title">{closingCallToAction.heading}</h2>
       <div class="fit-closing__actions">
-        <Button href={primaryHref}>{closingCallToAction.primaryCallToAction.label}</Button>
+        <Button href={primaryHref}
+          >{closingCallToAction.primaryCallToAction.label}</Button
+        >
         <Button href={secondaryHref} variant="secondary">
           {closingCallToAction.secondaryCallToAction.label}
         </Button>
@@ -139,27 +163,42 @@ if (
 
 <style>
   .fit-guide {
+    --fit-section-space: clamp(32px, 3vw, 48px);
+    --fit-content-gap: clamp(16px, 1.7vw, 24px);
+    --fit-card-space: clamp(20px, 2vw, 24px);
     color: var(--black);
   }
 
   .fit-guide__intro {
-    padding: clamp(72px, 6.5vw, 96px) 0 0;
+    padding: var(--fit-section-space) 0 0;
   }
 
   .fit-guide__intro :global(.breadcrumbs) {
     padding-top: 0;
   }
 
+  .fit-guide__intro :global(.breadcrumbs ol) {
+    align-items: center;
+  }
+
+  .fit-guide__intro :global(.breadcrumbs a) {
+    display: flex;
+    min-width: 44px;
+    min-height: 44px;
+    margin-block: -13px;
+    align-items: center;
+  }
+
   .fit-guide__intro-copy {
     max-width: 760px;
-    margin-top: clamp(32px, 3vw, 44px);
+    margin-top: var(--fit-content-gap);
   }
 
   .fit-eyebrow,
   .measure-card__identifier,
   .silhouette-card__number {
     margin: 0;
-    color: var(--gold);
+    color: #806a1f;
     font-family: var(--sans);
     font-size: 0.72rem;
     font-weight: 600;
@@ -175,6 +214,7 @@ if (
     font-weight: 400;
     letter-spacing: -0.045em;
     line-height: 0.98;
+    text-wrap: balance;
   }
 
   .fit-guide__intro-copy > p:not(.fit-eyebrow) {
@@ -190,7 +230,7 @@ if (
   }
 
   .measure-section {
-    padding-top: clamp(64px, 6vw, 88px);
+    padding-top: var(--fit-section-space);
   }
 
   .fit-section-heading {
@@ -206,6 +246,7 @@ if (
     font-weight: 400;
     letter-spacing: -0.035em;
     line-height: 1.03;
+    text-wrap: balance;
   }
 
   .fit-section-heading > p:not(.fit-eyebrow) {
@@ -218,68 +259,67 @@ if (
   .measure-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(24px, 2.3vw, 36px);
-    margin: clamp(28px, 3vw, 40px) 0 0;
+    gap: var(--fit-content-gap);
+    margin: var(--fit-content-gap) 0 0;
     padding: 0;
     list-style: none;
   }
 
   .measure-card {
-    min-height: 190px;
-    padding: clamp(24px, 2.2vw, 34px);
+    padding: var(--fit-card-space);
     border-top: 1px solid #dedbd3;
     background: #f8f7f4;
   }
 
   .measure-card > p:last-child {
-    margin: 28px 0 0;
+    margin: 12px 0 0;
     color: #3f3f3f;
     line-height: 1.65;
   }
 
   .measure-note {
-    margin: clamp(20px, 2vw, 28px) 0 0;
+    margin: var(--fit-content-gap) 0 0;
     color: #666;
     font-size: 0.88rem;
     line-height: 1.6;
   }
 
   .silhouette-section {
-    padding-top: clamp(80px, 7vw, 104px);
+    padding-top: var(--fit-section-space);
   }
 
   .silhouette-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(24px, 2.3vw, 36px);
-    margin-top: clamp(32px, 3.3vw, 48px);
+    gap: var(--fit-content-gap);
+    margin-top: var(--fit-content-gap);
   }
 
   .silhouette-card {
     display: flex;
-    min-height: 390px;
     flex-direction: column;
-    padding: clamp(28px, 2.6vw, 40px);
+    padding: var(--fit-card-space);
     border: 1px solid #e4e1da;
   }
 
   .silhouette-card h3 {
-    margin: clamp(24px, 2.3vw, 34px) 0 0;
+    margin: 12px 0 0;
     font-family: var(--serif);
     font-size: clamp(1.9rem, 2.3vw, 2.75rem);
     font-weight: 400;
     letter-spacing: -0.025em;
     line-height: 1.08;
+    text-wrap: balance;
   }
 
   .silhouette-card > p:not(.silhouette-card__number) {
-    margin: 20px 0 0;
+    margin: 14px 0 0;
     color: #4c4c4c;
     line-height: 1.65;
   }
 
   .silhouette-card .silhouette-card__note {
-    padding-top: 20px;
+    padding-top: 12px;
     border-top: 1px solid #e8e5df;
     color: #656565;
     font-size: 0.9rem;
@@ -288,7 +328,8 @@ if (
   .silhouette-card__link {
     width: fit-content;
     margin-top: auto;
-    padding-top: 32px;
+    min-height: 44px;
+    padding-block: 12px;
     color: inherit;
     font-size: 0.75rem;
     font-weight: 600;
@@ -308,12 +349,12 @@ if (
   }
 
   .before-order {
-    padding-top: clamp(72px, 6.5vw, 96px);
+    padding-top: var(--fit-section-space);
   }
 
   .before-order__inner {
     max-width: 900px;
-    padding: clamp(48px, 5vw, 72px);
+    padding: var(--fit-card-space);
     background: #f8f7f4;
   }
 
@@ -334,7 +375,7 @@ if (
   }
 
   .fit-closing {
-    padding: clamp(72px, 7vw, 96px) 0 clamp(64px, 6vw, 88px);
+    padding-block: var(--fit-section-space);
   }
 
   .fit-closing__inner {
@@ -350,16 +391,14 @@ if (
     display: flex;
     justify-content: center;
     gap: 14px;
-    margin-top: clamp(28px, 2.7vw, 38px);
+    margin-top: var(--fit-content-gap);
   }
 
   @media (max-width: 900px) {
-    .measure-grid,
     .silhouette-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .measure-card:last-child,
     .silhouette-card:last-child {
       grid-column: 1 / -1;
       width: calc(50% - 12px);
@@ -368,26 +407,38 @@ if (
   }
 
   @media (max-width: 640px) {
+    .fit-guide {
+      --fit-section-space: 28px;
+      --fit-content-gap: 16px;
+      --fit-card-space: 20px;
+    }
+
     .fit-guide__intro {
-      padding-top: clamp(48px, 13vw, 64px);
+      padding-top: var(--fit-section-space);
     }
 
     .fit-guide__intro-copy {
-      margin-top: clamp(24px, 7vw, 32px);
+      margin-top: var(--fit-content-gap);
     }
 
     .fit-guide__intro h1 {
       font-size: clamp(3rem, 14.5vw, 4.5rem);
     }
 
+    .fit-section-heading h2,
+    .before-order h2,
+    .fit-closing h2 {
+      font-size: 2rem;
+    }
+
     .measure-section {
-      padding-top: clamp(48px, 14vw, 64px);
+      padding-top: var(--fit-section-space);
     }
 
     .measure-grid,
     .silhouette-grid {
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 12px;
     }
 
     .measure-card:last-child,
@@ -397,33 +448,52 @@ if (
     }
 
     .measure-card {
-      min-height: auto;
+      padding: 16px 0;
+      background: transparent;
     }
 
     .silhouette-section {
-      padding-top: clamp(56px, 16vw, 72px);
+      padding-top: var(--fit-section-space);
+    }
+
+    .silhouette-grid {
+      gap: 0;
     }
 
     .silhouette-card {
       min-height: 0;
-      padding: 28px 24px;
+      padding: 16px 0;
+      border: 0;
+      border-top: 1px solid #e4e1da;
+    }
+
+    .silhouette-card h3 {
+      margin-top: 8px;
+    }
+
+    .silhouette-card > p:not(.silhouette-card__number) {
+      margin-top: 12px;
+    }
+
+    .silhouette-card .silhouette-card__note {
+      padding-top: 0;
+      border-top: 0;
     }
 
     .silhouette-card__link {
-      margin-top: 32px;
-      padding-top: 0;
+      margin-top: 8px;
     }
 
     .before-order {
-      padding-top: clamp(48px, 14vw, 72px);
+      padding-top: var(--fit-section-space);
     }
 
     .before-order__inner {
-      padding: 40px 24px;
+      padding: var(--fit-card-space);
     }
 
     .fit-closing {
-      padding: clamp(56px, 17vw, 80px) 0 clamp(48px, 14vw, 64px);
+      padding-block: var(--fit-section-space);
     }
 
     .fit-closing__actions {
