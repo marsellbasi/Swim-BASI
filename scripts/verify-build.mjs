@@ -122,6 +122,23 @@ if (
 }
 
 const shopHtml = readFileSync(join(dist, "shop", "index.html"), "utf8");
+if (sanityEnabled) {
+  if (
+    [...shopHtml.matchAll(/<h1\b/g)].length !== 1 ||
+    [...shopHtml.matchAll(/<main\b/g)].length !== 1
+  ) {
+    errors.push("Shop requires one H1 and one main landmark");
+  }
+  const categoryNavigation =
+    shopHtml.match(
+      /<nav\b[^>]*aria-label="Shop by silhouette"[^>]*>([\s\S]*?)<\/nav>/,
+    )?.[1] || "";
+  for (const slug of ["one-piece", "string-bikinis", "high-waisted-bikinis"]) {
+    if (!categoryNavigation.includes(`href="/collections/${slug}"`)) {
+      errors.push(`Shop category navigation is missing ${slug}`);
+    }
+  }
+}
 const productSchemas = [];
 for (const match of shopHtml.matchAll(
   /<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g,

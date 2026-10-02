@@ -7,3 +7,4 @@ studio/dist
 studio/node_modules
 studio/package-lock.json
 artifacts/homepage-compression/
+artifacts/shop-compression/

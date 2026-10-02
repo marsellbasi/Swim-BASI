@@ -38,6 +38,18 @@
     fit: getComputedStyle(img).objectFit,
   }));
   const video = document.querySelector("video");
+  const shop = document.querySelector(".shop-page");
+  const cards = [...document.querySelectorAll(".product-card")];
+  const productBoxes = cards.map((card) => ({
+    slug: card.dataset.productSlug,
+    ...rect(card),
+    media: rect(card.querySelector(".product-visual")),
+    name: card.querySelector("h3").textContent.trim(),
+    category: card.querySelector(".product-category").textContent.trim(),
+    price: card.querySelector(".price").textContent.trim(),
+    href: card.querySelector("a").href,
+    cta: rect(card.querySelector(".product-cta")),
+  }));
   return {
     url: window.location.href,
     viewport: { width: window.innerWidth, height: window.innerHeight },
@@ -45,6 +57,51 @@
     documentWidth: document.documentElement.scrollWidth,
     layoutShiftScore: window.__homepageLayoutShiftScore ?? null,
     sections,
+    shop: shop
+      ? {
+          sections: [
+            ["intro", ".shop-intro"],
+            ["categoryNavigation", ".shop-category-nav"],
+            ["catalogHeading", ".shop-catalog__header"],
+            ["productGrid", ".product-grid"],
+            ["disclosure", ".checkout-notice"],
+            ["footer", ".site-footer"],
+            ["header", ".site-header"],
+            ["announcement", ".announcement"],
+          ].map(([key, selector]) => {
+            const element = document.querySelector(selector);
+            return { key, ...(element ? rect(element) : { height: 0 }) };
+          }),
+          columns: getComputedStyle(
+            document.querySelector(".product-grid"),
+          ).gridTemplateColumns.split(" ").length,
+          products: productBoxes,
+          firstProductTop: productBoxes[0]?.y,
+          imagesVisibleFirstViewport: productBoxes.filter(
+            (card) => card.media.y < window.innerHeight,
+          ).length,
+          cardsFullyVisibleFirstViewport: productBoxes.filter(
+            (card) => card.y + card.height <= window.innerHeight,
+          ).length,
+          imagesVisibleTwoViewports: productBoxes.filter(
+            (card) => card.media.y < window.innerHeight * 2,
+          ).length,
+          cardsFullyVisibleTwoViewports: productBoxes.filter(
+            (card) => card.y + card.height <= window.innerHeight * 2,
+          ).length,
+          seo: {
+            title: document.title,
+            description: document.querySelector('meta[name="description"]')
+              ?.content,
+            canonical: document.querySelector('link[rel="canonical"]')?.href,
+            jsonLd: [
+              ...document.querySelectorAll(
+                'script[type="application/ld+json"]',
+              ),
+            ].map((script) => JSON.parse(script.textContent)),
+          },
+        }
+      : null,
     headingOrder: [...document.querySelectorAll("main h1, main h2")].map(
       (e) => ({ tag: e.tagName, text: e.textContent.trim() }),
     ),

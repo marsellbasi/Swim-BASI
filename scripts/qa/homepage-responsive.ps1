@@ -2,11 +2,12 @@ param(
     [string]$Url = 'https://swimbasi.com/',
     [string]$Label = 'before',
     [string]$Session = 'swim-compression',
-    [int[]]$Widths = @(390, 768, 1024, 1440, 1536)
+    [int[]]$Widths = @(390, 768, 1024, 1440, 1536),
+    [string]$ArtifactDirectory = 'artifacts/homepage-compression'
 )
 $ErrorActionPreference = 'Stop'
 $taskRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
-$artifactRoot = Join-Path $taskRoot 'artifacts/homepage-compression'
+$artifactRoot = Join-Path $taskRoot $ArtifactDirectory
 New-Item -ItemType Directory -Force -Path $artifactRoot | Out-Null
 $measureScript = Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot 'homepage-measure.js')
 $measureEncoded = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($measureScript))
@@ -22,7 +23,7 @@ foreach ($viewportWidth in $Widths) {
     & agent-browser --session $Session open $Url
     if ($LASTEXITCODE -ne 0) { throw 'Browser navigation failed' }
     Invoke-PageEval '(async () => { window.__homepageLayoutShiftScore = 0; new PerformanceObserver(list => { for (const entry of list.getEntries()) { if (!entry.hadRecentInput) window.__homepageLayoutShiftScore += entry.value; } }).observe({type: "layout-shift", buffered: true}); for (let y = 0; y < document.documentElement.scrollHeight; y += window.innerHeight * .8) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 80)); } await Promise.all([...document.images].filter(i => i.hasAttribute("src")).map(i => i.decode().catch(() => {}))); window.scrollTo(0, 0); await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))); })()'
-    & agent-browser --session $Session wait --fn 'document.querySelector("video").readyState >= 1'
+    & agent-browser --session $Session wait --fn '!document.querySelector("video") || document.querySelector("video").readyState >= 1'
     $raw = & agent-browser --session $Session --json eval -b $measureEncoded
     if ($LASTEXITCODE -ne 0) { throw 'Browser measurement failed' }
     $parsed = ($raw -join "`n") | ConvertFrom-Json

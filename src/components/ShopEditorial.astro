@@ -16,9 +16,7 @@ const { page } = Astro.props;
 const sections = (page.sections || []).filter(
   (section) => section.enabled !== false,
 );
-const intro = sections.find(
-  (section) => section._type === "richTextSection",
-);
+const intro = sections.find((section) => section._type === "richTextSection");
 const catalog = sections.find(
   (section) => section._type === "productGridSection",
 );
@@ -28,9 +26,20 @@ const bodyText = (section?: PageSection) =>
       ? section.body
       : portableTextToPlainText(section.body || section.content)
     : "";
-const products = (catalog?.products || catalog?.collection?.products || [])
-  .slice(0, catalog?.limit || 42)
-  .map(sanityProductToLocal);
+const sanityProducts = (
+  catalog?.products ||
+  catalog?.collection?.products ||
+  []
+).slice(0, catalog?.limit || 42);
+const products = sanityProducts.map(sanityProductToLocal);
+const collections = [
+  ...new Map(
+    sanityProducts
+      .flatMap((product) => product.collections || [])
+      .filter((collection) => collection.slug && collection.title)
+      .map((collection) => [collection.slug, collection]),
+  ).values(),
+];
 
 if (!intro?.heading || !catalog?.heading || products.length === 0) {
   throw new Error(
@@ -39,7 +48,7 @@ if (!intro?.heading || !catalog?.heading || products.length === 0) {
 }
 ---
 
-<main class="shop-page">
+<div class="shop-page">
   <section class="shop-intro" aria-labelledby="shop-title">
     <div class="wrap shop-intro__inner">
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Shop" }]} />
@@ -48,6 +57,15 @@ if (!intro?.heading || !catalog?.heading || products.length === 0) {
         <h1 id="shop-title">{intro.heading}</h1>
         {bodyText(intro) && <p class="shop-intro__lead">{bodyText(intro)}</p>}
       </div>
+      {
+        collections.length > 0 && (
+          <nav class="shop-category-nav" aria-label="Shop by silhouette">
+            {collections.map((collection) => (
+              <a href={`/collections/${collection.slug}`}>{collection.title}</a>
+            ))}
+          </nav>
+        )
+      }
     </div>
   </section>
 
@@ -56,16 +74,16 @@ if (!intro?.heading || !catalog?.heading || products.length === 0) {
       <header class="shop-catalog__header">
         <h2 id="shop-catalog-title">{catalog.heading}</h2>
         {bodyText(catalog) && <p>{bodyText(catalog)}</p>}
-        {catalog.showCheckoutNotice && <ExternalCheckoutNotice />}
       </header>
       <ProductGrid products={products} />
+      {catalog.showCheckoutNotice && <ExternalCheckoutNotice />}
     </div>
   </section>
-</main>
+</div>
 
 <style>
   .shop-intro {
-    padding-top: clamp(72px, 6.5vw, 96px);
+    padding-top: var(--shop-space);
   }
 
   .shop-intro :global(.breadcrumbs) {
@@ -73,8 +91,11 @@ if (!intro?.heading || !catalog?.heading || products.length === 0) {
   }
 
   .shop-intro__copy {
-    max-width: 760px;
-    margin-top: clamp(36px, 3.4vw, 48px);
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    column-gap: clamp(32px, 5vw, 72px);
+    align-items: end;
   }
 
   .shop-intro__copy .eyebrow {
@@ -82,7 +103,8 @@ if (!intro?.heading || !catalog?.heading || products.length === 0) {
   }
 
   .shop-intro h1 {
-    margin: clamp(20px, 1.8vw, 26px) 0 0;
+    grid-column: 1;
+    margin: 12px 0 0;
     font-family: var(--serif);
     font-size: clamp(3.25rem, 5vw, 5.75rem);
     font-weight: 400;
@@ -91,26 +113,28 @@ if (!intro?.heading || !catalog?.heading || products.length === 0) {
   }
 
   .shop-intro__lead {
-    max-width: 680px;
-    margin: clamp(18px, 1.6vw, 24px) 0 0;
+    grid-column: 2;
+    grid-row: 1 / 3;
+    max-width: 460px;
+    margin: 0;
     color: #4c4c4c;
     font-size: clamp(1rem, 1.2vw, 1.1rem);
     line-height: 1.65;
   }
 
   .shop-catalog {
-    margin-top: clamp(56px, 5.5vw, 80px);
-    padding-bottom: clamp(64px, 6vw, 88px);
+    margin-top: 24px;
+    padding-bottom: var(--shop-space);
   }
 
   .shop-catalog__header {
-    margin-bottom: clamp(28px, 2.8vw, 40px);
+    margin-bottom: 18px;
   }
 
   .shop-catalog__header h2 {
     margin: 0;
     font-family: var(--serif);
-    font-size: clamp(2rem, 3vw, 3rem);
+    font-size: clamp(1.5rem, 2vw, 1.75rem);
     font-weight: 400;
     line-height: 1.05;
     letter-spacing: -0.025em;
@@ -122,17 +146,93 @@ if (!intro?.heading || !catalog?.heading || products.length === 0) {
     color: #5a5a5a;
   }
 
-  .shop-catalog__header :global(.checkout-notice) {
-    margin: 10px 0 0;
+  .shop-page {
+    --shop-space: clamp(28px, 2.5vw, 40px);
+    --shop-grid-gap: 32px;
+  }
+
+  .shop-category-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 28px;
+    margin-top: 16px;
+  }
+
+  .shop-category-nav a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-color: var(--gold);
+  }
+
+  .shop-catalog :global(.product-grid) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--shop-grid-gap) 24px;
+  }
+
+  .shop-catalog :global(.product-visual) {
+    height: clamp(260px, 22vw, 320px);
+    aspect-ratio: auto;
+  }
+
+  .shop-catalog :global(.product-image) {
+    padding: 0;
+    object-fit: contain;
+  }
+
+  .shop-catalog :global(.product-info) {
+    padding-top: 12px;
+  }
+
+  .shop-catalog :global(.product-card h3) {
+    flex: 1;
+  }
+
+  .shop-catalog :global(.product-meta) {
+    margin-top: 8px;
+  }
+
+  .shop-catalog :global(.product-cta) {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    margin-top: 8px;
+    padding-bottom: 0;
+  }
+
+  .shop-catalog :global(.checkout-notice) {
+    margin: var(--shop-grid-gap) 0 0;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .shop-catalog
+      :global(
+        .product-visual:not(:has(.product-image--hover.is-loaded))
+          .product-image--primary
+      ) {
+      opacity: 1;
+    }
   }
 
   @media (max-width: 760px) {
     .shop-intro {
-      padding-top: clamp(48px, 13vw, 64px);
+      padding-top: var(--shop-space);
     }
 
     .shop-intro__copy {
-      margin-top: clamp(30px, 8vw, 40px);
+      margin-top: 18px;
+      display: block;
+    }
+
+    .shop-intro__lead {
+      max-width: 680px;
+      margin-top: 14px;
     }
 
     .shop-intro h1 {
@@ -140,12 +240,51 @@ if (!intro?.heading || !catalog?.heading || products.length === 0) {
     }
 
     .shop-catalog {
-      margin-top: clamp(40px, 12vw, 56px);
-      padding-bottom: clamp(48px, 14vw, 64px);
+      margin-top: 20px;
     }
 
     .shop-catalog__header {
-      margin-bottom: clamp(28px, 8vw, 36px);
+      margin-bottom: 16px;
+    }
+  }
+
+  @media (min-width: 721px) and (max-width: 999px) {
+    .shop-catalog :global(.product-grid) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 720px) {
+    .shop-category-nav {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .shop-category-nav a {
+      letter-spacing: 0.03em;
+      line-height: 1.5;
+    }
+    .shop-catalog :global(.product-grid) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--shop-grid-gap) 12px;
+    }
+    .shop-catalog :global(.product-visual) {
+      height: auto;
+      aspect-ratio: 4 / 5;
+    }
+    .shop-catalog :global(.color-chip) {
+      top: 8px;
+      left: 8px;
+      max-width: calc(100% - 16px);
+    }
+  }
+
+  @media (max-width: 359px) {
+    .shop-catalog :global(.product-grid) {
+      grid-template-columns: 1fr;
+    }
+    .shop-catalog :global(.product-visual) {
+      aspect-ratio: 1;
     }
   }
 </style>
