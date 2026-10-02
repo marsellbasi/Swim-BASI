@@ -193,19 +193,18 @@
   padding-top: var(--homepage-gap-sm);
 }
 
-/* The footer is shared; qualify its modest reduction with homepage presence. */
-body:has(#main-content .homepage-section) .footer-main {
-  padding-block: 52px 44px;
-  gap: 40px;
-}
-body:has(#main-content .homepage-section) .footer-main nav h2 {
-  margin-bottom: 8px;
-}
-body:has(#main-content .homepage-section) .footer-bottom {
-  padding-block: 16px;
-}
-
 @media (min-width: 981px) {
+  /* Preserve the approved homepage desktop footer; smaller widths share the global footer rhythm. */
+  body:has(#main-content .homepage-section) .footer-main {
+    padding-block: 52px 44px;
+    gap: 40px;
+  }
+  body:has(#main-content .homepage-section) .footer-main nav h2 {
+    margin-bottom: 8px;
+  }
+  body:has(#main-content .homepage-section) .footer-bottom {
+    padding-block: 16px;
+  }
   .homepage-section .homepage-product-section .section-heading {
     max-width: none;
     display: grid;
@@ -296,17 +295,6 @@ body:has(#main-content .homepage-section) .footer-bottom {
   }
   .homepage-section .newsletter {
     gap: var(--homepage-gap-md);
-  }
-  body:has(#main-content .homepage-section) .footer-main {
-    gap: 32px;
-  }
-  body:has(#main-content .homepage-section) .footer-main nav {
-    gap: 0;
-  }
-  body:has(#main-content .homepage-section) .footer-main nav a {
-    min-height: 44px;
-    display: flex;
-    align-items: center;
   }
 }
 

@@ -122,6 +122,17 @@ if (
 }
 
 const shopHtml = readFileSync(join(dist, "shop", "index.html"), "utf8");
+const sharedFooter = shopHtml.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/)?.[0];
+if (!sharedFooter || !sharedFooter.includes("Powered by confidence.")) {
+  errors.push("Shared footer is missing its content or bottom-row signature");
+}
+for (const file of htmlFiles) {
+  const html = readFileSync(file, "utf8");
+  const footers = [...html.matchAll(/<footer\b[^>]*>[\s\S]*?<\/footer>/g)];
+  if (footers.length !== 1 || footers[0][0] !== sharedFooter) {
+    errors.push(`${relative(root, file)} differs from the shared footer`);
+  }
+}
 if (sanityEnabled) {
   if (
     [...shopHtml.matchAll(/<h1\b/g)].length !== 1 ||

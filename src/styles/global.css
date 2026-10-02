@@ -879,6 +879,9 @@ summary {
   max-width: 280px;
   color: #aaa;
 }
+.footer-brand .logo span {
+  color: var(--gold);
+}
 .footer-main nav {
   display: grid;
   align-content: start;
@@ -1154,10 +1157,20 @@ summary {
     display: block;
   }
   .footer-main {
-    grid-template-columns: 2fr 1fr 1fr;
+    padding-block: 48px 40px;
+    grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr));
+    gap: 28px;
   }
-  .footer-main nav:last-child {
-    grid-column: 2;
+  .footer-main nav {
+    gap: 0;
+  }
+  .footer-main nav h2 {
+    margin-bottom: 8px;
+  }
+  .footer-main nav a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
   }
   .newsletter {
     grid-template-columns: 1fr;
@@ -1241,16 +1254,36 @@ summary {
     flex-direction: column;
   }
   .footer-main {
-    grid-template-columns: 1fr 1fr;
+    padding-block: 40px 32px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 24px;
   }
   .footer-brand {
     grid-column: 1/-1;
   }
+  .footer-brand .logo {
+    display: inline-block;
+    min-height: 44px;
+    padding-block: 4px;
+  }
+  .footer-brand p {
+    margin: 12px 0 0;
+  }
   .footer-main nav:last-child {
-    grid-column: auto;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 16px;
+  }
+  .footer-main nav:last-child h2 {
+    grid-column: 1 / -1;
   }
   .footer-bottom {
+    padding-block: 16px;
     flex-direction: column;
+    gap: 8px;
+  }
+  .footer-bottom p {
+    margin: 0;
   }
   .policy-grid,
   .info-grid,
@@ -1285,12 +1318,6 @@ summary {
 @media (max-width: 390px) {
   .product-grid {
     grid-template-columns: 1fr;
-  }
-  .footer-main {
-    grid-template-columns: 1fr;
-  }
-  .footer-main nav:last-child {
-    grid-column: auto;
   }
 }
 @media (prefers-reduced-motion: reduce) {
