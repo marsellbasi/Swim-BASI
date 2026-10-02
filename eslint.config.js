@@ -8,6 +8,7 @@ export default [
       "dist/",
       ".astro/",
       "node_modules/",
+      "artifacts/",
       "studio/dist/",
       "studio/.sanity/",
       "studio/node_modules/",

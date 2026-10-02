@@ -1,24 +1,30 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import CollectionEditorial from '../../components/CollectionEditorial.astro';
-import { getSanityCollections, getSiteSettings } from '../../lib/sanity/content';
-import { SANITY_CONTENT_ENABLED } from '../../lib/sanity/config';
-import { resolveSeo } from '../../lib/sanity/seo';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CollectionEditorial from "../../components/CollectionEditorial.astro";
+import {
+  getSanityCollections,
+  getSiteSettings,
+} from "../../lib/sanity/content";
+import { SANITY_CONTENT_ENABLED } from "../../lib/sanity/config";
+import { resolveSeo } from "../../lib/sanity/seo";
 
-const sanityCollection = (await getSanityCollections())?.find(
-  (item) => item.slug === 'high-waisted-bikinis',
+const collections = await getSanityCollections();
+const sanityCollection = collections?.find(
+  (item) => item.slug === "high-waisted-bikinis",
 );
 if (SANITY_CONTENT_ENABLED && !sanityCollection) {
-  throw new Error('The published Sanity High-Waisted collection is required for production.');
+  throw new Error(
+    "The published Sanity High-Waisted collection is required for production.",
+  );
 }
 const settings = await getSiteSettings();
 const pageSeo = resolveSeo({
   page: sanityCollection?.seo,
   settings,
-  derivedTitle: 'High-Waisted Bikinis | Swim BASI',
+  derivedTitle: "High-Waisted Bikinis | Swim BASI",
   derivedDescription:
-    'Shop Swim BASI high-waisted bikinis in expressive colorways for $44.99.',
-  canonicalPath: '/collections/high-waisted-bikinis',
+    "Shop Swim BASI high-waisted bikinis in expressive colorways for $44.99.",
+  canonicalPath: "/collections/high-waisted-bikinis",
 });
 ---
 
@@ -27,6 +33,12 @@ const pageSeo = resolveSeo({
   description="Shop Swim BASI high-waisted bikinis in expressive colorways for $44.99."
   seo={pageSeo}
 >
-  {sanityCollection && <CollectionEditorial collection={sanityCollection} />}
-</BaseLayout
->
+  {
+    sanityCollection && (
+      <CollectionEditorial
+        collection={sanityCollection}
+        collections={collections || []}
+      />
+    )
+  }
+</BaseLayout>

@@ -7,6 +7,7 @@ import {
 import Breadcrumbs from "./Breadcrumbs.astro";
 import ExternalCheckoutNotice from "./ExternalCheckoutNotice.astro";
 import ProductGrid from "./ProductGrid.astro";
+import "../styles/commerce.css";
 
 interface Props {
   page: SanityPage;
@@ -148,7 +149,6 @@ if (!intro?.heading || !catalog?.heading || products.length === 0) {
 
   .shop-page {
     --shop-space: clamp(28px, 2.5vw, 40px);
-    --shop-grid-gap: 32px;
   }
 
   .shop-category-nav {
@@ -168,56 +168,6 @@ if (!intro?.heading || !catalog?.heading || products.length === 0) {
     text-decoration: underline;
     text-underline-offset: 6px;
     text-decoration-color: var(--gold);
-  }
-
-  .shop-catalog :global(.product-grid) {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--shop-grid-gap) 24px;
-  }
-
-  .shop-catalog :global(.product-visual) {
-    height: clamp(260px, 22vw, 320px);
-    aspect-ratio: auto;
-  }
-
-  .shop-catalog :global(.product-image) {
-    padding: 0;
-    object-fit: contain;
-  }
-
-  .shop-catalog :global(.product-info) {
-    padding-top: 12px;
-  }
-
-  .shop-catalog :global(.product-card h3) {
-    flex: 1;
-  }
-
-  .shop-catalog :global(.product-meta) {
-    margin-top: 8px;
-  }
-
-  .shop-catalog :global(.product-cta) {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    min-height: 44px;
-    margin-top: 8px;
-    padding-bottom: 0;
-  }
-
-  .shop-catalog :global(.checkout-notice) {
-    margin: var(--shop-grid-gap) 0 0;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .shop-catalog
-      :global(
-        .product-visual:not(:has(.product-image--hover.is-loaded))
-          .product-image--primary
-      ) {
-      opacity: 1;
-    }
   }
 
   @media (max-width: 760px) {
@@ -248,12 +198,6 @@ if (!intro?.heading || !catalog?.heading || products.length === 0) {
     }
   }
 
-  @media (min-width: 721px) and (max-width: 999px) {
-    .shop-catalog :global(.product-grid) {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-
   @media (max-width: 720px) {
     .shop-category-nav {
       display: grid;
@@ -263,28 +207,6 @@ if (!intro?.heading || !catalog?.heading || products.length === 0) {
     .shop-category-nav a {
       letter-spacing: 0.03em;
       line-height: 1.5;
-    }
-    .shop-catalog :global(.product-grid) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--shop-grid-gap) 12px;
-    }
-    .shop-catalog :global(.product-visual) {
-      height: auto;
-      aspect-ratio: 4 / 5;
-    }
-    .shop-catalog :global(.color-chip) {
-      top: 8px;
-      left: 8px;
-      max-width: calc(100% - 16px);
-    }
-  }
-
-  @media (max-width: 359px) {
-    .shop-catalog :global(.product-grid) {
-      grid-template-columns: 1fr;
-    }
-    .shop-catalog :global(.product-visual) {
-      aspect-ratio: 1;
     }
   }
 </style>

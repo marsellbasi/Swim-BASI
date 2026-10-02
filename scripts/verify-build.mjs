@@ -163,6 +163,75 @@ const productIds = productCards.map((card) => card.id).filter(Boolean);
 const productSlugs = productCards.map((card) => card.slug).filter(Boolean);
 const productUrls = productSchemas.map((schema) => schema.url);
 
+if (sanityEnabled) {
+  for (const slug of ["one-piece", "string-bikinis", "high-waisted-bikinis"]) {
+    const html = readFileSync(
+      join(dist, "collections", slug, "index.html"),
+      "utf8",
+    );
+    const navigation =
+      html.match(
+        /<nav\b[^>]*aria-label="Shop by silhouette"[^>]*>([\s\S]*?)<\/nav>/,
+      )?.[1] || "";
+    const current = [
+      ...navigation.matchAll(/<a\b([^>]*)aria-current="page"([^>]*)>/g),
+    ];
+    const schemas = [
+      ...html.matchAll(
+        /<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g,
+      ),
+    ]
+      .map((match) => JSON.parse(match[1]))
+      .filter((schema) => schema["@type"] === "Product");
+    if (
+      [...html.matchAll(/<h1\b/g)].length !== 1 ||
+      [...html.matchAll(/<main\b/g)].length !== 1 ||
+      !html.includes('class="collection-products-title"')
+    )
+      errors.push(`${slug} requires one H1, one main, and a catalog heading`);
+    if (
+      schemas.length !== categoryCountsForCollection(slug) ||
+      schemas.some(
+        (schema) =>
+          !productSchemas.some(
+            (product) => JSON.stringify(product) === JSON.stringify(schema),
+          ),
+      )
+    )
+      errors.push(
+        `${slug} product count or structured product data differs from Shop`,
+      );
+    if (
+      current.length !== 1 ||
+      !current[0][0].includes(`href="/collections/${slug}"`)
+    )
+      errors.push(`${slug} has invalid active category semantics`);
+    for (const href of [
+      "/shop",
+      "/collections/one-piece",
+      "/collections/string-bikinis",
+      "/collections/high-waisted-bikinis",
+    ])
+      if (!navigation.includes(`href="${href}"`))
+        errors.push(`${slug} is missing category destination ${href}`);
+    if (
+      (html.match(/class="checkout-notice\b/g) || []).length !== 1 ||
+      !html.includes(`href="https://swimbasi.com/collections/${slug}"`)
+    )
+      errors.push(`${slug} disclosure or canonical is invalid`);
+  }
+}
+
+function categoryCountsForCollection(slug) {
+  const suffix = {
+    "one-piece": "One-Piece Swimsuit",
+    "string-bikinis": "String Bikini",
+    "high-waisted-bikinis": "High-Waisted Bikini",
+  }[slug];
+  return productSchemas.filter((product) => product.name.endsWith(suffix))
+    .length;
+}
+
 if (productSchemas.length !== 42 || productCards.length !== 42) {
   errors.push(
     `Expected 42 shop products; found ${productSchemas.length} schemas and ${productCards.length} cards`,

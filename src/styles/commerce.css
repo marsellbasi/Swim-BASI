@@ -1,0 +1,71 @@
+/* Approved Shop card presentation, shared only with the collection catalogs. */
+:is(.shop-catalog, .collection-catalog) {
+  --commerce-grid-gap: 32px;
+}
+:is(.shop-catalog, .collection-catalog) .product-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--commerce-grid-gap) 24px;
+}
+:is(.shop-catalog, .collection-catalog) .product-visual {
+  height: clamp(260px, 22vw, 320px);
+  aspect-ratio: auto;
+}
+:is(.shop-catalog, .collection-catalog) .product-image {
+  padding: 0;
+  object-fit: contain;
+}
+:is(.shop-catalog, .collection-catalog) .product-info {
+  padding-top: 12px;
+}
+:is(.shop-catalog, .collection-catalog) .product-card h3 {
+  flex: 1;
+}
+:is(.shop-catalog, .collection-catalog) .product-meta {
+  margin-top: 8px;
+}
+:is(.shop-catalog, .collection-catalog) .product-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  margin-top: 8px;
+  padding-bottom: 0;
+}
+:is(.shop-catalog, .collection-catalog) .checkout-notice {
+  margin: var(--commerce-grid-gap) 0 0;
+}
+@media (hover: hover) and (pointer: fine) {
+  :is(.shop-catalog, .collection-catalog)
+    .product-visual:not(:has(.product-image--hover.is-loaded))
+    .product-image--primary {
+    opacity: 1;
+  }
+}
+@media (min-width: 721px) and (max-width: 999px) {
+  :is(.shop-catalog, .collection-catalog) .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 720px) {
+  :is(.shop-catalog, .collection-catalog) .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--commerce-grid-gap) 12px;
+  }
+  :is(.shop-catalog, .collection-catalog) .product-visual {
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+  :is(.shop-catalog, .collection-catalog) .color-chip {
+    top: 8px;
+    left: 8px;
+    max-width: calc(100% - 16px);
+  }
+}
+@media (max-width: 359px) {
+  :is(.shop-catalog, .collection-catalog) .product-grid {
+    grid-template-columns: 1fr;
+  }
+  :is(.shop-catalog, .collection-catalog) .product-visual {
+    aspect-ratio: 1;
+  }
+}
